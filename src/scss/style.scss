@@ -1,0 +1,11 @@
+// If you want to override variables do it here
+@import "variables";
+
+// Bootstrap
+@import "~bootstrap/scss/bootstrap.scss";
+
+// If you want to add something do it here
+@import "custom";
+
+// ie fixes
+@import "ie-fix";

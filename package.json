@@ -1,0 +1,56 @@
+{
+  "name": "hack-in",
+  "version": "0.1.0",
+  "description": "CTF framework for DAMCS",
+  "private": true,
+  "homepage": "https://damcs.github.io/hack-in",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.com:aakashhemadri/hack-in.git"
+  },
+  "bugs": {
+    "url": "https://github.com/damcs/stepping-stone/issues"
+  },
+  "proxy": "http://localhost:4000",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "bootstrap": "^4.3.1",
+    "classnames": "^2.2.6",
+    "flag-icon-css": "^3.3.0",
+    "font-awesome": "^4.7.0",
+    "node-sass": "^4.12.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-router-dom": "^5.0.1",
+    "react-scripts": "3.0.1",
+    "reactstrap": "^8.0.1",
+    "simple-line-icons": "^2.4.1",
+    "styled-components": "^4.3.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "npm-check": "^5.9.0"
+  }
+}
