@@ -21,7 +21,7 @@
 
 ``` bash
 # clone the repo
-$ git clone https://github.com/damcs/stepping-stone
+$ git clone https://gitlab.com/aakashhemadri/hack-in.git
 
 # go into app's directory
 $ cd hack-in
