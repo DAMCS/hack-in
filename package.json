@@ -3,14 +3,13 @@
   "version": "0.1.0",
   "description": "CTF framework for DAMCS",
   "private": true,
-  "homepage": "https://damcs.github.io/hack-in",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git@gitlab.com:aakashhemadri/hack-in.git"
   },
   "bugs": {
-    "url": "https://github.com/damcs/stepping-stone/issues"
+    "url": "https://gitlab.com:aakashhemadri/hack-in/jissues"
   },
   "proxy": "http://localhost:4000",
   "dependencies": {
@@ -19,6 +18,7 @@
     "classnames": "^2.2.6",
     "flag-icon-css": "^3.3.0",
     "font-awesome": "^4.7.0",
+    "jquery": "^3.4.1",
     "node-sass": "^4.12.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
@@ -27,7 +27,8 @@
     "react-scripts": "3.0.1",
     "reactstrap": "^8.0.1",
     "simple-line-icons": "^2.4.1",
-    "styled-components": "^4.3.2"
+    "styled-components": "^4.3.2",
+    "typescript": "^3.5.3"
   },
   "scripts": {
     "start": "react-scripts start",

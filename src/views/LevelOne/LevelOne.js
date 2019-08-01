@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
-export default class Footer extends Component {
+export default class LevelOne extends Component {
   render() {
     return (
       <React.Fragment >
         <div className="animated fadeIn">
-          Login
+          LevelOne
         </div>
       </React.Fragment>
     )
