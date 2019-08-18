@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import TableRow from './tablerow';
-import './leaderboard.css';
+import "../../../../css/style.css";
 
 export default class Index extends Component {
 
@@ -27,7 +27,7 @@ export default class Index extends Component {
     render() {
       return (
         <div class="ht-tm-cat">
-            <h2 class="display-4 ht-tm-component-title">leaderboard</h2>
+            <h1 class="display-4 ht-tm-component-title text-center">Leaderboard</h1>
             <div class="ht-tm-codeblock mt-4">
                 <table class="table table-hover table-success ht-tm-element">
                     <thead>
