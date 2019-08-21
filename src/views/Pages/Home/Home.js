@@ -10,7 +10,7 @@ export default class Home extends Component {
 		return (
 			<React.Fragment >
 				<Header />
-				<Login />
+				<Login></Login>
 				<LeaderBoard />
 				<Footer />
 			</React.Fragment>
