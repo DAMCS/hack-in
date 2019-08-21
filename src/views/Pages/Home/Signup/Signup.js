@@ -9,7 +9,8 @@ export default class Signup extends Component {
           userName: "",
           password: "",
           confirmPassword: "",
-          isAlumini: "Non-Alumini"
+          phone: "",
+          loginCode: ""
         };
         this.handleInput = this.handleInput.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -45,13 +46,13 @@ export default class Signup extends Component {
         };
         axios({
           method: 'post',
-          url: '/user/signup',
+          url: 'http://13.235.77.118:3000/user/signup',
           data: {
-            "loginCode": "10922",
+            "loginCode": this.state.loginCode,
             "email": this.state.userName,
             "password": this.state.password,
             "confPassword": this.state.confirmPassword,
-            "phone": "9942765213"
+            "phone": this.state.phone
           }
           }).then(response => {
           console.log(response.data)
@@ -63,7 +64,7 @@ export default class Signup extends Component {
       <React.Fragment >
         <div className="animated fadeIn">
                 <Form onSubmit={this.handleSubmit}>
-                  <Form.Group >
+                  <Form.Group  controlId="formBasicEmail">
                     <Form.Control className="form-control" name="userName" onChange={this.handleInput} value={this.state.userName} type="email" placeholder="Enter email" />
                     <Form.Text className="text-muted">
                     We'll never share your email with anyone else.
@@ -75,10 +76,16 @@ export default class Signup extends Component {
                   <Form.Group controlId="formBasicConfirmPassword">
                     <Form.Control name="confirmPassword" onChange={this.handleInput} value={this.state.confirmPassword} type="password" placeholder="Confirm Password" />
                   </Form.Group>
-                  <Form.Group controlId="formBasicAlumini">
+                  <Form.Group controlId="formBasicPhone">
+                    <Form.Control name="phone" onChange={this.handleInput} value={this.state.phone} type="text" placeholder="Phone Number" />
+                  </Form.Group>
+                  <Form.Group controlId="formBasicLoginCode">
+                    <Form.Control name="loginCode" onChange={this.handleInput} value={this.state.loginCode} type="text" placeholder="LoginCode" />
+                  </Form.Group>
+                  {/* <Form.Group controlId="formBasicAlumini">
                     <Form.Check name="isAlumini" value="Non-Alumini" inline label="Non-Alumini" checked={this.state.isAlumini === "Non-Alumini"} onChange={this.handleInput} type="radio" id={`inline-radio-1`} />
                     <Form.Check value="Alumini" inline label="Alumini" checked={this.state.isAlumini === "Alumini"} onChange={this.handleInput} name="isAlumini" type="radio" id={`inline-radio-2`} />
-                  </Form.Group>
+                  </Form.Group> */}
                   <Button type="submit">
                     Submit
                   </Button>
