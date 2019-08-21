@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Nav, NavbarBrand, NavItem, Navbar } from 'react-bootstrap';
 
 const Login = React.lazy(() => import('./Login'))
 const LeaderBoard = React.lazy(() => import('./LeaderBoard/LeaderBoard'))
