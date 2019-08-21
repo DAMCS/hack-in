@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import { Card } from 'react-bootstrap'
-
+import { Button, Form } from 'react-bootstrap'
+import axios from 'axios';
 export default class Login extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			userName: "",
 			password: "",
-			confirmPassword: ""
 		};
 		this.handleInput = this.handleInput.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -22,31 +21,43 @@ export default class Login extends Component {
 		});
 	}
 	handleSubmit(event) {
-		if (this.state.password !== this.state.confirmPassword) {
-			alert("Password Mismatch");
-		} else if (
-			!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(this.state.userName)
-		) {
-			alert("Invalid Email");
-		} else {
-			alert("Success");
-		}
+		const data = {
+			"email": this.state.userName,
+			"password": this.state.password
+		};
+		console.log({data})
+		axios({
+			method: 'post',
+			url: '/user/login',
+			data: {
+				"email": this.state.userName,
+				"password": this.state.password
+			}
+		  }).then(response => {
+			console.log(response.data)
+		  })
 		event.preventDefault();
 	}
 	render() {
 		return (
 			<React.Fragment >
-				<div className="animated fadeIn">
-					<Card>
-						<Card.Title>
-							Login
-						</Card.Title>
-						<Card.Body>
-
-						</Card.Body>
-					</Card>
-				</div>
-			</React.Fragment>
+        		<div className="animated fadeIn">
+                <Form onSubmit={this.handleSubmit}>
+                  <Form.Group >
+                    <Form.Control className="form-control" name="userName" onChange={this.handleInput} value={this.state.userName} type="email" placeholder="Enter email" />
+                    <Form.Text className="text-muted">
+                    We'll never share your email with anyone else.
+                    </Form.Text>
+                  </Form.Group>
+                  <Form.Group controlId="formBasicPassword">
+                    <Form.Control name="password" onChange={this.handleInput} value={this.state.password} type="password" placeholder="Password" />
+                  </Form.Group>
+                  <Button type="submit">
+                    Submit
+                  </Button>
+                </Form>
+              </div>
+      		</React.Fragment>
 		)
 	}
 }

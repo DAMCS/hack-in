@@ -1,34 +1,11 @@
 import React, { Component } from 'react';
-import "../../../../css/style.css"
-
-function Input(props) {
-    return (
-      <div class="ht-tm-element ht-tm-element-inner">
-        <label>
-          {props.placeholder}:<br />
-          <input
-            class="form-control"
-            name={props.name}
-            type={props.type}
-            value={props.value}
-            onChange={props.onChange}
-            placeholder={props.placeholder}
-            required={props.required}
-          />
-        </label>
-      </div>
-    );
-  }
-function Button(props) {
-    return <input class={props.class} type={props.type} value={props.value} />;
-}
+import {Button , Form} from "react-bootstrap";
+import axios from 'axios';
 
 export default class Signup extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          firstName: "",
-          lastName: "",
           userName: "",
           password: "",
           confirmPassword: "",
@@ -59,85 +36,54 @@ export default class Signup extends Component {
         } else {
           alert("Success");
         }
+        const data = {
+          "loginCode": "10922",
+          "email": this.state.userName,
+          "password": this.state.password,
+          "confPassword": this.state.confirmPassword,
+          "phone": "9942765213"
+        };
+        axios({
+          method: 'post',
+          url: '/user/signup',
+          data: {
+            "loginCode": "10922",
+            "email": this.state.userName,
+            "password": this.state.password,
+            "confPassword": this.state.confirmPassword,
+            "phone": "9942765213"
+          }
+          }).then(response => {
+          console.log(response.data)
+          })
         event.preventDefault();
       }
     render() {
     return (
       <React.Fragment >
         <div className="animated fadeIn">
-        <div class="card">
-            <div class="card-body">
-              <h1 class="card-title text-center">Sign Up</h1>
-              <div class="ht-tm-codeblock ht-tm-btn-replaceable ht-tm-element ht-tm-element-inner">
-                <form onSubmit={this.handleSubmit}>
-                  <Input
-                    type="text"
-                    value={this.state.firstName}
-                    onChange={this.handleInput}
-                    name="firstName"
-                    placeholder="First Name"
-                    required={true}
-                  />
-                  <Input
-                    type="text"
-                    value={this.state.lastName}
-                    onChange={this.handleInput}
-                    name="lastName"
-                    placeholder="Last Name"
-                    required={true}
-                  />
-                  <Input
-                    type="text"
-                    value={this.state.userName}
-                    onChange={this.handleInput}
-                    name="userName"
-                    placeholder="Username"
-                    required={true}
-                  />
-                  <div class="ht-tm-element ht-tm-element-inner">
-                    <input
-                      type="radio"
-                      value="Alumini"
-                      checked={this.state.isAlumini === "Alumini"}
-                      onChange={this.handleInput}
-                      name="isAlumini"
-                    />
-                    Alumini &nbsp;&nbsp;
-                    <input
-                      type="radio"
-                      value="Non-Alumini"
-                      checked={this.state.isAlumini === "Non-Alumini"}
-                      onChange={this.handleInput}
-                      name="isAlumini"
-                    />
-                    Non-Alumini
-                  </div>
-                  <Input
-                    type="password"
-                    value={this.state.password}
-                    onChange={this.handleInput}
-                    name="password"
-                    placeholder="Password"
-                    required={true}
-                  />
-                  <Input
-                    type="password"
-                    value={this.state.confirmPassword}
-                    onChange={this.handleInput}
-                    name="confirmPassword"
-                    placeholder="Confirm Password"
-                    required={true}
-                  />
-                  <Button
-                    class="btn btn-outline-success"
-                    type="submit"
-                    value="Sign Up"
-                  />
-                </form>
+                <Form onSubmit={this.handleSubmit}>
+                  <Form.Group >
+                    <Form.Control className="form-control" name="userName" onChange={this.handleInput} value={this.state.userName} type="email" placeholder="Enter email" />
+                    <Form.Text className="text-muted">
+                    We'll never share your email with anyone else.
+                    </Form.Text>
+                  </Form.Group>
+                  <Form.Group controlId="formBasicPassword">
+                    <Form.Control name="password" onChange={this.handleInput} value={this.state.password} type="password" placeholder="Password" />
+                  </Form.Group>
+                  <Form.Group controlId="formBasicConfirmPassword">
+                    <Form.Control name="confirmPassword" onChange={this.handleInput} value={this.state.confirmPassword} type="password" placeholder="Confirm Password" />
+                  </Form.Group>
+                  <Form.Group controlId="formBasicAlumini">
+                    <Form.Check name="isAlumini" value="Non-Alumini" inline label="Non-Alumini" checked={this.state.isAlumini === "Non-Alumini"} onChange={this.handleInput} type="radio" id={`inline-radio-1`} />
+                    <Form.Check value="Alumini" inline label="Alumini" checked={this.state.isAlumini === "Alumini"} onChange={this.handleInput} name="isAlumini" type="radio" id={`inline-radio-2`} />
+                  </Form.Group>
+                  <Button type="submit">
+                    Submit
+                  </Button>
+                </Form>
               </div>
-            </div>
-          </div>
-        </div>
       </React.Fragment>
     )
   }

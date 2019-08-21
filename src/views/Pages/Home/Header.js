@@ -5,12 +5,9 @@ export default class Header extends Component {
 	render() {
 		return (
 			<React.Fragment>
-				<Jumbotron fluid>
 					<Container>
-						<h1>Hack[in] 2019</h1>
-						<p>Wow this beautiful</p>
+						<h1>Hack[in]</h1>
 					</Container>
-				</Jumbotron>
 			</React.Fragment>
 		)
 	}
