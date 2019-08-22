@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { Button, Form } from 'react-bootstrap'
+import {Redirect, Switch} from 'react-router-dom';
+import { Button, Form } from 'react-bootstrap';
 import axios from 'axios';
+const loading = () => <div className="animated fadeIn pt-3 text-center">Loading...</div>;
 export default class Login extends Component {
 	constructor(props) {
 		super(props);
@@ -28,11 +30,22 @@ export default class Login extends Component {
 				"email": this.state.userName,
 				"password": this.state.password
 			}
-		  }).then(response => {
-			console.log(response.data)
-		  })
-		  .catch(function (error) {
-			console.log(error);
+			}).then(response => {
+				let x = response.data.status;
+				
+				if (response.data.status === "Success") {
+					console.log(x);
+					return(
+						<React.Suspense fallback={loading()}>
+							<Switch>
+								<Redirect to='/levelone' />
+							</Switch>
+						</React.Suspense>
+					 );
+				}
+			})
+			.catch(function (error) {
+				console.log(error);
 			})
 		event.preventDefault();
 	}

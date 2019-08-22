@@ -1,0 +1,33 @@
+		/* canvas styles */
+
+
+/* draggable targets */
+[data-draggable="target"]
+{	
+	list-style-type:none;
+	float: none;
+	width:100%;
+	height:100%;
+	overflow-y:auto;
+	
+	margin:0 0.5em 0.5em 0;
+	padding:0.5em;
+	
+	border:2px solid #555555;
+	
+	background:#444444;
+}
+
+/* draggable items */
+[data-draggable="item"]
+{
+	display:block;
+	list-style-type:none;
+	
+	margin:0 0 2px 0;
+	padding:0.2em 0.4em;
+	
+	border-radius:0.2em;
+	
+	line-height:1.3;
+}

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 const Header = React.lazy(() => import('./Header'));
-const Footer = React.lazy(() => import('./Footer'));
+const Footer = React.lazy(() => import('../../views/Pages/Home/Footer'));
 
 export default class Dashboard extends Component {
   render() {
