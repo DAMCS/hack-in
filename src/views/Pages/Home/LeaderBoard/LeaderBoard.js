@@ -10,13 +10,17 @@ export default class LeaderBoard extends Component {
 		this.state = { leader_val: [] };
 	}
 	componentDidMount() {
-		axios.get('http://13.235.77.118:3000/leaderboard')
-			.then(response => {
-				this.setState({ leader_val: response.data });
-			})
-			.catch(function (error) {
-				console.log(error);
-			})
+		axios.get('http://13.235.77.118:3000/leaderboard',
+		{headers: {
+			"Authorization" : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QxMjNAZ21haWwuY29tIiwidXNlcm5hbWUiOiJ0ZXN0MTIzQGdtYWlsLmNvbSIsInVzZXJJZCI6IjVkNWU5NjM2Njg4ZjZmMDZiMzUyOGQ5ZCIsImlhdCI6MTU2NjQ4MDAwOCwiZXhwIjoxNTY2NDgzNjA4fQ.U6TkCk3AvvVaX8RnhsBzrmZwucoMzR-WBLuMi9RtSJ4",
+		  }
+		}
+		).then(response => {
+			this.setState({ leader_val: response.data });
+		})
+		.catch(function (error) {
+			console.log(error);
+		})
 	}
 	tabRow() {
 		return this.state.leader_val.map(function (object, i) {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Button , Form} from "react-bootstrap";
+import {Button , Form, Alert} from "react-bootstrap";
 import axios from 'axios';
 
 export default class Signup extends Component {
@@ -27,23 +27,20 @@ export default class Signup extends Component {
       handleSubmit(event) {
         let passCheck = /^[A-Za-z]\w{7,14}$/;
         if (!this.state.password.match(passCheck)) {
-          alert("Password dosent meet the requirements");
+          // <Alert variant="warning">
+          //   Password dosent meet the requirements
+          // </Alert>
         } else if (this.state.password !== this.state.confirmPassword) {
-          alert("Password Mismatch");
-        } else if (
-          !/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(this.state.userName)
-        ) {
-          alert("Invalid Email");
-        } else {
-          alert("Success");
+          // <Alert variant="warning">
+          //   Password Mismatch
+          // </Alert>
+        } else if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(this.state.userName)) {
+          // <Alert variant="warning">
+          //   Invalid Email
+          // </Alert>
+        } else{
+          console.log("success")
         }
-        const data = {
-          "loginCode": "10922",
-          "email": this.state.userName,
-          "password": this.state.password,
-          "confPassword": this.state.confirmPassword,
-          "phone": "9942765213"
-        };
         axios({
           method: 'post',
           url: 'http://13.235.77.118:3000/user/signup',
@@ -57,6 +54,9 @@ export default class Signup extends Component {
           }).then(response => {
           console.log(response.data)
           })
+          .catch(function (error) {
+            console.log(error);
+            })
         event.preventDefault();
       }
     render() {
@@ -92,6 +92,6 @@ export default class Signup extends Component {
                 </Form>
               </div>
       </React.Fragment>
-    )
+    );
   }
 }

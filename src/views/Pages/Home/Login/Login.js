@@ -21,14 +21,9 @@ export default class Login extends Component {
 		});
 	}
 	handleSubmit(event) {
-		const data = {
-			"email": this.state.userName,
-			"password": this.state.password
-		};
-		console.log({data})
 		axios({
 			method: 'post',
-			url: '/user/login',
+			url: 'http://13.235.77.118:3000/user/login',
 			data: {
 				"email": this.state.userName,
 				"password": this.state.password
@@ -36,6 +31,9 @@ export default class Login extends Component {
 		  }).then(response => {
 			console.log(response.data)
 		  })
+		  .catch(function (error) {
+			console.log(error);
+			})
 		event.preventDefault();
 	}
 	render() {
