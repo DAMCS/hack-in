@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import {Redirect, Switch} from 'react-router-dom';
+import {Redirect, Switch, Route} from 'react-router-dom';
 import { Button, Form } from 'react-bootstrap';
 import axios from 'axios';
+
 const loading = () => <div className="animated fadeIn pt-3 text-center">Loading...</div>;
 export default class Login extends Component {
 	constructor(props) {
@@ -9,6 +10,8 @@ export default class Login extends Component {
 		this.state = {
 			userName: "",
 			password: "",
+			isLoggedIn:false,
+			msg:""
 		};
 		this.handleInput = this.handleInput.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -35,17 +38,15 @@ export default class Login extends Component {
 				
 				if (response.data.status === "Success") {
 					console.log(x);
-					return(
-						<React.Suspense fallback={loading()}>
-							<Switch>
-								<Redirect to='/levelone' />
-							</Switch>
-						</React.Suspense>
-					 );
+					this.setState({
+						isLoggedIn:true
+					})
 				}
 			})
-			.catch(function (error) {
-				console.log(error);
+			.catch(error => {
+				this.setState({
+					msg: error.response.data.message
+				})
 			})
 		event.preventDefault();
 	}
@@ -67,6 +68,13 @@ export default class Login extends Component {
                     Submit
                   </Button>
                 </Form>
+					{this.state.isLoggedIn ? <React.Suspense fallback={loading()}>
+						<Switch>
+							<Redirect to='/dashboard' />
+						</Switch>
+					</React.Suspense> : <div>
+						{this.state.msg}
+  					<Redirect to='/' /></div>}
               </div>
       		</React.Fragment>
 		)
