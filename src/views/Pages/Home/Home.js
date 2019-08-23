@@ -70,7 +70,7 @@ export default class Home extends Component {
 	render() {
 		return (
 			<React.Fragment >
-				<Jumbotron fluid style={{height: 'calc(100vh)'}}>
+				<Jumbotron fluid style={{height: 'calc(100vh)', marginBottom: "0px"}}>
 				<Header />
 				<Row>
 					<Col md="4">

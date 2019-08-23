@@ -1,17 +1,52 @@
-import React, { Component } from 'react';
-import {Redirect, Switch, Route} from 'react-router-dom';
-import { Button, Form } from 'react-bootstrap';
-import axios from 'axios';
+import React, { Component, useState } from "react";
+import { Redirect, Switch, Route, withRouter } from "react-router-dom";
+import { Button, Form, Modal } from "react-bootstrap";
+import axios from "axios";
 
-const loading = () => <div className="animated fadeIn pt-3 text-center">Loading...</div>;
-export default class Login extends Component {
+const loading = () => (
+	<div className="animated fadeIn pt-3 text-center">Loading...</div>
+);
+
+function Example() {
+	const [show, setShow] = useState(false);
+  
+	const handleClose = () => setShow(false);
+	const handleShow = () => setShow(true);
+  
+	return (
+	  <>
+		<Button variant="primary" onClick={handleShow}>
+		  Launch demo modal
+		</Button>
+  
+		<Modal show={show} onHide={handleClose}>
+		  <Modal.Header closeButton>
+			<Modal.Title>Modal heading</Modal.Title>
+		  </Modal.Header>
+		  <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+		  <Modal.Footer>
+			<Button variant="secondary" onClick={handleClose}>
+			  Close
+			</Button>
+			<Button variant="primary" onClick={handleClose}>
+			  Save Changes
+			</Button>
+		  </Modal.Footer>
+		</Modal>
+		{console.log("test")}
+	  </>
+	);
+  }
+
+class Login extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			userName: "",
+			email: "",
 			password: "",
-			isLoggedIn:false,
-			msg:""
+			isLoggedIn: false,
+			msg: "",
+			visible: true
 		};
 		this.handleInput = this.handleInput.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -30,58 +65,59 @@ export default class Login extends Component {
 			method: "post",
 			url: "/user/login",
 			data: {
-				email: this.state.userName,
+				email: this.state.email,
 				password: this.state.password
 			}
-			}).then(response => {
-				let x = response.data.status;
-				
+		})
+			.then(response => {
 				if (response.data.status === "Success") {
-					console.log(x);
-					this.setState({
-						isLoggedIn:true
-					})
+					localStorage.setItem("token", response.data.token);
 				}
 			})
 			.catch(error => {
-				this.setState({
-					msg: error.response.data.message
-				})
-			})
-			.catch(error => {
-				console.log(error);
-				this.props.history.push("/404");
+				console.log(error.response);
+
+				alert(error.response.data.message);
+
+				// this.props.history.push("/404");
 			});
 		event.preventDefault();
 	}
 	render() {
 		return (
-			<React.Fragment >
-        		<div className="animated fadeIn">
-                <Form onSubmit={this.handleSubmit}>
-                  <Form.Group >
-                    <Form.Control className="form-control" name="userName" onChange={this.handleInput} value={this.state.userName} type="email" placeholder="Enter email" />
-                    <Form.Text className="text-muted">
-                    We'll never share your email with anyone else.
-                    </Form.Text>
-                  </Form.Group>
-                  <Form.Group controlId="formBasicPassword">
-                    <Form.Control name="password" onChange={this.handleInput} value={this.state.password} type="password" placeholder="Password" />
-                  </Form.Group>
-                  <Button type="submit">
-                    Submit
-                  </Button>
-                </Form>
-					{this.state.isLoggedIn ? <React.Suspense fallback={loading()}>
-						<Switch>
-							<Redirect to='/dashboard' />
-						</Switch>
-					</React.Suspense> : <div>
-						{this.state.msg}
-  					<Redirect to='/' /></div>}
-              </div>
-      		</React.Fragment>
-		)
+			<React.Fragment>
+				<div className="animated fadeIn">
+					<Form onSubmit={this.handleSubmit}>
+						<Form.Group>
+							<Form.Control
+								className="form-control"
+								name="email"
+								onChange={this.handleInput}
+								value={this.state.email}
+								type="email"
+								placeholder="Enter email"
+							/>
+							<Form.Text className="text-muted">
+								We'll never share your email with anyone else.
+							</Form.Text>
+						</Form.Group>
+						<Form.Group controlId="formBasicPassword">
+							<Form.Control
+								name="password"
+								onChange={this.handleInput}
+								value={this.state.password}
+								type="password"
+								placeholder="Password"
+							/>
+						</Form.Group>
+						<Button type="submit">Submit</Button>
+					</Form>
+				</div>
+				<div>
+					<Example />
+				</div>
+			</React.Fragment>
+		);
 	}
 }
 

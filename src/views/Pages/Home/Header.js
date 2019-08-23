@@ -6,7 +6,7 @@ export default class Header extends Component {
 		return (
 			<React.Fragment>
 					<Container>
-						<h1>Hack[in]</h1>
+						<h1>HACK[IN]</h1>
 					</Container>
 			</React.Fragment>
 		)
