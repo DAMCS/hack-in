@@ -47,8 +47,8 @@ class ControlledTabs extends React.Component{
 		return(	 
 		<div>
 				<ul class="nav nav-tabs">
-                    <li onClick={this.handleChange} class={this.state.class1}><a aria-expanded={this.state.bool1} href="#" data-toggle="tab">Login</a></li>
-                    <li onClick={this.handleChange} class={this.state.class2}><a aria-expanded={this.state.bool2} href="#" data-toggle="tab">Signup</a></li>
+                    <li onClick={this.handleChange} class={this.state.class1}><a aria-expanded={this.state.bool1} data-toggle="tab">Login</a></li>
+                    <li onClick={this.handleChange} class={this.state.class2}><a aria-expanded={this.state.bool2} data-toggle="tab">Signup</a></li>
                 </ul><br></br>
                 <div id="myTabContent" class="tab-content">
                     <div class={this.state.active1} id="home">
@@ -68,7 +68,7 @@ export default class Home extends Component {
 	render() {
 		return (
 			<React.Fragment >
-				<Jumbotron fluid>
+				<Jumbotron fluid style={{height: 'calc(100vh)'}}>
 				<Header />
 				<Row>
 					<Col md="4">

@@ -1,10 +1,7 @@
 import React, { Component } from "react";
 import { Button, Form } from "react-bootstrap";
 import axios from "axios";
-import {
-	withRouter
-} from 'react-router-dom';
-
+import { withRouter } from "react-router-dom";
 
 class Login extends Component {
 	constructor(props) {
@@ -28,19 +25,24 @@ class Login extends Component {
 	handleSubmit(event) {
 		axios({
 			method: "post",
-			url: "http://13.235.77.118:3000/user/login",
+			url: "/user/login",
 			data: {
 				email: this.state.userName,
 				password: this.state.password
 			}
 		})
 			.then(response => {
-				console.log(response.data);
-				this.props.history.push('/leaderboard');
+				// console.log(response.data.token);
+				if (response.data.status === "Success") {
+					localStorage.setItem("token", response.data.token);
+					this.props.history.push("/dashboard");
+				} else {
+					this.props.history.push("/login");
+				}
 			})
-			.catch(function(error) {
+			.catch(error => {
 				console.log(error);
-				this.props.history.push('/leaderboard');
+				this.props.history.push("/404");
 			});
 		event.preventDefault();
 	}
@@ -78,6 +80,5 @@ class Login extends Component {
 		);
 	}
 }
-
 
 export default withRouter(Login);
