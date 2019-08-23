@@ -5,7 +5,7 @@ export default class Footer extends Component {
     return (
       <React.Fragment >
         <div className="animated fadeIn">
-          Login
+          Footer
         </div>
       </React.Fragment>
     )

@@ -3,7 +3,6 @@ import {Row,Col,Jumbotron,Tab,Tabs,Nav, Button,TabContent} from "react-bootstrap
 
 const Login = React.lazy(() => import('./Login'))
 const Signup = React.lazy(() => import('./Signup'))
-const LeaderBoard = React.lazy(() => import('./LeaderBoard/LeaderBoard'))
 const Header = React.lazy(() => import('./Header'))
 const Footer = React.lazy(() => import('./Footer'))
 
@@ -65,6 +64,9 @@ class ControlledTabs extends React.Component{
 
 
 export default class Home extends Component {
+	constructor(props){
+		super(props);
+	}
 	render() {
 		return (
 			<React.Fragment >

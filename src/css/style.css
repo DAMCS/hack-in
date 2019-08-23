@@ -8668,9 +8668,9 @@
     .display-2 {
       font-size: 3.5rem; } }
   
-  body {
-    /*background-image: url("../images/ng-background-dot.png"); */
-  }
+ /* body  {
+    background-image: url("../images/ng-background-dot.png"); 
+  } */
   
   .btn-shadow {
     margin-left: 8px; }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Button , Form, Alert} from "react-bootstrap";
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
 export default class Signup extends Component {
     constructor(props) {
@@ -39,23 +40,26 @@ export default class Signup extends Component {
           //   Invalid Email
           // </Alert>
         } else{
-          console.log("success")
-          axios({
-            method: 'post',
-            url: 'http://13.235.77.118:3000/user/signup',
-            data: {
-              "loginCode": this.state.loginCode,
-              "email": this.state.userName,
-              "password": this.state.password,
-              "confPassword": this.state.confirmPassword,
-              "phone": this.state.phone
-            }
-          }).then(response => {
-            console.log(response.data)
-          })
-          .catch(function (error) {
-            console.log(error);
-          })
+            axios({
+              method: 'post',
+              url: 'http://13.235.77.118:3000/user/signup',
+              data: {
+                "loginCode": this.state.loginCode,
+                "email": this.state.userName,
+                "password": this.state.password,
+                "confPassword": this.state.confirmPassword,
+                "phone": this.state.phone
+              }
+            }).then(response => {
+              let x=response.data.status;
+              console.log(x); 
+                if(response.data.status === "Success"){
+                  return <Redirect to='/dashboard' />
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
         }
         event.preventDefault();
       }
