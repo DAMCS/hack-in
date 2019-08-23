@@ -72,6 +72,7 @@ class Login extends Component {
 			.then(response => {
 				if (response.data.status === "Success") {
 					localStorage.setItem("token", response.data.token);
+					this.props.history.push('/dashboard');
 				}
 			})
 			.catch(error => {
@@ -114,7 +115,7 @@ class Login extends Component {
 					</Form>
 				</div>
 				<div>
-					<Example />
+					{/* <Example /> */}
 				</div>
 			</React.Fragment>
 		);

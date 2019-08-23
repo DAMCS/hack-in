@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Button, Form, Alert } from "react-bootstrap";
 import axios from "axios";
-import { Redirect } from "react-router-dom";
+import { Redirect, withRouter } from "react-router-dom";
 
-export default class Signup extends Component {
+class Signup extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -57,6 +57,7 @@ export default class Signup extends Component {
 			})
 				.then(response => {
 					if (response.data.status === "Success") {
+						this.props.history.push('./dashboard');
 						localStorage.setItem("token", response.data.token);
 					}
 				})
@@ -127,3 +128,5 @@ export default class Signup extends Component {
 		);
 	}
 }
+
+export default withRouter(Signup)
