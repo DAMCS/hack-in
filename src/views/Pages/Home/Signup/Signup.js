@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import {Button , Form, Alert} from "react-bootstrap";
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
+import { Redirect,Switch } from 'react-router-dom';
 
+const loading = () => <div className="animated fadeIn pt-3 text-center">Loading...</div>;
 export default class Signup extends Component {
     constructor(props) {
         super(props);
@@ -11,7 +12,9 @@ export default class Signup extends Component {
           password: "",
           confirmPassword: "",
           phone: "",
-          loginCode: ""
+          loginCode: "",
+          isAuthSuccess:false,
+          msg:""
         };
         this.handleInput = this.handleInput.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -28,17 +31,11 @@ export default class Signup extends Component {
       handleSubmit(event) {
         let passCheck = /^[A-Za-z]\w{7,14}$/;
         if (!this.state.password.match(passCheck)) {
-          // <Alert variant="warning">
-          //   Password dosent meet the requirements
-          // </Alert>
+          this.setState({ msg: "Password dose not meet the requirements" });
         } else if (this.state.password !== this.state.confirmPassword) {
-          // <Alert variant="warning">
-          //   Password Mismatch
-          // </Alert>
+          this.setState({ msg: "Password Mismatch" });
         } else if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(this.state.userName)) {
-          // <Alert variant="warning">
-          //   Invalid Email
-          // </Alert>
+            this.setState({msg:"Invalid Email"});
         } else{
             axios({
               method: 'post',
@@ -51,15 +48,21 @@ export default class Signup extends Component {
                 "phone": this.state.phone
               }
             }).then(response => {
-              let x=response.data.status;
-              console.log(x); 
-                if(response.data.status === "Success"){
-                  return <Redirect to='/dashboard' />
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-            })
+              let x = response.data.status;
+
+              if (response.data.status === "Success") {
+                console.log(x);
+                this.setState({
+                  isAuthSuccess: true
+                })
+              }
+              })
+              .catch(error => {
+                console.log(error.response.data)
+                this.setState({
+                  msg: error.response.data.message
+                })
+              })
         }
         event.preventDefault();
       }
@@ -76,6 +79,9 @@ export default class Signup extends Component {
                   </Form.Group>
                   <Form.Group controlId="formBasicPassword">
                     <Form.Control name="password" onChange={this.handleInput} value={this.state.password} type="password" placeholder="Password" />
+                    <Form.Text className="text-muted">
+                      Requirements: Must contain a capital letter and a number.
+                    </Form.Text>
                   </Form.Group>
                   <Form.Group controlId="formBasicConfirmPassword">
                     <Form.Control name="confirmPassword" onChange={this.handleInput} value={this.state.confirmPassword} type="password" placeholder="Confirm Password" />
@@ -94,6 +100,14 @@ export default class Signup extends Component {
                     Submit
                   </Button>
                 </Form>
+                {this.state.isAuthSuccess ? <React.Suspense fallback={loading()}>
+                  <Switch>
+                    {window.location.reload()}
+                    <Redirect to='/' />
+                  </Switch>
+                </React.Suspense> : <div>
+                    {this.state.msg}
+                    <Redirect to='/' /></div>}
               </div>
       </React.Fragment>
     );
