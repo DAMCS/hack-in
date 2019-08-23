@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Col, Container, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
+import { Button, Col, Container, Row } from 'react-bootstrap';
 
 class Page500 extends Component {
   render() {
@@ -11,9 +11,9 @@ class Page500 extends Component {
               <span className="clearfix">
                 <h1 className="float-left display-3 mr-4">500</h1>
                 <h4 className="pt-3">Houston, we have a problem!</h4>
-                <p className="text-muted float-left">The page you are looking for is temporarily unavailable.</p>
+                <p className="float-left">The page you are looking for is temporarily unavailable.</p>
               </span>
-              <InputGroup className="input-prepend">
+              {/* <InputGroup className="input-prepend">
                 <InputGroupAddon addonType="prepend">
                   <InputGroupText>
                     <i className="fa fa-search"></i>
@@ -23,7 +23,7 @@ class Page500 extends Component {
                 <InputGroupAddon addonType="append">
                   <Button color="info">Search</Button>
                 </InputGroupAddon>
-              </InputGroup>
+              </InputGroup> */}
             </Col>
           </Row>
         </Container>

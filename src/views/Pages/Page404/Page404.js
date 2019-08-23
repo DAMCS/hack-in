@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Col, Container, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'react-bootstrap';
+import { Button, Col, Container, Row } from 'react-bootstrap';
 
 class Page404 extends Component {
 	render() {
@@ -11,9 +11,9 @@ class Page404 extends Component {
 							<div className="clearfix">
 								<h1 className="float-left display-3 mr-4">404</h1>
 								<h4 className="pt-3">Oops! You're lost.</h4>
-								<p className="text-muted float-left">The page you are looking for was not found.</p>
+								<p className="float-left">The page you are looking for was not found.</p>
 							</div>
-							<InputGroup className="input-prepend">
+							{/* <InputGroup className="input-prepend">
 								<InputGroupAddon addonType="prepend">
 									<InputGroupText>
 										<i className="fa fa-search"></i>
@@ -23,7 +23,7 @@ class Page404 extends Component {
 								<InputGroupAddon addonType="append">
 									<Button color="info">Search</Button>
 								</InputGroupAddon>
-							</InputGroup>
+							</InputGroup> */}
 						</Col>
 					</Row>
 				</Container>

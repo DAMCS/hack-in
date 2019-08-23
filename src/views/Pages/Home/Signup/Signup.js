@@ -40,23 +40,23 @@ export default class Signup extends Component {
           // </Alert>
         } else{
           console.log("success")
-        }
-        axios({
-          method: 'post',
-          url: 'http://13.235.77.118:3000/user/signup',
-          data: {
-            "loginCode": this.state.loginCode,
-            "email": this.state.userName,
-            "password": this.state.password,
-            "confPassword": this.state.confirmPassword,
-            "phone": this.state.phone
-          }
+          axios({
+            method: 'post',
+            url: 'http://13.235.77.118:3000/user/signup',
+            data: {
+              "loginCode": this.state.loginCode,
+              "email": this.state.userName,
+              "password": this.state.password,
+              "confPassword": this.state.confirmPassword,
+              "phone": this.state.phone
+            }
           }).then(response => {
-          console.log(response.data)
+            console.log(response.data)
           })
           .catch(function (error) {
             console.log(error);
-            })
+          })
+        }
         event.preventDefault();
       }
     render() {
@@ -70,7 +70,7 @@ export default class Signup extends Component {
                     We'll never share your email with anyone else.
                     </Form.Text>
                   </Form.Group>
-                  <Form.Group controlId="formBasicPassword">
+                  <Form.Group controlId="formBasicSignupPassword">
                     <Form.Control name="password" onChange={this.handleInput} value={this.state.password} type="password" placeholder="Password" />
                   </Form.Group>
                   <Form.Group controlId="formBasicConfirmPassword">
