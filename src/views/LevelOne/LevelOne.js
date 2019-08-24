@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import {Accordion,Card,ListGroupItem,Badge,Col,Row,Nav,NavDropdown,Navbar} from 'react-bootstrap';
 import axios from 'axios';
-import Inventory from '../Pages/Home/Inventory';
+import Inventory from '../../components/Inventory/Inventory';
 
 
 function Anouncement(){
-  const data = axios({
+  axios({
     method:'get',
     url:'http://13.235.77.118:3000/announcement',
     headers: {

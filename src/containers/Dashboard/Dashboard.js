@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Accordion, Card, ListGroupItem, Badge, Col, Row, Nav, NavDropdown, Navbar } from 'react-bootstrap';
 import axios from 'axios';
 
-const Inventory = React.lazy(()=>import('../../views/Pages/Home/Inventory'));
+const Inventory = React.lazy(()=>import('../../components/Inventory/Inventory'));
 const Header = React.lazy(() => import('./Header'));
 const Footer = React.lazy(() => import('./Footer'));
 

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "../../../css/footer.css";
+import "../../../assets/css/footer.css";
 import { Container } from "react-bootstrap";
 
 export default class Footer extends Component {
@@ -13,7 +13,7 @@ export default class Footer extends Component {
 					/>
 					<section id="lab_social_icon_footer">
 						<Container>
-							<div class="text-right center-block">
+							<div class="text-center center-block">
 								<a href="https://www.facebook.com/bootsnipp">
 									<i
 										id="social-fb"

@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Button, Form, Alert } from "react-bootstrap";
 import axios from "axios";
 import { Redirect, withRouter } from "react-router-dom";
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 class Signup extends Component {
 	constructor(props) {

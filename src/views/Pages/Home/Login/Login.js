@@ -3,40 +3,16 @@ import { Redirect, Switch, Route, withRouter } from "react-router-dom";
 import { Button, Form, Modal } from "react-bootstrap";
 import axios from "axios";
 
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
+import "../../../../assets/css/dark.scss"
+
+const MySwal = withReactContent(Swal)
+
 const loading = () => (
 	<div className="animated fadeIn pt-3 text-center">Loading...</div>
 );
-
-function Example() {
-	const [show, setShow] = useState(false);
-  
-	const handleClose = () => setShow(false);
-	const handleShow = () => setShow(true);
-  
-	return (
-	  <>
-		<Button variant="primary" onClick={handleShow}>
-		  Launch demo modal
-		</Button>
-  
-		<Modal show={show} onHide={handleClose}>
-		  <Modal.Header closeButton>
-			<Modal.Title>Modal heading</Modal.Title>
-		  </Modal.Header>
-		  <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-		  <Modal.Footer>
-			<Button variant="secondary" onClick={handleClose}>
-			  Close
-			</Button>
-			<Button variant="primary" onClick={handleClose}>
-			  Save Changes
-			</Button>
-		  </Modal.Footer>
-		</Modal>
-		{console.log("test")}
-	  </>
-	);
-  }
 
 class Login extends Component {
 	constructor(props) {
@@ -71,22 +47,36 @@ class Login extends Component {
 		})
 			.then(response => {
 				if (response.data.status === "Success") {
+					  
+					  MySwal.fire({
+						type: 'success',
+						title: 'Signed in successfully',
+						toast: true,
+						position: 'top-end',
+						showConfirmButton: false,
+						timer: 1000
+					  })
 					localStorage.setItem("token", response.data.token);
 					this.props.history.push('/dashboard');
 				}
 			})
 			.catch(error => {
-				console.log(error.response);
-
-				alert(error.response.data.message);
-
-				// this.props.history.push("/404");
+				MySwal.fire({
+					type: 'error',
+					title: 'Oops...',
+					text: error.response.data.message,
+					toast: false,
+					customClass: {
+						borderColor: "red"
+					}
+				  })
 			});
 		event.preventDefault();
 	}
 	render() {
 		return (
 			<React.Fragment>
+				{/* <link rel="stylesheet" href="../../../../assets/dark.scss"></link> */}
 				<div className="animated fadeIn">
 					<Form onSubmit={this.handleSubmit}>
 						<Form.Group>
@@ -113,9 +103,6 @@ class Login extends Component {
 						</Form.Group>
 						<Button type="submit">Submit</Button>
 					</Form>
-				</div>
-				<div>
-					{/* <Example /> */}
 				</div>
 			</React.Fragment>
 		);

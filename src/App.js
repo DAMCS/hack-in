@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Switch ,Redirect} from 'react-router-dom';
 import { createBrowserHistory } from "history";
 
-import './css/hacker.css';
+import './assets/css/hacker.css';
 
 const loading = () => <div className="animated fadeIn pt-3 text-center">Loading...</div>;
 const Page404 = React.lazy(() => import('./views/Pages/Page404'))
@@ -11,7 +11,7 @@ const Home = React.lazy(() => import('./views/Pages/Home'))
 // const Home = React.lazy(() => import('./views/LevelOne'))
 const Dashboard = React.lazy(() => import('./containers/Dashboard'))
 const LevelOne = React.lazy(() => import('./views/LevelOne'))
-const LeaderBoard = React.lazy(() => import('./views/Pages/Home/LeaderBoard'))
+const LeaderBoard = React.lazy(() => import('./components/LeaderBoard'))
 function App() {
 	return (
 		<BrowserRouter history={createBrowserHistory()}>
