@@ -1,24 +1,13 @@
 import React, { Component } from 'react';
-import { Accordion, Card, ListGroupItem, Badge, Col, Row, Nav, NavDropdown, Navbar } from 'react-bootstrap';
+import { Accordion, Card, ListGroupItem, Badge, Col, Row, Nav, NavDropdown, Navbar, Button } from 'react-bootstrap';
 import axios from 'axios';
 
+import { Redirect } from "react-router-dom";
 const Inventory = React.lazy(()=>import('../../components/Inventory/Inventory'));
 const Header = React.lazy(() => import('./Header'));
 const Footer = React.lazy(() => import('./Footer'));
 
 function Anouncement() {
-  const data = axios({
-    method: 'get',
-    url: 'http://13.235.77.118:3000/announcement',
-    headers: {
-      "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QxMjNAZ21haWwuY29tIiwidXNlcm5hbWUiOiJ0ZXN0MTIzQGdtYWlsLmNvbSIsInVzZXJJZCI6IjVkNWU5NjM2Njg4ZjZmMDZiMzUyOGQ5ZCIsImlhdCI6MTU2NjQ4MDAwOCwiZXhwIjoxNTY2NDgzNjA4fQ.U6TkCk3AvvVaX8RnhsBzrmZwucoMzR-WBLuMi9RtSJ4",
-    }
-  }).then(response => {
-    console.log(response.data)
-  })
-    .catch(function (error) {
-      console.log(error.response.data);
-    })
   return (
     <Accordion className="list-group">
       <Card>
@@ -53,8 +42,49 @@ class Menu extends React.Component {
       </Navbar>);
   }
 }
+
 export default class Dashboard extends Component {
+  constructor(props) {
+		super(props);
+		this.state = {
+			isLoggedIn: true
+    }
+    this.handleLogout = this.handleLogout.bind(this);
+  }
+  
+  handleLogout() {
+    localStorage.removeItem('token');
+    this.state.isLoggedIn = false;
+    this.props.history.push('/')
+  }
+
+	componentWillMount() {
+		let token = localStorage.getItem("token");
+		if (token) {
+			axios({
+				method: "get",
+				url: "/user",
+				headers: {
+					Authorization: "Bearer " + token
+				}
+			}).then(response => {
+				if (response.data.status === "Success") {
+					console.log(response.data);
+					this.setState({isLoggedIn: true})
+				}
+			}).catch(error => {
+        this.setState({isLoggedIn: false})
+      })
+    }
+    else {
+      this.setState({isLoggedIn: false})
+    }
+  }
+  
   render() {
+    if (this.state.isLoggedIn == false) {
+			return (<Redirect to="/" />)
+		} else {
     return (
       <React.Fragment>
         <div class="animated fadeIn">
@@ -72,8 +102,10 @@ export default class Dashboard extends Component {
             </Col>
           </Row>
           <Footer />
+          <Button variant="danger" onClick={this.handleLogout}>signout</Button>
         </div>
       </React.Fragment>
     )
+    }
   }
 }

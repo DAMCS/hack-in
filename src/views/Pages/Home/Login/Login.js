@@ -66,9 +66,6 @@ class Login extends Component {
 					title: 'Oops...',
 					text: error.response.data.message,
 					toast: false,
-					customClass: {
-						borderColor: "red"
-					}
 				  })
 			});
 		event.preventDefault();

@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import { Button, Form, Alert } from "react-bootstrap";
 import axios from "axios";
 import { Redirect, withRouter } from "react-router-dom";
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+const MySwal = withReactContent(Swal);
 
 class Signup extends Component {
 	constructor(props) {
@@ -30,21 +31,30 @@ class Signup extends Component {
 	handleSubmit(event) {
 		let passCheck = /^[A-Za-z]\w{7,14}$/;
 		if (!this.state.password.match(passCheck)) {
-			// <Alert variant="warning">
-			//   Password dosent meet the requirements
-			// </Alert>
+			MySwal.fire({
+				type: "error",
+				title: "Oops...",
+				text: "Password dosent meet the requirements",
+				toast: true
+			});
 		} else if (this.state.password !== this.state.confirmPassword) {
-			// <Alert variant="warning">
-			//   Password Mismatch
-			// </Alert>
+			MySwal.fire({
+				type: "error",
+				title: "Oops...",
+				text: "Password Mismatch",
+				toast: true
+			});
 		} else if (
 			!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(
-				this.state.userName
+				this.state.email
 			)
 		) {
-			// <Alert variant="warning">
-			//   Invalid Email
-			// </Alert>
+			MySwal.fire({
+				type: "error",
+				title: "Oops...",
+				text: "Invalid Email",
+				toast: true
+			});
 		} else {
 			axios({
 				method: "post",
@@ -59,12 +69,25 @@ class Signup extends Component {
 			})
 				.then(response => {
 					if (response.data.status === "Success") {
-						this.props.history.push('./dashboard');
+						MySwal.fire({
+							type: "success",
+							title: "User created successfully",
+							toast: true,
+							position: "top-end",
+							showConfirmButton: false,
+							timer: 1000
+						});
 						localStorage.setItem("token", response.data.token);
+						this.props.history.push("/dashboard");
 					}
 				})
 				.catch(function(error) {
-					console.log(error);
+					MySwal.fire({
+						type: "error",
+						title: "Oops...",
+						text: error.response.data.message,
+						toast: false
+					});
 				});
 		}
 		event.preventDefault();
@@ -131,4 +154,4 @@ class Signup extends Component {
 	}
 }
 
-export default withRouter(Signup)
+export default withRouter(Signup);
