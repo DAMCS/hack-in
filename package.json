@@ -13,6 +13,8 @@
 	},
 	"proxy": "http://13.235.77.118:3000",
 	"dependencies": {
+		"@fortawesome/free-solid-svg-icons": "^5.10.2",
+		"@fortawesome/react-fontawesome": "^0.1.4",
 		"@sweetalert2/theme-dark": "^2.1.0",
 		"axios": "^0.19.0",
 		"bootstrap": "^3.4.1",

@@ -1,14 +1,14 @@
-import React, { Component, useState } from "react";
-import { Redirect, Switch, Route, withRouter } from "react-router-dom";
-import { Button, Form, Modal } from "react-bootstrap";
+import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
+import { Button, Form } from "react-bootstrap";
 import axios from "axios";
 
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
-import "../../../../assets/css/dark.scss"
+import "../../../../assets/css/dark.scss";
 
-const MySwal = withReactContent(Swal)
+const MySwal = withReactContent(Swal);
 
 const loading = () => (
 	<div className="animated fadeIn pt-3 text-center">Loading...</div>
@@ -73,7 +73,6 @@ class Login extends Component {
 	render() {
 		return (
 			<React.Fragment>
-				{/* <link rel="stylesheet" href="../../../../assets/dark.scss"></link> */}
 				<div className="animated fadeIn">
 					<Form onSubmit={this.handleSubmit}>
 						<Form.Group>

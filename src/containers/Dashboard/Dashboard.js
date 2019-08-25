@@ -1,47 +1,13 @@
 import React, { Component } from 'react';
-import { Accordion, Card, ListGroupItem, Badge, Col, Row, Nav, NavDropdown, Navbar, Button } from 'react-bootstrap';
+import {Col, Row, Button } from 'react-bootstrap';
 import axios from 'axios';
+import Anouncement from '../../components/Announcement/Announcement'
 
 import { Redirect } from "react-router-dom";
 const Inventory = React.lazy(()=>import('../../components/Inventory/Inventory'));
 const Header = React.lazy(() => import('./Header'));
 const Footer = React.lazy(() => import('./Footer'));
-
-function Anouncement() {
-  return (
-    <Accordion className="list-group">
-      <Card>
-        <Card.Header>
-          <Accordion.Toggle className="list-group-item" as={ListGroupItem} variant="link" eventKey="0">
-            Anouncements<Badge className="badge" variant="light">2</Badge>
-          </Accordion.Toggle>
-        </Card.Header>
-        <Accordion.Collapse eventKey="0">
-          <Card.Body>Anouncements comes here</Card.Body>
-        </Accordion.Collapse>
-      </Card>
-    </Accordion>
-  );
-}
-
-class Menu extends React.Component {
-  render() {
-    return (
-      <Navbar bg="light">
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav>
-            <NavDropdown title="Menu">
-              <NavDropdown.Item href="#action/3.1"><img width="30px" height="30px" src="" /></NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.2"><img width="30px" height="30px" src="" /></NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.3"><img width="30px" height="30px" src="" /></NavDropdown.Item>
-            </NavDropdown>
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>);
-  }
-}
+const Menu = React.lazy(()=>import('../../components/Menu/Menu'));
 
 export default class Dashboard extends Component {
   constructor(props) {
@@ -54,7 +20,7 @@ export default class Dashboard extends Component {
   
   handleLogout() {
     localStorage.removeItem('token');
-    this.state.isLoggedIn = false;
+    this.state.setState({isLoggedIn : false});
     this.props.history.push('/')
   }
 
@@ -82,7 +48,7 @@ export default class Dashboard extends Component {
   }
   
   render() {
-    if (this.state.isLoggedIn == false) {
+    if (this.state.isLoggedIn === false) {
 			return (<Redirect to="/" />)
 		} else {
     return (

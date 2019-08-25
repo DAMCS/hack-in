@@ -40,11 +40,11 @@ class Menu extends React.Component{
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav>
               <NavDropdown title="Menu">
-                <NavDropdown.Item href="#action/3.1"><img width="30px" height="30px" src="" /></NavDropdown.Item>
+                <NavDropdown.Item href="#"><img width="30px" alt="" height="30px" src="" /></NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.2"><img width="30px" height="30px" src="" /></NavDropdown.Item>
+                <NavDropdown.Item href="#"><img width="30px" alt="" height="30px" src="" /></NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.3"><img width="30px" height="30px" src="" /></NavDropdown.Item>  
+                <NavDropdown.Item href="#"><img width="30px" alt="" height="30px" src="" /></NavDropdown.Item>  
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
