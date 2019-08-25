@@ -20,7 +20,7 @@ export default class Dashboard extends Component {
   
   handleLogout() {
     localStorage.removeItem('token');
-    this.state.setState({isLoggedIn : false});
+    this.setState({isLoggedIn : false});
     this.props.history.push('/')
   }
 
