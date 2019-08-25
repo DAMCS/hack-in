@@ -7,13 +7,19 @@ export default class Footer extends Component {
 		return (
 			<React.Fragment>
 				<div className="animated fadeIn">
+					
 					<link
 						href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"
 						rel="stylesheet"
 					/>
+					
 					<section id="lab_social_icon_footer">
 						<Container>
-							<div class="text-center center-block">
+							<div style={{ float: "left" }}>
+								<h3>PSG College of Technology</h3>
+								<h4>Login 2k19</h4>
+							</div>
+							<div style={{ float: "right" }}>
 								<a href="https://www.facebook.com/bootsnipp">
 									<i
 										id="social-fb"

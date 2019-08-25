@@ -7,7 +7,8 @@ import {
 	Tabs,
 	Nav,
 	Button,
-	TabContent
+	TabContent,
+	Container
 } from "react-bootstrap";
 
 import { Redirect } from "react-router-dom";
@@ -125,9 +126,13 @@ export default class Home extends Component {
 			<React.Fragment>
 				<Jumbotron
 					fluid
-					style={{ height: "calc(100vh)", marginBottom: "0px" }}
-				>
-					<Header />
+					style={{ boxShadow: "0 50vh 0 50vh #000", maxWidth: "100%",overflowX: "hidden" }}
+		>
+					<Row>
+						<Col>
+							<Header/>
+						</Col>
+					</Row>
 					<Row>
 						<Col md="4" />
 						<Col md="4">
@@ -135,7 +140,12 @@ export default class Home extends Component {
 						</Col>
 						<Col md="4" />
 					</Row>
-					<Footer />
+					<Row>
+						<Col>
+							<Footer />
+						</Col>
+					</Row>
+
 				</Jumbotron>
 			</React.Fragment>
 		);
