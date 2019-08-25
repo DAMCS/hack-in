@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import TableRow from './TableRow';
-import {Table} from 'react-bootstrap';
+import {Table,Modal,Button,ButtonToolbar,Jumbotron} from 'react-bootstrap';
 
-export default class LeaderBoard extends Component {
+class LeaderBoard extends Component {
 
 	constructor(props) {
 		super(props);
@@ -29,7 +29,7 @@ export default class LeaderBoard extends Component {
 	}
 
 	render() {
-		return (			
+		return (		
 				<Table striped bordered hover>
 					<thead>
 						<tr className="active">
@@ -50,4 +50,44 @@ export default class LeaderBoard extends Component {
 	
 		);
 	}
+}
+
+function LeaderBoardModal(props) {
+	return (
+		<Modal
+			{...props}
+			aria-labelledby="contained-modal-title-vcenter"
+			centered
+			animation
+			className="fade active in"
+		>
+			<Modal.Header closeButton>
+				<Modal.Title id="contained-modal-title-vcenter">
+					LeaderBoard
+          		</Modal.Title>
+			</Modal.Header>
+			<Modal.Body>
+				<LeaderBoard />
+			</Modal.Body>
+			<Modal.Footer>
+				<Button onClick={props.onHide}>Close</Button>
+			</Modal.Footer>
+		</Modal>
+	);
+}
+
+export default function Board() {
+	const [modalShow, setModalShow] = React.useState(false);
+
+	return (
+		<ButtonToolbar>
+			<a variant="primary" onClick={() => setModalShow(true)}>
+				<img style={{marginLeft:"5px"}} width="30px" alt="" height="30px" src={require("../Inventory/hacker1.png")} />
+     		</a>
+			<LeaderBoardModal
+				show={modalShow}
+				onHide={() => setModalShow(false)}
+			/>
+		</ButtonToolbar>
+	);
 }

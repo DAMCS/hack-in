@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import {Col, Row, Button } from 'react-bootstrap';
+import { Col, Row, Button  } from 'react-bootstrap';
 import axios from 'axios';
 import Anouncement from '../../components/Announcement/Announcement'
 
 import { Redirect } from "react-router-dom";
+
 const Inventory = React.lazy(()=>import('../../components/Inventory/Inventory'));
 const Header = React.lazy(() => import('./Header'));
 const Footer = React.lazy(() => import('./Footer'));
 const Menu = React.lazy(()=>import('../../components/Menu/Menu'));
+
 
 export default class Dashboard extends Component {
   constructor(props) {
@@ -60,7 +62,6 @@ export default class Dashboard extends Component {
               <Anouncement />
             </Col>
             <Col md="9">
-
             </Col>
             <Col md="1">
               <Inventory />
