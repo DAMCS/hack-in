@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
-import { Col, Row, Button  } from 'react-bootstrap';
+import { Col, Row, Button,Container, Jumbotron  } from 'react-bootstrap';
 import axios from 'axios';
 import Anouncement from '../../components/Announcement/Announcement'
 
 import { Redirect } from "react-router-dom";
+import Footer from './Footer';
 
 const Inventory = React.lazy(()=>import('../../components/Inventory/Inventory'));
-const Header = React.lazy(() => import('./Header'));
-const Footer = React.lazy(() => import('./Footer'));
-const Menu = React.lazy(()=>import('../../components/Menu/Menu'));
 
 
 export default class Dashboard extends Component {
@@ -55,22 +53,32 @@ export default class Dashboard extends Component {
 		} else {
     return (
       <React.Fragment>
-        <div class="animated fadeIn">
-          <Header />
+        {/* <Jumbotron fluid style={{overflowX:"hidden"}}> */}
+        <div class="animated fadeIn" >
           <Row>
             <Col md="2">
               <Anouncement />
+              
             </Col>
             <Col md="9">
+              
             </Col>
             <Col md="1">
+              <Button style={{background:"black"}} onClick={this.handleLogout}><img width="30px" alt="Signout" height="30px" src={require("../Dashboard/signout.png")} /></Button>
               <Inventory />
-              <Menu />
+             
+            </Col>
+            
+          </Row>
+          <Row>
+            <Col md="11">
+            </Col>
+            <Col md="1">
+              <Footer />
             </Col>
           </Row>
-          <Footer />
-          <Button variant="danger" onClick={this.handleLogout}>signout</Button>
         </div>
+        {/* </Jumbotron> */}
       </React.Fragment>
     )
     }

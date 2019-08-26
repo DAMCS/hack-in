@@ -82,7 +82,7 @@ function LeaderBoardModal(props) {
 		>
 			<Modal.Header>
 				<Modal.Title id="contained-modal-title-vcenter">
-					LeaderBoard
+					<h2>LeaderBoard</h2>
           		</Modal.Title>
 			</Modal.Header>
 			<Modal.Body>
