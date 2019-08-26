@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
-import { Jumbotron } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 
 export default class Header extends Component {
 	render() {
 		return (
 			<React.Fragment>
-				<Jumbotron fluid>
-					<h1>Hack[in] 2019</h1>
-					<p>Wow this beautiful</p>
-				</Jumbotron>
+					<Container>
+						<h1>HACK[IN]</h1>
+					</Container>
 			</React.Fragment>
 		)
 	}
