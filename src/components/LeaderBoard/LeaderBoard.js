@@ -61,9 +61,9 @@ function LeaderBoardModal(props) {
 			animation
 			className="fade active in"
 		>
-			<Modal.Header closeButton>
+			<Modal.Header>
 				<Modal.Title id="contained-modal-title-vcenter">
-					LeaderBoard
+					<h2>LeaderBoard</h2>
           		</Modal.Title>
 			</Modal.Header>
 			<Modal.Body>

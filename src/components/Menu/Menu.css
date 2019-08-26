@@ -1,3 +1,9 @@
 .dropdown-menu {
     min-width: 40px;
 }
+
+.item:hover {
+  -webkit-transform: scale(1.1);
+  -moz-transform: scale(1.1);
+  -o-transform: scale(1.1);
+}
