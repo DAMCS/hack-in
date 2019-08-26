@@ -11,7 +11,7 @@ class TableRow extends Component {
 					{this.props.obj.leader_name}
 				</td>
 				<td>
-					{this.props.obj.leader_points}
+					{this.props.obj.leader_pts}
 				</td>
 			</tr>
 		);
