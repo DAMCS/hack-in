@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import { Button, Form } from "react-bootstrap";
+import { Button, Form,FormGroup,FormText,Input } from "reactstrap";
 import axios from "axios";
 
 import Swal from 'sweetalert2';
@@ -75,8 +75,8 @@ class Login extends Component {
 			<React.Fragment>
 				<div className="animated fadeIn">
 					<Form onSubmit={this.handleSubmit}>
-						<Form.Group>
-							<Form.Control
+						<FormGroup>
+							<Input
 								className="form-control"
 								name="email"
 								onChange={this.handleInput}
@@ -84,19 +84,19 @@ class Login extends Component {
 								type="email"
 								placeholder="Enter email"
 							/>
-							<Form.Text className="text-muted">
+							<FormText color="muted">
 								We'll never share your email with anyone else.
-							</Form.Text>
-						</Form.Group>
-						<Form.Group controlId="formBasicPassword">
-							<Form.Control
+							</FormText>
+						</FormGroup>
+						<FormGroup controlId="formBasicPassword">
+							<Input
 								name="password"
 								onChange={this.handleInput}
 								value={this.state.password}
 								type="password"
 								placeholder="Password"
 							/>
-						</Form.Group>
+						</FormGroup>
 						<Button type="submit">Submit</Button>
 					</Form>
 				</div>

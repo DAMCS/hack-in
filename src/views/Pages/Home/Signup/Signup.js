@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, FormText ,FormGroup,Input} from "reactstrap";
 import axios from "axios";
 import { withRouter } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -97,8 +97,8 @@ class Signup extends Component {
 			<React.Fragment>
 				<div className="animated fadeIn">
 					<Form onSubmit={this.handleSubmit}>
-						<Form.Group controlId="formBasicEmail">
-							<Form.Control
+						<FormGroup controlId="formBasicEmail">
+							<Input
 								className="form-control"
 								name="email"
 								onChange={this.handleInput}
@@ -106,46 +106,46 @@ class Signup extends Component {
 								type="email"
 								placeholder="Enter email"
 							/>
-							<Form.Text className="text-muted">
+							<FormText color="muted">
 								We'll never share your email with anyone else.
-							</Form.Text>
-						</Form.Group>
-						<Form.Group controlId="formBasicSignupPassword">
-							<Form.Control
+							</FormText>
+						</FormGroup>
+						<FormGroup controlId="formBasicSignupPassword">
+							<Input
 								name="password"
 								onChange={this.handleInput}
 								value={this.state.password}
 								type="password"
 								placeholder="Password"
 							/>
-						</Form.Group>
-						<Form.Group controlId="formBasicConfirmPassword">
-							<Form.Control
+						</FormGroup>
+						<FormGroup controlId="formBasicConfirmPassword">
+							<Input
 								name="confirmPassword"
 								onChange={this.handleInput}
 								value={this.state.confirmPassword}
 								type="password"
 								placeholder="Confirm Password"
 							/>
-						</Form.Group>
-						<Form.Group controlId="formBasicPhone">
-							<Form.Control
+						</FormGroup>
+						<FormGroup controlId="formBasicPhone">
+							<Input
 								name="phone"
 								onChange={this.handleInput}
 								value={this.state.phone}
 								type="text"
 								placeholder="Phone Number"
 							/>
-						</Form.Group>
-						<Form.Group controlId="formBasicLoginCode">
-							<Form.Control
+						</FormGroup>
+						<FormGroup controlId="formBasicLoginCode">
+							<Input
 								name="loginCode"
 								onChange={this.handleInput}
 								value={this.state.loginCode}
 								type="text"
 								placeholder="LoginCode"
 							/>
-						</Form.Group>
+						</FormGroup>
 						<Button type="submit">Submit</Button>
 					</Form>
 				</div>
