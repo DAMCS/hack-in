@@ -1,0 +1,6 @@
+{
+  "name": "LeaderBoard",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./LeaderBoard.js"
+}
