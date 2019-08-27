@@ -29,7 +29,7 @@ export default class Dashboard extends Component {
 		if (token) {
 			axios({
 				method: "get",
-				url: "/user",
+				url: "/api/user",
 				headers: {
 					Authorization: "Bearer " + token
 				}

@@ -58,7 +58,7 @@ class Signup extends Component {
 		} else {
 			axios({
 				method: "post",
-				url: "http://13.235.77.118:3000/user/signup",
+				url: "/api/user/signup",
 				data: {
 					loginCode: this.state.loginCode,
 					email: this.state.email,
