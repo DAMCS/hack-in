@@ -11,7 +11,7 @@
   "bugs": {
     "url": "https://gitlab.com:aakashhemadri/hack-in/jissues"
   },
-  "proxy": "http://localhost:4000",
+  "proxy": "http://http://13.235.77.118:5000/",
   "dependencies": {
     "axios": "^0.19.0",
     "bootstrap": "^4.3.1",
