@@ -1,5 +1,6 @@
 import React from 'react';
 import './Inventory.css'
+import { Button } from 'react-bootstrap';
 (function () {
 
   if
@@ -52,18 +53,44 @@ import './Inventory.css'
 
 })();	
 
-export default function Inventory() {
+export default class Inventory extends React.Component {
+  constructor(props){
+    super(props);
+    this.state={
+      class1:"close",
+      class2:"open"
+    };
+    this.handleChange = this.handleChange.bind(this);
+  } 
+  handleChange(event) {
+    if (this.state.class1 === "close" && this.state.class2 === "open")
+      this.setState({class1: "open",class2:"close"});
+    else
+      this.setState({ class1: "close",class2:"open" });
+  }
+  render(){
     return (
       <React.Fragment >
+       <div> 
+          <div class={this.state.class1}> 
             <ol data-draggable="target">
-              <li data-draggable="item" ><img width="50px" alt="" height="50px" src={require('./hacker1.png')} /></li>
-              <li data-draggable="item" ><img width="50px" alt="" height="50px" src={require('./hacker2.png')} /></li>
-              <li data-draggable="item" ><img width="50px" alt="" height="50px" src={require('./hacker4.png')} /></li>
-              <li data-draggable="item" ><img width="50px" alt="" height="50px" src={require('./hacker1.png')} /></li>
-              <li data-draggable="item" ><img width="50px" alt="" height="50px" src={require('./hacker1.png')} /></li>
+              <section id="inventory"> 
+                <a href="javascript:void(0)" class="closebtn" onClick={this.handleChange}>&times;</a>
+                <li class="item" data-draggable="item" ><img width="50px" alt="" height="50px" src={require('./hacker1.png')} /></li>
+                <li class="item" data-draggable="item" ><img width="50px" alt="" height="50px" src={require('./hacker2.png')} /></li>
+                <li class="item" data-draggable="item" ><img width="50px" alt="" height="50px" src={require('./hacker4.png')} /></li>
+                <li class="item" data-draggable="item" ><img width="50px" alt="" height="50px" src={require('./hacker1.png')} /></li>
+                <li class="item" data-draggable="item" ><img width="50px" alt="" height="50px" src={require('./hacker1.png')} /></li>
+              </section>
             </ol>
             <ol data-draggable="target" className="list-group">
             </ol>
+        </div>
+        <a style={{cursor:"pointer",textDecoration:"none"}}class={this.state.class2} onClick={this.handleChange}>Inventory</a>
+        </div>
+            
       </React.Fragment>
     );
+   }
   }
+

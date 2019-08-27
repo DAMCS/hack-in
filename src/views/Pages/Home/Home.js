@@ -22,7 +22,7 @@ export default class Home extends Component {
 		if (token) {
 			axios({
 				method: "get",
-				url: "/user",
+				url: "/api/user",
 				headers: {
 					Authorization: "Bearer " + token
 				}

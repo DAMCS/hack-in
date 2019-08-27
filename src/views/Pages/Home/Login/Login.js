@@ -39,7 +39,7 @@ class Login extends Component {
 	handleSubmit(event) {
 		axios({
 			method: "post",
-			url: "/user/login",
+			url: "/api/user/login",
 			data: {
 				email: this.state.email,
 				password: this.state.password
