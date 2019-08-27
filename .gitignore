@@ -118,3 +118,5 @@ typings/
 
 # Build
 build/
+
+.vscode/

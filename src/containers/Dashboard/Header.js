@@ -5,7 +5,7 @@ export default class Header extends Component {
     return (
       <React.Fragment >
         <div className="animated fadeIn">
-          Header
+          Dashboard Header
         </div>
       </React.Fragment>
     )
