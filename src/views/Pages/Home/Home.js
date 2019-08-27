@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Col, Jumbotron } from "react-bootstrap";
+import { Row, Col, Jumbotron, Container } from "react-bootstrap";
 
 import { Redirect } from "react-router-dom";
 
@@ -39,33 +39,24 @@ export default class Home extends Component {
 		if (this.state.isLoggedIn === true) {
 			return <Redirect to="/dashboard" />;
 		} else {
-		return (
-			<React.Fragment>
-				<Jumbotron
-					fluid
-					style={{ boxShadow: "0 50vh 0 50vh #000", maxWidth: "100%",overflowX: "hidden" }}
-		>
-					<Row>
-						<Col>
-							<Header/>
-						</Col>
-					</Row>
-					<Row>
-						<Col md="4" />
-						<Col md="4">
-							<ControlledTabs />
-						</Col>
-						<Col md="4" />
-					</Row>
-					<Row>
-						<Col>
-							<Footer />
-						</Col>
-					</Row>
-
-				</Jumbotron>
-			</React.Fragment>
-		);
+			return (
+				<React.Fragment>
+					<Container fluid>
+						<Row>
+							<Col className="d-flex justify-content-center align-items-center">
+								<Jumbotron fluid >
+									<Header />
+									<ControlledTabs />
+								</Jumbotron>
+							</Col>
+						</Row>
+					</Container>
+				</React.Fragment >
+			);
 		}
 	}
 }
+/*
+
+style={{ boxShadow: "0 50vh 0 50vh #000", maxWidth: "100%", overflowX: "hidden" }}
+*/

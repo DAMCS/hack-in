@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
-import { Container } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 
 export default class Header extends Component {
 	render() {
 		return (
 			<React.Fragment>
-					<Container>
-						<h1>HACK[IN]</h1>
-					</Container>
+				<Container fluid >
+					<Row>
+						<Col className="d-flex justify-content-center">
+							<h1>HACK[IN]</h1>
+						</Col>
+					</Row>
+				</Container>
 			</React.Fragment>
 		)
 	}

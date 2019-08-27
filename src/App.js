@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { createBrowserHistory } from "history";
 
-import './assets/css/hacker.css';
+import './App.scss';
 
 const loading = () => <div className="animated fadeIn pt-3 text-center">Loading...</div>;
 const Page404 = React.lazy(() => import('./views/Pages/Page404'))

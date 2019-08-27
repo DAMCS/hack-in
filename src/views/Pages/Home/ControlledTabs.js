@@ -1,4 +1,5 @@
 import React from "react";
+import { Container } from "react-bootstrap";
 const Login = React.lazy(() => import("./Login"));
 const Signup = React.lazy(() => import("./Signup"));
 
@@ -12,7 +13,7 @@ class ControlledTabs extends React.Component {
 			bool2: "",
 			active1: "tab-pane fade active in",
 			active2: "tab-pane fade"
-			
+
 		};
 		this.handleChange = this.handleChange.bind(this);
 	}
@@ -47,7 +48,7 @@ class ControlledTabs extends React.Component {
 	}
 	render() {
 		return (
-			<div>
+			<Container fluid className="center-block">
 				<ul class="nav nav-tabs">
 					<li onClick={this.handleChange} class={this.state.class1}>
 						<a aria-expanded={this.state.bool1} data-toggle="tab">
@@ -69,7 +70,8 @@ class ControlledTabs extends React.Component {
 						<Signup />
 					</div>
 				</div>
-			</div>
+			</Container>
+
 		);
 	}
 }
