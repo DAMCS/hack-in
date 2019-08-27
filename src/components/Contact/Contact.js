@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal,Button,ButtonToolbar, Container} from 'react-bootstrap';
+import { Modal,Button,ButtonToolbar, Container} from 'reactstrap';
 
 
 function ContactModal(props) {

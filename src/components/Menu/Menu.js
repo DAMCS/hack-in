@@ -1,5 +1,5 @@
 import React from 'react';
-import {Nav, NavDropdown, Navbar,Dropdown,DropdownButton,ButtonToolbar} from 'react-bootstrap';
+import {Nav, NavDropdown, Navbar,Dropdown,DropdownButton,ButtonToolbar} from 'reactstrap';
 import "./Menu.css";
 import Contact from "../Contact";
 const LeaderBoard = React.lazy(() => import('../LeaderBoard'));

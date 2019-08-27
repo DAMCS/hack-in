@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import TableRow from './TableRow';
-import {Table,Modal,Button,ButtonToolbar,Jumbotron} from 'react-bootstrap';
+import {Table,Modal,Button,ButtonToolbar,Jumbotron} from 'reactstrap';
 
 class LeaderBoard extends Component {
 

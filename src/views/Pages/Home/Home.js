@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
-import {Row,Col} from "reactstrap";
+import { Row, Col } from "reactstrap";
 import axios from "axios";
 const Header = React.lazy(() => import("./Header"));
 const Footer = React.lazy(() => import("./Footer"));
@@ -38,14 +38,14 @@ export default class Home extends Component {
 			return <Redirect to="/dashboard" />;
 		} else {
 			return (
-        <React.Fragment>
-          <Row>
-            <Col sm="12" md={{ size: 6, offset: 3 }}>
-              <ControlledTabs />
-            </Col>
-          </Row>
-        </React.Fragment>
-      );
+				<React.Fragment>
+					<Row>
+						<Col sm="12" md={{ size: 6, offset: 3 }}>
+							<ControlledTabs />
+						</Col>
+					</Row>
+				</React.Fragment>
+			);
 		}
 	}
 }

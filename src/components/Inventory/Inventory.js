@@ -1,6 +1,6 @@
 import React from 'react';
 import './Inventory.css'
-import { Button } from 'react-bootstrap';
+import { Button } from 'reactstrap';
 (function () {
 
   if

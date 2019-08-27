@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Col, Row, Button,Container, Jumbotron  } from 'react-bootstrap';
+import { Col, Row, Button,Container, Jumbotron  } from 'reactstrap';
 import axios from 'axios';
 import Anouncement from '../../components/Announcement/Announcement'
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Accordion, Card, Button, Badge} from 'react-bootstrap';
+import { Accordion, Card, Button, Badge} from 'reactstrap';
 
 class Announcement extends Component {
 
