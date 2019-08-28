@@ -1,0 +1,3 @@
+[submodule "src/assets/darkdarktheme"]
+	path = src/assets/darkdarktheme
+	url = https://github.com/aakashhemadri/darkdarktheme.git

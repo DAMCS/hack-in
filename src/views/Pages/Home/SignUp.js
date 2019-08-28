@@ -1,12 +1,11 @@
 import React, { Component } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, FormText, FormGroup, Input } from "reactstrap";
 import axios from "axios";
-import { withRouter } from "react-router-dom";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 const MySwal = withReactContent(Swal);
 
-class Signup extends Component {
+export default class SignUp extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -29,7 +28,7 @@ class Signup extends Component {
 		});
 	}
 	handleSubmit(event) {
-		let passCheck = /^[A-Za-z]\w{7,14}$/;
+		let passCheck = /^[A-Za-z]\w{7,30}$/;
 		if (!this.state.password.match(passCheck)) {
 			MySwal.fire({
 				type: "error",
@@ -55,6 +54,7 @@ class Signup extends Component {
 				text: "Invalid Email",
 				toast: true
 			});
+
 		} else {
 			axios({
 				method: "post",
@@ -78,10 +78,11 @@ class Signup extends Component {
 							timer: 1000
 						});
 						localStorage.setItem("token", response.data.token);
-						this.props.history.push("/dashboard");
+						// this.props.history.push("/dashboard");
+						this.props.onSubmitToggle();
 					}
 				})
-				.catch(function(error) {
+				.catch(function (error) {
 					MySwal.fire({
 						type: "error",
 						title: "Oops...",
@@ -96,9 +97,9 @@ class Signup extends Component {
 		return (
 			<React.Fragment>
 				<div className="animated fadeIn">
-					<Form onSubmit={this.handleSubmit}>
-						<Form.Group controlId="formBasicEmail">
-							<Form.Control
+					<Form onSubmit={this.handleSubmit} className="d-flex flex-column align-items-center">
+						<FormGroup controlId="formBasicEmail">
+							<Input
 								className="form-control"
 								name="email"
 								onChange={this.handleInput}
@@ -106,52 +107,50 @@ class Signup extends Component {
 								type="email"
 								placeholder="Enter email"
 							/>
-							<Form.Text className="text-muted">
-								We'll never share your email with anyone else.
-							</Form.Text>
-						</Form.Group>
-						<Form.Group controlId="formBasicSignupPassword">
-							<Form.Control
+							<FormText color="muted">
+								You're information will be kept a secret!
+							</FormText>
+						</FormGroup>
+						<FormGroup controlId="formBasicSignupPassword">
+							<Input
 								name="password"
 								onChange={this.handleInput}
 								value={this.state.password}
 								type="password"
 								placeholder="Password"
 							/>
-						</Form.Group>
-						<Form.Group controlId="formBasicConfirmPassword">
-							<Form.Control
+						</FormGroup>
+						<FormGroup controlId="formBasicConfirmPassword">
+							<Input
 								name="confirmPassword"
 								onChange={this.handleInput}
 								value={this.state.confirmPassword}
 								type="password"
 								placeholder="Confirm Password"
 							/>
-						</Form.Group>
-						<Form.Group controlId="formBasicPhone">
-							<Form.Control
+						</FormGroup>
+						<FormGroup controlId="formBasicPhone">
+							<Input
 								name="phone"
 								onChange={this.handleInput}
 								value={this.state.phone}
 								type="text"
 								placeholder="Phone Number"
 							/>
-						</Form.Group>
-						<Form.Group controlId="formBasicLoginCode">
-							<Form.Control
+						</FormGroup>
+						<FormGroup controlId="formBasicLoginCode">
+							<Input
 								name="loginCode"
 								onChange={this.handleInput}
 								value={this.state.loginCode}
 								type="text"
-								placeholder="LoginCode"
+								placeholder="Login 2k19 Code"
 							/>
-						</Form.Group>
-						<Button type="submit">Submit</Button>
+						</FormGroup>
+						<Button type="submit">Sign Up!</Button>
 					</Form>
 				</div>
 			</React.Fragment>
 		);
 	}
 }
-
-export default withRouter(Signup);

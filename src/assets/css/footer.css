@@ -1,6 +1,5 @@
 #lab_social_icon_footer {
     padding: 40px;
-    background-color: #080808;
   }
 
   #clg_watermark {
@@ -12,7 +11,7 @@
   }
   
   #lab_social_icon_footer a {
-    color: #0f0,
+    color: green,
   }
   
   #lab_social_icon_footer .social:hover {
