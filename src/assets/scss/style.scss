@@ -1,0 +1,10 @@
+@import "../darkdarktheme/scss/darkdarktheme.scss";
+
+@import "../css/dark.scss";
+
+html,
+body,
+#root,
+#root > div {
+  height: 100%;
+}

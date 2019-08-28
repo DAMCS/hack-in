@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import TableRow from './TableRow';
-import {Table,Modal,Button,ButtonToolbar,Jumbotron} from 'react-bootstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Table } from 'reactstrap';
 
 class LeaderBoard extends Component {
 
@@ -14,22 +13,22 @@ class LeaderBoard extends Component {
 		let dummy_data = {
 			display_name: "Name/Level Progressed",
 			display_value: "Points/Completed count",
-			data : [
+			data: [
 				{
-				  "leader_id": 1,
-				  "leader_name": "Surya",
-				  "leader_pts": 1000
+					"leader_id": 1,
+					"leader_name": "Surya",
+					"leader_pts": 1000
 				},
 				{
 					"leader_id": 2,
 					"leader_name": "Prasath",
 					"leader_pts": 800
-				  }, {
+				}, {
 					"leader_id": 3,
 					"leader_name": "Tester",
 					"leader_pts": 700
-				  }
-			  ]
+				}
+			]
 		}
 
 		this.setState(dummy_data);
@@ -53,60 +52,55 @@ class LeaderBoard extends Component {
 	}
 
 	render() {
-		return (		
-				<Table striped bordered hover>
-					<thead>
-						<tr className="active">
-							<th>ID</th>
-							<th>{this.state.display_name}</th>
-							<th>{this.state.display_value}</th>
-						</tr>
-					</thead>
-					<tbody>
+		return (
+			<Table striped bordered hover>
+				<thead>
+					<tr className="active">
+						<th>ID</th>
+						<th>{this.state.display_name}</th>
+						<th>{this.state.display_value}</th>
+					</tr>
+				</thead>
+				<tbody>
 					{this.tabRow()}
-					</tbody>
-				</Table>
-	
+				</tbody>
+			</Table>
+
 		);
 	}
 }
 
-function LeaderBoardModal(props) {
-	return (
-		<Modal
-			{...props}
-			aria-labelledby="contained-modal-title-vcenter"
-			centered
-			animation
-			className="fade active in"
-		>
-			<Modal.Header>
-				<Modal.Title id="contained-modal-title-vcenter">
-					<h2>LeaderBoard</h2>
-          		</Modal.Title>
-			</Modal.Header>
-			<Modal.Body>
-				<LeaderBoard />
-			</Modal.Body>
-			<Modal.Footer>
-				<Button onClick={props.onHide}>Close</Button>
-			</Modal.Footer>
-		</Modal>
-	);
-}
+export default class LeaderBoardModal extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			modal: false
+		};
 
-export default function Board() {
-	const [modalShow, setModalShow] = React.useState(false);
+		this.toggle = this.toggle.bind(this);
+	}
 
-	return (
-		<ButtonToolbar>
-			<a variant="primary" onClick={() => setModalShow(true)}>
-				<img style={{marginLeft:"5px"}} width="30px" alt="" height="30px" src={require("../Inventory/hacker1.png")} />
-     		</a>
-			<LeaderBoardModal
-				show={modalShow}
-				onHide={() => setModalShow(false)}
-			/>
-		</ButtonToolbar>
-	);
+	toggle() {
+		this.setState(prevState => ({
+			modal: !prevState.modal
+		}));
+	}
+
+	render() {
+		return (
+			<div>
+				<Button color="primary" onClick={this.toggle}><img style={{ marginLeft: "5px" }} width="30px" alt="" height="30px" src={require("../../components/Inventory/hacker2.png")} />
+				</Button>
+				<Modal centered="true" isOpen={this.state.modal} toggle={this.toggle}>
+					<ModalHeader>LeaderBoard</ModalHeader>
+					<ModalBody>
+						<LeaderBoard />
+					</ModalBody>
+					<ModalFooter>
+						<Button color="danger" onClick={this.toggle}>Cancel</Button>
+					</ModalFooter>
+				</Modal>
+			</div>
+		);
+	}
 }
