@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import TableRow from './TableRow';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter,Table} from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Table } from 'reactstrap';
 
 class LeaderBoard extends Component {
 
@@ -14,22 +13,22 @@ class LeaderBoard extends Component {
 		let dummy_data = {
 			display_name: "Name/Level Progressed",
 			display_value: "Points/Completed count",
-			data : [
+			data: [
 				{
-				  "leader_id": 1,
-				  "leader_name": "Surya",
-				  "leader_pts": 1000
+					"leader_id": 1,
+					"leader_name": "Surya",
+					"leader_pts": 1000
 				},
 				{
 					"leader_id": 2,
 					"leader_name": "Prasath",
 					"leader_pts": 800
-				  }, {
+				}, {
 					"leader_id": 3,
 					"leader_name": "Tester",
 					"leader_pts": 700
-				  }
-			  ]
+				}
+			]
 		}
 
 		this.setState(dummy_data);
@@ -53,20 +52,20 @@ class LeaderBoard extends Component {
 	}
 
 	render() {
-		return (		
-				<Table striped bordered hover>
-					<thead>
-						<tr className="active">
-							<th>ID</th>
-							<th>{this.state.display_name}</th>
-							<th>{this.state.display_value}</th>
-						</tr>
-					</thead>
-					<tbody>
+		return (
+			<Table striped bordered hover>
+				<thead>
+					<tr className="active">
+						<th>ID</th>
+						<th>{this.state.display_name}</th>
+						<th>{this.state.display_value}</th>
+					</tr>
+				</thead>
+				<tbody>
 					{this.tabRow()}
-					</tbody>
-				</Table>
-	
+				</tbody>
+			</Table>
+
 		);
 	}
 }
@@ -88,7 +87,6 @@ export default class LeaderBoardModal extends React.Component {
 	}
 
 	render() {
-		let val = false
 		return (
 			<div>
 				<Button color="primary" onClick={this.toggle}><img style={{ marginLeft: "5px" }} width="30px" alt="" height="30px" src={require("../../components/Inventory/hacker2.png")} />
@@ -97,7 +95,7 @@ export default class LeaderBoardModal extends React.Component {
 					<ModalHeader>LeaderBoard</ModalHeader>
 					<ModalBody>
 						<LeaderBoard />
-          			</ModalBody>
+					</ModalBody>
 					<ModalFooter>
 						<Button color="danger" onClick={this.toggle}>Cancel</Button>
 					</ModalFooter>

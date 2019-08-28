@@ -1,18 +1,14 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import { Button, Form,FormGroup,FormText,Input } from "reactstrap";
+import { Button, Form, FormGroup, Input } from "reactstrap";
 import axios from "axios";
 
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
-import "../../../../assets/css/dark.scss";
+import "../../../assets/css/dark.scss";
 
 const MySwal = withReactContent(Swal);
-
-const loading = () => (
-	<div className="animated fadeIn pt-3 text-center">Loading...</div>
-);
 
 class Login extends Component {
 	constructor(props) {
@@ -47,15 +43,15 @@ class Login extends Component {
 		})
 			.then(response => {
 				if (response.data.status === "Success") {
-					  
-					  MySwal.fire({
+
+					MySwal.fire({
 						type: 'success',
 						title: 'Signed in successfully',
 						toast: true,
 						position: 'top-end',
 						showConfirmButton: false,
 						timer: 1000
-					  })
+					})
 					localStorage.setItem("token", response.data.token);
 					this.props.history.push('/dashboard');
 				}
@@ -66,7 +62,7 @@ class Login extends Component {
 					title: 'Oops...',
 					text: error.response.data.message,
 					toast: false,
-				  })
+				})
 			});
 		event.preventDefault();
 	}
@@ -74,7 +70,7 @@ class Login extends Component {
 		return (
 			<React.Fragment>
 				<div className="animated fadeIn">
-					<Form onSubmit={this.handleSubmit}>
+					<Form onSubmit={this.handleSubmit} className="d-flex flex-column align-items-center">
 						<FormGroup>
 							<Input
 								className="form-control"
@@ -84,9 +80,6 @@ class Login extends Component {
 								type="email"
 								placeholder="Enter email"
 							/>
-							<FormText color="muted">
-								We'll never share your email with anyone else.
-							</FormText>
 						</FormGroup>
 						<FormGroup controlId="formBasicPassword">
 							<Input
@@ -97,7 +90,7 @@ class Login extends Component {
 								placeholder="Password"
 							/>
 						</FormGroup>
-						<Button type="submit">Submit</Button>
+						<Button type="submit">Sign In</Button>
 					</Form>
 				</div>
 			</React.Fragment>
