@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { Accordion, Card, Button, Badge} from 'reactstrap';
+import { Collapse, Card, Button, Badge} from 'reactstrap';
 
 class Announcement extends Component {
 
 	constructor(props) {
-		super(props);
-		this.state = { display_name: "", display_value: "", data: [] };
+    super(props);
+    this.toggle = this.toggle.bind(this);
+    this.state = { display_name: "", display_value: "", data: [], collapse: false };
 	}
 	componentDidMount() {
 
@@ -44,28 +45,38 @@ class Announcement extends Component {
 		// 	console.log(error);
 		// })
 	}
-	announcement() {
-		return this.state.data.map(function (object, i) {
-			return (
-        <Accordion.Collapse eventKey="0">
-            <Card.Body>Anouncements comes here</Card.Body>
-          </Accordion.Collapse>
-      )
-		});
-	}
+	// announcement() {
+	// 	return this.state.data.map(function (object, i) {
+	// 		return (
+  //       <Accordion.Collapse eventKey="0">
+  //           <Card.Body>Anouncements comes here</Card.Body>
+  //         </Accordion.Collapse>
+  //     )
+	// 	});
+  // }
+  
+  toggle() {
+    this.setState(state => ({ collapse: !state.collapse }));
+  }
 
 render() {
     return (
-      <Accordion className="list-group">
-        <Card>
-          <Card.Header>
-            <Accordion.Toggle style={{background:"black"}} className="btn bg-default" as={Button} eventKey="0">
-              <img width="20px" alt="" height="20px" src={require('../Announcement/announcement.png')} />&nbsp;<Badge className="badge" variant="light">2</Badge>
-            </Accordion.Toggle>
-          </Card.Header>
-          {this.announcement()}
-        </Card>
-      </Accordion>
+      // <Accordion className="list-group">
+      //   <Card>
+      //     <Card.Header>
+      //       <Accordion.Toggle style={{background:"black"}} className="btn bg-default" as={Button} eventKey="0">
+      //         <img width="20px" alt="" height="20px" src={require('../Announcement/announcement.png')} />&nbsp;<Badge className="badge" variant="light">2</Badge>
+      //       </Accordion.Toggle>
+      //     </Card.Header>
+      //     {this.announcement()}
+      //   </Card>
+      // </Accordion>
+      <div>
+        <Button color="primary" onClick={this.toggle} style={{ marginBottom: '1rem' }}> <img width="20px" alt="" height="20px" src={require('../Announcement/announcement.png')} /><Badge color="dark">2</Badge></Button> 
+        <Collapse isOpen={this.state.collapse}>
+          Announcement comes here.
+        </Collapse>
+      </div >
     );
   }
 }

@@ -5,9 +5,9 @@ export default class Header extends Component {
 	render() {
 		return (
 			<React.Fragment>
-				<Container fluid >
+				<Container  >
 					<Row>
-						<Col className="d-flex justify-content-center">
+						<Col>
 							<h1>HACK[IN]</h1>
 						</Col>
 					</Row>

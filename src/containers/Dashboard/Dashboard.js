@@ -6,8 +6,11 @@ import Anouncement from '../../components/Announcement/Announcement'
 import { Redirect } from "react-router-dom";
 import Footer from './Footer';
 
-const Inventory = React.lazy(()=>import('../../components/Inventory/Inventory'));
+const Menu = React.lazy(() => import('../../components/Menu/Menu'));
 
+const Inventory = React.lazy(()=>import('../../components/Inventory/Inventory'));
+const LeaderBoard = React.lazy(()=>import('../../components/LeaderBoard'));
+const Contact = React.lazy(() => import('../../components/Contact'));
 
 export default class Dashboard extends Component {
   constructor(props) {
@@ -56,27 +59,25 @@ export default class Dashboard extends Component {
         {/* <Jumbotron fluid style={{overflowX:"hidden"}}> */}
         <div class="animated fadeIn" >
           <Row>
-            <Col md="2">
+            <Col md="1">
               <Anouncement />
-              
             </Col>
-            <Col md="9">
-              
+            <Col md="10">
             </Col>
             <Col md="1">
               <Button style={{background:"black"}} onClick={this.handleLogout}><img width="30px" alt="Signout" height="30px" src={require("../Dashboard/signout.png")} /></Button>
               <Inventory />
-             
+              <LeaderBoard />
+              <Contact />
             </Col>
-            
           </Row>
-          <Row>
+          {/* <Row>
             <Col md="11">
             </Col>
             <Col md="1">
-              <Footer />
+              <Menu />
             </Col>
-          </Row>
+          </Row> */}
         </div>
         {/* </Jumbotron> */}
       </React.Fragment>

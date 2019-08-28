@@ -40,8 +40,18 @@ export default class Home extends Component {
 			return (
 				<React.Fragment>
 					<Row>
+						<Col >
+							<Header />
+						</Col>
+					</Row>
+					<Row>
 						<Col sm="12" md={{ size: 6, offset: 3 }}>
 							<ControlledTabs />
+						</Col>
+					</Row>
+					<Row>
+						<Col>
+							<Footer />
 						</Col>
 					</Row>
 				</React.Fragment>
