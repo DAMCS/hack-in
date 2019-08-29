@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { Col, Row, Button } from 'reactstrap';
 import axios from 'axios';
 import Anouncement from '../../components/Announcement/Announcement'
-
+import StoryLine from '../../components/StoryLine'
 import { Redirect } from "react-router-dom";
-
 // const Menu = React.lazy(() => import('../../components/Menu/Menu'));
 
 const Inventory = React.lazy(() => import('../..//components/Inventory/Inventory'));
 const LeaderBoard = React.lazy(() => import('../../components/LeaderBoard'));
 const Contact = React.lazy(() => import('../../components/Contact'));
+
 
 export default class Dashboard extends Component {
 	constructor(props) {
@@ -64,10 +64,15 @@ export default class Dashboard extends Component {
 							<Col md="10">
 							</Col>
 							<Col md="1">
-								<Button style={{ background: "black" }} onClick={this.handleLogout}><img width="30px" alt="Signout" height="30px" src={require("../Dashboard/signout.png")} /></Button>
-								<Inventory />
 								<LeaderBoard />
 								<Contact />
+								<StoryLine />
+								<Inventory />
+							</Col>
+						</Row>
+						<Row>
+							<Col style={{bottom:"0",position:"fixed"}}>
+								<a color="primary" onClick={this.handleLogout}><i class="fa fa-sign-out" aria-hidden="true"></i></a>
 							</Col>
 						</Row>
 						{/* <Row>

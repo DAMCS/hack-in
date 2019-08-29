@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "../../../assets/css/footer.css";
+import './footer.css';
 import { Container } from "reactstrap";
 
 export default class Footer extends Component {

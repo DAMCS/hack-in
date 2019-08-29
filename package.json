@@ -33,6 +33,7 @@
 		"reactstrap": "^8.0.1",
 		"simple-line-icons": "^2.4.1",
 		"styled-components": "^4.3.2",
+		"typed.js": "^2.0.10",
 		"typescript": "^3.5.3"
 	},
 	"scripts": {

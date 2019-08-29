@@ -20,8 +20,7 @@ export default class Contact extends React.Component {
     render() {
         return (
             <div>
-                <Button color="primary" onClick={this.toggle}><img style={{ marginLeft: "5px" }} width="30px" alt="" height="30px" src={require("../../components/Inventory/hacker2.png")} />
-                </Button>
+                <a color="primary" onClick={this.toggle}><i class="fa fa-address-card" aria-hidden="true"></i></a>
                 <Modal centered="true" isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                     <ModalHeader toggle={this.toggle}>Contact</ModalHeader>
                     <ModalBody>

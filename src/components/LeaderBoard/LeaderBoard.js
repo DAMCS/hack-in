@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import TableRow from './TableRow';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Table } from 'reactstrap';
-
+import axios from 'axios';
 class LeaderBoard extends Component {
 
 	constructor(props) {
@@ -32,18 +32,18 @@ class LeaderBoard extends Component {
 		}
 
 		this.setState(dummy_data);
-
-		// axios.get('/api/leaderboard',
-		// {headers: {
-		// 	"Authorization" : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QxMjNAZ21haWwuY29tIiwidXNlcm5hbWUiOiJ0ZXN0MTIzQGdtYWlsLmNvbSIsInVzZXJJZCI6IjVkNWU5NjM2Njg4ZjZmMDZiMzUyOGQ5ZCIsImlhdCI6MTU2NjQ4MDAwOCwiZXhwIjoxNTY2NDgzNjA4fQ.U6TkCk3AvvVaX8RnhsBzrmZwucoMzR-WBLuMi9RtSJ4",
-		//   }
-		// }
-		// ).then(response => {
-		// 	this.setState({ leader_val: response.data });
-		// })
-		// .catch(function (error) {
-		// 	console.log(error);
-		// })
+		var token = localStorage.getItem('token');
+		axios.get('/api/leaderboard',
+		{headers: {
+			"Authorization": "Bearer "+ token
+		  }
+		}
+		).then(response => {
+			this.setState({ leader_val: response.data });
+		})
+		.catch(function (error) {
+			console.log(error);
+		})
 	}
 	tabRow() {
 		return this.state.data.map(function (object, i) {
@@ -89,8 +89,8 @@ export default class LeaderBoardModal extends React.Component {
 	render() {
 		return (
 			<div>
-				<Button color="primary" onClick={this.toggle}><img style={{ marginLeft: "5px" }} width="30px" alt="" height="30px" src={require("../../components/Inventory/hacker2.png")} />
-				</Button>
+				<a color="primary" onClick={this.toggle}><i class="fa fa-table" aria-hidden="true"></i>
+				</a>
 				<Modal centered="true" isOpen={this.state.modal} toggle={this.toggle}>
 					<ModalHeader>LeaderBoard</ModalHeader>
 					<ModalBody>
