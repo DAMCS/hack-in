@@ -3,12 +3,7 @@ import { withRouter } from "react-router-dom";
 import { Button, Form, FormGroup, Input } from "reactstrap";
 import axios from "axios";
 
-import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
-
-import "../../../assets/css/dark.scss";
-
-const MySwal = withReactContent(Swal);
+import { toast } from 'react-toastify'
 
 class Login extends Component {
 	constructor(props) {
@@ -43,26 +38,13 @@ class Login extends Component {
 		})
 			.then(response => {
 				if (response.data.status === "Success") {
-
-					MySwal.fire({
-						type: 'success',
-						title: 'Signed in successfully',
-						toast: true,
-						position: 'top-end',
-						showConfirmButton: false,
-						timer: 1000
-					})
+					toast.success("Signed in successfully");
 					localStorage.setItem("token", response.data.token);
 					this.props.history.push('/dashboard');
 				}
 			})
 			.catch(error => {
-				MySwal.fire({
-					type: 'error',
-					title: 'Oops...',
-					text: error.response.data.message,
-					toast: false,
-				})
+				toast.error("Failed to sign in!");
 			});
 		event.preventDefault();
 	}
