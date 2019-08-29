@@ -55,14 +55,14 @@ export default class Home extends Component {
 			return (
 				<React.Fragment>
 					<div class="d-flex align-items-center">
-						<Container className="text-center">
+						<Container fluid className="w-100">
 							<Row>
 								<Col xs="12">
 									<Header />
 								</Col>
 							</Row>
 							<Row className="">
-								<Col xs="12" className="d-flex flex-column justify-content-center align-items-center align-middle">
+								<Col xs="12" className="d-flex flex-column justify-content-center align-items-center align-middle w-50">
 									<TabContent activeTab={this.state.activeTab} className="p-2">
 										<TabPane tabId="SignIn">
 											<Login />

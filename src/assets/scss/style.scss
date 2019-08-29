@@ -6,6 +6,7 @@ html,
 body,
 #root > div {
   height: 100vh;
+  width: 100%;
   overflow: hidden;
 }
 
@@ -15,4 +16,14 @@ body,
     display: flex;
     flex-direction: column;
   }
+}
+
+.popover {
+  max-width: 400px;
+}
+
+@import url("https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap");
+
+body {
+  font-family: "Press Start 2P", cursive;
 }

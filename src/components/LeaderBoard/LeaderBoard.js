@@ -88,19 +88,7 @@ export default class LeaderBoardModal extends React.Component {
 
 	render() {
 		return (
-			<div>
-				<Button color="primary" onClick={this.toggle}><img style={{ marginLeft: "5px" }} width="30px" alt="" height="30px" src={require("../../components/Inventory/hacker2.png")} />
-				</Button>
-				<Modal centered="true" isOpen={this.state.modal} toggle={this.toggle}>
-					<ModalHeader>LeaderBoard</ModalHeader>
-					<ModalBody>
-						<LeaderBoard />
-					</ModalBody>
-					<ModalFooter>
-						<Button color="danger" onClick={this.toggle}>Cancel</Button>
-					</ModalFooter>
-				</Modal>
-			</div>
+			<LeaderBoard />
 		);
 	}
 }
