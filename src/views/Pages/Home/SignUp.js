@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import { Button, Form, FormText, FormGroup, Input } from "reactstrap";
 import axios from "axios";
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
-const MySwal = withReactContent(Swal);
+import { toast } from 'react-toastify';
 
 export default class SignUp extends Component {
 	constructor(props) {
@@ -30,31 +28,15 @@ export default class SignUp extends Component {
 	handleSubmit(event) {
 		let passCheck = /^[A-Za-z]\w{7,30}$/;
 		if (!this.state.password.match(passCheck)) {
-			MySwal.fire({
-				type: "error",
-				title: "Oops...",
-				text: "Password dosent meet the requirements",
-				toast: true
-			});
+			toast.warn("Password dosent meet the requirements");
 		} else if (this.state.password !== this.state.confirmPassword) {
-			MySwal.fire({
-				type: "error",
-				title: "Oops...",
-				text: "Password Mismatch",
-				toast: true
-			});
+			toast.warn("Password Mismatch");
 		} else if (
 			!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(
 				this.state.email
 			)
 		) {
-			MySwal.fire({
-				type: "error",
-				title: "Oops...",
-				text: "Invalid Email",
-				toast: true
-			});
-
+			toast.error("Failed to sign up!");
 		} else {
 			axios({
 				method: "post",
@@ -69,26 +51,14 @@ export default class SignUp extends Component {
 			})
 				.then(response => {
 					if (response.data.status === "Success") {
-						MySwal.fire({
-							type: "success",
-							title: "User created successfully",
-							toast: true,
-							position: "top-end",
-							showConfirmButton: false,
-							timer: 1000
-						});
+						toast.success("User created successfully")
 						localStorage.setItem("token", response.data.token);
 						// this.props.history.push("/dashboard");
 						this.props.onSubmitToggle();
 					}
 				})
 				.catch(function (error) {
-					MySwal.fire({
-						type: "error",
-						title: "Oops...",
-						text: error.response.data.message,
-						toast: false
-					});
+					toast.error("Failed to sign up!");
 				});
 		}
 		event.preventDefault();
