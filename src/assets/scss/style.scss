@@ -1,0 +1,18 @@
+@import "../darkdarktheme/scss/darkdarktheme.scss";
+
+@import "../react-toastify/scss/main.scss";
+
+html,
+body,
+#root > div {
+  height: 100vh;
+  overflow: hidden;
+}
+
+// ie11 floating footer temp fix, react only
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  #root {
+    display: flex;
+    flex-direction: column;
+  }
+}

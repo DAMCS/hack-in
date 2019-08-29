@@ -1,0 +1,27 @@
+$rt-namespace: "Toastify";
+$rt-toast-width: 320px !default;
+$rt-toast-background: #ffffff !default;
+$rt-toast-min-height: 64px !default;
+$rt-toast-max-height: 800px !default;
+
+$rt-color-default: $body-bg !default;
+$rt-color-info: $body-bg !default;
+$rt-color-success: $body-bg !default;
+$rt-color-warning: $body-bg !default;
+$rt-color-error: $body-bg !default;
+
+$rt-text-color-default: theme-color("hack") !default;
+$rt-text-color-info: $info !default;
+$rt-text-color-success: $success !default;
+$rt-text-color-warning: $warning !default;
+$rt-text-color-error: $danger !default;
+
+$rt-color-progress-default: theme-color("hack") !default;
+$rt-color-progress-info: $info !default;
+$rt-color-progress-success: $success !default;
+$rt-color-progress-warning: $warning !default;
+$rt-color-progress-error: $danger;
+
+$rt-mobile: "only screen and (max-width : 480px)" !default;
+$rt-font-family: sans-serif !default;
+$rt-z-index: 9999 !default;

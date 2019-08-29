@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col, Container, Row } from 'reactstrap';
 
 class Page500 extends Component {
   render() {
