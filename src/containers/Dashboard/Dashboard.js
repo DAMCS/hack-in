@@ -1,21 +1,18 @@
 import React, { Component } from 'react';
 import {
-	Col, Row, Nav, NavItem, NavLink, Popover, PopoverHeader, PopoverBody, Modal, ModalHeader, ModalBody, ModalFooter, Button, Collapse
+	Col, Row, Nav, NavItem, NavLink, Modal, ModalHeader, ModalBody, ModalFooter, Button, Collapse
 } from 'reactstrap';
-import classnames from 'classnames';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faSatelliteDish, faTable, faSignOutAlt, faAngleLeft, faIdCard, faVideo } from '@fortawesome/free-solid-svg-icons'
-
-
-
+import { faSatelliteDish, faTable, faSignOutAlt, faAngleLeft, faIdCard, faVideo, } from '@fortawesome/free-solid-svg-icons'
 import { Redirect } from "react-router-dom";
-import { toast } from 'react-toastify';
 
 const Announcement = React.lazy(() => import('../../components/Announcement/Announcement'));
 const Inventory = React.lazy(() => import('../..//components/Inventory/Inventory'));
 const LeaderBoard = React.lazy(() => import('../../components/LeaderBoard'));
+const StoryLine = React.lazy(() => import('../../components/StoryLine'));
+const MissionMap = React.lazy(() => import('../../components/MissionMap'));
 
 library.add(faSatelliteDish, faTable, faSignOutAlt, faAngleLeft, faIdCard, faVideo)
 
@@ -24,42 +21,22 @@ export default class Dashboard extends Component {
 		super(props);
 
 		this.handleLogout = this.handleLogout.bind(this);
-		this.toggleLeaderBoard = this.toggleLeaderBoard.bind(this);
-		this.toggleContact = this.toggleContact.bind(this);
-		this.toggleAnnouncements = this.toggleAnnouncements.bind(this);
-		this.toggleInventory = this.toggleInventory.bind(this);
+		this.toggle = this.toggle.bind(this);
 
 		this.state = {
 			isLoggedIn: true,
-			LeaderBoardModal: false,
-			ContactModal: false,
-			AnnouncementsOpen: false,
-			InventoryCollapse: false,
+			LeaderBoard: false,
+			Contact: false,
+			Announcements: false,
+			Inventory: false,
+			StoryLine: false,
 		}
 	}
 
-	toggleLeaderBoard() {
-		this.setState(prevState => ({
-			LeaderBoardModal: !prevState.LeaderBoardModal
-		}))
-	}
-	toggleContact() {
-		this.setState(prevState => ({
-			ContactModal: !prevState.ContactModal
-		}))
-	}
-	toggleInventory() {
-		this.setState(prevState => ({
-			InventoryCollapse: !prevState.InventoryCollapse
-		}))
+	toggle = modal => ev => {
+		this.setState(prevState => ({ [modal]: !prevState[modal] }))
 	}
 
-	toggleAnnouncements(event) {
-		this.setState({
-			AnnouncementsOpen: !this.state.AnnouncementsOpen,
-		})
-
-	}
 	handleLogout() {
 		localStorage.removeItem('token');
 		this.setState({ isLoggedIn: false });
@@ -89,61 +66,56 @@ export default class Dashboard extends Component {
 		}
 	}
 
+	componentDidMount() {
+
+	}
 	render() {
 		if (this.state.isLoggedIn === false) {
 			return (<Redirect to="/" />)
 		} else {
 			return (
 				<React.Fragment>
-					<Row className="d-flex justify-content-between">
+					<Row className="h-100 d-flex justify-content-between">
 						<Col xs="1" className="h-100 d-flex flex-column">
 							<Nav pills className="d-flex flex-column justify-content-start">
 								<NavItem>
-									<NavLink
-										className={classnames({ active: this.state.activeTab === 'Announcements' })}
-										id="Announcements"
-									>
+									<NavLink onClick={this.toggle('Announcements')}									>
 										<FontAwesomeIcon icon={faSatelliteDish} size="3x" />
 									</NavLink>
+									<Modal centered="true" isOpen={this.state.Announcements} toggle={this.toggle('Announcements')} className="modal-lg">
+										<ModalHeader>Announcements</ModalHeader>
+										<ModalBody className="container-fluid mw-100">
+											<Announcement />
+										</ModalBody>
+										<ModalFooter>
+											<Button color="danger text-white" onClick={this.toggle('Announcements')}>Close</Button>
+										</ModalFooter>
+									</Modal>
 								</NavItem>
 								<NavItem>
-									<NavLink
-										className={classnames({ active: this.state.activeTab === 'LeaderBoard' })}
-										onClick={this.toggleLeaderBoard}
-									>
+									<NavLink onClick={this.toggle("LeaderBoard")}>
 										<FontAwesomeIcon icon={faTable} size="3x" />
-										<Modal centered="true" isOpen={this.state.LeaderBoardModal} toggle={this.toggleLeaderBoard} className="modal-lg">
+										<Modal centered="true" isOpen={this.state.LeaderBoard} toggle={this.toggle('LeaderBoard')} className="modal-lg">
 											<ModalHeader>LeaderBoard</ModalHeader>
 											<ModalBody className="container-fluid mw-100">
-												<Row>
-													<Col>
-														<LeaderBoard />
-													</Col>
-												</Row>
+												<LeaderBoard />
 											</ModalBody>
 											<ModalFooter>
-												<Button color="danger text-white" onClick={this.toggleLeaderBoard}>Cancel</Button>
+												<Button color="danger text-white" onClick={this.toggle('LeaderBoard')}>Close</Button>
 											</ModalFooter>
 										</Modal>
 									</NavLink>
 								</NavItem>
 								<NavItem>
-									<NavLink
-										className={classnames({ active: this.state.activeTab === 'LeaderBoard' })}
-										onClick={this.toggleLeaderBoard}
-									>
+									<NavLink onClick={this.toggle('StoryLine')}>
 										<FontAwesomeIcon icon={faVideo} size="3x" />
-										<Modal centered="true" isOpen={this.state.LeaderBoardModal} toggle={this.toggleLeaderBoard} className="modal-lg">
-											<ModalHeader>LeaderBoard</ModalHeader>
-											<ModalBody className="container-fluid mw-100">
-												<Row>
-													<Col>
-														<LeaderBoard />
-													</Col>
-												</Row>
+										<Modal centered="true" isOpen={this.state.StoryLine} toggle={this.toggle('StoryLine')} className="modal-lg">
+											< ModalHeader > <img alt="Story" width="100%" src={require('../../components/StoryLine/story.gif')} /></ModalHeader>
+											<ModalBody>
+												<StoryLine />
 											</ModalBody>
 											<ModalFooter>
-												<Button color="danger text-white" onClick={this.toggleLeaderBoard}>Cancel</Button>
+												<Button color="danger text-white" onClick={this.toggle('StoryLine')}>Cancel</Button>
 											</ModalFooter>
 										</Modal>
 									</NavLink>
@@ -151,10 +123,9 @@ export default class Dashboard extends Component {
 							</Nav>
 							<Nav pills className="d-flex flex-column justify-content-end mt-auto">
 								<NavItem className="d-flex">
-									<NavLink className={classnames({ active: this.state.activeTab === 'Exit' })}
-										id="Exit" onClick={this.toggleContact}>
+									<NavLink onClick={this.toggle('Contact')}>
 										<FontAwesomeIcon icon={faIdCard} size="3x" />
-										<Modal centered="true" isOpen={this.state.ContactModal} toggle={this.toggleContact} className="modal-lg">
+										<Modal centered="true" isOpen={this.state.Contact} toggle={this.toggle('Contact')} className="modal-lg">
 											<ModalHeader>Contact</ModalHeader>
 											<ModalBody>
 												<div class="p-2 mx-auto">
@@ -162,44 +133,35 @@ export default class Dashboard extends Component {
 													Email : hackin2019@gmail.com<br />
 													Phone : 9791745977<br />
 												</div>
-
 											</ModalBody>
 											<ModalFooter>
-												<Button color="danger text-white" onClick={this.toggleContact}>Close</Button>
+												<Button color="danger text-white" onClick={this.toggle('Contact')}>Close</Button>
 											</ModalFooter>
 										</Modal>
 									</NavLink>
 								</NavItem>
 								<NavItem className="d-flex ">
-									<NavLink className={classnames({ active: this.state.activeTab === 'Exit' })}
-										id="Exit" onClick={this.handleLogout}>
+									<NavLink onClick={this.handleLogout}>
 										<FontAwesomeIcon icon={faSignOutAlt} size="3x" />
 									</NavLink>
 								</NavItem>
 							</Nav>
-							<Popover name="1" placement="left-start" trigger="click" isOpen={this.state.AnnouncementsOpen} target="Announcements" toggle={this.toggleAnnouncements.bind(this)}>
-								<PopoverHeader>Announcements</PopoverHeader>
-								<PopoverBody><Announcement /></PopoverBody>
-							</Popover>
 						</Col>
-						<Col xs="auto">
-
+						<Col xs="10" className="h-100 d-flex mx-auto my-auto">
+							<MissionMap />
 						</Col>
 						<Col xs="1" className="d-flex flex-column justify-content-center align-items-center">
 							<Nav pills>
 								<NavItem >
-									<NavLink className={classnames({ active: this.state.activeTab === 'Inventory' })} onClick={this.toggleInventory}>
+									<NavLink onClick={this.toggle('Inventory')}>
 										<FontAwesomeIcon icon={faAngleLeft} size="3x" />
 									</NavLink>
 								</NavItem>
 							</Nav>
-							<Collapse isOpen={this.state.InventoryCollapse} className="navbar-collapse">
-								<Col xs="auto" className="h-100 w-50 d-flex">
-									<Inventory />
-								</Col>
+							<Collapse isOpen={this.state.Inventory} className="navbar-collapse">
+								<Inventory />
 							</Collapse>
 						</Col>
-
 					</Row>
 				</React.Fragment >
 			)

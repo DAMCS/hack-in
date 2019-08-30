@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TableRow from './TableRow';
 import { Container, Table } from 'reactstrap';
+import axios from 'axios';
 
 export default class LeaderBoard extends Component {
 
@@ -34,16 +35,17 @@ export default class LeaderBoard extends Component {
 		this.setState(dummy_data);
 		var token = localStorage.getItem('token');
 		axios.get('/api/leaderboard',
-		{headers: {
-			"Authorization": "Bearer "+ token
-		  }
-		}
+			{
+				headers: {
+					"Authorization": "Bearer " + token
+				}
+			}
 		).then(response => {
 			this.setState({ leader_val: response.data });
 		})
-		.catch(function (error) {
-			console.log(error);
-		})
+			.catch(function (error) {
+				console.log(error);
+			})
 	}
 	tabRow() {
 		return this.state.data.map(function (object, i) {

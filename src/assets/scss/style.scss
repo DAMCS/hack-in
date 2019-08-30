@@ -4,8 +4,8 @@
 
 html,
 body,
-#root > div {
-  height: 100vh;
+#root {
+  height: 100%;
   width: 100%;
   overflow: hidden;
 }
@@ -45,4 +45,28 @@ body {
 //   position: relative;
 //   overflow-y: auto;
 //   max-height: 400px;
+// }
+
+// .overlay-menu {
+//   position: relative;
+//   width: 100px;
+//   height: 100%;
+//   background: #000;
+//   z-index: 1100;
+//   left: 0;
+//   top: 0;
+// }
+
+// .overlay-inventory {
+//   position: relative;
+//   width: 100px;
+//   height: 100%;
+//   background: #000;
+//   z-index: 1100;
+//   right: 0;
+//   top: 0;
+// }
+// .overlay-content {
+//   position: fixed;
+//   z-index: 1150;
 // }

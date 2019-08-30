@@ -21,15 +21,9 @@ const LevelOne = React.lazy(() => import('./views/LevelOne'))
 const MissionMap = React.lazy(() => import('./components/MissionMap'))
 
 export default class App extends Component {
-	constructor(props) {
-		super(props);
-
-	}
 	render() {
 		return (
 			<BrowserRouter history={createBrowserHistory()} >
-				{/* <div class="d-block"> */}
-				{/* </div> */}
 				<React.Suspense fallback={<Loading />}>
 					<Switch>
 						<Route exact path="/404" name="Page 404" render={props => <Page404 {...props} />} />
@@ -40,7 +34,7 @@ export default class App extends Component {
 						<Route path="/levelone" render={props => <LevelOne {...props} />} />
 						<Route path="/missionmap" render={props => <MissionMap {...props} />} />
 					</Switch>
-					<ToastContainer autoClose={4000} className="" />
+					<ToastContainer autoClose={2000} />
 				</React.Suspense>
 			</ BrowserRouter>
 		);

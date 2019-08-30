@@ -1,5 +1,4 @@
 import React from 'react';
-import { NavLink } from 'reactstrap'
 // import './Inventory.css'
 (function () {
 
@@ -73,6 +72,4 @@ export default class Inventory extends React.Component {
 		);
 	}
 }
-
-export default SubMenu;
 
