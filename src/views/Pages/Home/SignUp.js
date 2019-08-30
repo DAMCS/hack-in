@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { Button, Form, FormText, FormGroup, Input } from "reactstrap";
+import { withRouter } from "react-router-dom";
 import axios from "axios";
 import { toast } from 'react-toastify';
 
-export default class SignUp extends Component {
+class SignUp extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -53,8 +54,8 @@ export default class SignUp extends Component {
 					if (response.data.status === "Success") {
 						toast.success("User created successfully")
 						localStorage.setItem("token", response.data.token);
-						// this.props.history.push("/dashboard");
-						this.props.onSubmitToggle();
+						this.props.history.push("/dashboard");
+						// this.props.onSubmitToggle();
 					}
 				})
 				.catch(function (error) {
@@ -124,3 +125,5 @@ export default class SignUp extends Component {
 		);
 	}
 }
+
+export default withRouter(SignUp) 

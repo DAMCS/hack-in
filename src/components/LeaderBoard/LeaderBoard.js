@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import TableRow from './TableRow';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Table } from 'reactstrap';
+import { Container, Table } from 'reactstrap';
 
-class LeaderBoard extends Component {
+export default class LeaderBoard extends Component {
 
 	constructor(props) {
 		super(props);
@@ -53,42 +53,20 @@ class LeaderBoard extends Component {
 
 	render() {
 		return (
-			<Table striped bordered hover>
-				<thead>
-					<tr className="active">
-						<th>ID</th>
-						<th>{this.state.display_name}</th>
-						<th>{this.state.display_value}</th>
-					</tr>
-				</thead>
-				<tbody>
-					{this.tabRow()}
-				</tbody>
-			</Table>
-
-		);
-	}
-}
-
-export default class LeaderBoardModal extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			modal: false
-		};
-
-		this.toggle = this.toggle.bind(this);
-	}
-
-	toggle() {
-		this.setState(prevState => ({
-			modal: !prevState.modal
-		}));
-	}
-
-	render() {
-		return (
-			<LeaderBoard />
+			<Container fluid >
+				<Table striped bordered hover>
+					<thead>
+						<tr className="active">
+							<th>ID</th>
+							<th>{this.state.display_name}</th>
+							<th>{this.state.display_value}</th>
+						</tr>
+					</thead>
+					<tbody>
+						{this.tabRow()}
+					</tbody>
+				</Table>
+			</Container>
 		);
 	}
 }

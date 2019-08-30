@@ -27,3 +27,22 @@ body,
 body {
   font-family: "Press Start 2P", cursive;
 }
+
+.modal-lg {
+  min-width: 400px !important;
+  line-height: 25pt;
+}
+
+.navbar-collapse {
+  position: relative;
+  width: 100px;
+}
+// .contact-modal {
+//   min-width: 400px !important;
+// }
+
+// .modal-body {
+//   position: relative;
+//   overflow-y: auto;
+//   max-height: 400px;
+// }

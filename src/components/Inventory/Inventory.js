@@ -1,15 +1,9 @@
 import React from 'react';
 import { NavLink } from 'reactstrap'
-import './Inventory.css'
+// import './Inventory.css'
 (function () {
 
-	if
-		(
-		!document.querySelectorAll
-		||
-		!('draggable' in document.createElement('span'))
-		||
-		window.opera
+	if (!document.querySelectorAll || !('draggable' in document.createElement('span')) || window.opera
 	) { return; }
 
 
@@ -57,38 +51,23 @@ export default class Inventory extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			class1: "close",
-			class2: "open"
 		};
-		this.handleChange = this.handleChange.bind(this);
-	}
-	handleChange(event) {
-		if (this.state.class1 === "close" && this.state.class2 === "open")
-			this.setState({ class1: "open", class2: "close" });
-		else
-			this.setState({ class1: "close", class2: "open" });
 	}
 	render() {
 		return (
 			<React.Fragment >
-				<div>
-					<div class={this.state.class1}>
-						<ol data-draggable="target">
-							<section id="inventory">
-								{/* <a href="#" class="closebtn" onClick={this.handleChange}>&times;</a> */}
-								<NavLink href="#" className="closebtn" onClick={this.handleChange}>&times;</NavLink>
-								<li class="item" data-draggable="item" ><img width="50px" alt="" height="50px" src={require('./hacker1.png')} /></li>
-								<li class="item" data-draggable="item" ><img width="50px" alt="" height="50px" src={require('./hacker2.png')} /></li>
-								<li class="item" data-draggable="item" ><img width="50px" alt="" height="50px" src={require('./hacker4.png')} /></li>
-								<li class="item" data-draggable="item" ><img width="50px" alt="" height="50px" src={require('./hacker1.png')} /></li>
-								<li class="item" data-draggable="item" ><img width="50px" alt="" height="50px" src={require('./hacker1.png')} /></li>
-							</section>
-						</ol>
-						<ol data-draggable="target" className="list-group">
-						</ol>
-					</div>
-					{/* <a style={{ cursor: "pointer", textDecoration: "none" }} class={this.state.class2} onClick={this.handleChange}>Inventory</a> */}
-					<NavLink href="#" style={{ cursor: "pointer", textDecoration: "none" }} className={this.state.class2} onClick={this.handleChange}>Inventory</NavLink>
+				<div class="container-fluid d-flex flex-column ">
+					<ol data-draggable="target">
+						<section id="inventory">
+							<li class="item" data-draggable="item" ><img width="50px" alt="" height="50px" src={require('./hacker1.png')} /></li>
+							<li class="item" data-draggable="item" ><img width="50px" alt="" height="50px" src={require('./hacker2.png')} /></li>
+							<li class="item" data-draggable="item" ><img width="50px" alt="" height="50px" src={require('./hacker4.png')} /></li>
+							<li class="item" data-draggable="item" ><img width="50px" alt="" height="50px" src={require('./hacker1.png')} /></li>
+							<li class="item" data-draggable="item" ><img width="50px" alt="" height="50px" src={require('./hacker1.png')} /></li>
+						</section>
+					</ol>
+					<ol data-draggable="target" className="list-group">
+					</ol>
 				</div>
 			</React.Fragment>
 		);
