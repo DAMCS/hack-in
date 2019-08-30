@@ -1,12 +1,67 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
-import { Container, Col, NavLink, Row, TabContent, TabPane } from "reactstrap";
+import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col,Container } from 'reactstrap';
+import classnames from 'classnames';
 import axios from "axios";
+
 const Header = React.lazy(() => import("./Header"));
-// const Footer = React.lazy(() => import("./Footer"));
+const Footer = React.lazy(() => import("./Footer"));
 const Login = React.lazy(() => import("./SignIn"));
 const SignUp = React.lazy(() => import("./SignUp"));
 
+
+class ControlledTabs extends React.Component {
+	constructor(props) {
+		super(props);
+
+		this.toggle = this.toggle.bind(this);
+		this.state = {
+			activeTab: '1'
+		};
+	}
+
+	toggle(tab) {
+		if (this.state.activeTab !== tab) {
+			this.setState({
+				activeTab: tab
+			});
+		}
+	}
+	render() {
+		return (
+			<div>
+				
+				<Nav tabs>
+					<NavItem>
+						<NavLink
+							className={classnames({ active: this.state.activeTab === '1' })}
+							onClick={() => { this.toggle('1'); }}
+						>
+							Login
+            		</NavLink>
+					</NavItem>
+					<NavItem>
+						<NavLink
+							className={classnames({ active: this.state.activeTab === '2' })}
+							onClick={() => { this.toggle('2'); }}
+						>
+							SignUp
+            	</NavLink>
+					</NavItem>
+				</Nav>
+				<br />
+				<TabContent activeTab={this.state.activeTab}>
+					<TabPane tabId="1">
+								<Login />
+					</TabPane>
+					<TabPane tabId="2">
+								<SignUp />
+					</TabPane>
+				</TabContent>
+			</div>
+		);
+	}
+}
 export default class Home extends Component {
 	constructor(props) {
 		super(props);
@@ -78,9 +133,9 @@ export default class Home extends Component {
 							</Row>
 							{/* <Row>
 								<Footer />
-							</Row> */}
-						</Container>
-					</div>
+							</Col>
+						</Row>
+					</Container>
 				</React.Fragment >
 			);
 		}
