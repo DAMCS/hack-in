@@ -1,0 +1,6 @@
+{
+    "name": "MissionMap",
+    "version": "0.0.0",
+    "private": true,
+    "main": "./MissionMap.js"
+}

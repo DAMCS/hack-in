@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import TableRow from './TableRow';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Table } from 'reactstrap';
+import { Container, Table } from 'reactstrap';
+import axios from 'axios';
 
-class LeaderBoard extends Component {
+export default class LeaderBoard extends Component {
 
 	constructor(props) {
 		super(props);
@@ -32,18 +33,19 @@ class LeaderBoard extends Component {
 		}
 
 		this.setState(dummy_data);
-
-		// axios.get('/api/leaderboard',
-		// {headers: {
-		// 	"Authorization" : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QxMjNAZ21haWwuY29tIiwidXNlcm5hbWUiOiJ0ZXN0MTIzQGdtYWlsLmNvbSIsInVzZXJJZCI6IjVkNWU5NjM2Njg4ZjZmMDZiMzUyOGQ5ZCIsImlhdCI6MTU2NjQ4MDAwOCwiZXhwIjoxNTY2NDgzNjA4fQ.U6TkCk3AvvVaX8RnhsBzrmZwucoMzR-WBLuMi9RtSJ4",
-		//   }
-		// }
-		// ).then(response => {
-		// 	this.setState({ leader_val: response.data });
-		// })
-		// .catch(function (error) {
-		// 	console.log(error);
-		// })
+		var token = localStorage.getItem('token');
+		axios.get('/api/leaderboard',
+			{
+				headers: {
+					"Authorization": "Bearer " + token
+				}
+			}
+		).then(response => {
+			this.setState({ leader_val: response.data });
+		})
+			.catch(function (error) {
+				console.log(error);
+			})
 	}
 	tabRow() {
 		return this.state.data.map(function (object, i) {
@@ -53,54 +55,20 @@ class LeaderBoard extends Component {
 
 	render() {
 		return (
-			<Table striped bordered hover>
-				<thead>
-					<tr className="active">
-						<th>ID</th>
-						<th>{this.state.display_name}</th>
-						<th>{this.state.display_value}</th>
-					</tr>
-				</thead>
-				<tbody>
-					{this.tabRow()}
-				</tbody>
-			</Table>
-
-		);
-	}
-}
-
-export default class LeaderBoardModal extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			modal: false
-		};
-
-		this.toggle = this.toggle.bind(this);
-	}
-
-	toggle() {
-		this.setState(prevState => ({
-			modal: !prevState.modal
-		}));
-	}
-
-	render() {
-		return (
-			<div>
-				<Button color="primary" onClick={this.toggle}><img style={{ marginLeft: "5px" }} width="30px" alt="" height="30px" src={require("../../components/Inventory/hacker2.png")} />
-				</Button>
-				<Modal centered="true" isOpen={this.state.modal} toggle={this.toggle}>
-					<ModalHeader>LeaderBoard</ModalHeader>
-					<ModalBody>
-						<LeaderBoard />
-					</ModalBody>
-					<ModalFooter>
-						<Button color="danger" onClick={this.toggle}>Cancel</Button>
-					</ModalFooter>
-				</Modal>
-			</div>
+			<Container fluid >
+				<Table striped bordered hover>
+					<thead>
+						<tr className="active">
+							<th>ID</th>
+							<th>{this.state.display_name}</th>
+							<th>{this.state.display_value}</th>
+						</tr>
+					</thead>
+					<tbody>
+						{this.tabRow()}
+					</tbody>
+				</Table>
+			</Container>
 		);
 	}
 }
