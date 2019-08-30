@@ -5,7 +5,7 @@ class Announcement extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			announcement: ""
+			announcement: []
 		}
 	}
 	componentDidMount() {
@@ -17,7 +17,9 @@ class Announcement extends Component {
 				}
 			}
 		).then((res) => {
-			this.setState({ announcement: res.data.data });
+			this.setState({ 
+				announcement: res.data.data
+			});
 		})
 			.catch(function (error) {
 				console.log(error);
@@ -26,7 +28,10 @@ class Announcement extends Component {
 	render() {
 		return (
 			<div>
-				{this.state.announcement}
+				{
+				this.state.announcement.map((object, i) => {
+					return <div><font color={object.seen === false ? "red" : ""}>{object.annoMsg}</font> <br /></div>
+				})}
 			</div>
 		);
 	}

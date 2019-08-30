@@ -21,11 +21,11 @@ export default class MissionMap extends React.Component {
 	}
 	componentDidMount() {
 		const token = localStorage.getItem('token');
-		console.log(token);
+		// let temp = [];
 		for (let i = 1; i < 10; i++) {
 			axios({
 				method: 'post',
-				url: 'http://13.235.77.118:3000/api/level',
+				url: '/api/level',
 				headers: {
 					Authorization: "Bearer " + token
 				},
@@ -34,20 +34,22 @@ export default class MissionMap extends React.Component {
 				}
 			})
 				.then(response => {
-					// console.log(response.data);
-					this.setState({
-						level: this.state.level.concat(response.data)
-					})
+					// temp.push(response.data.data)
+					this.setState(
+						this.state.level.push(response.data.data)
+					)
 				})
 				.catch(function (error) {
 					console.log(error);
 				});
 		}
-
+		// this.setState({
+		// 	level:temp
+		// })
 	}
 
 	handleClick() {
-		alert("Level Clicked");
+		this.props.history.push('/levelthree');
 	}
 
 	render() {

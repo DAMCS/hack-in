@@ -30,9 +30,9 @@ export default class TypedReactDemo extends React.Component {
 						ref={(el) => { this.el = el; }}
 					/>
 				</div>
-				<NavLink onClick={() => this.typed.start()}><i class="fa fa-play-circle" aria-hidden="true"></i></NavLink>&nbsp;&nbsp;
-                <NavLink onClick={() => this.typed.stop()}><i class="fa fa-pause-circle" aria-hidden="true"></i></NavLink>&nbsp;&nbsp;
-                <NavLink href="#" onClick={() => this.typed.reset()}><i class="fa fa-repeat" aria-hidden="true"></i></NavLink>&nbsp;&nbsp;
+				<a onClick={() => this.typed.start()}><i class="fa fa-play-circle" aria-hidden="true"></i></a>&nbsp;&nbsp;
+                <a onClick={() => this.typed.stop()}><i class="fa fa-pause-circle" aria-hidden="true"></i></a>&nbsp;&nbsp;
+                <a href="#" onClick={() => this.typed.reset()}><i class="fa fa-repeat" aria-hidden="true"></i></a>&nbsp;&nbsp;
             </div>
 		);
 	}

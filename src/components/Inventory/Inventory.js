@@ -1,4 +1,5 @@
 import React from 'react';
+
 // import './Inventory.css'
 (function () {
 
@@ -59,8 +60,8 @@ export default class Inventory extends React.Component {
 					<ol data-draggable="target">
 						<section id="inventory">
 							<li class="item" data-draggable="item" ><img width="50px" alt="" height="50px" src={require('./hacker1.png')} /></li>
-							<li class="item" data-draggable="item" ><img width="50px" alt="" height="50px" src={require('./hacker2.png')} /></li>
-							<li class="item" data-draggable="item" ><img width="50px" alt="" height="50px" src={require('./hacker4.png')} /></li>
+							<li class="item" data-draggable="item" ><img width="50px" alt="" height="50px" src={require('./hacker1.png')} /></li>
+							<li class="item" data-draggable="item" ><img width="50px" alt="" height="50px" src={require('./hacker1.png')} /></li>
 							<li class="item" data-draggable="item" ><img width="50px" alt="" height="50px" src={require('./hacker1.png')} /></li>
 							<li class="item" data-draggable="item" ><img width="50px" alt="" height="50px" src={require('./hacker1.png')} /></li>
 						</section>

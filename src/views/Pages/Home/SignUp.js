@@ -78,9 +78,9 @@ class SignUp extends Component {
 								type="email"
 								placeholder="Enter email"
 							/>
-							<FormText color="muted">
+							{/* <FormText color="muted">
 								You're information is kept secret!
-							</FormText>
+							</FormText> */}
 						</FormGroup>
 						<FormGroup controlId="formBasicSignupPassword">
 							<Input
