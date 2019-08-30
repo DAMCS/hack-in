@@ -1,23 +1,40 @@
 import React, { Component } from 'react';
-import { Col, Row, Button } from 'reactstrap';
+import {
+	Col, Row, Nav, NavItem, NavLink, Modal, ModalHeader, ModalBody, ModalFooter, Button, Collapse
+} from 'reactstrap';
 import axios from 'axios';
-import Anouncement from '../../components/Announcement/Announcement'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faSatelliteDish, faTable, faSignOutAlt, faAngleLeft, faIdCard, faVideo, } from '@fortawesome/free-solid-svg-icons'
 import { Redirect } from "react-router-dom";
 
-// const Menu = React.lazy(() => import('../../components/Menu/Menu'));
-
+const Announcement = React.lazy(() => import('../../components/Announcement/Announcement'));
 const Inventory = React.lazy(() => import('../..//components/Inventory/Inventory'));
 const LeaderBoard = React.lazy(() => import('../../components/LeaderBoard'));
-const Contact = React.lazy(() => import('../../components/Contact'));
+const StoryLine = React.lazy(() => import('../../components/StoryLine'));
+const MissionMap = React.lazy(() => import('../../components/MissionMap'));
+
+library.add(faSatelliteDish, faTable, faSignOutAlt, faAngleLeft, faIdCard, faVideo)
 
 export default class Dashboard extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			isLoggedIn: true
-		}
+
 		this.handleLogout = this.handleLogout.bind(this);
+		this.toggle = this.toggle.bind(this);
+
+		this.state = {
+			isLoggedIn: true,
+			LeaderBoard: false,
+			Contact: false,
+			Announcements: false,
+			Inventory: false,
+			StoryLine: false,
+		}
+	}
+
+	toggle = modal => ev => {
+		this.setState(prevState => ({ [modal]: !prevState[modal] }))
 	}
 
 	handleLogout() {
@@ -49,37 +66,104 @@ export default class Dashboard extends Component {
 		}
 	}
 
+	componentDidMount() {
+
+	}
 	render() {
 		if (this.state.isLoggedIn === false) {
 			return (<Redirect to="/" />)
 		} else {
 			return (
 				<React.Fragment>
-					{/* <Jumbotron fluid style={{overflowX:"hidden"}}> */}
-					<div class="animated fadeIn" >
-						<Row>
-							<Col md="1">
-								<Anouncement />
-							</Col>
-							<Col md="10">
-							</Col>
-							<Col md="1">
-								<Button style={{ background: "black" }} onClick={this.handleLogout}><img width="30px" alt="Signout" height="30px" src={require("../Dashboard/signout.png")} /></Button>
+					<Row className="h-100 d-flex justify-content-between">
+						<Col xs="1" className="h-100 d-flex flex-column">
+							<Nav pills className="d-flex flex-column justify-content-start">
+								<NavItem>
+									<NavLink onClick={this.toggle('Announcements')}									>
+										<FontAwesomeIcon icon={faSatelliteDish} size="3x" />
+									</NavLink>
+									<Modal centered="true" isOpen={this.state.Announcements} toggle={this.toggle('Announcements')} className="modal-lg">
+										<ModalHeader>Announcements</ModalHeader>
+										<ModalBody className="container-fluid mw-100">
+											<Announcement />
+										</ModalBody>
+										<ModalFooter>
+											<Button color="danger text-white" onClick={this.toggle('Announcements')}>Close</Button>
+										</ModalFooter>
+									</Modal>
+								</NavItem>
+								<NavItem>
+									<NavLink onClick={this.toggle("LeaderBoard")}>
+										<FontAwesomeIcon icon={faTable} size="3x" />
+										<Modal centered="true" isOpen={this.state.LeaderBoard} toggle={this.toggle('LeaderBoard')} className="modal-lg">
+											<ModalHeader>LeaderBoard</ModalHeader>
+											<ModalBody className="container-fluid mw-100">
+												<LeaderBoard />
+											</ModalBody>
+											<ModalFooter>
+												<Button color="danger text-white" onClick={this.toggle('LeaderBoard')}>Close</Button>
+											</ModalFooter>
+										</Modal>
+									</NavLink>
+								</NavItem>
+								<NavItem>
+									<NavLink onClick={this.toggle('StoryLine')}>
+										<FontAwesomeIcon icon={faVideo} size="3x" />
+										<Modal centered="true" isOpen={this.state.StoryLine} toggle={this.toggle('StoryLine')} className="modal-lg">
+											< ModalHeader > <img alt="Story" width="100%" src={require('../../components/StoryLine/story.gif')} /></ModalHeader>
+											<ModalBody>
+												<StoryLine />
+											</ModalBody>
+											<ModalFooter>
+												<Button color="danger text-white" onClick={this.toggle('StoryLine')}>Cancel</Button>
+											</ModalFooter>
+										</Modal>
+									</NavLink>
+								</NavItem>
+							</Nav>
+							<Nav pills className="d-flex flex-column justify-content-end mt-auto">
+								<NavItem className="d-flex">
+									<NavLink onClick={this.toggle('Contact')}>
+										<FontAwesomeIcon icon={faIdCard} size="3x" />
+										<Modal centered="true" isOpen={this.state.Contact} toggle={this.toggle('Contact')} className="modal-lg">
+											<ModalHeader>Contact</ModalHeader>
+											<ModalBody>
+												<div class="p-2 mx-auto">
+													Co-ordinator : Surya Prasath S<br />
+													Email : hackin2019@gmail.com<br />
+													Phone : 9791745977<br />
+												</div>
+											</ModalBody>
+											<ModalFooter>
+												<Button color="danger text-white" onClick={this.toggle('Contact')}>Close</Button>
+											</ModalFooter>
+										</Modal>
+									</NavLink>
+								</NavItem>
+								<NavItem className="d-flex ">
+									<NavLink onClick={this.handleLogout}>
+										<FontAwesomeIcon icon={faSignOutAlt} size="3x" />
+									</NavLink>
+								</NavItem>
+							</Nav>
+						</Col>
+						<Col xs="10" className="h-100 d-flex mx-auto my-auto">
+							<MissionMap />
+						</Col>
+						<Col xs="1" className="d-flex flex-column justify-content-center align-items-center">
+							<Nav pills>
+								<NavItem >
+									<NavLink onClick={this.toggle('Inventory')}>
+										<FontAwesomeIcon icon={faAngleLeft} size="3x" />
+									</NavLink>
+								</NavItem>
+							</Nav>
+							<Collapse isOpen={this.state.Inventory} className="navbar-collapse">
 								<Inventory />
-								<LeaderBoard />
-								<Contact />
-							</Col>
-						</Row>
-						{/* <Row>
-            <Col md="11">
-            </Col>
-            <Col md="1">
-              <Menu />
-            </Col>
-          </Row> */}
-					</div>
-					{/* </Jumbotron> */}
-				</React.Fragment>
+							</Collapse>
+						</Col>
+					</Row>
+				</React.Fragment >
 			)
 		}
 	}
