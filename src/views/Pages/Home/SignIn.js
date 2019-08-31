@@ -3,6 +3,7 @@ import { withRouter } from "react-router-dom";
 import axios from "axios";
 import { Button, Form, FormGroup, Input } from "reactstrap";
 import { toast } from 'react-toastify'
+import ReactGA from 'react-ga';
 
 class Login extends Component {
 	constructor(props) {
@@ -39,6 +40,12 @@ class Login extends Component {
 				if (response.data.status === "Success") {
 					toast.success("Signed in successfully");
 					localStorage.setItem("token", response.data.token);
+					ReactGA.event({
+						category: 'User',
+						action: 'User Logged In',
+						time: new Date()
+					});
+					ReactGA.set({ userId: this.state.email });
 					this.props.history.push('/dashboard');
 				}
 			})

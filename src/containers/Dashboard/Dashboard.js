@@ -8,7 +8,12 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faSatelliteDish, faTable, faSignOutAlt, faAngleLeft, faIdCard, faVideo, faMap } from '@fortawesome/free-solid-svg-icons'
 import { Redirect, Route, BrowserRouter, Switch } from "react-router-dom";
 import { createBrowserHistory } from "history";
+import ReactGA from 'react-ga';
 
+function initializeReactGA() {
+	ReactGA.initialize('UA-104887157-5');
+	ReactGA.pageview('/dashboard');
+}
 function Loading() {
 	return (
 		<div class="d-flex justify-content-center align-items-center">
@@ -44,12 +49,18 @@ export default class Dashboard extends Component {
 	}
 
 	toggle = modal => ev => {
+		ReactGA.modalview('/dashboard/'+modal);
 		this.setState(prevState => ({ [modal]: !prevState[modal] }))
 	}
 
 	handleLogout() {
 		localStorage.removeItem('token');
 		this.setState({ isLoggedIn: false });
+		ReactGA.event({
+			category: 'User',
+			action: 'User Logged Out',
+			time: new Date()
+		});
 		this.props.history.push('/')
 	}
 
@@ -80,6 +91,7 @@ export default class Dashboard extends Component {
 
 	}
 	render() {
+		initializeReactGA();
 		if (this.state.isLoggedIn === false) {
 			return (<Redirect to="/" />)
 		} else {

@@ -3,6 +3,7 @@ import { Button, Form, FormText, FormGroup, Input } from "reactstrap";
 import axios from "axios";
 import { toast } from 'react-toastify';
 import { withRouter } from "react-router-dom"
+import ReactGA from 'react-ga';
 
 class SignUp extends Component {
 	constructor(props) {
@@ -54,6 +55,12 @@ class SignUp extends Component {
 					if (response.data.status === "Success") {
 						toast.success("User created successfully")
 						localStorage.setItem("token", response.data.token);
+						ReactGA.event({
+							category: 'User',
+							action: 'Created an Account',
+							time: new Date()
+						});
+						ReactGA.set({ userId: this.state.email });
 						this.props.history.push("/dashboard");
 						// this.props.onSubmitToggle();
 					}

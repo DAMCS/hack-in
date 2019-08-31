@@ -4,6 +4,12 @@ import Typed from 'typed.js';
 import ReactTerminal from 'react-terminal-component';
 import { EmulatorState, FileSystem, OutputFactory, Outputs, History,defaultCommandMapping,CommandMapping} from 'javascript-terminal';
 import {Form,FormGroup,Input} from 'reactstrap';
+import ReactGA from 'react-ga';
+
+function initializeReactGA() {
+    ReactGA.initialize('UA-104887157-5');
+    ReactGA.pageview('/leveltwo');
+}
 export default class LevelTwo extends Component{
     constructor(props){
         super(props);
@@ -20,7 +26,7 @@ export default class LevelTwo extends Component{
         this.setState({
             [name]: value
         });
-        if(this.state.pass == 'pass'){
+        if(this.state.pass === 'pass'){
             alert('Success');
         }
     }
@@ -36,6 +42,7 @@ export default class LevelTwo extends Component{
         this.typed.destroy();
     }
     render(){
+        initializeReactGA();
         let customState = EmulatorState.create({
             'fs': FileSystem.create({
                 '/home': {},

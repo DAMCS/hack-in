@@ -3,9 +3,13 @@ import { Spinner } from 'reactstrap';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { createBrowserHistory } from "history";
 import { ToastContainer } from 'react-toastify'
-
 import './App.scss';
+import ReactGA from 'react-ga';
 
+function initializeReactGA() {
+	ReactGA.initialize('UA-104887157-5');
+	ReactGA.pageview('/homepage');
+}
 function Loading() {
 	return (
 		<div class="d-flex justify-content-center align-items-center">
@@ -21,6 +25,7 @@ const Dashboard = React.lazy(() => import('./containers/Dashboard'))
 
 export default class App extends Component {
 	render() {
+		initializeReactGA();
 		return (
 			<BrowserRouter history={createBrowserHistory()} >
 				<React.Suspense fallback={<Loading />}>
