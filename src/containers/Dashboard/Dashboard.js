@@ -137,24 +137,6 @@ export default class Dashboard extends Component {
 										<FontAwesomeIcon icon={faMap} size="2x"/>
 									</NavLink>
 								</NavItem>
-								<NavItem className="d-flex">
-									<NavLink onClick={this.toggle('Contact')}>
-										<FontAwesomeIcon icon={faIdCard} size="2x" />
-										<Modal centered="true" isOpen={this.state.Contact} toggle={this.toggle('Contact')} className="modal-lg">
-											<ModalHeader>Contact</ModalHeader>
-											<ModalBody>
-												<div class="p-2 mx-auto">
-													Co-ordinator : Surya Prasath S<br />
-													Email : hackin2019@gmail.com<br />
-													Phone : 9791745977<br />
-												</div>
-											</ModalBody>
-											<ModalFooter>
-												<Button color="danger text-white" onClick={this.toggle('Contact')}>Close</Button>
-											</ModalFooter>
-										</Modal>
-									</NavLink>
-								</NavItem>
 								<NavItem className="d-flex ">
 									<NavLink onClick={this.handleLogout}>
 										<FontAwesomeIcon icon={faSignOutAlt} size="2x" />

@@ -5,7 +5,7 @@ import axios from "axios";
 const Header = React.lazy(() => import("./Header"));
 const Login = React.lazy(() => import("./SignIn"));
 const SignUp = React.lazy(() => import("./SignUp"));
-
+const Footer = React.lazy(()=>import("./Footer"));
 export default class Home extends Component {
 	constructor(props) {
 		super(props);
@@ -72,6 +72,11 @@ export default class Home extends Component {
 								<NavLink href="#" name={this.state.activeTab} onClick={this.toggle} className={this.state.activeTab === "SignUp" ? "d-none" : "d-block"}>
 									{this.state.activeTab === "SignIn" ? "Don't have an account yet?" : ""}
 								</NavLink>
+							</Col>
+						</Row>
+						<Row>
+							<Col xs="12">
+								<Footer />
 							</Col>
 						</Row>
 					</Container>

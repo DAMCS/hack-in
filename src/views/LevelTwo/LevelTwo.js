@@ -113,7 +113,7 @@ export default class LevelTwo extends Component{
                             />
                         </Col>
                     </Row>
-                    <Row className="h-100 w-100 border border-primary d-flex mx-auto my-auto align-self-center" >
+                    <Row className="w-100 h-40 border border-primary d-flex mx-auto my-auto align-self-center" >
                         <Col>
                             <ReactTerminal theme={
                                 {
@@ -126,7 +126,7 @@ export default class LevelTwo extends Component{
                                     spacing: '1%',
                                     fontFamily: 'monospace',
                                     width: '100%',
-                                    height: '100%'
+                                    height: '50vh'
                                 }
                             } promptSymbol='guest@Hackin>' emulatorState={customState} clickToFocus autoFocus={false}/>
                         </Col>
