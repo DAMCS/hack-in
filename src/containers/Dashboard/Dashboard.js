@@ -5,14 +5,14 @@ import {
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faSatelliteDish, faTable, faSignOutAlt, faAngleLeft, faIdCard, faVideo, } from '@fortawesome/free-solid-svg-icons'
+import { faSatelliteDish, faTable, faSignOutAlt, faAngleLeft, faIdCard, faVideo, faMap } from '@fortawesome/free-solid-svg-icons'
 import { Redirect, Route, BrowserRouter, Switch } from "react-router-dom";
 import { createBrowserHistory } from "history";
 
 function Loading() {
 	return (
 		<div class="d-flex justify-content-center align-items-center">
-			<Spinner color="hack" />
+			Loading...
 		</div>
 	);
 }
@@ -21,7 +21,9 @@ const Inventory = React.lazy(() => import('../..//components/Inventory/Inventory
 const LeaderBoard = React.lazy(() => import('../../components/LeaderBoard'));
 const StoryLine = React.lazy(() => import('../../components/StoryLine'));
 const MissionMap = React.lazy(() => import('../../components/MissionMap'));
-const LevelThree = React.lazy(() => import('../../views/LevelThree'))
+const LevelThree = React.lazy(() => import('../../views/LevelThree'));
+const LevelOne = React.lazy(() => import('../../views/LevelOne'));
+const LevelTwo = React.lazy(() => import('../../views/LevelTwo'));
 library.add(faSatelliteDish, faTable, faSignOutAlt, faAngleLeft, faIdCard, faVideo)
 
 export default class Dashboard extends Component {
@@ -131,6 +133,11 @@ export default class Dashboard extends Component {
 							</Nav>
 							<Nav pills className="d-flex flex-column justify-content-end mt-auto">
 								<NavItem className="d-flex">
+									<NavLink onClick={() => this.props.history.push('/')}>
+										<FontAwesomeIcon icon={faMap} size="2x"/>
+									</NavLink>
+								</NavItem>
+								<NavItem className="d-flex">
 									<NavLink onClick={this.toggle('Contact')}>
 										<FontAwesomeIcon icon={faIdCard} size="2x" />
 										<Modal centered="true" isOpen={this.state.Contact} toggle={this.toggle('Contact')} className="modal-lg">
@@ -155,11 +162,13 @@ export default class Dashboard extends Component {
 								</NavItem>
 							</Nav>
 						</Col>
-						<Col xs="10" className="h-100 d-flex mx-auto my-auto">
+						<Col xs="10" className="h-100 d-flex mx-auto my-auto align-self-center">
 							<BrowserRouter history={createBrowserHistory()} >
 								<React.Suspense fallback={<Loading />}>
 									<Switch>
 										<Route exact path="/levelthree" name="LevelThree" render={props => <LevelThree {...props} />} />
+										<Route exact path="/levelone" name="LevelOne" render={props => <LevelOne {...props} />} />
+										<Route exact path="/leveltwo" name="LevelTwo" render={props => <LevelTwo {...props} />} />
 										<Route path="/" name="MissionMap" render={props => <MissionMap {...props} />} />
 									</Switch>
 								</React.Suspense>

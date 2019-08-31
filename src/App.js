@@ -9,7 +9,7 @@ import './App.scss';
 function Loading() {
 	return (
 		<div class="d-flex justify-content-center align-items-center">
-			<Spinner color="hack" />
+			Loading...
 		</div>
 	);
 }
