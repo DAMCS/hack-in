@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import {
-	Col, Row, Nav, NavItem, NavLink, Modal, ModalHeader, ModalBody, ModalFooter, Button, Collapse,Spinner
+	Col, Row, Nav, NavItem, NavLink, Modal, ModalHeader, ModalBody, ModalFooter, Button, Collapse, Spinner
 } from 'reactstrap';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faSatelliteDish, faTable, faSignOutAlt, faAngleLeft, faIdCard, faVideo, } from '@fortawesome/free-solid-svg-icons'
-import { Redirect,Route,BrowserRouter,Switch } from "react-router-dom";
-import {createBrowserHistory} from "history";
+import { Redirect, Route, BrowserRouter, Switch } from "react-router-dom";
+import { createBrowserHistory } from "history";
 
 function Loading() {
 	return (
@@ -166,7 +166,7 @@ export default class Dashboard extends Component {
 							</ BrowserRouter>
 							{/* <MissionMap /> */}
 						</Col>
-						<Col xs="1" className="d-flex flex-column justify-content-center align-items-center">
+						<Col xs="1" className="d-flex justify-content-center align-items-center">
 							<Nav pills>
 								<NavItem >
 									<NavLink onClick={this.toggle('Inventory')}>

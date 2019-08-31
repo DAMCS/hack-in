@@ -1,6 +1,6 @@
 import React from 'react';
+import { ListGroup, ListGroupItem } from 'reactstrap';
 
-// import './Inventory.css'
 (function () {
 
 	if (!document.querySelectorAll || !('draggable' in document.createElement('span')) || window.opera
@@ -56,21 +56,23 @@ export default class Inventory extends React.Component {
 	render() {
 		return (
 			<React.Fragment >
-				<div class="container-fluid d-flex flex-column ">
-					<ol data-draggable="target">
-						<section id="inventory">
-							<li class="item" data-draggable="item" ><img width="50px" alt="" height="50px" src={require('./hacker1.png')} /></li>
-							<li class="item" data-draggable="item" ><img width="50px" alt="" height="50px" src={require('./hacker1.png')} /></li>
-							<li class="item" data-draggable="item" ><img width="50px" alt="" height="50px" src={require('./hacker1.png')} /></li>
-							<li class="item" data-draggable="item" ><img width="50px" alt="" height="50px" src={require('./hacker1.png')} /></li>
-							<li class="item" data-draggable="item" ><img width="50px" alt="" height="50px" src={require('./hacker1.png')} /></li>
-						</section>
-					</ol>
-					<ol data-draggable="target" className="list-group">
-					</ol>
-				</div>
+				<ListGroup data-draggable="target">
+					<ListGroupItem data-draggable="target">
+						<img width="50px" alt="" height="50px" src={require('./hacker1.png')} />
+					</ListGroupItem>
+					<ListGroupItem data-draggable="target">
+						<img width="50px" alt="" height="50px" src={require('./hacker1.png')} />
+					</ListGroupItem>
+					<ListGroupItem data-draggable="target">
+						<img width="50px" alt="" height="50px" src={require('./hacker1.png')} />
+					</ListGroupItem>
+				</ListGroup>
+				<ListGroup data-draggable="target">
+					<ListGroupItem data-draggable="target">
+
+					</ListGroupItem>
+				</ListGroup>
 			</React.Fragment>
 		);
 	}
 }
-
