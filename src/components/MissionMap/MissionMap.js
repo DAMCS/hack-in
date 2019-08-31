@@ -4,12 +4,6 @@ import MapImage from './MAP-Final.png';
 import './MissionMap.css';
 import { Button } from 'reactstrap';
 
-
-// const level = {
-//     "level_status": "open/closed",
-//     "user_level_status": "completed"
-// };
-
 export default class MissionMap extends React.Component {
 	constructor(props) {
 		super(props);
@@ -21,31 +15,22 @@ export default class MissionMap extends React.Component {
 	}
 	componentDidMount() {
 		const token = localStorage.getItem('token');
-		// let temp = [];
-		for (let i = 1; i < 10; i++) {
-			axios({
-				method: 'post',
-				url: '/api/level',
-				headers: {
-					Authorization: "Bearer " + token
-				},
-				data: {
-					levelId: i
-				}
-			})
-				.then(response => {
-					// temp.push(response.data.data)
-					this.setState(
-						this.state.level.push(response.data.data)
-					)
-				})
-				.catch(function (error) {
-					console.log(error);
-				});
-		}
-		// this.setState({
-		// 	level:temp
-		// })
+        axios({
+            method: 'get',
+            url: '/api/level/all',
+            headers: {
+                Authorization: "Bearer " + token
+            }
+        })
+            .then(response => {
+                console.log(response.data)
+                this.setState({
+                    level: response.data.data
+                })
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
 	}
 
 	handleClick() {
