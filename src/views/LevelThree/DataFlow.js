@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './LevelThree.css';
+// import './LevelThree.css';
 
 
 export default class DataFlow extends Component {
@@ -15,8 +15,8 @@ export default class DataFlow extends Component {
 		var ctx = c.getContext("2d");
 
 		//making the canvas full screen
-		c.height = window.innerHeight;
-		c.width = window.innerWidth;
+		c.height = 100;
+		c.width = 900;
 
 		//binary characters - taken from the unicode charset
 		var binary = "10";

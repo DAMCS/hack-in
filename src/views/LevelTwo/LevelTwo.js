@@ -142,7 +142,7 @@ export default class LevelTwo extends Component{
                         <Col>
                             <Form>
                                 <FormGroup>
-                                    <Input value={this.state.value} onChange={this.handleChange} type="password" name="pass" placeholder="Pascode" />
+                                    <Input value={this.state.pass} onChange={this.handleChange} type="password" name="pass" placeholder="Pascode" />
                                 </FormGroup>
                             </Form>
                         </Col>
