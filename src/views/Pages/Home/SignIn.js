@@ -67,6 +67,7 @@ class Login extends Component {
 								value={this.state.email}
 								type="email"
 								placeholder="Enter email"
+								required
 							/>
 						</FormGroup>
 						<FormGroup controlId="formBasicPassword">
@@ -76,6 +77,7 @@ class Login extends Component {
 								value={this.state.password}
 								type="password"
 								placeholder="Password"
+								required
 							/>
 						</FormGroup>
 						<Button type="submit">Sign In</Button>

@@ -131,7 +131,7 @@ export default class Dashboard extends Component {
 								<NavItem>
 									<NavLink onClick={this.toggle('StoryLine')}>
 										<FontAwesomeIcon icon={faVideo} size="2x" />
-										<Modal centered="true" isOpen={this.state.StoryLine} toggle={this.toggle('StoryLine')} className="modal-lg">
+										<Modal isOpen={this.state.StoryLine} toggle={this.toggle('StoryLine')} className="modal-lg">
 											< ModalHeader > <img alt="Story" width="100%" src={require('../../components/StoryLine/story.gif')} /></ModalHeader>
 											<ModalBody>
 												<StoryLine />

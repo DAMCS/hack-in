@@ -156,7 +156,7 @@ export default class LevelThree extends Component {
 		initializeReactGA();
 		return (
 			<React.Fragment >
-				<div  class="h-100 w-100 d-flex flex-column justify-content-start">
+				<div  class="h-100 w-100 d-flex flex-column justify-content-center">
 					<Row>
 						<Col xs="1" className="align-items-start"><FontAwesomeIcon icon={faDesktop} size="5x" /></Col>
 						<Col xs="10" className="align-items-center"><DataFlowModal handleCheck={this.handleCheck}/></Col>

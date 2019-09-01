@@ -84,6 +84,7 @@ class SignUp extends Component {
 								value={this.state.email}
 								type="email"
 								placeholder="Enter email"
+								required
 							/>
 							{/* <FormText color="muted">
 								You're information is kept secret!
@@ -96,6 +97,7 @@ class SignUp extends Component {
 								value={this.state.password}
 								type="password"
 								placeholder="Password"
+								required
 							/>
 						</FormGroup>
 						<FormGroup controlId="formBasicConfirmPassword">
@@ -105,6 +107,7 @@ class SignUp extends Component {
 								value={this.state.confirmPassword}
 								type="password"
 								placeholder="Confirm Password"
+								required
 							/>
 						</FormGroup>
 						<FormGroup controlId="formBasicPhone">
@@ -114,6 +117,7 @@ class SignUp extends Component {
 								value={this.state.phone}
 								type="text"
 								placeholder="Phone Number"
+								required
 							/>
 						</FormGroup>
 						<FormGroup controlId="formBasicLoginCode">
@@ -123,6 +127,7 @@ class SignUp extends Component {
 								value={this.state.loginCode}
 								type="text"
 								placeholder="Login 2k19 Code"
+								required
 							/>
 						</FormGroup>
 						<Button type="submit">Sign Up!</Button>
