@@ -49,34 +49,34 @@ class DataFlowModal extends React.Component {
 		super(props);
 		this.state = {
 			modal: false,
-			code: "import pyshark \
-					net_interface = 'wlan0'\
-					capture_time = 20\
-					capture = pyshark.LiveCapture(interface = net_interface)\
-					capture.sniff(timeout = capture_time)\
-					for i in range(len(capture)):\
-								\t\t\tpacket = capture[i]\
-						try:\
-							\tif packet.http.request_method == 'GET':\
-								\t\tprint(\"Captured packet number:\"+str(i + 1))\
-							\tprint(\"Posted URL : \", packet.http.request_full_uri)\
-							\tprint(packet[\"urlencoded-form\"])\
-							\texcept:\
-							\t\tpass",
-			codeTrue: "import pyshark \
-					net_interface = 'wlan0'\
-					capture_time = 20\
-					capture = pyshark.LiveCapture(interface = net_interface)\
-					capture.sniff(timeout = capture_time)\
-					for i in range(len(capture)):\
-								\t\t\tpacket = capture[i]\
-						try:\
-							\tif packet.http.request_method == 'POST':\
-								\t\tprint(\"Captured packet number:\"+str(i + 1))\
-							\tprint(\"Posted URL : \", packet.http.request_full_uri)\
-							\tprint(packet[\"urlencoded-form\"])\
-							\texcept:\
-							\t\tpass"
+			code: "import pyshark" + "\n" +
+					"net_interface = 'wlan0'" + "\n" +
+					"capture_time = 20" + "\n" +
+					"capture = pyshark.LiveCapture(interface = net_interface)" + "\n" +
+					"capture.sniff(timeout = capture_time)" + "\n" +
+					"for i in range(len(capture)):" + "\n" +
+					"  packet = capture[i]" + "\n" +
+					"  try:" + "\n" +
+					"    if packet.http.request_method == 'GET':" + "\n" +
+					"      print(\"Captured packet number:\"+str(i + 1))" + "\n" +
+					"      print(packet.http.request_full_uri)" + "\n" +
+					"      print(packet[\"urlencoded-form\"])" + "\n" +
+					"    except:" + "\n" +
+					"      pass",
+			codeTrue: "import pyshark" + "\n" +
+						"net_interface = 'wlan0'" + "\n" +
+						"capture_time = 20" + "\n" +
+						"capture = pyshark.LiveCapture(interface = net_interface)" + "\n" +
+						"capture.sniff(timeout = capture_time)" + "\n" +
+						"for i in range(len(capture)):" + "\n" +
+						"  packet = capture[i]" + "\n" +
+						"  try:" + "\n" +
+						"    if packet.http.request_method == 'POST':" + "\n" +
+						"      print(\"Captured packet number:\"+str(i + 1))" + "\n" +
+						"      print(packet.http.request_full_uri)" + "\n" +
+						"      print(packet[\"urlencoded-form\"])" + "\n" +
+						"    except:" + "\n" +
+						"      pass"
 		};
 		this.toggle = this.toggle.bind(this);
 		this.handleChange = this.handleChange.bind(this);

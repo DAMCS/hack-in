@@ -143,7 +143,13 @@ export default class Dashboard extends Component {
 									</NavLink>
 								</NavItem>
 							</Nav>
+							
 							<Nav pills className="d-flex flex-column justify-content-end mt-auto">
+								<NavItem className="d-flex">
+									<NavLink onClick={() => this.props.history.push('/')}>
+										<FontAwesomeIcon icon={faMap} size="2x"/>
+									</NavLink>
+								</NavItem>
 								<NavItem className="d-flex">
 									<NavLink onClick={this.toggle('Contact')}>
 										<FontAwesomeIcon icon={faIdCard} size="2x" />
@@ -160,11 +166,6 @@ export default class Dashboard extends Component {
 												<Button color="danger text-white" onClick={this.toggle('Contact')}>Close</Button>
 											</ModalFooter>
 										</Modal>
-									</NavLink>
-								</NavItem>
-								<NavItem className="d-flex">
-									<NavLink onClick={() => this.props.history.push('/')}>
-										<FontAwesomeIcon icon={faMap} size="2x"/>
 									</NavLink>
 								</NavItem>
 								<NavItem className="d-flex ">
