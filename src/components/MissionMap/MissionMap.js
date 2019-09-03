@@ -53,16 +53,18 @@ export default class MissionMap extends React.Component {
 	render() {
 		let text_color = '';
 		return (
-			<div className='mission-map'>
+			<div class='h-100 w-100 mission-map mx-auto my-auto d-flex justify-content-center align-items-center'>
 				<img src={MapImage} alt='Mission Map' className='img' />
-				{this.state.level.map((object, i) => {
-					object.userLevelStatus === "completed" ? text_color = "green" : text_color = "red";
-					return <Button className={"level" + (i + 1) + "-button"}
-						disabled={object.levelStatus === "open" ? false : true}
-						style={{ color: text_color }}
-						onClick={() => this.handleClick(i + 1)} >{i + 1}
-					</Button>
-				})}
+				<div class="h-100 w-100">
+					{this.state.level.map((object, i) => {
+						object.userLevelStatus === "completed" ? text_color = "green" : text_color = "red";
+						return <Button className={"level" + (i + 1) + "-button"}
+							disabled={object.levelStatus === "open" ? false : true}
+							style={{ color: text_color }}
+							onClick={() => this.handleClick(i + 1)} >{i + 1}
+						</Button>
+					})}
+				</div>
 			</div>
 		)
 	}

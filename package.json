@@ -9,7 +9,7 @@
 		"url": "git@gitlab.com:aakashhemadri/hack-in.git"
 	},
 	"bugs": {
-		"url": "https://gitlab.com:aakashhemadri/hack-in/jissues"
+		"url": "https://gitlab.com:aakashhemadri/hack-in/issues"
 	},
 	"proxy": "http://hackinpsg.ml:8000/",
 	"dependencies": {

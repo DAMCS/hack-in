@@ -7,6 +7,7 @@ body,
 #root {
   height: 100%;
   width: 100%;
+  overflow: hidden;
 }
 
 // ie11 floating footer temp fix, react only
@@ -69,3 +70,31 @@ body {
 //   position: fixed;
 //   z-index: 1150;
 // }
+
+.left-nav {
+  z-index: 1100;
+}
+
+.right-nav {
+  z-index: 1100;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: $primary;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: $secondary;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

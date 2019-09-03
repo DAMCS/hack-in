@@ -119,7 +119,7 @@ toggle() {
 			return (
 				<React.Fragment>
 					<Row className="h-100 d-flex justify-content-between">
-						<Col xs="1" className="h-100 d-flex flex-column">
+						<Col xs="1" className="h-100 d-flex flex-column left-nav">
 							<Nav pills className="d-flex flex-column justify-content-start">
 								<NavItem>
 									<NavLink onClick={this.toggle('Announcements')}>
@@ -196,7 +196,7 @@ toggle() {
 								</NavItem>
 							</Nav>
 						</Col>
-						<Col xs="10" className="h-100 mt-4 d-flex mx-auto justify-content-center align-self-center">
+						<Col xs="10" className="h-100 w-100 mx-auto my-auto d-flex justify-content-center align-items-center">
 							{/* Routing dashboard containers! */}
 							<React.Suspense fallback={<Loading />}>
 								<Switch>
@@ -207,7 +207,7 @@ toggle() {
 								</Switch>
 							</React.Suspense>
 						</Col>
-						<Col xs="1" className="h-100 d-flex justify-content-center align-items-center">
+						<Col xs="1" className="h-100 d-flex justify-content-center align-items-center right-nav">
 							<Nav pills>
 								<NavItem >
 									<NavLink onClick={this.toggle('Inventory')}>

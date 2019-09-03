@@ -5,6 +5,29 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlay, faPause, faReply } from '@fortawesome/free-solid-svg-icons'
 
 export default class TypedReactDemo extends React.Component {
+	constructor(props) {
+		super(props);
+
+		this.toggle = this.toggle.bind(this);
+		this.state = {
+			trigger: true,
+		}
+	}
+	toggle(trigger) {
+		if (trigger === false) {
+			this.state.typed.start();
+			this.setState({
+				trigger: !trigger
+			})
+		}
+		else if (trigger === true) {
+			this.state.typed.stop();
+			this.setState({
+				trigger: !trigger
+			})
+		}
+
+	}
 	componentDidMount() {
 		const strings = [
 			'"We live in a world where all wars will <br>begin as cyber wars..<br>It’s the combination of hacking and massive <br>well - coordinated disinformation campaigns.”<br>',
@@ -22,6 +45,9 @@ export default class TypedReactDemo extends React.Component {
 			typeSpeed: 30,
 		};
 		this.typed = new Typed(this.el, options);
+		this.setState({
+			typed: this.typed,
+		})
 	}
 
 	componentWillUnmount() {
@@ -30,17 +56,18 @@ export default class TypedReactDemo extends React.Component {
 
 	render() {
 		return (
-			<div className="wrap">
-				<a onClick={() => this.typed.start()}><FontAwesomeIcon icon={faPlay} size="2px"/></a>&nbsp;&nbsp;
-                <a onClick={() => this.typed.stop()}><FontAwesomeIcon icon={faPause} size="2px" /></a>&nbsp;&nbsp;
-                <a href="#" onClick={() => this.typed.reset()}><FontAwesomeIcon icon={faReply} size="2px" /></a>&nbsp;&nbsp;
+			<div class="wrap d-flex flex-column">
+				<div class="d-flex justify-content-start">
+					{this.state.trigger === false ? (<NavLink href="#" onClick={this.toggle.bind(this, false)}><FontAwesomeIcon icon={faPlay} size="2px" /></NavLink>) : (<NavLink href="#" onClick={this.toggle.bind(this, true)}><FontAwesomeIcon icon={faPause} size="2px" /></NavLink>)}
+					<NavLink href="#" onClick={() => this.typed.reset()}><FontAwesomeIcon icon={faReply} size="2px" /></NavLink>&nbsp;&nbsp;
+						</div>
 				<div className="type-wrap">
 					<span
 						style={{ whiteSpace: 'pre' }}
 						ref={(el) => { this.el = el; }}
 					/>
 				</div>
-            </div>
+			</div>
 		);
 	}
 }
