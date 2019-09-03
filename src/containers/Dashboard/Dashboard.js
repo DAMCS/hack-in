@@ -49,7 +49,7 @@ export default class Dashboard extends Component {
 	}
 
 	toggle = modal => ev => {
-		ReactGA.modalview('/dashboard/'+modal);
+		ReactGA.modalview('/dashboard/' + modal);
 		this.setState(prevState => ({ [modal]: !prevState[modal] }))
 	}
 
@@ -143,7 +143,6 @@ export default class Dashboard extends Component {
 									</NavLink>
 								</NavItem>
 							</Nav>
-							
 							<Nav pills className="d-flex flex-column justify-content-end mt-auto">
 								<NavItem className="d-flex">
 									<NavLink onClick={() => {this.props.history.push('/dashboard'); window.location.reload()}}>

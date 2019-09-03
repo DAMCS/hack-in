@@ -37,7 +37,7 @@ export default class App extends Component {
 						<Route path="/leveltwo" name="Level Two" render={props => <Dashboard {...props} />} />
 						<Route path="/levelthree" name="Level Three" render={props => <Dashboard {...props} />} />
 						<Route exact path="/" name="Home" render={props => <Home {...props} />} />
-						<Redirect push from="/dashboard" to="/" />
+						<Route path="/dashboard" name="Dashboard" render={props => <Dashboard {...props} />} />
 					</Switch>
 					<ToastContainer autoClose={2000} />
 				</React.Suspense>

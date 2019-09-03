@@ -6,7 +6,7 @@ import ReactGA from 'react-ga';
 const Header = React.lazy(() => import("./Header"));
 const Login = React.lazy(() => import("./SignIn"));
 const SignUp = React.lazy(() => import("./SignUp"));
-const Footer = React.lazy(()=>import("./Footer"));
+const Footer = React.lazy(() => import("./Footer"));
 
 function initializeReactGA() {
 	ReactGA.initialize('UA-104887157-5');
@@ -57,7 +57,7 @@ export default class Home extends Component {
 
 		initializeReactGA();
 		if (this.state.isLoggedIn === true) {
-			return <Redirect to="/dashboard" />;
+			return <Redirect exact push to="/dashboard" />;
 		} else {
 			return (
 				<React.Fragment>
