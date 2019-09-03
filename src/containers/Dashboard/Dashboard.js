@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 import {
-	Col, Row, Nav, NavItem, NavLink, Modal, ModalHeader, ModalBody, ModalFooter, Button, Collapse, Spinner
+	Col, Row, Nav, NavItem, NavLink, Modal, ModalHeader, ModalBody, ModalFooter, Button, Collapse
 } from 'reactstrap';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faSatelliteDish, faTable, faSignOutAlt, faAngleLeft, faIdCard, faVideo, faMap, faAngleRight } from '@fortawesome/free-solid-svg-icons'
-import { Redirect, Route, BrowserRouter, Switch } from "react-router-dom";
-import { createBrowserHistory } from "history";
-import {Tooltip} from 'reactstrap';
-
-import classNames from 'classnames'
+import { Redirect, Route, Switch } from "react-router-dom";
 import ReactGA from 'react-ga';
 
 function initializeReactGA() {
@@ -19,7 +15,7 @@ function initializeReactGA() {
 }
 function Loading() {
 	return (
-		<div class="d-flex justify-content-center align-items-center">
+		<div class="h-100 w-100 d-flex justify-content-center align-items-center">
 			Loading...
 		</div>
 	);
@@ -36,12 +32,12 @@ library.add(faSatelliteDish, faTable, faSignOutAlt, faAngleLeft, faIdCard, faVid
 
 export const Tool = class Tip extends React.Component {
 	constructor(props) {
-	  super(props);
-  
-	  this.toggle = this.toggle.bind(this);
-	  this.state = {
-		tooltipOpen: false
-	  };
+		super(props);
+
+		this.toggle = this.toggle.bind(this);
+		this.state = {
+			tooltipOpen: false
+		};
 	}
 }
 
@@ -104,11 +100,11 @@ export default class Dashboard extends Component {
 	componentDidMount() {
 
 	}
-toggle() {
-	this.setState({
-		tooltipOpen: !this.state.tooltipOpen
-	});
-}
+	toggle() {
+		this.setState({
+			tooltipOpen: !this.state.tooltipOpen
+		});
+	}
 
 
 	render() {
@@ -123,8 +119,8 @@ toggle() {
 							<Nav pills className="d-flex flex-column justify-content-start">
 								<NavItem>
 									<NavLink onClick={this.toggle('Announcements')}>
-										
-									<FontAwesomeIcon icon={faSatelliteDish} size="2x" title="Announcements"/>
+
+										<FontAwesomeIcon icon={faSatelliteDish} size="2x" title="Announcements" />
 									</NavLink>
 									<Modal centered="true" isOpen={this.state.Announcements} toggle={this.toggle('Announcements')} className="modal-lg">
 										<ModalHeader>Announcements</ModalHeader>
@@ -138,7 +134,7 @@ toggle() {
 								</NavItem>
 								<NavItem>
 									<NavLink onClick={this.toggle("LeaderBoard")}>
-										<FontAwesomeIcon icon={faTable} size="2x" title="Leaderboard"/>
+										<FontAwesomeIcon icon={faTable} size="2x" title="Leaderboard" />
 										<Modal centered="true" isOpen={this.state.LeaderBoard} toggle={this.toggle('LeaderBoard')} className="modal-lg">
 											<ModalHeader>LeaderBoard</ModalHeader>
 											<ModalBody className="container-fluid mw-100">
@@ -152,7 +148,7 @@ toggle() {
 								</NavItem>
 								<NavItem>
 									<NavLink onClick={this.toggle('StoryLine')}>
-										<FontAwesomeIcon icon={faVideo} size="2x" title="StoryLine"/>
+										<FontAwesomeIcon icon={faVideo} size="2x" title="StoryLine" />
 										<Modal isOpen={this.state.StoryLine} toggle={this.toggle('StoryLine')} className="modal-lg">
 											< ModalHeader > <img alt="Story" width="100%" src={require('../../components/StoryLine/story.gif')} /></ModalHeader>
 											<ModalBody>
@@ -168,12 +164,12 @@ toggle() {
 							<Nav pills className="d-flex flex-column justify-content-end mt-auto">
 								<NavItem className="d-flex">
 									<NavLink onClick={() => { this.props.history.push('/dashboard') }}>
-										<FontAwesomeIcon icon={faMap} size="2x" title = "Lab Map"/>
+										<FontAwesomeIcon icon={faMap} size="2x" title="Lab Map" />
 									</NavLink>
 								</NavItem>
 								<NavItem className="d-flex">
 									<NavLink onClick={this.toggle('Contact')}>
-										<FontAwesomeIcon icon={faIdCard} size="2x" title="Contact"/>
+										<FontAwesomeIcon icon={faIdCard} size="2x" title="Contact" />
 										<Modal centered="true" isOpen={this.state.Contact} toggle={this.toggle('Contact')} className="modal-lg">
 											<ModalHeader>Contact</ModalHeader>
 											<ModalBody>
@@ -191,7 +187,7 @@ toggle() {
 								</NavItem>
 								<NavItem className="d-flex ">
 									<NavLink onClick={this.handleLogout}>
-										<FontAwesomeIcon icon={faSignOutAlt} size="2x" title ="Sign Out"/>
+										<FontAwesomeIcon icon={faSignOutAlt} size="2x" title="Sign Out" />
 									</NavLink>
 								</NavItem>
 							</Nav>

@@ -59,13 +59,13 @@ class DoorRoom extends Component {
 				<map name="image-map">
 					<area alt="numbed" data-draggable="target" title="numbed" coords="611,286,656,375" shape="rect" onClick={this.toggleNumpad} />
 				</map>
-				<Modal isOpen={this.state.modal == 1} toggle={this.closeModal} className={this.props.className}>
+				<Modal isOpen={this.state.modal === 1} toggle={this.closeModal} className={this.props.className}>
 					<ModalHeader toggle={this.closeModal}>Enter the Passcode</ModalHeader>
 					<ModalBody>
 						<Numpad />
 					</ModalBody>
 				</Modal>
-				<Modal isOpen={this.state.modal == 2} toggle={this.closeModal} className={this.props.className}>
+				<Modal isOpen={this.state.modal === 2} toggle={this.closeModal} className={this.props.className}>
 					<ModalHeader toggle={this.closeModal}>Enter the Passcode</ModalHeader>
 					<ModalBody>
 						<NumpadReveal />
@@ -93,7 +93,7 @@ export default class LevelOne extends Component {
 	}
 
 	render() {
-		if (this.state.door == false) {
+		if (this.state.door === false) {
 			return (
 				<div className='levelOne'>
 					<img src={Room3d} alt='Room One' onClick={this.toggle} />

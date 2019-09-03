@@ -1,24 +1,20 @@
 import React, { Component } from 'react';
-import { Row, Col, Container } from 'reactstrap';
-import DataFlow from './DataFlow.js'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faServer, faDesktop } from '@fortawesome/free-solid-svg-icons'
+import { Row, Col, Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Input, NavLink } from 'reactstrap';
 import ReactGA from 'react-ga';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Input, NavLink } from 'reactstrap';
 import Arrow from '@elsdoerfer/react-arrow';
 import Typed from 'typed.js';
 import { toast } from 'react-toastify'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faServer, faDesktop } from '@fortawesome/free-solid-svg-icons'
+
+import DataFlow from './DataFlow.js'
 
 function initializeReactGA() {
 	ReactGA.initialize('UA-104887157-5');
 	ReactGA.pageview('/levelthree');
 }
 
-
 class TypedReact extends React.Component {
-	constructor(props) {
-		super(props);
-	}
 	componentDidMount() {
 		const strings = [this.props.content];
 		const options = {
@@ -49,34 +45,34 @@ class DataFlowModal extends React.Component {
 		super(props);
 		this.state = {
 			modal: false,
-			code: "import pyshark" + "\n" +
-				"net_interface = 'wlan0'" + "\n" +
-				"capture_time = 20" + "\n" +
-				"capture = pyshark.LiveCapture(interface = net_interface)" + "\n" +
-				"capture.sniff(timeout = capture_time)" + "\n" +
-				"for i in range(len(capture)):" + "\n" +
-				"  packet = capture[i]" + "\n" +
-				"  try:" + "\n" +
-				"    if packet.http.request_method == 'GET':" + "\n" +
-				"      print(\"Captured packet number:\"+str(i + 1))" + "\n" +
-				"      print(packet.http.request_full_uri)" + "\n" +
-				"      print(packet[\"urlencoded-form\"])" + "\n" +
-				"    except:" + "\n" +
-				"      pass",
-			codeTrue: "import pyshark" + "\n" +
-				"net_interface = 'wlan0'" + "\n" +
-				"capture_time = 20" + "\n" +
-				"capture = pyshark.LiveCapture(interface = net_interface)" + "\n" +
-				"capture.sniff(timeout = capture_time)" + "\n" +
-				"for i in range(len(capture)):" + "\n" +
-				"  packet = capture[i]" + "\n" +
-				"  try:" + "\n" +
-				"    if packet.http.request_method == 'POST':" + "\n" +
-				"      print(\"Captured packet number:\"+str(i + 1))" + "\n" +
-				"      print(packet.http.request_full_uri)" + "\n" +
-				"      print(packet[\"urlencoded-form\"])" + "\n" +
-				"    except:" + "\n" +
-				"      pass"
+			code: `import pyshark
+net_interface = 'wlan0'
+capture_time = 20
+capture = pyshark.LiveCapture(interface = net_interface)
+capture.sniff(timeout = capture_time)
+for i in range(len(capture)):
+  packet = capture[i]
+  try:
+    if packet.http.request_method == 'GET':
+			print("Captured packet number:"+str(i + 1))
+			print(packet.http.request_full_uri)
+      print(packet["urlencoded-form"])
+  except:
+    pass`,
+			codeTrue: `import pyshark
+net_interface = 'wlan0'
+capture_time = 20
+capture = pyshark.LiveCapture(interface = net_interface)
+capture.sniff(timeout = capture_time)
+for i in range(len(capture)):
+  packet = capture[i]
+  try:
+    if packet.http.request_method == 'POST':
+			print("Captured packet number:"+str(i + 1))
+			print(packet.http.request_full_uri)
+      print(packet["urlencoded-form"])
+  except:
+    pass`,
 		};
 		this.toggle = this.toggle.bind(this);
 		this.handleChange = this.handleChange.bind(this);
@@ -113,7 +109,7 @@ class DataFlowModal extends React.Component {
 						<TypedReact content="Code to tap the network!!!" />
 					</ModalHeader>
 					<ModalBody>
-						<Input style={{ height: "300px", fontSize: "13px" }} type="textarea" name="code" value={this.state.code} onChange={this.handleChange} />
+						<Input style={{ height: "300px", fontSize: "10px" }} type="textarea" name="code" value={this.state.code} onChange={this.handleChange} />
 					</ModalBody>
 					<ModalFooter>
 						<Button color="success text-white" onClick={this.handleSubmit}>Submit</Button>
@@ -129,23 +125,16 @@ export default class LevelThree extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			pass: '',
+			pass: "",
 			check: false
 		}
 		this.handleChange = this.handleChange.bind(this);
 		this.handleCheck = this.handleCheck.bind(this);
 	}
 	handleChange(event) {
-		const target = event.target;
-		const value = target.value;
-		const name = target.name;
-
 		this.setState({
-			[name]: value
+			[event.target.name]: event.target.value
 		});
-		if (this.state.pass === 'pass') {
-			alert('Success');
-		}
 	}
 	handleCheck() {
 		this.setState({
@@ -175,10 +164,12 @@ export default class LevelThree extends Component {
 								lineDashed="0.9"
 							/>
 							<FontAwesomeIcon icon={faDesktop} size="5x" />
-							{this.state.check === true ? <TypedReact content='Your Passcode is:01010010100' className="p-4 h-100 w-100" /> : ''}
+							<div>
+								{this.state.check === true ? <TypedReact content='Your passcode is 01010010100' className="p-4 h-100 w-100" /> : ''}
+							</div>
 							<Form className="p-4 h-100 w-100">
 								<FormGroup className="w-100">
-									<Input className="w-100" value={this.state.pass} onChange={this.handleChange} type="password" name="pass" placeholder="Pascode" />
+									<Input className="w-100" value={this.state.pass} onChange={this.handleChange} type="password" name="pass" placeholder="passcode" />
 								</FormGroup>
 							</Form>
 						</Col>

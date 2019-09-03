@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Form, FormText, FormGroup, Input } from "reactstrap";
+import { Button, Form, FormGroup, Input } from "reactstrap";
 import axios from "axios";
 import { toast } from 'react-toastify';
 import { withRouter } from "react-router-dom"

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Spinner } from 'reactstrap';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { createBrowserHistory } from "history";
 import { ToastContainer } from 'react-toastify'
 import './App.scss';
