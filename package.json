@@ -11,7 +11,7 @@
 	"bugs": {
 		"url": "https://gitlab.com:aakashhemadri/hack-in/jissues"
 	},
-	"proxy": "http://hackinpsg.tk:3000/",
+	"proxy": "http://hackinpsg.ml:8000/",
 	"dependencies": {
 		"@elsdoerfer/react-arrow": "^1.0.3",
 		"@fortawesome/fontawesome-svg-core": "^1.2.22",

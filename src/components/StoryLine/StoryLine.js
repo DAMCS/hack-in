@@ -31,15 +31,15 @@ export default class TypedReactDemo extends React.Component {
 	render() {
 		return (
 			<div className="wrap">
+				<a onClick={() => this.typed.start()}><FontAwesomeIcon icon={faPlay} size="2px"/></a>&nbsp;&nbsp;
+                <a onClick={() => this.typed.stop()}><FontAwesomeIcon icon={faPause} size="2px" /></a>&nbsp;&nbsp;
+                <a href="#" onClick={() => this.typed.reset()}><FontAwesomeIcon icon={faReply} size="2px" /></a>&nbsp;&nbsp;
 				<div className="type-wrap">
 					<span
 						style={{ whiteSpace: 'pre' }}
 						ref={(el) => { this.el = el; }}
 					/>
 				</div>
-				<a onClick={() => this.typed.start()}><FontAwesomeIcon icon={faPlay} size="2px"/></a>&nbsp;&nbsp;
-                <a onClick={() => this.typed.stop()}><FontAwesomeIcon icon={faPause} size="2px" /></a>&nbsp;&nbsp;
-                <a href="#" onClick={() => this.typed.reset()}><FontAwesomeIcon icon={faReply} size="2px" /></a>&nbsp;&nbsp;
             </div>
 		);
 	}

@@ -146,7 +146,7 @@ export default class Dashboard extends Component {
 							
 							<Nav pills className="d-flex flex-column justify-content-end mt-auto">
 								<NavItem className="d-flex">
-									<NavLink onClick={() => this.props.history.push('/')}>
+									<NavLink onClick={() => {this.props.history.push('/dashboard'); window.location.reload()}}>
 										<FontAwesomeIcon icon={faMap} size="2x"/>
 									</NavLink>
 								</NavItem>
@@ -182,7 +182,7 @@ export default class Dashboard extends Component {
 										<Route exact path="/levelthree" name="LevelThree" render={props => <LevelThree {...props} />} />
 										<Route exact path="/levelone" name="LevelOne" render={props => <LevelOne {...props} />} />
 										<Route exact path="/leveltwo" name="LevelTwo" render={props => <LevelTwo {...props} />} />
-										<Route path="/" name="MissionMap" render={props => <MissionMap {...props} />} />
+										<Route path="/dashboard" name="MissionMap" render={props => <MissionMap {...props} />} />
 									</Switch>
 								</React.Suspense>
 							</ BrowserRouter>
