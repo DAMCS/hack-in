@@ -30,15 +30,7 @@ import { ListGroup, ListGroupItem } from 'reactstrap';
 
 	}, false);
 
-	document.addEventListener('drop', function (e) {
-
-		if (e.target.getAttribute('data-draggable') === 'target') {
-			e.target.appendChild(item);
-
-			e.preventDefault();
-		}
-
-	}, false);
+	
 
 	document.addEventListener('dragend', function (e) {
 		item = null;
@@ -58,7 +50,7 @@ export default class Inventory extends React.Component {
 			<React.Fragment >
 				<ListGroup data-draggable="target">
 					<ListGroupItem data-draggable="target">
-						<img width="50px" alt="" height="50px" src={require('./hacker1.png')} />
+						<img width="50px" alt="" height="50px" src={require('./thermal.png')} />
 					</ListGroupItem>
 					<ListGroupItem data-draggable="target">
 						<img width="50px" alt="" height="50px" src={require('./hacker1.png')} />
