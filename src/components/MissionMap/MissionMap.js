@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import MapImage from './MAP-Final.png';
 import './MissionMap.css';
-import { Button } from 'reactstrap'; 
+import { Button } from 'reactstrap';
 
 export default class MissionMap extends React.Component {
 	constructor(props) {
@@ -15,37 +15,37 @@ export default class MissionMap extends React.Component {
 	}
 	componentDidMount() {
 		const token = localStorage.getItem('token');
-        axios({
-            method: 'get',
-            url: '/api/level/all',
-            headers: {
-                Authorization: "Bearer " + token
-            }
-        })
-            .then(response => {
-                console.log(response.data)
-                this.setState({
-                    level: response.data.data
-                })
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+		axios({
+			method: 'get',
+			url: '/api/level/all',
+			headers: {
+				Authorization: "Bearer " + token
+			}
+		})
+			.then(response => {
+				console.log(response.data)
+				this.setState({
+					level: response.data.data
+				})
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
 	}
 
 	handleClick(eventNumber) {
-		switch(eventNumber){
+		switch (eventNumber) {
 			case 1:
-				this.props.history.push('/levelone');
+				this.props.history.push('/dashboard/levelone');
 				break;
 			case 2:
-				this.props.history.push('/leveltwo');
+				this.props.history.push('/dashboard/leveltwo');
 				break;
 			case 3:
-				this.props.history.push('/levelthree');
+				this.props.history.push('/dashboard/levelthree');
 				break;
 			default:
-				this.props.history.push('/');
+				this.props.history.push('/dashboard/');
 				break;
 		}
 	}
@@ -60,7 +60,7 @@ export default class MissionMap extends React.Component {
 					return <Button className={"level" + (i + 1) + "-button"}
 						disabled={object.levelStatus === "open" ? false : true}
 						style={{ color: text_color }}
-						onClick={() => this.handleClick(i+1)} >{i + 1}
+						onClick={() => this.handleClick(i + 1)} >{i + 1}
 					</Button>
 				})}
 			</div>

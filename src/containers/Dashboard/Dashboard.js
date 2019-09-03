@@ -49,7 +49,7 @@ export default class Dashboard extends Component {
 	}
 
 	toggle = modal => ev => {
-		ReactGA.modalview('/dashboard/'+modal);
+		ReactGA.modalview('/dashboard/' + modal);
 		this.setState(prevState => ({ [modal]: !prevState[modal] }))
 	}
 
@@ -143,11 +143,10 @@ export default class Dashboard extends Component {
 									</NavLink>
 								</NavItem>
 							</Nav>
-							
 							<Nav pills className="d-flex flex-column justify-content-end mt-auto">
 								<NavItem className="d-flex">
-									<NavLink onClick={() => this.props.history.push('/')}>
-										<FontAwesomeIcon icon={faMap} size="2x"/>
+									<NavLink onClick={() => this.props.history.push('/dashboard')}>
+										<FontAwesomeIcon icon={faMap} size="2x" />
 									</NavLink>
 								</NavItem>
 								<NavItem className="d-flex">
@@ -175,18 +174,16 @@ export default class Dashboard extends Component {
 								</NavItem>
 							</Nav>
 						</Col>
-						<Col xs="10" className="h-100 d-flex mx-auto my-auto align-self-center">
-							<BrowserRouter history={createBrowserHistory()} >
-								<React.Suspense fallback={<Loading />}>
-									<Switch>
-										<Route exact path="/levelthree" name="LevelThree" render={props => <LevelThree {...props} />} />
-										<Route exact path="/levelone" name="LevelOne" render={props => <LevelOne {...props} />} />
-										<Route exact path="/leveltwo" name="LevelTwo" render={props => <LevelTwo {...props} />} />
-										<Route path="/" name="MissionMap" render={props => <MissionMap {...props} />} />
-									</Switch>
-								</React.Suspense>
-							</ BrowserRouter>
-							{/* <MissionMap /> */}
+						<Col xs="10" className="h-100 d-flex mx-auto my-auto justify-content-center align-self-center">
+							{/* Routing dashboard containers! */}
+							<React.Suspense fallback={<Loading />}>
+								<Switch>
+									<Route exact path={this.props.match.path} name="MissionMap" render={props => <MissionMap {...props} />} />
+									<Route path={`${this.props.match.path}/levelthree`} name="LevelThree" render={props => <LevelThree {...props} />} />
+									<Route path={`${this.props.match.path}/levelone`} name="LevelOne" render={props => <LevelOne {...props} />} />
+									<Route path={`${this.props.match.path}/leveltwo`} name="LevelTwo" render={props => <LevelTwo {...props} />} />
+								</Switch>
+							</React.Suspense>
 						</Col>
 						<Col xs="1" className="d-flex justify-content-center align-items-center">
 							<Nav pills>
