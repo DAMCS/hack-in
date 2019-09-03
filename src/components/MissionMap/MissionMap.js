@@ -1,36 +1,23 @@
 import React from 'react';
 import axios from 'axios';
-import MapImage from './MAP-Final.png';
+import MapImage from './map.jpg';
 import './MissionMap.css';
-import { Button } from 'reactstrap';
+import { NavLink, Tooltip } from 'reactstrap';
 
-export default class MissionMap extends React.Component {
+class TooltipItem extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			level: []
-		};
-
 		this.handleClick = this.handleClick.bind(this);
+		this.toggle = this.toggle.bind(this);
+		this.state = {
+			tooltipOpen: false
+		};
 	}
-	componentDidMount() {
-		const token = localStorage.getItem('token');
-		axios({
-			method: 'get',
-			url: '/api/level/all',
-			headers: {
-				Authorization: "Bearer " + token
-			}
-		})
-			.then(response => {
-				console.log(response.data)
-				this.setState({
-					level: response.data.data
-				})
-			})
-			.catch(function (error) {
-				console.log(error);
-			});
+
+	toggle() {
+		this.setState({
+			tooltipOpen: !this.state.tooltipOpen
+		});
 	}
 
 	handleClick(eventNumber) {
@@ -52,20 +39,67 @@ export default class MissionMap extends React.Component {
 
 	render() {
 		let text_color = '';
+		this.props.object.userLevelStatus === "completed" ? text_color = "green" : text_color = "red";
 		return (
-			<div class='h-100 w-100 mission-map mx-auto my-auto d-flex justify-content-center align-items-center'>
-				<img src={MapImage} alt='Mission Map' className='img' />
-				<div class="h-100 w-100">
-					{this.state.level.map((object, i) => {
-						object.userLevelStatus === "completed" ? text_color = "green" : text_color = "red";
-						return <Button className={"level" + (i + 1) + "-button"}
-							disabled={object.levelStatus === "open" ? false : true}
-							style={{ color: text_color }}
-							onClick={() => this.handleClick(i + 1)} >{i + 1}
-						</Button>
-					})}
-				</div>
+			<div class="h-100 w-100 d-flex justify-content-center align-items-center">
+				<NavLink href="#" id={'Level-' + this.props.id} className={"level" + (this.props.i + 1) + "-button"}
+					disabled={this.props.object.levelStatus === "open" ? false : true}
+					style={{ color: text_color }}
+					onClick={() => this.handleClick(this.props.i + 1)} >{this.props.i + 1}
+				</NavLink>
+				<Tooltip placement="top" isOpen={this.state.tooltipOpen} target={'Level-' + this.props.id} toggle={this.toggle}>
+					Level {this.props.id + 1}
+				</Tooltip>
 			</div>
+		);
+	}
+}
+
+export default class MissionMap extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			level: [],
+		};
+
+
+	}
+	componentDidMount() {
+		const token = localStorage.getItem('token');
+		axios({
+			method: 'get',
+			url: '/api/level/all',
+			headers: {
+				Authorization: "Bearer " + token
+			}
+		})
+			.then(response => {
+				console.log(response.data)
+				this.setState({
+					level: response.data.data
+				})
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+	}
+
+
+
+	render() {
+
+		return (
+			<React.Fragment>
+				<div className="fill h-100 w-100">
+					<img src={MapImage} alt='Map' className="img h-100 w-100" />
+					<div class="fill">
+						{this.state.level.map((object, i) => {
+							return <TooltipItem key={i} id={i} object={object} i={i} {...this.props} />;
+						})}
+					</div>
+				</div>
+
+			</React.Fragment>
 		)
 	}
 }

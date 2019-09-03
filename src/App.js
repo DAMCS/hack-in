@@ -11,7 +11,7 @@ function initializeReactGA() {
 }
 function Loading() {
 	return (
-		<div class="d-flex justify-content-center align-items-center">
+		<div class="h-100 w-100 d-flex justify-content-center align-items-center">
 			Loading...
 		</div>
 	);
@@ -20,7 +20,6 @@ const Page404 = React.lazy(() => import('./views/Pages/Page404'))
 const Page500 = React.lazy(() => import('./views/Pages/Page500'))
 const Home = React.lazy(() => import('./views/Pages/Home'))
 const Dashboard = React.lazy(() => import('./containers/Dashboard'))
-
 
 export default class App extends Component {
 	render() {

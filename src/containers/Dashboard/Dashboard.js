@@ -13,13 +13,7 @@ function initializeReactGA() {
 	ReactGA.initialize('UA-104887157-5');
 	ReactGA.pageview('/dashboard');
 }
-function Loading() {
-	return (
-		<div class="h-100 w-100 d-flex justify-content-center align-items-center">
-			Loading...
-		</div>
-	);
-}
+
 const Announcement = React.lazy(() => import('../../components/Announcement/Announcement'));
 const Inventory = React.lazy(() => import('../..//components/Inventory/Inventory'));
 const LeaderBoard = React.lazy(() => import('../../components/LeaderBoard'));
@@ -28,6 +22,7 @@ const MissionMap = React.lazy(() => import('../../components/MissionMap'));
 const LevelThree = React.lazy(() => import('../../views/LevelThree'));
 const LevelOne = React.lazy(() => import('../../views/LevelOne'));
 const LevelTwo = React.lazy(() => import('../../views/LevelTwo'));
+
 library.add(faSatelliteDish, faTable, faSignOutAlt, faAngleLeft, faIdCard, faVideo, faAngleRight)
 
 export const Tool = class Tip extends React.Component {
@@ -194,14 +189,12 @@ export default class Dashboard extends Component {
 						</Col>
 						<Col xs="10" className="h-100 w-100 mx-auto my-auto d-flex justify-content-center align-items-center">
 							{/* Routing dashboard containers! */}
-							<React.Suspense fallback={<Loading />}>
-								<Switch>
-									<Route exact path={this.props.match.path} name="MissionMap" render={props => <MissionMap {...props} />} />
-									<Route path={`${this.props.match.path}/levelthree`} name="LevelThree" render={props => <LevelThree {...props} />} />
-									<Route path={`${this.props.match.path}/levelone`} name="LevelOne" render={props => <LevelOne {...props} />} />
-									<Route path={`${this.props.match.path}/leveltwo`} name="LevelTwo" render={props => <LevelTwo {...props} />} />
-								</Switch>
-							</React.Suspense>
+							<Switch>
+								<Route exact path={this.props.match.path} name="MissionMap" render={props => <MissionMap {...props} />} />
+								<Route path={`${this.props.match.path}/levelthree`} name="LevelThree" render={props => <LevelThree {...props} />} />
+								<Route path={`${this.props.match.path}/levelone`} name="LevelOne" render={props => <LevelOne {...props} />} />
+								<Route path={`${this.props.match.path}/leveltwo`} name="LevelTwo" render={props => <LevelTwo {...props} />} />
+							</Switch>
 						</Col>
 						<Col xs="1" className="h-100 d-flex justify-content-center align-items-center right-nav">
 							<Nav pills>

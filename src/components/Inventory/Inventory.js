@@ -30,7 +30,7 @@ import { ListGroup, ListGroupItem } from 'reactstrap';
 
 	}, false);
 
-	
+
 
 	document.addEventListener('dragend', function (e) {
 		item = null;
@@ -48,20 +48,15 @@ export default class Inventory extends React.Component {
 	render() {
 		return (
 			<React.Fragment >
-				<ListGroup data-draggable="target">
-					<ListGroupItem data-draggable="target">
+				<ListGroup data-draggable="target" className="p-2">
+					<ListGroupItem data-draggable="target" className="p-2">
 						<img width="50px" alt="" height="50px" src={require('./thermal.png')} />
 					</ListGroupItem>
-					<ListGroupItem data-draggable="target">
+					<ListGroupItem data-draggable="target" className="p-2">
 						<img width="50px" alt="" height="50px" src={require('./hacker1.png')} />
 					</ListGroupItem>
-					<ListGroupItem data-draggable="target">
+					<ListGroupItem data-draggable="target" className="p-2">
 						<img width="50px" alt="" height="50px" src={require('./hacker1.png')} />
-					</ListGroupItem>
-				</ListGroup>
-				<ListGroup data-draggable="target">
-					<ListGroupItem data-draggable="target">
-
 					</ListGroupItem>
 				</ListGroup>
 			</React.Fragment>

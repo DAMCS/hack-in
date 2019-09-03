@@ -1,99 +1,101 @@
-.mission-map {
-  position: static;
+.fill {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 }
-
-.mission-map .img {
-  width: 90%;
-  position: absolute;
-  left: 5%;
+.fill .img {
+  flex-shrink: 0;
+  min-width: 100%;
+  min-height: 100%;
   z-index: -100;
 }
-.mission-map .level1-button {
+.level1-button {
   border: none;
   background-color: transparent;
   font-size: 24px;
   cursor: pointer;
-  left: 50%;
-  margin-top: 45%;
+  left: 48%;
+  top: 79%;
   position: absolute;
 }
 
-.mission-map .level2-button {
+.level2-button {
   border: none;
   background-color: transparent;
   font-size: 24px;
   cursor: pointer;
-  left: 10%;
-  margin-top: 40%;
+  left: 78%;
+  top: 75%;
   position: absolute;
 }
 
-.mission-map .level3-button {
-  border: none;
-  background-color: transparent;
-  font-size: 24px;
-  cursor: pointer;
-  left: 20%;
-  margin-top: 20%;
-  position: absolute;
-}
-
-.mission-map .level4-button {
-  border: none;
-  background-color: transparent;
-  font-size: 24px;
-  cursor: pointer;
-  left: 40%;
-  margin-top: 10%;
-  position: absolute;
-}
-
-.mission-map .level5-button {
-  border: none;
-  background-color: transparent;
-  font-size: 24px;
-  cursor: pointer;
-  left: 40%;
-  margin-top: 25%;
-  position: absolute;
-}
-
-.mission-map .level6-button {
-  border: none;
-  background-color: transparent;
-  font-size: 24px;
-  cursor: pointer;
-  left: 52%;
-  margin-top: 30%;
-  position: absolute;
-}
-
-.mission-map .level7-button {
-  border: none;
-  background-color: transparent;
-  font-size: 24px;
-  cursor: pointer;
-  left: 80%;
-  margin-top: 40%;
-  position: absolute;
-}
-
-.mission-map .level8-button {
-  border: none;
-  background-color: transparent;
-  font-size: 24px;
-  cursor: pointer;
-  left: 75%;
-  margin-top: 25%;
-  position: absolute;
-}
-
-.mission-map .level9-button {
+.level3-button {
   border: none;
   background-color: transparent;
   font-size: 24px;
   cursor: pointer;
   left: 70%;
-  margin-top: 10%;
+  top: 45%;
+  position: absolute;
+}
+
+.level4-button {
+  border: none;
+  background-color: transparent;
+  font-size: 24px;
+  cursor: pointer;
+  left: 75%;
+  top: 20%;
+  position: absolute;
+}
+
+.level5-button {
+  border: none;
+  background-color: transparent;
+  font-size: 24px;
+  cursor: pointer;
+  left: 45%;
+  top: 20%;
+  position: absolute;
+}
+
+.level6-button {
+  border: none;
+  background-color: transparent;
+  font-size: 24px;
+  cursor: pointer;
+  left: 51%;
+  top: 50%;
+  position: absolute;
+}
+
+.level7-button {
+  border: none;
+  background-color: transparent;
+  font-size: 24px;
+  cursor: pointer;
+  left: 40%;
+  top: 50%;
+  position: absolute;
+}
+
+.level8-button {
+  border: none;
+  background-color: transparent;
+  font-size: 24px;
+  cursor: pointer;
+  left: 20%;
+  top: 75%;
+  position: absolute;
+}
+
+.level9-button {
+  border: none;
+  background-color: transparent;
+  font-size: 24px;
+  cursor: pointer;
+  left: 20%;
+  top: 35%;
   position: absolute;
 }
