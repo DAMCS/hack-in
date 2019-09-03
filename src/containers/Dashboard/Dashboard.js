@@ -8,6 +8,9 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faSatelliteDish, faTable, faSignOutAlt, faAngleLeft, faIdCard, faVideo, faMap, faAngleRight } from '@fortawesome/free-solid-svg-icons'
 import { Redirect, Route, BrowserRouter, Switch } from "react-router-dom";
 import { createBrowserHistory } from "history";
+import {Tooltip} from 'reactstrap';
+
+import classNames from 'classnames'
 import ReactGA from 'react-ga';
 
 function initializeReactGA() {
@@ -30,6 +33,17 @@ const LevelThree = React.lazy(() => import('../../views/LevelThree'));
 const LevelOne = React.lazy(() => import('../../views/LevelOne'));
 const LevelTwo = React.lazy(() => import('../../views/LevelTwo'));
 library.add(faSatelliteDish, faTable, faSignOutAlt, faAngleLeft, faIdCard, faVideo, faAngleRight)
+
+export const Tool = class Tip extends React.Component {
+	constructor(props) {
+	  super(props);
+  
+	  this.toggle = this.toggle.bind(this);
+	  this.state = {
+		tooltipOpen: false
+	  };
+	}
+}
 
 export default class Dashboard extends Component {
 	constructor(props) {
@@ -90,6 +104,13 @@ export default class Dashboard extends Component {
 	componentDidMount() {
 
 	}
+toggle() {
+	this.setState({
+		tooltipOpen: !this.state.tooltipOpen
+	});
+}
+
+
 	render() {
 		initializeReactGA();
 		if (this.state.isLoggedIn === false) {
@@ -101,8 +122,9 @@ export default class Dashboard extends Component {
 						<Col xs="1" className="h-100 d-flex flex-column">
 							<Nav pills className="d-flex flex-column justify-content-start">
 								<NavItem>
-									<NavLink onClick={this.toggle('Announcements')}									>
-										<FontAwesomeIcon icon={faSatelliteDish} size="2x" />
+									<NavLink onClick={this.toggle('Announcements')}>
+										
+									<FontAwesomeIcon icon={faSatelliteDish} size="2x" title="Announcements"/>
 									</NavLink>
 									<Modal centered="true" isOpen={this.state.Announcements} toggle={this.toggle('Announcements')} className="modal-lg">
 										<ModalHeader>Announcements</ModalHeader>
@@ -116,7 +138,7 @@ export default class Dashboard extends Component {
 								</NavItem>
 								<NavItem>
 									<NavLink onClick={this.toggle("LeaderBoard")}>
-										<FontAwesomeIcon icon={faTable} size="2x" />
+										<FontAwesomeIcon icon={faTable} size="2x" title="Leaderboard"/>
 										<Modal centered="true" isOpen={this.state.LeaderBoard} toggle={this.toggle('LeaderBoard')} className="modal-lg">
 											<ModalHeader>LeaderBoard</ModalHeader>
 											<ModalBody className="container-fluid mw-100">
@@ -130,7 +152,7 @@ export default class Dashboard extends Component {
 								</NavItem>
 								<NavItem>
 									<NavLink onClick={this.toggle('StoryLine')}>
-										<FontAwesomeIcon icon={faVideo} size="2x" />
+										<FontAwesomeIcon icon={faVideo} size="2x" title="StoryLine"/>
 										<Modal isOpen={this.state.StoryLine} toggle={this.toggle('StoryLine')} className="modal-lg">
 											< ModalHeader > <img alt="Story" width="100%" src={require('../../components/StoryLine/story.gif')} /></ModalHeader>
 											<ModalBody>
@@ -146,12 +168,12 @@ export default class Dashboard extends Component {
 							<Nav pills className="d-flex flex-column justify-content-end mt-auto">
 								<NavItem className="d-flex">
 									<NavLink onClick={() => { this.props.history.push('/dashboard') }}>
-										<FontAwesomeIcon icon={faMap} size="2x" />
+										<FontAwesomeIcon icon={faMap} size="2x" title = "Lab Map"/>
 									</NavLink>
 								</NavItem>
 								<NavItem className="d-flex">
 									<NavLink onClick={this.toggle('Contact')}>
-										<FontAwesomeIcon icon={faIdCard} size="2x" />
+										<FontAwesomeIcon icon={faIdCard} size="2x" title="Contact"/>
 										<Modal centered="true" isOpen={this.state.Contact} toggle={this.toggle('Contact')} className="modal-lg">
 											<ModalHeader>Contact</ModalHeader>
 											<ModalBody>
@@ -169,7 +191,7 @@ export default class Dashboard extends Component {
 								</NavItem>
 								<NavItem className="d-flex ">
 									<NavLink onClick={this.handleLogout}>
-										<FontAwesomeIcon icon={faSignOutAlt} size="2x" />
+										<FontAwesomeIcon icon={faSignOutAlt} size="2x" title ="Sign Out"/>
 									</NavLink>
 								</NavItem>
 							</Nav>
