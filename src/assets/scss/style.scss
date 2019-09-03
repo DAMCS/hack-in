@@ -2,6 +2,12 @@
 
 @import "../react-toastify/scss/main.scss";
 
+@import url("https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap");
+
+body {
+  font-family: "Press Start 2P", cursive;
+}
+
 html,
 body,
 #root {
@@ -19,14 +25,11 @@ body,
   }
 }
 
+@import "mission_map.scss";
+@import "story_line.scss";
+
 .popover {
   max-width: 400px;
-}
-
-@import url("https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap");
-
-body {
-  font-family: "Press Start 2P", cursive;
 }
 
 .modal-lg {
@@ -38,48 +41,8 @@ body {
   position: relative;
   width: 100px;
 }
-// .contact-modal {
-//   min-width: 400px !important;
-// }
 
-// .modal-body {
-//   position: relative;
-//   overflow-y: auto;
-//   max-height: 400px;
-// }
-
-// .overlay-menu {
-//   position: relative;
-//   width: 100px;
-//   height: 100%;
-//   background: #000;
-//   z-index: 1100;
-//   left: 0;
-//   top: 0;
-// }
-
-// .overlay-inventory {
-//   position: relative;
-//   width: 100px;
-//   height: 100%;
-//   background: #000;
-//   z-index: 1100;
-//   right: 0;
-//   top: 0;
-// }
-// .overlay-content {
-//   position: fixed;
-//   z-index: 1150;
-// }
-
-.left-nav {
-  z-index: 1100;
-}
-
-.right-nav {
-  z-index: 1100;
-}
-
+// Scrollbar fix for chrome.
 /* width */
 ::-webkit-scrollbar {
   width: 10px;

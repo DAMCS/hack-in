@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import MapImage from './map.jpg';
-import './MissionMap.css';
+import MapImage from 'assets/images/mission_map/map.jpg';
 import { NavLink, Tooltip } from 'reactstrap';
 
 class TooltipItem extends React.Component {

@@ -23,6 +23,8 @@ const LevelThree = React.lazy(() => import('../../views/LevelThree'));
 const LevelOne = React.lazy(() => import('../../views/LevelOne'));
 const LevelTwo = React.lazy(() => import('../../views/LevelTwo'));
 
+const storyLineGIF = require('assets/images/story_line/story.gif');
+
 library.add(faSatelliteDish, faTable, faSignOutAlt, faAngleLeft, faIdCard, faVideo, faAngleRight)
 
 export const Tool = class Tip extends React.Component {
@@ -92,15 +94,11 @@ export default class Dashboard extends Component {
 		}
 	}
 
-	componentDidMount() {
-
-	}
 	toggle() {
 		this.setState({
 			tooltipOpen: !this.state.tooltipOpen
 		});
 	}
-
 
 	render() {
 		initializeReactGA();
@@ -145,7 +143,7 @@ export default class Dashboard extends Component {
 									<NavLink onClick={this.toggle('StoryLine')}>
 										<FontAwesomeIcon icon={faVideo} size="2x" title="StoryLine" />
 										<Modal isOpen={this.state.StoryLine} toggle={this.toggle('StoryLine')} className="modal-lg">
-											< ModalHeader > <img alt="Story" width="100%" src={require('../../components/StoryLine/story.gif')} /></ModalHeader>
+											<ModalHeader> <img alt="Story" width="100%" src={storyLineGIF} /></ModalHeader>
 											<ModalBody>
 												<StoryLine />
 											</ModalBody>
