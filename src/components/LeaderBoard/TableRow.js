@@ -5,13 +5,16 @@ class TableRow extends Component {
 		return (
 			<tr>
 				<td>
-					{this.props.obj.leader_id}
+					{
+						console.log(this.props.key)
+						// this.props.key
+					}
 				</td>
 				<td>
-					{this.props.obj.leader_name}
+					{this.props.obj.username}
 				</td>
 				<td>
-					{this.props.obj.leader_pts}
+					{this.props.obj.score}
 				</td>
 			</tr>
 		);

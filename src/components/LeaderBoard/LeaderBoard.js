@@ -7,28 +7,68 @@ export default class LeaderBoard extends Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {
-			leader_board: [],
-		};
+		this.state = {display_name: "", display_value: "", data: [] };
 	}
 	componentDidMount() {
+
+		let dummy_data = {
+			display_name: "Name/Level Progressed",
+			display_value: "Points/Completed count",
+			data: [
+				{
+					"leader_id": 1,
+					"leader_name": "Surya",
+					"leader_pts": 1000
+				},
+				{
+					"leader_id": 2,
+					"leader_name": "Prasath",
+					"leader_pts": 800
+				}, {
+					"leader_id": 3,
+					"leader_name": "Tester",
+					"leader_pts": 700
+				}
+			]
+		}
+
+		this.setState(dummy_data);
 		var token = localStorage.getItem('token');
 		axios.get('/api/leaderboard',
 			{
 				headers: {
-					"Authorization": "Bearer " + token
+					"Authorization": "Bearer " + localStorage.getItem('token')
 				}
 			}
 		).then(response => {
-			this.setState({ leader_board: response.data });
-		})
+			console.log(response.data);
+				this.setState({
+					data : response.data.data,
+					display_name : response.data.name,
+					display_value : response.data.count,
+				})	
+			})
 			.catch(function (error) {
 				console.log(error);
 			})
 	}
 	tabRow() {
-		return this.state.leader_board.map((object, i) => {
-			return <TableRow obj={object} key={i} />;
+		return this.state.data.map(function (object, i) {
+			return (
+				<tr>
+				<td>
+					{
+						i+1
+					}
+				</td>
+				<td>
+					{object.username}
+				</td>
+				<td>
+					{object.score}
+				</td>
+			</tr>
+			);
 		});
 	}
 
