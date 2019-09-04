@@ -5,7 +5,7 @@ import {
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faSatelliteDish, faTable, faSignOutAlt, faAngleLeft, faIdCard, faVideo, faMap, faAngleRight, faLightbulb } from '@fortawesome/free-solid-svg-icons'
+import { faSatelliteDish, faTable, faSignOutAlt, faAngleLeft, faIdCard, faVideo, faMap, faAngleRight } from '@fortawesome/free-solid-svg-icons'
 import { Redirect, Route, BrowserRouter, Switch } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import ReactGA from 'react-ga';
@@ -37,10 +37,7 @@ export default class Dashboard extends Component {
 
 		this.handleLogout = this.handleLogout.bind(this);
 		this.toggle = this.toggle.bind(this);
-		this.getLevel = this.getLevel.bind(this);
-		this.hintCost = this.hintCost.bind(this);
-		this.hintBuy = this.hintBuy.bind(this);
-		this.toggleHint = this.toggleHint.bind(this);
+
 		this.state = {
 			isLoggedIn: true,
 			LeaderBoard: false,
@@ -48,36 +45,12 @@ export default class Dashboard extends Component {
 			Announcements: false,
 			Inventory: false,
 			StoryLine: false,
-			Hint: false,
-			currentLevel:0,
-			hints:[]
 		}
 	}
 
 	toggle = modal => ev => {
 		ReactGA.modalview('/dashboard/' + modal);
 		this.setState(prevState => ({ [modal]: !prevState[modal] }))
-	}
-	toggleHint(){
-		this.setState({
-			Hint:true
-		})
-		let token = localStorage.getItem("token");
-		axios({
-			method: "post",
-			url: "/api/hint",
-			headers: {
-				Authorization: "Bearer " + token
-			},
-			data: {
-				levelId : this.state.currentLevel
-			}
-		}).then(response => {
-			console.log(response.data);	
-		}).catch(error => {
-			console.log(error);
-		})
-
 	}
 
 	handleLogout() {
@@ -91,51 +64,7 @@ export default class Dashboard extends Component {
 		this.props.history.push('/')
 	}
 
-	getLevel(level){
-		this.setState({
-			currentLevel:level
-		})
-	}
-
-	hintBuy(){
-		axios({
-			method: "post",
-			url: "/api/hint/buy",
-			headers: {
-				Authorization: "Bearer " + localStorage.getItem('token')
-			},
-			data: {
-				levelId : this.state.currentLevel,
-				hintNo : this.state.hints.length+1
-			}
-		}).then(response => {
-			this.setState({
-				hint : this.hint.state.push(response.data.data.hintMsg)
-			})	
-		}).catch(error => {
-			console.log(error);
-		})
-	}
-
-	hintCost(){
-		axios({
-			method: "post",
-			url: "/api/hint/cost",
-			headers: {
-				Authorization: "Bearer " + localStorage.getItem('token')
-			},
-			data: {
-				levelId : this.state.currentLevel,
-				hintNo : this.state.hints.length+1
-			}
-		}).then(response => {
-			console.log(response.data.hintCost);	
-		}).catch(error => {
-			console.log(error);
-		})
-	}
-
-	componentDidMount() {
+	componentWillMount() {
 		let token = localStorage.getItem("token");
 		if (token) {
 			axios({
@@ -156,7 +85,10 @@ export default class Dashboard extends Component {
 		else {
 			this.setState({ isLoggedIn: false })
 		}
-			
+	}
+
+	componentDidMount() {
+
 	}
 	render() {
 		initializeReactGA();
@@ -210,24 +142,6 @@ export default class Dashboard extends Component {
 										</Modal>
 									</NavLink>
 								</NavItem>
-								<NavItem>
-									<NavLink onClick={this.toggleHint}>
-										<FontAwesomeIcon icon={faLightbulb} size="2x" />
-										<Modal isOpen={this.state.Hint} toggle={this.toggle('Hint')} className="modal-lg">
-											<ModalHeader >Hint</ModalHeader>
-											<ModalBody>
-												{this.state.hints.map((object) => {
-													return object + '\n'
-												})}
-											</ModalBody>
-											<ModalFooter>
-												<Button color="danger text-white" onClick={this.toggle('Hint')}>Close</Button>
-												<Button color="success text-white" onClick={this.hintBuy}>Buy</Button>
-												<Button color="success text-white" onClick={this.hintCost}>Cost</Button>
-											</ModalFooter>
-										</Modal>
-									</NavLink>
-								</NavItem>
 							</Nav>
 							<Nav pills className="d-flex flex-column justify-content-end mt-auto">
 								<NavItem className="d-flex">
@@ -264,7 +178,7 @@ export default class Dashboard extends Component {
 							{/* Routing dashboard containers! */}
 							<React.Suspense fallback={<Loading />}>
 								<Switch>
-									<Route exact path={this.props.match.path} name="MissionMap" render={props => <MissionMap {...props} getLevel={this.getLevel}/>} />
+									<Route exact path={this.props.match.path} name="MissionMap" render={props => <MissionMap {...props} />} />
 									<Route path={`${this.props.match.path}/levelthree`} name="LevelThree" render={props => <LevelThree {...props} />} />
 									<Route path={`${this.props.match.path}/levelone`} name="LevelOne" render={props => <LevelOne {...props} />} />
 									<Route path={`${this.props.match.path}/leveltwo`} name="LevelTwo" render={props => <LevelTwo {...props} />} />
