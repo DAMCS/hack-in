@@ -14,14 +14,15 @@ function initializeReactGA() {
 	ReactGA.pageview('/dashboard');
 }
 
-const Announcement = React.lazy(() => import('../../components/Announcement/Announcement'));
-const Inventory = React.lazy(() => import('../..//components/Inventory/Inventory'));
-const LeaderBoard = React.lazy(() => import('../../components/LeaderBoard'));
-const StoryLine = React.lazy(() => import('../../components/StoryLine'));
-const MissionMap = React.lazy(() => import('../../components/MissionMap'));
-const LevelThree = React.lazy(() => import('../../views/LevelThree'));
-const LevelOne = React.lazy(() => import('../../views/LevelOne'));
-const LevelTwo = React.lazy(() => import('../../views/LevelTwo'));
+const Announcement = React.lazy(() => import('components/Announcement/Announcement'));
+const Inventory = React.lazy(() => import('components/Inventory/Inventory'));
+const LeaderBoard = React.lazy(() => import('components/LeaderBoard'));
+const StoryLine = React.lazy(() => import('components/StoryLine'));
+const MissionMap = React.lazy(() => import('components/MissionMap'));
+const LevelThree = React.lazy(() => import('views/LevelThree'));
+const LevelOne = React.lazy(() => import('views/LevelOne'));
+const LevelTwo = React.lazy(() => import('views/LevelTwo'));
+const Page404 = React.lazy(() => import('views/Pages/Page404'))
 
 const storyLineGIF = require('assets/images/story_line/story.gif');
 
@@ -60,6 +61,7 @@ export default class Dashboard extends Component {
 			StoryLine: false,
 			announcement: [],
 			seen: 0,
+			level: [],
 		}
 	}
 	componentDidMount() {
@@ -102,6 +104,22 @@ export default class Dashboard extends Component {
 			.catch(function (error) {
 				console.log(error);
 			})
+		axios({
+			method: 'get',
+			url: '/api/level/all',
+			headers: {
+				Authorization: "Bearer " + token
+			}
+		})
+			.then(response => {
+				console.log(response.data);
+				this.setState({
+					level: response.data.data
+				})
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
 	}
 
 	render() {
@@ -115,12 +133,11 @@ export default class Dashboard extends Component {
 						<Col xs="1" className="h-100 d-flex flex-column left-nav">
 							<Nav pills className="d-flex flex-column justify-content-start">
 								<NavItem>
-									<NavLink onClick={this.toggle('Announcements')} className="d-flex justify-content-center align-items-center">
+									<NavLink onClick={this.toggle('Announcements')} className="d-flex justify-content-start align-items-center">
 										<FontAwesomeIcon icon={faSatelliteDish} size="2x" title="Announcements" />
 										{this.state.announcement.length > this.state.seen ? (<React.Fragment>&nbsp;
 											<Badge color="primary">{this.state.announcement.length - this.state.seen}</Badge>
-										</React.Fragment>) : (<React.Fragment><Badge class="align-self-start text-danger">{this.state.announcement.length - this.state.seen}</Badge>
-										</React.Fragment>)}
+										</React.Fragment>) : (<React.Fragment></React.Fragment>)}
 									</NavLink>
 									<Modal centered="true" isOpen={this.state.Announcements} toggle={this.toggle('Announcements')} className="modal-lg">
 										<ModalHeader>Announcements</ModalHeader>
@@ -133,7 +150,7 @@ export default class Dashboard extends Component {
 									</Modal>
 								</NavItem>
 								<NavItem>
-									<NavLink onClick={this.toggle("LeaderBoard")}>
+									<NavLink onClick={this.toggle("LeaderBoard")} className="d-flex justify-content-start align-items-center">
 										<FontAwesomeIcon icon={faTable} size="2x" title="Leaderboard" />
 										<Modal centered="true" isOpen={this.state.LeaderBoard} toggle={this.toggle('LeaderBoard')} className="modal-lg">
 											<ModalHeader>LeaderBoard</ModalHeader>
@@ -147,7 +164,7 @@ export default class Dashboard extends Component {
 									</NavLink>
 								</NavItem>
 								<NavItem>
-									<NavLink onClick={this.toggle('StoryLine')}>
+									<NavLink onClick={this.toggle('StoryLine')} className="d-flex justify-content-start align-items-center">
 										<FontAwesomeIcon icon={faVideo} size="2x" title="StoryLine" />
 										<Modal isOpen={this.state.StoryLine} toggle={this.toggle('StoryLine')} className="modal-lg">
 											<ModalHeader> <img alt="Story" width="100%" src={storyLineGIF} /></ModalHeader>
@@ -195,10 +212,22 @@ export default class Dashboard extends Component {
 						<Col xs="10" className="h-100 w-100 mx-auto my-auto d-flex justify-content-center align-items-center">
 							{/* Routing dashboard containers! */}
 							<Switch>
-								<Route exact path={this.props.match.path} name="MissionMap" render={props => <MissionMap {...props} />} />
-								<Route path={`${this.props.match.path}/levelthree`} name="LevelThree" render={props => <LevelThree {...props} />} />
-								<Route path={`${this.props.match.path}/levelone`} name="LevelOne" render={props => <LevelOne {...props} />} />
-								<Route path={`${this.props.match.path}/leveltwo`} name="LevelTwo" render={props => <LevelTwo {...props} />} />
+								{this.state.level.map((level, index) => {
+									if (level.levelId === '1') {
+										return (<Route exact path={`${this.props.match.path}/levelone`} name="LevelOne" render={props => <LevelOne {...props} />} />)
+									}
+									else if (level.levelId === '2') {
+										return (<Route exact path={`${this.props.match.path}/leveltwo`} name="LevelTwo" render={props => <LevelTwo {...props} />} />)
+									}
+									else if (level.levelId === '3') {
+										return (<Route exact path={`${this.props.match.path}/levelthree`} name="LevelThree" render={props => <LevelThree {...props} />} />)
+									}
+									else {
+										return (<React.Fragment></React.Fragment>)
+									}
+								})}
+								<Route exact path={`${this.props.match.path}`} name="MissionMap" render={props => <MissionMap {...props} />} />
+								<Route component={Page404} name="Page 404" />
 							</Switch>
 						</Col>
 						<Col xs="1" className="h-100 d-flex justify-content-center align-items-center right-nav">
@@ -214,7 +243,7 @@ export default class Dashboard extends Component {
 							</Collapse>
 						</Col>
 					</Row>
-				</React.Fragment >
+				</React.Fragment>
 			)
 		}
 	}

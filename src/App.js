@@ -28,7 +28,6 @@ export default class App extends Component {
 			<BrowserRouter history={createBrowserHistory()} >
 				<React.Suspense fallback={<Loading />}>
 					<Switch>
-						<Route exact path="/404" name="Page 404" render={props => <Page404 {...props} />} />
 						<Route exact path="/500" name="Page 500" render={props => <Page500 {...props} />} />
 						<Route exact path="/" name="Home" render={props => <Home {...props} />} />
 						<Route path="/dashboard" name="Dashboard" render={props => <Dashboard {...props} />} />
