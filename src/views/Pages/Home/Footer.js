@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import './footer.css';
 import { Container } from "reactstrap";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Button, NavLink, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 class Contact extends React.Component {
 	constructor(props) {
@@ -22,12 +22,12 @@ class Contact extends React.Component {
 	render() {
 		return (
 			<div>
-				<a style={{ color: "#2ea155" }} href="#" onClick={this.toggle}>
+				<NavLink style={{ color: "#2ea155" }} href="#" onClick={this.toggle}>
 					<i
 						id="social-tw"
 						class="fa fa-address-card fa-3x social"
 					/>
-				</a>
+				</NavLink>
 				<Modal centered="true" isOpen={this.state.modal} toggle={this.toggle} className="modal-lg">
 					<ModalHeader>Contact</ModalHeader>
 					<ModalBody>
@@ -63,28 +63,28 @@ export default class Footer extends Component {
 							<div style={{ float: "left" }}>
 								Login 2k19, PSG College of Technology.
 									</div>
-							<div style={{ float: "right" }}>
-								<div style={{float:"left"}}>
+							<div style={{ float: "right" }} class="d-flex justfy-content-end">
+								<div style={{ float: "left" }}>
 									<Contact />
 								</div>
-								<a style={{ color: "#2ea155" }} href="https://www.facebook.com/psg.symposium/">
+								<NavLink style={{ color: "#2ea155" }} href="https://www.facebook.com/psg.symposium/">
 									<i
 										id="social-fb"
 										class="fa fa-facebook-square fa-3x social"
 									/>
-								</a>
-								<a style={{ color: "#2ea155" }} href="https://youtu.be/M4Vv4ZmUzbc">
+								</NavLink>
+								<NavLink style={{ color: "#2ea155" }} href="https://youtu.be/M4Vv4ZmUzbc">
 									<i
 										id="social-gp"
 										class="fa fa-youtube-play fa-3x social"
 									/>
-								</a>
-								<a style={{ color: "#2ea155" }} href="mailto:hackin2019@gmail.com">
+								</NavLink>
+								<NavLink style={{ color: "#2ea155" }} href="mailto:hackin2019@gmail.com">
 									<i
 										id="social-em"
 										class="fa fa-envelope-square fa-3x social"
 									/>
-								</a>
+								</NavLink>
 							</div>
 						</Container>
 					</section>
