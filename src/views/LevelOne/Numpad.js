@@ -7,15 +7,15 @@ var imgstyle = {
 }
 var screenstyle = {
 	position: 'absolute',
-	width: '245px',
+	width: '250px',
 	height: '90px',
-	background: '#ddd',
+    background: 'transparent',
 	border: '0px',
 	color: '#222',
 	padding: '10px',
 	textAlign: 'right',
 	top: '40px',
-	left: '130px',
+	left: '125px',
 	borderRadius: '25px'
 }
 
