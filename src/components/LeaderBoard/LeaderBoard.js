@@ -56,7 +56,7 @@ export default class LeaderBoard extends Component {
 	render() {
 		return (
 			<Container fluid >
-				<Table striped bordered hover>
+				<Table striped bordered hover responsive>
 					<thead>
 						<tr className="active">
 							<th>ID</th>
