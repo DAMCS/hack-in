@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-	Col, Row, Nav, NavItem, NavLink, Modal, ModalHeader, ModalBody, ModalFooter, Button, Collapse
+	Col, Row, Nav, NavItem, NavLink, Modal, ModalHeader, ModalBody, ModalFooter, Button, Collapse, Badge
 } from 'reactstrap';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -30,12 +30,17 @@ library.add(faSatelliteDish, faTable, faSignOutAlt, faAngleLeft, faIdCard, faVid
 export const Tool = class Tip extends React.Component {
 	constructor(props) {
 		super(props);
-
 		this.toggle = this.toggle.bind(this);
 		this.state = {
 			tooltipOpen: false
 		};
 	}
+	toggle() {
+		this.setState({
+			tooltipOpen: !this.state.tooltipOpen
+		});
+	}
+
 }
 
 export default class Dashboard extends Component {
@@ -44,6 +49,7 @@ export default class Dashboard extends Component {
 
 		this.handleLogout = this.handleLogout.bind(this);
 		this.toggle = this.toggle.bind(this);
+		this.toggleAnnouncement = this.toggleAnnouncement.bind(this);
 
 		this.state = {
 			isLoggedIn: true,
@@ -52,26 +58,11 @@ export default class Dashboard extends Component {
 			Announcements: false,
 			Inventory: false,
 			StoryLine: false,
+			announcement: [],
+			seen: 0,
 		}
 	}
-
-	toggle = modal => ev => {
-		ReactGA.modalview('/dashboard/' + modal);
-		this.setState(prevState => ({ [modal]: !prevState[modal] }))
-	}
-
-	handleLogout() {
-		localStorage.removeItem('token');
-		this.setState({ isLoggedIn: false });
-		ReactGA.event({
-			category: 'User',
-			action: 'User Logged Out',
-			time: new Date()
-		});
-		this.props.history.push('/')
-	}
-
-	componentWillMount() {
+	componentDidMount() {
 		let token = localStorage.getItem("token");
 		if (token) {
 			axios({
@@ -85,6 +76,11 @@ export default class Dashboard extends Component {
 					console.log(response.data);
 					this.setState({ isLoggedIn: true })
 				}
+				if (response.data.storySeen === false) {
+					this.setState({
+						StoryLine: true,
+					})
+				}
 			}).catch(error => {
 				this.setState({ isLoggedIn: false })
 			})
@@ -92,12 +88,20 @@ export default class Dashboard extends Component {
 		else {
 			this.setState({ isLoggedIn: false })
 		}
-	}
-
-	toggle() {
-		this.setState({
-			tooltipOpen: !this.state.tooltipOpen
-		});
+		axios.get('/api/announcement', {
+			headers: {
+				"Authorization": "Bearer " + token
+			}
+		})
+			.then((res) => {
+				this.setState({
+					announcement: res.data.data.announcements,
+					seen: res.data.data.seen
+				});
+			})
+			.catch(function (error) {
+				console.log(error);
+			})
 	}
 
 	render() {
@@ -111,17 +115,20 @@ export default class Dashboard extends Component {
 						<Col xs="1" className="h-100 d-flex flex-column left-nav">
 							<Nav pills className="d-flex flex-column justify-content-start">
 								<NavItem>
-									<NavLink onClick={this.toggle('Announcements')}>
-
+									<NavLink onClick={this.toggle('Announcements')} className="d-flex justify-content-center align-items-center">
 										<FontAwesomeIcon icon={faSatelliteDish} size="2x" title="Announcements" />
+										{this.state.announcement.length > this.state.seen ? (<React.Fragment>&nbsp;
+											<Badge color="primary">{this.state.announcement.length - this.state.seen}</Badge>
+										</React.Fragment>) : (<React.Fragment><Badge class="align-self-start text-danger">{this.state.announcement.length - this.state.seen}</Badge>
+										</React.Fragment>)}
 									</NavLink>
 									<Modal centered="true" isOpen={this.state.Announcements} toggle={this.toggle('Announcements')} className="modal-lg">
 										<ModalHeader>Announcements</ModalHeader>
 										<ModalBody className="container-fluid mw-100">
-											<Announcement />
+											<Announcement announcement={this.state.announcement} seen={this.state.seen} />
 										</ModalBody>
 										<ModalFooter>
-											<Button color="danger text-white" onClick={this.toggle('Announcements')}>Close</Button>
+											<Button color="danger text-white" onClick={this.toggleAnnouncement}>Close</Button>
 										</ModalFooter>
 									</Modal>
 								</NavItem>
@@ -211,4 +218,27 @@ export default class Dashboard extends Component {
 			)
 		}
 	}
+
+	toggleAnnouncement() {
+		this.setState({
+			seen: this.state.announcement.length,
+			Announcements: !this.state.Announcements
+		})
+	}
+	toggle = modal => ev => {
+		ReactGA.modalview('/dashboard/' + modal);
+		this.setState(prevState => ({ [modal]: !prevState[modal] }))
+	}
+
+	handleLogout() {
+		localStorage.removeItem('token');
+		this.setState({ isLoggedIn: false });
+		ReactGA.event({
+			category: 'User',
+			action: 'User Logged Out',
+			time: new Date()
+		});
+		this.props.history.push('/')
+	}
+
 }
