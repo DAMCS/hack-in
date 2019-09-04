@@ -5,9 +5,10 @@ import {
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faSatelliteDish, faTable, faSignOutAlt, faAngleLeft, faIdCard, faVideo, faMap, faAngleRight } from '@fortawesome/free-solid-svg-icons'
+import { faSatelliteDish, faTable, faSignOutAlt, faAngleLeft, faIdCard, faVideo, faMap, faAngleRight, faLightbulb } from '@fortawesome/free-solid-svg-icons'
 import { Redirect, Route, Switch } from "react-router-dom";
 import ReactGA from 'react-ga';
+import { toast } from 'react-toastify';
 
 function initializeReactGA() {
 	ReactGA.initialize('UA-104887157-5');
@@ -26,7 +27,7 @@ const Page404 = React.lazy(() => import('views/Pages/Page404'))
 
 const storyLineGIF = require('assets/images/story_line/story.gif');
 
-library.add(faSatelliteDish, faTable, faSignOutAlt, faAngleLeft, faIdCard, faVideo, faAngleRight)
+library.add(faSatelliteDish, faTable, faSignOutAlt, faAngleLeft, faIdCard, faVideo, faAngleRight, faLightbulb)
 
 export const Tool = class Tip extends React.Component {
 	constructor(props) {
@@ -52,6 +53,11 @@ export default class Dashboard extends Component {
 		this.toggle = this.toggle.bind(this);
 		this.toggleAnnouncement = this.toggleAnnouncement.bind(this);
 
+		this.getLevel = this.getLevel.bind(this);
+		this.hintBuy = this.hintBuy.bind(this);
+		this.toggleHint = this.toggleHint.bind(this);
+		this.updateHint = this.updateHint.bind(this);
+
 		this.state = {
 			isLoggedIn: true,
 			LeaderBoard: false,
@@ -62,6 +68,9 @@ export default class Dashboard extends Component {
 			announcement: [],
 			seen: 0,
 			level: [],
+			Hint: false,
+			currentLevel: 0,
+			hints: []
 		}
 	}
 	componentDidMount() {
@@ -177,6 +186,24 @@ export default class Dashboard extends Component {
 										</Modal>
 									</NavLink>
 								</NavItem>
+								<NavItem>
+									<NavLink onClick={this.toggleHint}>
+										<FontAwesomeIcon icon={faLightbulb} size="2x" />
+										<Modal isOpen={this.state.Hint} toggle={this.toggle('Hint')} className="modal-lg">
+											<ModalHeader >Hint</ModalHeader>
+											<ModalBody>
+												{this.state.hints.length !== 0 ? (<React.Fragment></React.Fragment>) : (<div>You haven't bought any hints!</div>)}
+												{this.state.hints.map((object, index) => {
+													return (<React.Fragment><div>{object.hintMsg}<br /></div></React.Fragment>)
+												})}
+											</ModalBody>
+											<ModalFooter>
+												<Button color="danger text-white" onClick={this.toggle('Hint')}>Close</Button>
+												<Button color="success text-white" onClick={this.hintBuy}>Buy</Button>
+											</ModalFooter>
+										</Modal>
+									</NavLink>
+								</NavItem>
 							</Nav>
 							<Nav pills className="d-flex flex-column justify-content-end mt-auto">
 								<NavItem className="d-flex">
@@ -223,8 +250,8 @@ export default class Dashboard extends Component {
 										return (<Route exact path={`${this.props.match.path}/levelthree`} name="LevelThree" render={props => <LevelThree {...props} />} />)
 									}
 								})}
-								<Route exact path={`${this.props.match.path}`} name="MissionMap" render={props => <MissionMap {...props} />} />
-								<Route component={Page404} name="Page 404" />
+								<Route exact path={`${this.props.match.path}`} name="MissionMap" render={props => <MissionMap {...props} getLevel={this.getLevel} />} />
+								<Route component={Page404} />
 							</Switch>
 						</Col>
 						<Col xs="1" className="h-100 d-flex justify-content-center align-items-center right-nav">
@@ -243,6 +270,66 @@ export default class Dashboard extends Component {
 				</React.Fragment>
 			)
 		}
+	}
+
+	updateHint() {
+		let token = localStorage.getItem("token");
+		axios({
+			method: "post",
+			url: "/api/hint",
+			headers: {
+				Authorization: "Bearer " + token
+			},
+			data: {
+				levelId: this.state.currentLevel
+			}
+		}).then(response => {
+			console.log(response.data);
+			this.setState({
+				hints: response.data.data,
+			})
+		}).catch(error => {
+			console.log(error);
+		})
+	}
+	toggleHint() {
+		this.setState({
+			Hint: !this.state.Hint
+		})
+		this.updateHint();
+	}
+
+	getLevel(level) {
+		this.setState({
+			currentLevel: level
+		})
+		console.log(level);
+	}
+
+	hintBuy() {
+		axios({
+			method: "post",
+			url: "/api/hint/buy",
+			headers: {
+				Authorization: "Bearer " + localStorage.getItem('token')
+			},
+			data: {
+				levelId: this.state.currentLevel,
+				hintId: this.state.hints.length + 1
+			}
+		})
+			.then((response) => {
+				if (response.data.status === "Success") {
+					toast.success("Bought a hint!");
+					this.updateHint();
+				}
+				else if (response.data.status === "Error") {
+					toast.error("You cannot buy anymore hints!");
+				}
+			})
+			.catch((err) => {
+				toast.error("Internal Error");
+			})
 	}
 
 	toggleAnnouncement() {
