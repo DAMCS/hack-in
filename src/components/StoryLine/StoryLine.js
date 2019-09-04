@@ -56,14 +56,14 @@ export default class TypedReactDemo extends React.Component {
 
 	render() {
 		return (
-			<div class="wrap d-flex flex-column">
-				<div class="d-flex justify-content-start">
+			<div class="h-100 w-100 wrap d-flex flex-column">
+				<div class="h-50 w-100 d-flex justify-content-start">
 					{this.state.trigger === false ? (<NavLink href="#" onClick={this.toggle.bind(this, false)}><FontAwesomeIcon icon={faPlay} size="2px" /></NavLink>) : (<NavLink href="#" onClick={this.toggle.bind(this, true)}><FontAwesomeIcon icon={faPause} size="2px" /></NavLink>)}
 					<NavLink href="#" onClick={() => this.typed.reset()}><FontAwesomeIcon icon={faReply} size="2px" /></NavLink>&nbsp;&nbsp;
 						</div>
-				<div className="type-wrap">
+				<div class="h-50 w-100">
 					<span
-						style={{ whiteSpace: 'pre' }}
+						style={{ whiteSpace: 'pre' }} class="h-100 w-100"
 						ref={(el) => { this.el = el; }}
 					/>
 				</div>

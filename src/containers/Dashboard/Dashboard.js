@@ -213,17 +213,14 @@ export default class Dashboard extends Component {
 							{/* Routing dashboard containers! */}
 							<Switch>
 								{this.state.level.map((level, index) => {
-									if (level.levelId === '1') {
+									if (level.levelId === 1) {
 										return (<Route exact path={`${this.props.match.path}/levelone`} name="LevelOne" render={props => <LevelOne {...props} />} />)
 									}
-									else if (level.levelId === '2') {
+									else if (level.levelId === 2) {
 										return (<Route exact path={`${this.props.match.path}/leveltwo`} name="LevelTwo" render={props => <LevelTwo {...props} />} />)
 									}
-									else if (level.levelId === '3') {
+									else if (level.levelId === 3) {
 										return (<Route exact path={`${this.props.match.path}/levelthree`} name="LevelThree" render={props => <LevelThree {...props} />} />)
-									}
-									else {
-										return (<React.Fragment></React.Fragment>)
 									}
 								})}
 								<Route exact path={`${this.props.match.path}`} name="MissionMap" render={props => <MissionMap {...props} />} />
