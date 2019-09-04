@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import ReactGA from 'react-ga';
-import Room1 from './Lift3.png';
-import Room3d from './room3d.png';
+import Door from './Door.png';
+import RoomOne from './levelone.jpg';
 import Numpad from './Numpad.js';
 import NumpadReveal from './NumpadReveal';
 
@@ -55,9 +55,9 @@ class DoorRoom extends Component {
 		initializeReactGA();
 		return (
 			<div class="h-100 w-100 ">
-				<img src={Room1} alt='Room One' useMap='#image-map' />
+				<img src={Door} alt='Room One' useMap='#image-map' />
 				<map name="image-map">
-					<area alt="numbed" data-draggable="target" title="numbed" coords="611,286,656,375" shape="rect" onClick={this.toggleNumpad} />
+					<area alt="numpad" data-draggable="target" title="numpad" coords="608,424,640,476" shape="rect" onClick={this.toggleNumpad} />
 				</map>
 				<Modal isOpen={this.state.modal === 1} toggle={this.closeModal} className={this.props.className}>
 					<ModalHeader toggle={this.closeModal}>Enter the Passcode</ModalHeader>
@@ -96,7 +96,10 @@ export default class LevelOne extends Component {
 		if (this.state.door === false) {
 			return (
 				<div className='levelOne'>
-					<img src={Room3d} alt='Room One' onClick={this.toggle} />
+					<img src={RoomOne} alt='Room One' useMap='#image-door' />
+					<map name="image-door">
+						<area alt="door" title="door" coords="1061,321,1064,595,1133,630,1131,310" shape="poly" onClick={this.toggle} />
+					</map>
 				</div>
 			)
 		} else {
