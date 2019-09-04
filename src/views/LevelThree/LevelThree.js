@@ -144,11 +144,11 @@ export default class LevelThree extends Component {
 	render() {
 		initializeReactGA();
 		return (
-			<React.Fragment >
+			<React.Fragment>
 				<div class="h-100 w-100 d-flex flex-column justify-content-center align-items-center">
-					<Row class="h-25 w-100 d-flex justify-content-center align-self-center">
+					<Row class="h-25 w-100 d-flex justify-content-center">
 						<div class="d-flex justify-content-center align-items-center"><FontAwesomeIcon icon={faDesktop} size="5x" /></div>
-						<div class="d-flex justify-content-center "><DataFlowModal handleCheck={this.handleCheck} /></div>
+						<div class="d-flex justify-content-center align-items-center"><DataFlowModal handleCheck={this.handleCheck} /></div>
 						<div class="d-flex justify-content-center align-items-center"><FontAwesomeIcon icon={faServer} size="5x" /></div>
 					</Row>
 					<Row class="h-100 w-100 d-flex">

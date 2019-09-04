@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import './LevelThree.css';
+import './LevelThree.css';
 
 
 export default class DataFlow extends Component {
@@ -15,9 +15,8 @@ export default class DataFlow extends Component {
 		var ctx = c.getContext("2d");
 
 		//making the canvas full screen
-		c.height = "50";
-		c.width = "1000";
-
+		c.height = 50;
+		c.width = 600;
 		//binary characters - taken from the unicode charset
 		var binary = "10";
 		//converting the string into an array of single characters
@@ -64,8 +63,8 @@ export default class DataFlow extends Component {
 
 	render() {
 		return (
-			<React.Fragment >
-				<canvas id="c" ref={this.myRef} class="w-100 h-100" ></canvas>
+			<React.Fragment>
+				<canvas id="c" ref={this.myRef} ></canvas>
 			</React.Fragment>
 		)
 	}

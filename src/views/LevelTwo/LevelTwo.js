@@ -14,7 +14,7 @@ export default class LevelTwo extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			pass: '1'
+			pass: "",
 		}
 		this.handleChange = this.handleChange.bind(this);
 	}
