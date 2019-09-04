@@ -67,19 +67,19 @@ export default class Footer extends Component {
 								<div style={{ float: "left" }}>
 									<Contact />
 								</div>
-								<NavLink style={{ color: "#2ea155" }} href="https://www.facebook.com/psg.symposium/">
+								<NavLink style={{ color: "#2ea155" }} href="https://www.facebook.com/psg.symposium/" target= "_blank">
 									<i
 										id="social-fb"
 										class="fa fa-facebook-square fa-3x social"
 									/>
 								</NavLink>
-								<NavLink style={{ color: "#2ea155" }} href="https://youtu.be/M4Vv4ZmUzbc">
+								<NavLink style={{ color: "#2ea155" }} href="https://youtu.be/M4Vv4ZmUzbc" target= "_blank">
 									<i
 										id="social-gp"
 										class="fa fa-youtube-play fa-3x social"
 									/>
 								</NavLink>
-								<NavLink style={{ color: "#2ea155" }} href="mailto:hackin2019@gmail.com">
+								<NavLink style={{ color: "#2ea155" }} href="mailto:hackin2019@gmail.com" target= "_blank">
 									<i
 										id="social-em"
 										class="fa fa-envelope-square fa-3x social"
