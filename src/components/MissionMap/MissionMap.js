@@ -20,6 +20,7 @@ class TooltipItem extends React.Component {
 	}
 
 	handleClick(eventNumber) {
+		this.props.getLevel(eventNumber);
 		switch (eventNumber) {
 			case 1:
 				this.props.history.push('/dashboard/levelone');
