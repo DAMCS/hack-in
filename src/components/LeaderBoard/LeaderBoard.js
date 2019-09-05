@@ -10,30 +10,6 @@ export default class LeaderBoard extends Component {
 		this.state = {display_name: "", display_value: "", data: [] };
 	}
 	componentDidMount() {
-
-		let dummy_data = {
-			display_name: "Name/Level Progressed",
-			display_value: "Points/Completed count",
-			data: [
-				{
-					"leader_id": 1,
-					"leader_name": "Surya",
-					"leader_pts": 1000
-				},
-				{
-					"leader_id": 2,
-					"leader_name": "Prasath",
-					"leader_pts": 800
-				}, {
-					"leader_id": 3,
-					"leader_name": "Tester",
-					"leader_pts": 700
-				}
-			]
-		}
-
-		this.setState(dummy_data);
-		var token = localStorage.getItem('token');
 		axios.get('/api/leaderboard',
 			{
 				headers: {
@@ -62,10 +38,10 @@ export default class LeaderBoard extends Component {
 					}
 				</td>
 				<td>
-					{object.username}
+					{object.name_id}
 				</td>
 				<td>
-					{object.score}
+					{object.level_pts}
 				</td>
 			</tr>
 			);
