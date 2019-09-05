@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import TableRow from './TableRow';
 import { Container, Table } from 'reactstrap';
 import axios from 'axios';
 
@@ -19,9 +18,9 @@ export default class LeaderBoard extends Component {
 		).then(response => {
 			console.log(response.data);
 				this.setState({
-					data : response.data.data,
 					display_name : response.data.name,
 					display_value : response.data.count,
+					data : response.data.data,
 				})	
 			})
 			.catch(function (error) {
@@ -32,11 +31,6 @@ export default class LeaderBoard extends Component {
 		return this.state.data.map(function (object, i) {
 			return (
 				<tr>
-				<td>
-					{
-						i+1
-					}
-				</td>
 				<td>
 					{object.name_id}
 				</td>
@@ -54,9 +48,8 @@ export default class LeaderBoard extends Component {
 				<Table striped bordered hover responsive>
 					<thead>
 						<tr className="active">
-							<th>ID</th>
-							<th>USERNAME</th>
-							<th>SCORE</th>
+							<th>{this.state.display_name}</th>
+							<th>{this.state.display_value}</th>
 						</tr>
 					</thead>
 					<tbody>
