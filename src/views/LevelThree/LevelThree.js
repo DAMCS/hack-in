@@ -6,9 +6,8 @@ import Typed from 'typed.js';
 import { toast } from 'react-toastify'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faServer, faDesktop } from '@fortawesome/free-solid-svg-icons'
-
 import DataFlow from './DataFlow.js'
-
+import axios from 'axios';
 function initializeReactGA() {
 	ReactGA.initialize('UA-104887157-5');
 	ReactGA.pageview('/levelthree');
@@ -130,6 +129,7 @@ export default class LevelThree extends Component {
 		}
 		this.handleChange = this.handleChange.bind(this);
 		this.handleCheck = this.handleCheck.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 	handleChange(event) {
 		this.setState({
@@ -140,6 +140,29 @@ export default class LevelThree extends Component {
 		this.setState({
 			check: true
 		})
+	}
+	handleSubmit(event){
+		axios({
+			method: "post",
+			url: "/api/level/completion",
+			headers: {
+				Authorization: "Bearer " + localStorage.getItem('token')
+			},
+			data: {
+				levelId: 3,
+				password: this.state.pass
+			}
+		}).then(response => {
+			if (response.data.status === "Success") {
+				toast.success(response.data.message);
+				this.props.history.push('/dashboard/');
+			}
+		})
+		.catch(function (error) {
+			console.log(error);
+			toast.error('You entered the wrong code');
+		});
+		event.preventDefault();
 	}
 	render() {
 		initializeReactGA();
@@ -165,11 +188,12 @@ export default class LevelThree extends Component {
 							/>
 							<FontAwesomeIcon icon={faDesktop} size="5x" />
 							<div>
-								{this.state.check === true ? <TypedReact content='Your passcode is 01010010100' className="p-4 h-100 w-100" /> : ''}
+								{this.state.check === true ? <TypedReact content='Your passcode is 11110 00001 00011 00011 1 11000 00000 1' className="p-4 h-100 w-100" /> : ''}
 							</div>
-							<Form className="p-4 h-100 w-100">
+							<Form className="p-4 h-100 w-100" onSubmit={this.handleSubmit}>
 								<FormGroup className="w-100">
-									<Input className="w-100" value={this.state.pass} onChange={this.handleChange} type="password" name="pass" placeholder="passcode" />
+									<Input className="w-100" value={this.state.pass} onChange={this.handleChange} type="password" name="pass" placeholder="passcode" />	<br />								
+									<Button color="success text-white">Submit</Button>
 								</FormGroup>
 							</Form>
 						</Col>
