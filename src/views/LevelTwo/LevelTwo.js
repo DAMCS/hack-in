@@ -5,12 +5,14 @@ import ReactTerminal from 'react-terminal-component';
 import { EmulatorState, FileSystem, OutputFactory, Outputs, History, defaultCommandMapping, CommandMapping } from 'javascript-terminal';
 import { Form, FormGroup, Input } from 'reactstrap';
 import ReactGA from 'react-ga';
+import RoomTwo from './leveltwo.jpg';
+const LevelOne = React.lazy(() => import('views/LevelOne'));
 
 function initializeReactGA() {
 	ReactGA.initialize('UA-104887157-5');
 	ReactGA.pageview('/leveltwo');
 }
-export default class LevelTwo extends Component {
+class Terminal extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -50,13 +52,13 @@ export default class LevelTwo extends Component {
 				'/bin/passwd': { content: 'You are not allowed to access this file' },
 				'/etc': {},
 				'/Network': {},
-				'/NetWork/netstat': { content: 'You are not allowed to access this file' },
+				'/Network/netstat': { content: 'You are not allowed to access this file' },
 				'/OS': {},
 				'/OS/boot': { content: 'Contains boot information' },
 				'/home/README': { content: 'This is a text file' },
 				'/home/users/hacker': {},
 				'/home/user/hacker/passwd': { content: 'You fool!!!' },
-				'/etc/passwd': { content: "Does'nt work like unix :)" }
+				'/etc/passwd': { content: "A*&^vdcvW$" }
 			}),
 			'commandMapping': CommandMapping.create({
 				...defaultCommandMapping,
@@ -150,5 +152,44 @@ export default class LevelTwo extends Component {
 				</div>
 			</React.Fragment>
 		);
+	}
+}
+
+export default class LevelTwo extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			terminal: false
+		};
+
+		this.toggle = this.toggle.bind(this);
+	}
+
+	toggle() {
+		this.setState(prevState => ({
+			terminal: !prevState.terminal
+		}));
+	}
+
+	render() {
+		if (this.state.terminal === false) {
+			return (
+				<div >
+					<img src={RoomTwo} alt='Room One' useMap='#image-door' />
+					<map name="image-door">
+						{/* <area alt="door" title="door" coords="825,279,825,512,878,541,877,271" shape="poly" onClick={this.toggle} /> */}
+						{/* <area alt="door2" title="door2" coords="373,309,494,520" shape="rect" /> */}
+						<area alt="terminal" title="terminal" coords="581,433,622,457" shape="rect" onClick={this.toggle} />
+						<area alt="door1" title="door1" coords="72,308,74,615,118,578,116,310" shape="poly" />
+					</map>
+				</div>
+			)
+		} else {
+			return (
+				<div>
+					<Terminal onClick={this.toggle} />
+				</div>
+			)
+		}
 	}
 }

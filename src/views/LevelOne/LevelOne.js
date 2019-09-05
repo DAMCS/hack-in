@@ -98,7 +98,7 @@ export default class LevelOne extends Component {
 				<div className='levelOne'>
 					<img src={RoomOne} alt='Room One' useMap='#image-door' />
 					<map name="image-door">
-						<area alt="door" title="door" coords="1061,321,1064,595,1133,630,1131,310" shape="poly" onClick={this.toggle} />
+						<area alt="door" title="door" coords="825,279,825,512,878,541,877,271" shape="poly" onClick={this.toggle} />
 					</map>
 				</div>
 			)
