@@ -1,5 +1,8 @@
 @charset "UTF-8";
-@import url("https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap");
+@font-face {
+  font-family: "PressStart2P";
+  src: url("assets/fonts/PressStart2P.ttf") format("truetype");
+}
 
 @import "variables";
 @import "toastContainer";
