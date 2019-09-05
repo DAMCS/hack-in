@@ -11,7 +11,7 @@
 	"bugs": {
 		"url": "https://gitlab.com:aakashhemadri/hack-in/issues"
 	},
-	"proxy": "http://hackinpsg.ml:8000/",
+	"homepage": "https://hackinpsg.ml",
 	"dependencies": {
 		"@elsdoerfer/react-arrow": "^1.0.3",
 		"@fortawesome/fontawesome-svg-core": "^1.2.22",
@@ -44,7 +44,8 @@
 	},
 	"scripts": {
 		"start": "react-scripts start",
-		"build": "react-scripts build && javascript-obfuscator ./build --output . --config ./javascript-obfuscator.json",
+		"prebuild": "rm -rf ./build",
+		"build": "react-scripts build && javascript-obfuscator ./build --output . --config ./javascript-obfuscator.js",
 		"postbuild": "rm -rf build/**/**/*.map",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject"
