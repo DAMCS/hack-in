@@ -142,7 +142,7 @@ export default class Dashboard extends Component {
 						<Col xs="1" className="h-100 d-flex flex-column left-nav">
 							<Nav pills className="d-flex flex-column justify-content-start">
 								<NavItem>
-									<NavLink onClick={this.toggle('Announcements')} className="d-flex justify-content-start align-items-center">
+									<NavLink href="#" onClick={this.toggle('Announcements')} className="d-flex justify-content-start align-items-center">
 										<FontAwesomeIcon icon={faSatelliteDish} size="2x" title="Announcements" />
 										{this.state.announcement.length > this.state.seen ? (<React.Fragment>&nbsp;
 											<Badge color="primary">{this.state.announcement.length - this.state.seen}</Badge>
@@ -159,7 +159,7 @@ export default class Dashboard extends Component {
 									</Modal>
 								</NavItem>
 								<NavItem>
-									<NavLink onClick={this.toggle("LeaderBoard")} className="d-flex justify-content-start align-items-center">
+									<NavLink href="#" onClick={this.toggle("LeaderBoard")} className="d-flex justify-content-start align-items-center">
 										<FontAwesomeIcon icon={faTable} size="2x" title="Leaderboard" />
 										<Modal centered="true" isOpen={this.state.LeaderBoard} toggle={this.toggle('LeaderBoard')} className="modal-lg">
 											<ModalHeader>LeaderBoard</ModalHeader>
@@ -173,7 +173,7 @@ export default class Dashboard extends Component {
 									</NavLink>
 								</NavItem>
 								<NavItem>
-									<NavLink onClick={this.toggle('StoryLine')} className="d-flex justify-content-start align-items-center">
+									<NavLink href="#" onClick={this.toggle('StoryLine')} className="d-flex justify-content-start align-items-center">
 										<FontAwesomeIcon icon={faVideo} size="2x" title="StoryLine" />
 										<Modal isOpen={this.state.StoryLine} toggle={this.toggle('StoryLine')} className="modal-lg">
 											<ModalHeader> <img alt="Story" width="100%" src={storyLineGIF} /></ModalHeader>
@@ -187,7 +187,7 @@ export default class Dashboard extends Component {
 									</NavLink>
 								</NavItem>
 								<NavItem>
-									<NavLink onClick={this.toggleHint}>
+									<NavLink href="#" onClick={this.toggleHint}>
 										<FontAwesomeIcon icon={faLightbulb} size="2x" />
 										<Modal isOpen={this.state.Hint} toggle={this.toggle('Hint')} className="modal-lg">
 											<ModalHeader >Hint</ModalHeader>
@@ -207,12 +207,12 @@ export default class Dashboard extends Component {
 							</Nav>
 							<Nav pills className="d-flex flex-column justify-content-end mt-auto">
 								<NavItem className="d-flex">
-									<NavLink onClick={() => { this.props.history.push('/dashboard') }}>
+									<NavLink href="#" onClick={() => { this.props.history.push('/dashboard') }}>
 										<FontAwesomeIcon icon={faMap} size="2x" title="Lab Map" />
 									</NavLink>
 								</NavItem>
 								<NavItem className="d-flex">
-									<NavLink onClick={this.toggle('Contact')}>
+									<NavLink href="#" onClick={this.toggle('Contact')}>
 										<FontAwesomeIcon icon={faIdCard} size="2x" title="Contact" />
 										<Modal centered="true" isOpen={this.state.Contact} toggle={this.toggle('Contact')} className="modal-lg">
 											<ModalHeader>Contact</ModalHeader>
@@ -230,7 +230,7 @@ export default class Dashboard extends Component {
 									</NavLink>
 								</NavItem>
 								<NavItem className="d-flex ">
-									<NavLink onClick={this.handleLogout}>
+									<NavLink href="#" onClick={this.handleLogout}>
 										<FontAwesomeIcon icon={faSignOutAlt} size="2x" title="Sign Out" />
 									</NavLink>
 								</NavItem>
@@ -257,7 +257,7 @@ export default class Dashboard extends Component {
 						<Col xs="1" className="h-100 d-flex justify-content-center align-items-center right-nav">
 							<Nav pills>
 								<NavItem >
-									<NavLink onClick={this.toggle('Inventory')}>
+									<NavLink href="#" onClick={this.toggle('Inventory')}>
 										<FontAwesomeIcon icon={this.state.Inventory ? faAngleRight : faAngleLeft} size="2x" />
 									</NavLink>
 								</NavItem>

@@ -28,17 +28,15 @@ class SignUp extends Component {
 		});
 	}
 	handleSubmit(event) {
-		let passCheck = /^[A-Za-z]\w{7,30}$/;
+		let passCheck = /^[A-Za-z0-9]\w{7,30}$/;
 		if (!this.state.password.match(passCheck)) {
-			toast.warn("Password dosent meet the requirements");
+			toast.warn("Password should be a combination of letters and numbers greater than 7 characters!");
 		} else if (this.state.password !== this.state.confirmPassword) {
 			toast.warn("Password Mismatch");
-		} else if (
-			!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(
-				this.state.email
-			)
-		) {
-			toast.error("Failed to sign up!");
+		} else if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(this.state.email)) {
+			toast.warn("Invalid e-mail id!");
+		} else if (this.state.phone.length < 10) {
+			toast.warn("Invalid phone number!");
 		} else {
 			axios({
 				method: "post",
@@ -62,11 +60,11 @@ class SignUp extends Component {
 						});
 						ReactGA.set({ userId: this.state.email });
 						this.props.history.push("/dashboard");
-						// this.props.onSubmitToggle();
 					}
 				})
-				.catch(function (error) {
-					toast.error("Failed to sign up!");
+				.catch((err) => {
+					if (err.data.status === "Error")
+						toast.error("Sign up failed! Please contact hack[in] coordinator!");
 				});
 		}
 		event.preventDefault();
