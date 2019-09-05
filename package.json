@@ -44,7 +44,8 @@
 	},
 	"scripts": {
 		"start": "react-scripts start",
-		"build": "react-scripts build",
+		"build": "react-scripts build && javascript-obfuscator ./build --output . --config ./javascript-obfuscator.json",
+		"postbuild": "rm -rf build/**/**/*.map",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject"
 	},
@@ -64,6 +65,8 @@
 		]
 	},
 	"devDependencies": {
-		"npm-check": "^5.9.0"
+		"javascript-obfuscator": "^0.18.1",
+		"npm-check": "^5.9.0",
+		"react-native-obfuscating-transformer": "^1.0.0"
 	}
 }

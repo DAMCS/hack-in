@@ -120,3 +120,5 @@ typings/
 build/
 
 .vscode/
+
+dist/
