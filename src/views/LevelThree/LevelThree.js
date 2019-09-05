@@ -160,8 +160,8 @@ export default class LevelThree extends Component {
 		})
 		.catch(function (error) {
 			console.log(error);
-			toast.error('You entered the wrong code');
-		});
+			toast.error(error.response.data.message);
+		});	
 		event.preventDefault();
 	}
 	render() {
@@ -192,9 +192,9 @@ export default class LevelThree extends Component {
 							</div>
 							<Form className="p-4 h-100 w-100" onSubmit={this.handleSubmit}>
 								<FormGroup className="w-100">
-									<Input className="w-100" value={this.state.pass} onChange={this.handleChange} type="password" name="pass" placeholder="passcode" />	<br />								
-									<Button color="success text-white">Submit</Button>
+									<Input className="w-100" value={this.state.pass} onChange={this.handleChange} type="password" name="pass" placeholder="passcode" />	<br />
 								</FormGroup>
+								<Button color="success text-white">Submit</Button>
 							</Form>
 						</Col>
 					</Row>
