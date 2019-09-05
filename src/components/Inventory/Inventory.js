@@ -39,10 +39,10 @@ export default class Inventory extends React.Component {
 			<React.Fragment>
 				<ListGroup data-draggable="target" className="p-2">
 					<ListGroupItem data-draggable="target" className="p-2 inventory">
-						<img width="50px" alt="" height="50px" src={thermal} />
+						<img width="50px" alt="" id="numpad" height="50px" src={thermal} />
 					</ListGroupItem>
 					<ListGroupItem data-draggable="target" className="p-2 inventory">
-						<img width="50px" alt="" height="50px" src={usb} />
+						<img width="50px" alt="" id="terminal" height="50px" src={usb} />
 					</ListGroupItem>
 					<ListGroupItem data-draggable="target" className="p-2 inventory">
 						<img width="50px" alt="" height="50px" src={thermal} />
