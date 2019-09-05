@@ -62,13 +62,13 @@ class DoorRoom extends Component {
 				<Modal isOpen={this.state.modal === 1} toggle={this.closeModal} className={this.props.className}>
 					<ModalHeader toggle={this.closeModal}>Enter the Passcode</ModalHeader>
 					<ModalBody>
-						<Numpad />
+						<Numpad pushBack={this.props.pushBack}/>
 					</ModalBody>
 				</Modal>
 				<Modal isOpen={this.state.modal === 2} toggle={this.closeModal} className={this.props.className}>
 					<ModalHeader toggle={this.closeModal}>Enter the Passcode</ModalHeader>
 					<ModalBody>
-						<NumpadReveal />
+						<NumpadReveal pushBack={this.props.pushBack}/>
 					</ModalBody>
 				</Modal>
 			</div>
@@ -84,12 +84,18 @@ export default class LevelOne extends Component {
 		};
 
 		this.toggle = this.toggle.bind(this);
+		this.pushBack = this.toggle.bind(this);
 	}
 
 	toggle() {
 		this.setState(prevState => ({
 			door: !prevState.door
 		}));
+	}
+
+	pushBack(){
+		console.log('call pushback')
+		this.props.history.push('/dashboard/');
 	}
 
 	render() {
@@ -105,7 +111,7 @@ export default class LevelOne extends Component {
 		} else {
 			return (
 				<div className='levelOne'>
-					<DoorRoom onClick={this.toggle} />
+					<DoorRoom onClick={this.toggle} pushBack={this.pushBack}/>
 				</div>
 			)
 		}

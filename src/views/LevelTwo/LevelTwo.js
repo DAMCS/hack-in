@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { Row, Col } from 'reactstrap';
 import Typed from 'typed.js';
 import ReactTerminal from 'react-terminal-component';
-import { EmulatorState, FileSystem, OutputFactory, Outputs, History, defaultCommandMapping, CommandMapping } from 'javascript-terminal';
+import { EmulatorState, FileSystem, OutputFactory, Outputs, History, defaultCommandMapping, CommandMapping ,Button} from 'javascript-terminal';
 import { Form, FormGroup, Input } from 'reactstrap';
 import ReactGA from 'react-ga';
-import RoomTwo from './leveltwo.jpg';
-const LevelOne = React.lazy(() => import('views/LevelOne'));
+import { toast } from 'react-toastify';
+import axios from 'axios';
 
 function initializeReactGA() {
 	ReactGA.initialize('UA-104887157-5');
@@ -19,6 +19,7 @@ class Terminal extends Component {
 			pass: "",
 		}
 		this.handleChange = this.handleChange.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 	handleChange(event) {
 		const target = event.target;
@@ -43,6 +44,28 @@ class Terminal extends Component {
 	componentWillUnmount() {
 		this.typed.destroy();
 	}
+	handleSubmit(){
+		axios({
+			method: "post",
+			url: "/api/level/completion",
+			headers: {
+				Authorization: "Bearer " + localStorage.getItem('token')
+			},
+			data: {
+				levelId: 3,
+				password: this.state.pass
+			}
+		}).then(response => {
+			if (response.data.status === "Success") {
+				toast.success(response.data.message);
+				this.props.history.push('/dashboard/');
+			}
+		})
+			.catch(function (error) {
+				console.log(error);
+				toast.error('You entered the wrong code');
+			});
+	}
 	render() {
 		initializeReactGA();
 		let customState = EmulatorState.create({
@@ -58,7 +81,7 @@ class Terminal extends Component {
 				'/home/README': { content: 'This is a text file' },
 				'/home/users/hacker': {},
 				'/home/user/hacker/passwd': { content: 'You fool!!!' },
-				'/etc/passwd': { content: "A*&^vdcvW$" }
+				'/etc/passwd': { content: "Does'nt work like unix :) =>" }
 			}),
 			'commandMapping': CommandMapping.create({
 				...defaultCommandMapping,
@@ -147,6 +170,7 @@ class Terminal extends Component {
 									<Input value={this.state.pass} onChange={this.handleChange} type="password" name="pass" placeholder="passcode" />
 								</FormGroup>
 							</Form>
+							{/* <Button color="success text-white">Submit</Button> */}
 						</Col>
 					</Row>
 				</div>
