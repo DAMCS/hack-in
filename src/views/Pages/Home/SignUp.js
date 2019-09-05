@@ -35,7 +35,7 @@ class SignUp extends Component {
 			toast.warn("Password Mismatch");
 		} else if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(this.state.email)) {
 			toast.warn("Invalid e-mail id!");
-		} else if (this.state.phone.length < 10) {
+		} else if (this.state.phone.length !== 10) {
 			toast.warn("Invalid phone number!");
 		} else {
 			axios({
