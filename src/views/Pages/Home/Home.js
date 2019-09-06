@@ -10,7 +10,7 @@ const SignUp = React.lazy(() => import("./SignUp"));
 const Footer = React.lazy(() => import("./Footer"));
 
 function initializeReactGA() {
-	ReactGA.initialize('UA-104887157-5');
+	ReactGA.initialize('process.env.GA_ID');
 	ReactGA.pageview('/homepage');
 }
 

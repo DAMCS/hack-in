@@ -5,13 +5,12 @@ import Arrow from '@elsdoerfer/react-arrow';
 import Typed from 'typed.js';
 import { toast } from 'react-toastify'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faServer, faDesktop } from '@fortawesome/free-solid-svg-icons'
+import { faServer, faDesktop, faChevronCircleLeft } from '@fortawesome/free-solid-svg-icons'
 import RoomThree from 'assets/images/level3/levelthree.jpg'
-
 import DataFlow from './DataFlow.js'
 import axios from 'axios';
 function initializeReactGA() {
-	ReactGA.initialize('UA-104887157-5');
+	ReactGA.initialize('process.env.GA_ID');
 	ReactGA.pageview('/levelthree');
 }
 
@@ -126,21 +125,74 @@ class Transmission extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			pass: "",
 			check: false
 		}
-		this.handleChange = this.handleChange.bind(this);
 		this.handleCheck = this.handleCheck.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
-	}
-	handleChange(event) {
-		this.setState({
-			[event.target.name]: event.target.value
-		});
 	}
 	handleCheck() {
 		this.setState({
 			check: true
+		})
+	}
+	render() {
+		initializeReactGA();
+		return (
+			<React.Fragment>
+				<div class="h-100 w-100 d-flex flex-column justify-content-center align-items-center">
+					<Row class="h-25 w-100 d-flex justify-content-center">
+						<div class="d-flex justify-content-center align-items-center"><FontAwesomeIcon icon={faDesktop} size="5x" /></div>
+						<div class="d-flex justify-content-center align-items-center"><DataFlowModal handleCheck={this.handleCheck} /></div>
+						<div class="d-flex justify-content-center align-items-center"><FontAwesomeIcon icon={faServer} size="5x" /></div>
+					</Row>
+					<Row class="h-100 w-100 d-flex">
+						<Col className="h-100 w-100 d-flex flex-column justify-content-center align-items-center">
+							<Arrow
+								angle={0}
+								length={40}
+								style={{
+									width: '70px',
+								}}
+								arrowHeadFilled={true}
+								color='#00de4a'
+								lineDashed="0.9"
+							/>
+							<FontAwesomeIcon icon={faDesktop} size="5x" />
+							<div className="p-2">
+								{this.state.check === true ? <TypedReact content='Your passcode is 11110 00001 00011 00011 1 11000 00000 1' className="p-4 h-100 w-100" /> : ''}
+							</div>
+						</Col>
+					</Row>
+				</div>
+			</React.Fragment>
+		)
+	}
+}
+
+export default class LevelThree extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			door: false,
+			modal: false,
+			pass: ''
+		};
+		this.handleSubmit = this.handleSubmit.bind(this);
+		this.toggle = this.toggle.bind(this);
+		this.toggleModal = this.toggleModal.bind(this);
+		this.handleChange = this.handleChange.bind(this);
+	}
+	componentDidMount() {
+		this.props.changeNavigation(3);
+	}
+
+	toggle() {
+		this.setState(prevState => ({
+			door: !prevState.door
+		}));
+	}
+	toggleModal() {
+		this.setState({
+			modal: !this.state.modal
 		})
 	}
 	handleSubmit(event) {
@@ -166,65 +218,11 @@ class Transmission extends Component {
 			});
 		event.preventDefault();
 	}
-	render() {
-		initializeReactGA();
-		return (
-			<React.Fragment>
-				<div class="h-100 w-100 d-flex flex-column justify-content-center align-items-center">
-					<Row class="h-25 w-100 d-flex justify-content-center">
-						<div class="d-flex justify-content-center align-items-center"><FontAwesomeIcon icon={faDesktop} size="5x" /></div>
-						<div class="d-flex justify-content-center align-items-center"><DataFlowModal handleCheck={this.handleCheck} /></div>
-						<div class="d-flex justify-content-center align-items-center"><FontAwesomeIcon icon={faServer} size="5x" /></div>
-					</Row>
-					<Row class="h-100 w-100 d-flex">
-						<Col className="h-100 w-100 d-flex flex-column justify-content-center align-items-center">
-							<Arrow
-								angle={0}
-								length={40}
-								style={{
-									width: '70px',
-								}}
-								arrowHeadFilled={true}
-								color='#00de4a'
-								lineDashed="0.9"
-							/>
-							<FontAwesomeIcon icon={faDesktop} size="5x" />
-							<div>
-								{this.state.check === true ? <TypedReact content='Your passcode is 11110 00001 00011 00011 1 11000 00000 1' className="p-4 h-100 w-100" /> : ''}
-							</div>
-							<Form className="p-4 h-100 w-100" onSubmit={this.handleSubmit}>
-								<FormGroup className="w-100">
-									<Input className="w-100" value={this.state.pass} onChange={this.handleChange} type="password" name="pass" placeholder="passcode" />  <br />
-								</FormGroup>
-								<Button color="success text-white">Submit</Button>
-							</Form>
-						</Col>
-					</Row>
-				</div>
-			</React.Fragment>
-		)
+	handleChange(event) {
+		this.setState({
+			[event.target.name]: event.target.value
+		});
 	}
-}
-
-export default class LevelThree extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			door: false
-		};
-
-		this.toggle = this.toggle.bind(this);
-	}
-	componentDidMount() {
-		this.props.changeNavigation(3);
-	}
-
-	toggle() {
-		this.setState(prevState => ({
-			door: !prevState.door
-		}));
-	}
-
 	render() {
 		if (this.state.door === false) {
 			return (
@@ -232,13 +230,29 @@ export default class LevelThree extends Component {
 					<img src={RoomThree} alt='Room Three' useMap='#image-door' />
 					<map name="image-door">
 						<area alt="router" title="router" coords="286,440,309,457" shape="rect" onClick={this.toggle} />
+						<area alt="door" title="door" coords="625,309,745,521" shape="rect" onClick={this.toggleModal} />
 					</map>
+					<Modal isOpen={this.state.modal} toggle={this.toggleModal}>
+						<ModalHeader>Enter the Passcode</ModalHeader>
+						<ModalBody>
+							<Form onSubmit={this.handleSubmit}>
+								<FormGroup>
+									<Input value={this.state.pass} onChange={this.handleChange} type="password" name="pass" placeholder="passcode" />
+								</FormGroup>
+								<Button color="success" type="submit" className="success text-white">Submit</Button>&nbsp;
+								<Button color="danger" onClick={this.toggleModal} className="danger text-white">Close</Button>
+							</Form>
+						</ModalBody>
+					</Modal>
 				</div>
 			)
 		} else {
 			return (
 				<div className='levelOne'>
 					<Transmission onClick={this.toggle} />
+					<NavLink className="back-button" onClick={() => { this.setState({ door: false }) }}>
+						<FontAwesomeIcon icon={faChevronCircleLeft} size="1x" title="Back"></FontAwesomeIcon>
+					</NavLink>
 				</div>
 			)
 		}
