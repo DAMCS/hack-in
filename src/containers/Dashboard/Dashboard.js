@@ -255,8 +255,10 @@ export default class Dashboard extends Component {
 									else if (level.levelId === 3) {
 										return (<Route exact path={`${this.props.match.path}/levelthree`} key="3" name="LevelThree" render={props => <LevelThree {...props} changeNavigation={this.changeNavigation} />} />)
 									}
+									else {
+										return <Route exact path={`${this.props.match.path}`} name="MissionMap" key="0" render={props => <MissionMap {...props} getLevel={this.getLevel} changeNavigation={this.changeNavigation} />} />
+									}
 								})}
-								<Route exact path={`${this.props.match.path}`} name="MissionMap" key="0" render={props => <MissionMap {...props} getLevel={this.getLevel} changeNavigation={this.changeNavigation} />} />
 								<Route key="-1" component={Page404} />
 							</Switch>
 						</Col>
