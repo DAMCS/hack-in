@@ -31,7 +31,7 @@ class Contact extends React.Component {
 					<ModalBody>
 						<div class="p-2 mx-auto">
 							Co-ordinator : Surya Prasath S<br />
-							Email : hackin2019@gmail.com<br />
+							Email : hackinpsg2019@gmail.com<br />
 							Phone : 9791745977<br />
 						</div>
 					</ModalBody>
@@ -70,7 +70,7 @@ export default class Footer extends Component {
 										class="fa fa-youtube-play fa-3x social"
 									/>
 								</NavLink>
-								<NavLink style={{ color: "#2ea155" }} href="mailto:hackin2019@gmail.com" target="_blank" rel="noreferrer">
+								<NavLink style={{ color: "#2ea155" }} href="mailto:hackinpsg2019@gmail.com" target="_blank" rel="noreferrer">
 									<i
 										id="social-em"
 										class="fa fa-envelope-square fa-3x social"

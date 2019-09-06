@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { Modal, ModalHeader, ModalBody } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody,NavLink } from 'reactstrap';
 import ReactGA from 'react-ga';
 import Door from 'assets/images/level1/Door.png';
 import RoomOne from 'assets/images/level1/levelone.jpg';
 import Numpad from './Numpad.js';
 import NumpadReveal from './NumpadReveal';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronCircleLeft } from '@fortawesome/free-solid-svg-icons'
 
 function initializeReactGA() {
 	ReactGA.initialize('UA-104887157-5');
@@ -119,7 +121,12 @@ export default class LevelOne extends Component {
 		} else {
 			return (
 				<div className='levelOne'>
-					<DoorRoom onClick={this.toggle} pushBack={this.pushBack} />
+					<div className="fill">
+						<DoorRoom onClick={this.toggle} pushBack={this.pushBack} />
+						<NavLink className="back-button" onClick={() => { this.setState({ door: false }) }}>
+							<FontAwesomeIcon icon={faChevronCircleLeft} size="1x" title="Back"></FontAwesomeIcon>
+						</NavLink>
+					</div>
 				</div>
 			)
 		}
