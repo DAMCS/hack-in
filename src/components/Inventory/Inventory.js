@@ -2,6 +2,7 @@ import React from 'react';
 import { ListGroup, ListGroupItem } from 'reactstrap';
 
 const thermal = require('assets/images/inventory/thermal.png');
+const usb = require('assets/images/inventory/usb.ico');
 
 (function () {
 	if (!document.querySelectorAll || !('draggable' in document.createElement('span')) || window.opera
@@ -35,15 +36,15 @@ const thermal = require('assets/images/inventory/thermal.png');
 export default class Inventory extends React.Component {
 	render() {
 		return (
-			<React.Fragment >
+			<React.Fragment>
 				<ListGroup data-draggable="target" className="p-2">
-					<ListGroupItem data-draggable="target" className="p-2">
-						<img width="50px" alt="" height="50px" src={thermal} />
+					<ListGroupItem data-draggable="target" className="p-2 inventory">
+						<img width="50px" alt="" id="numpad" height="50px" src={thermal} />
 					</ListGroupItem>
-					<ListGroupItem data-draggable="target" className="p-2">
-						<img width="50px" alt="" height="50px" src={thermal} />
+					<ListGroupItem data-draggable="target" className="p-2 inventory">
+						<img width="50px" alt="" id="terminal" height="50px" src={usb} />
 					</ListGroupItem>
-					<ListGroupItem data-draggable="target" className="p-2">
+					<ListGroupItem data-draggable="target" className="p-2 inventory">
 						<img width="50px" alt="" height="50px" src={thermal} />
 					</ListGroupItem>
 				</ListGroup>

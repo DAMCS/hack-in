@@ -2,37 +2,38 @@ import React, { Component } from 'react';
 import { Row, Col } from 'reactstrap';
 import Typed from 'typed.js';
 import ReactTerminal from 'react-terminal-component';
-import { EmulatorState, FileSystem, OutputFactory, Outputs, History, defaultCommandMapping, CommandMapping ,Button} from 'javascript-terminal';
+import { EmulatorState, FileSystem, OutputFactory, Outputs, History, defaultCommandMapping, CommandMapping, Modal, ModalBody, ModalFooter, ModalHeader, Button } from 'javascript-terminal';
 import { Form, FormGroup, Input } from 'reactstrap';
 import ReactGA from 'react-ga';
-import { toast } from 'react-toastify';
+import RoomTwo from './leveltwo.jpg';
 import axios from 'axios';
+import { toast } from 'react-toastify';
+import { isTSEnumMember } from '@babel/types';
+const LevelOne = React.lazy(() => import('views/LevelOne'));
 
 function initializeReactGA() {
 	ReactGA.initialize('UA-104887157-5');
 	ReactGA.pageview('/leveltwo');
 }
-export default class LevelTwo extends Component {
+class Terminal extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			pass: "",
-		}
-		this.handleChange = this.handleChange.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
-	}
-	handleChange(event) {
-		const target = event.target;
-		const value = target.value;
-		const name = target.name;
+		// this.state = {
+		// 	pass: "",
+		// }
 
-		this.setState({
-			[name]: value
-		});
-		if (this.state.pass === 'pass') {
-			alert('Success');
-		}
+		// this.handleChange = this.handleChange.bind(this);
+
 	}
+	// handleChange(event) {
+	// 	const target = event.target;
+	// 	const value = target.value;
+	// 	const name = target.name;
+
+	// 	this.setState({
+	// 		[name]: value
+	// 	});
+	// }
 	componentDidMount() {
 		const strings = ["Look here...we got a terminal!!!"]
 		const options = {
@@ -44,7 +45,7 @@ export default class LevelTwo extends Component {
 	componentWillUnmount() {
 		this.typed.destroy();
 	}
-	handleSubmit(){
+	handleSubmit() {
 		axios({
 			method: "post",
 			url: "/api/level/completion",
@@ -75,7 +76,7 @@ export default class LevelTwo extends Component {
 				'/bin/passwd': { content: 'You are not allowed to access this file' },
 				'/etc': {},
 				'/Network': {},
-				'/NetWork/netstat': { content: 'You are not allowed to access this file' },
+				'/Network/netstat': { content: 'You are not allowed to access this file' },
 				'/OS': {},
 				'/OS/boot': { content: 'Contains boot information' },
 				'/home/README': { content: 'This is a text file' },
@@ -163,18 +164,129 @@ export default class LevelTwo extends Component {
 							} promptSymbol='guest@Hackin>' emulatorState={customState} clickToFocus autoFocus={false} />
 						</Col>
 					</Row>
-					<Row className="p-4">
+					{/* <Row className="p-4">
 						<Col>
 							<Form>
 								<FormGroup>
 									<Input value={this.state.pass} onChange={this.handleChange} type="password" name="pass" placeholder="passcode" />
 								</FormGroup>
 							</Form>
-							{/* <Button color="success text-white">Submit</Button> */}
+							{/* <Button color="success text-white">Submit</Button> 
 						</Col>
-					</Row>
+					</Row> */}
 				</div>
 			</React.Fragment>
 		);
+	}
+}
+
+export default class LevelTwo extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			terminal: false,
+			pass: '',
+			modal: false
+		};
+
+		this.toggle = this.toggle.bind(this);
+		this.handleChange = this.handleChange.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
+		this.toggleModal = this.toggleModal.bind(this);
+		let copy = this;
+
+		var item = null;
+		document.addEventListener('dragstart', function (e) {
+			item = e.target;
+
+			e.dataTransfer.setData('text', '');
+
+		}, false);
+
+		document.addEventListener('drop', function (e) {
+
+			if (e.target.getAttribute('data-draggable') === 'target' && e.target.id === item.id) {
+				console.log("test passed!!");
+				copy.toggle();
+				e.preventDefault();
+			}
+		}, false);
+	}
+	componentDidMount() {
+		this.props.changeNavigation(2)
+	}
+	toggle() {
+		this.setState(prevState => ({
+			terminal: !prevState.terminal
+		}));
+	}
+	handleChange(event) {
+		this.setState({
+			[event.target.name]: event.target.value
+		});
+	}
+	toggleModal() {
+		this.setState({
+			modal: !this.state.modal
+		})
+	}
+	handleSubmit() {
+		axios({
+			method: "post",
+			url: "/api/level/completion",
+			headers: {
+				Authorization: "Bearer " + localStorage.getItem('token')
+			},
+			data: {
+				levelId: 2,
+				password: this.state.pass
+			}
+		}).then(response => {
+			if (response.data.status === "Success") {
+				toast.success(response.data.message);
+				this.props.history.push('/dashboard/');
+			}
+		})
+			.catch(function (error) {
+				console.log(error);
+				toast.error(error.response.data.message);
+			});
+	}
+	render() {
+		if (this.state.terminal === false) {
+			return (
+				<React.Fragment>
+					<img src={RoomTwo} alt='Room One' useMap='#image-door' />
+					<map name="image-door">
+						{/* <area alt="door" title="door" coords="825,279,825,512,878,541,877,271" shape="poly" onClick={this.toggle} /> */}
+						<area alt="door2" title="door2" coords="373,309,494,520" shape="rect" />
+						<area id='terminal' alt="terminal" title="terminal" data-draggable="target" coords="593,414,646,448" shape="rect" />
+						<area alt="door1" title="door1" coords="72,308,74,615,118,578,116,310" shape="poly" />
+					</map>
+
+					{/* <Modal isOpen={this.state.modal} toggle={this.toggleModal} className={this.props.className}>
+						<ModalHeader>Enter the Passcode</ModalHeader>
+						<ModalBody>
+							<Form onSubmit={this.handleSubmit}>
+								<FormGroup>
+									<Input value={this.state.pass} onChange={this.handleChange} type="password" name="pass" placeholder="passcode" />
+								</FormGroup>
+							</Form>
+						</ModalBody>
+						<ModalFooter>
+							<Button className="success text-white">Submit</Button>
+							<Button onClick={this.toggleModal} className="danger text-white">Close</Button>
+						</ModalFooter>
+					</Modal> */}
+
+				</React.Fragment>
+			)
+		} else {
+			return (
+				<div class='w-100 h-100'>
+					<Terminal onClick={this.toggle} />
+				</div>
+			)
+		}
 	}
 }

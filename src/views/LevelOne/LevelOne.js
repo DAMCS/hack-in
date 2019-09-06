@@ -24,15 +24,22 @@ class DoorRoom extends Component {
 		this.toggleReveal = this.toggleReveal.bind(this);
 		let copy = this;
 
+		var item = null;
+		document.addEventListener('dragstart', function (e) {
+			console.log(e.target.id);
+			item = e.target;
+			e.dataTransfer.setData('text', '');
+
+		}, false);
+
 		document.addEventListener('drop', function (e) {
 
-			if (e.target.getAttribute('data-draggable') === 'target') {
+			if (e.target.getAttribute('data-draggable') === 'target' && e.target.id === item.id) {
 				console.log("test passed!!");
 				copy.toggleReveal();
 				e.preventDefault();
 			}
-
-		}, false);
+		}, false); 
 	}
 
 	closeModal() {
@@ -57,7 +64,7 @@ class DoorRoom extends Component {
 			<div class="h-100 w-100 ">
 				<img src={Door} alt='Room One' useMap='#image-map' />
 				<map name="image-map">
-					<area alt="numpad" data-draggable="target" title="numpad" coords="608,424,640,476" shape="rect" onClick={this.toggleNumpad} />
+					<area alt="numpad" id="numpad" data-draggable="target" title="numpad" coords="608,424,640,476" shape="rect" onClick={this.toggleNumpad} />
 				</map>
 				<Modal isOpen={this.state.modal === 1} toggle={this.closeModal} className={this.props.className}>
 					<ModalHeader toggle={this.closeModal}>Enter the Passcode</ModalHeader>
@@ -86,7 +93,9 @@ export default class LevelOne extends Component {
 		this.toggle = this.toggle.bind(this);
 		this.pushBack = this.toggle.bind(this);
 	}
-
+	componentDidMount() { 
+		this.props.changeNavigation(1);
+	}
 	toggle() {
 		this.setState(prevState => ({
 			door: !prevState.door
@@ -104,7 +113,7 @@ export default class LevelOne extends Component {
 				<div className='levelOne'>
 					<img src={RoomOne} alt='Room One' useMap='#image-door' />
 					<map name="image-door">
-						<area alt="door" title="door" coords="1061,321,1064,595,1133,630,1131,310" shape="poly" onClick={this.toggle} />
+						<area alt="door" title="door" coords="825,279,825,512,878,541,877,271" shape="poly" onClick={this.toggle} />
 					</map>
 				</div>
 			)

@@ -5,9 +5,10 @@ import {
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faSatelliteDish, faTable, faSignOutAlt, faAngleLeft, faIdCard, faVideo, faMap, faAngleRight } from '@fortawesome/free-solid-svg-icons'
+import { faSatelliteDish, faTable, faSignOutAlt, faAngleLeft, faIdCard, faVideo, faMap, faAngleRight, faLightbulb } from '@fortawesome/free-solid-svg-icons'
 import { Redirect, Route, Switch } from "react-router-dom";
 import ReactGA from 'react-ga';
+import { toast } from 'react-toastify';
 
 function initializeReactGA() {
 	ReactGA.initialize('UA-104887157-5');
@@ -26,7 +27,7 @@ const Page404 = React.lazy(() => import('views/Pages/Page404'))
 
 const storyLineGIF = require('assets/images/story_line/story.gif');
 
-library.add(faSatelliteDish, faTable, faSignOutAlt, faAngleLeft, faIdCard, faVideo, faAngleRight)
+library.add(faSatelliteDish, faTable, faSignOutAlt, faAngleLeft, faIdCard, faVideo, faAngleRight, faLightbulb)
 
 export const Tool = class Tip extends React.Component {
 	constructor(props) {
@@ -52,6 +53,11 @@ export default class Dashboard extends Component {
 		this.toggle = this.toggle.bind(this);
 		this.toggleAnnouncement = this.toggleAnnouncement.bind(this);
 
+		this.getLevel = this.getLevel.bind(this);
+		this.hintBuy = this.hintBuy.bind(this);
+		this.toggleHint = this.toggleHint.bind(this);
+		this.updateHint = this.updateHint.bind(this);
+		this.changeNavigation = this.changeNavigation.bind(this);
 		this.state = {
 			isLoggedIn: true,
 			LeaderBoard: false,
@@ -62,7 +68,16 @@ export default class Dashboard extends Component {
 			announcement: [],
 			seen: 0,
 			level: [],
+			Hint: false,
+			currentLevel: 0,
+			hints: [],
+			navigation: 0
 		}
+	}
+	changeNavigation(level) { 
+		this.setState({
+			navigation:level
+		})
 	}
 	componentDidMount() {
 		let token = localStorage.getItem("token");
@@ -121,7 +136,6 @@ export default class Dashboard extends Component {
 				console.log(error);
 			});
 	}
-
 	render() {
 		initializeReactGA();
 		if (this.state.isLoggedIn === false) {
@@ -133,7 +147,7 @@ export default class Dashboard extends Component {
 						<Col xs="1" className="h-100 d-flex flex-column left-nav">
 							<Nav pills className="d-flex flex-column justify-content-start">
 								<NavItem>
-									<NavLink onClick={this.toggle('Announcements')} className="d-flex justify-content-start align-items-center">
+									<NavLink href="#" onClick={this.toggle('Announcements')} className="d-flex justify-content-start align-items-center">
 										<FontAwesomeIcon icon={faSatelliteDish} size="2x" title="Announcements" />
 										{this.state.announcement.length > this.state.seen ? (<React.Fragment>&nbsp;
 											<Badge color="primary">{this.state.announcement.length - this.state.seen}</Badge>
@@ -150,7 +164,7 @@ export default class Dashboard extends Component {
 									</Modal>
 								</NavItem>
 								<NavItem>
-									<NavLink onClick={this.toggle("LeaderBoard")} className="d-flex justify-content-start align-items-center">
+									<NavLink href="#" onClick={this.toggle("LeaderBoard")} className="d-flex justify-content-start align-items-center">
 										<FontAwesomeIcon icon={faTable} size="2x" title="Leaderboard" />
 										<Modal centered="true" isOpen={this.state.LeaderBoard} toggle={this.toggle('LeaderBoard')} className="modal-lg">
 											<ModalHeader>LeaderBoard</ModalHeader>
@@ -164,7 +178,7 @@ export default class Dashboard extends Component {
 									</NavLink>
 								</NavItem>
 								<NavItem>
-									<NavLink onClick={this.toggle('StoryLine')} className="d-flex justify-content-start align-items-center">
+									<NavLink href="#" onClick={this.toggle('StoryLine')} className="d-flex justify-content-start align-items-center">
 										<FontAwesomeIcon icon={faVideo} size="2x" title="StoryLine" />
 										<Modal isOpen={this.state.StoryLine} toggle={this.toggle('StoryLine')} className="modal-lg">
 											<ModalHeader> <img alt="Story" width="100%" src={storyLineGIF} /></ModalHeader>
@@ -177,15 +191,34 @@ export default class Dashboard extends Component {
 										</Modal>
 									</NavLink>
 								</NavItem>
+								<NavItem>{
+										this.state.navigation !== 0 ?
+										<NavLink href="#" onClick={this.toggleHint}>
+											<FontAwesomeIcon icon={faLightbulb} size="2x" />
+											<Modal isOpen={this.state.Hint} toggle={this.toggle('Hint')} className="modal-lg">
+												<ModalHeader >Hint</ModalHeader>
+												<ModalBody>
+													{this.state.hints.length !== 0 ? (<React.Fragment></React.Fragment>) : (<div>You haven't bought any hints!</div>)}
+													{this.state.hints.map((object, index) => {
+														return (<React.Fragment><div>{object.hintMsg}<br /></div></React.Fragment>)
+													})}
+												</ModalBody>
+												<ModalFooter>
+													<Button color="danger text-white" onClick={this.toggle('Hint')}>Close</Button>
+													<Button color="success text-white" onClick={this.hintBuy}>Buy</Button>
+												</ModalFooter>
+											</Modal>
+										</NavLink> : <React.Fragment></React.Fragment>}
+								</NavItem>
 							</Nav>
 							<Nav pills className="d-flex flex-column justify-content-end mt-auto">
 								<NavItem className="d-flex">
-									<NavLink onClick={() => { this.props.history.push('/dashboard') }}>
+									<NavLink href="#" onClick={() => { this.props.history.push('/dashboard') }}>
 										<FontAwesomeIcon icon={faMap} size="2x" title="Lab Map" />
 									</NavLink>
 								</NavItem>
 								<NavItem className="d-flex">
-									<NavLink onClick={this.toggle('Contact')}>
+									<NavLink href="#" onClick={this.toggle('Contact')}>
 										<FontAwesomeIcon icon={faIdCard} size="2x" title="Contact" />
 										<Modal centered="true" isOpen={this.state.Contact} toggle={this.toggle('Contact')} className="modal-lg">
 											<ModalHeader>Contact</ModalHeader>
@@ -203,7 +236,7 @@ export default class Dashboard extends Component {
 									</NavLink>
 								</NavItem>
 								<NavItem className="d-flex ">
-									<NavLink onClick={this.handleLogout}>
+									<NavLink href="#" onClick={this.handleLogout}>
 										<FontAwesomeIcon icon={faSignOutAlt} size="2x" title="Sign Out" />
 									</NavLink>
 								</NavItem>
@@ -214,23 +247,23 @@ export default class Dashboard extends Component {
 							<Switch>
 								{this.state.level.map((level, index) => {
 									if (level.levelId === 1) {
-										return (<Route exact path={`${this.props.match.path}/levelone`} name="LevelOne" render={props => <LevelOne {...props} />} />)
+										return (<Route exact path={`${this.props.match.path}/levelone`} name="LevelOne" render={props => <LevelOne {...props} changeNavigation={this.changeNavigation}/>} />)
 									}
 									else if (level.levelId === 2) {
-										return (<Route exact path={`${this.props.match.path}/leveltwo`} name="LevelTwo" render={props => <LevelTwo {...props} />} />)
+										return (<Route exact path={`${this.props.match.path}/leveltwo`} name="LevelTwo" render={props => <LevelTwo {...props} changeNavigation={this.changeNavigation}/>} />)
 									}
 									else if (level.levelId === 3) {
-										return (<Route exact path={`${this.props.match.path}/levelthree`} name="LevelThree" render={props => <LevelThree {...props} />} />)
+										return (<Route exact path={`${this.props.match.path}/levelthree`} name="LevelThree" render={props => <LevelThree {...props} changeNavigation={this.changeNavigation}/>} />)
 									}
 								})}
-								<Route exact path={`${this.props.match.path}`} name="MissionMap" render={props => <MissionMap {...props} />} />
-								<Route component={Page404} name="Page 404" />
+								<Route exact path={`${this.props.match.path}`} name="MissionMap" render={props => <MissionMap {...props} getLevel={this.getLevel} changeNavigation={this.changeNavigation}/>} />
+								<Route component={Page404} />
 							</Switch>
 						</Col>
 						<Col xs="1" className="h-100 d-flex justify-content-center align-items-center right-nav">
 							<Nav pills>
 								<NavItem >
-									<NavLink onClick={this.toggle('Inventory')}>
+									<NavLink href="#" onClick={this.toggle('Inventory')}>
 										<FontAwesomeIcon icon={this.state.Inventory ? faAngleRight : faAngleLeft} size="2x" />
 									</NavLink>
 								</NavItem>
@@ -243,6 +276,66 @@ export default class Dashboard extends Component {
 				</React.Fragment>
 			)
 		}
+	}
+
+	updateHint() {
+		// console.log(this.state.navigation);
+		let token = localStorage.getItem("token");
+		axios({
+			method: "post",
+			url: "/api/hint",
+			headers: {
+				Authorization: "Bearer " + token
+			},
+			data: {
+				levelId: this.state.currentLevel
+			}
+		}).then(response => {
+			console.log(response.data);
+			this.setState({
+				hints: response.data.data,
+			})
+		}).catch(error => {
+			console.log(error);
+		})
+	}
+	toggleHint() {
+		this.setState({
+			Hint: !this.state.Hint
+		})
+		this.updateHint();
+	}
+
+	getLevel(level) {
+		this.setState({
+			currentLevel: level
+		})
+	}
+
+	hintBuy() {
+		axios({
+			method: "post",
+			url: "/api/hint/buy",
+			headers: {
+				Authorization: "Bearer " + localStorage.getItem('token')
+			},
+			data: {
+				levelId: this.state.currentLevel,
+				hintId: this.state.hints.length + 1
+			}
+		})
+			.then((response) => {
+				if (response.data.status === "Success") {
+					toast.success("Bought a hint!");
+					this.updateHint();
+				}
+				else if (response.data.status === "Error") {
+					toast.error("You cannot buy anymore hints!");
+				}
+			})
+			.catch((err) => {
+				toast.error("Internal Error");
+			})
 	}
 
 	toggleAnnouncement() {
@@ -266,5 +359,4 @@ export default class Dashboard extends Component {
 		});
 		this.props.history.push('/')
 	}
-
 }

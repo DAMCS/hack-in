@@ -3,46 +3,8 @@
 @import "../react-toastify/scss/main.scss";
 
 @font-face {
-  font-family: "Minecraft";
-  src: url("assets/fonts/Minecraft.ttf") format("truetype");
-  font-weight: 800;
-}
-
-@font-face {
   font-family: "PressStart2P";
   src: url("assets/fonts/PressStart2P.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "8bit";
-  src: url("assets/fonts/8bitpusab.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "retro";
-  src: url("assets/fonts/retro_computer.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "rainyheart";
-  src: url("assets/fonts/rainyhearts.ttf") format("truetype");
-  font-weight: 400;
-}
-
-@font-face {
-  font-family: "ManualDisplay";
-  src: url("assets/fonts/ManualDisplay.ttf") format("truetype");
-  font-weight: 400;
-}
-
-@font-face {
-  font-family: "Calculator";
-  src: url("assets/fonts/Calculator.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "Open24Display";
-  src: url("assets/fonts/Open24Display.ttf") format("truetype");
 }
 
 html,
@@ -65,6 +27,7 @@ body,
 
 @import "mission_map.scss";
 @import "story_line.scss";
+@import "inventory.scss";
 
 .popover {
   max-width: 400px;
