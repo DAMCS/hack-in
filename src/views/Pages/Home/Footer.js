@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import './footer.css';
 import { Container } from "reactstrap";
 import { Button, NavLink, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
@@ -9,7 +8,6 @@ class Contact extends React.Component {
 		this.state = {
 			modal: false
 		};
-
 		this.toggle = this.toggle.bind(this);
 	}
 
@@ -50,14 +48,7 @@ export default class Footer extends Component {
 	render() {
 		return (
 			<React.Fragment>
-				<link
-					rel="stylesheet"
-				/>
 				<Container fluid className="fixed-bottom">
-					<link
-						rel="stylesheet"
-					/>
-
 					<section id="lab_social_icon_footer">
 						<Container>
 							<div style={{ float: "left" }}>
@@ -67,19 +58,19 @@ export default class Footer extends Component {
 								<div style={{ float: "left" }}>
 									<Contact />
 								</div>
-								<NavLink style={{ color: "#2ea155" }} href="https://www.facebook.com/psg.symposium/" target= "_blank">
+								<NavLink style={{ color: "#2ea155" }} href="https://www.facebook.com/psg.symposium/" target="_blank" rel="noreferrer">
 									<i
 										id="social-fb"
 										class="fa fa-facebook-square fa-3x social"
 									/>
 								</NavLink>
-								<NavLink style={{ color: "#2ea155" }} href="https://youtu.be/M4Vv4ZmUzbc" target= "_blank">
+								<NavLink style={{ color: "#2ea155" }} href="https://youtu.be/M4Vv4ZmUzbc" target="_blank" rel="noreferrer">
 									<i
 										id="social-gp"
 										class="fa fa-youtube-play fa-3x social"
 									/>
 								</NavLink>
-								<NavLink style={{ color: "#2ea155" }} href="mailto:hackin2019@gmail.com" target= "_blank">
+								<NavLink style={{ color: "#2ea155" }} href="mailto:hackin2019@gmail.com" target="_blank" rel="noreferrer">
 									<i
 										id="social-em"
 										class="fa fa-envelope-square fa-3x social"
@@ -88,8 +79,8 @@ export default class Footer extends Component {
 							</div>
 						</Container>
 					</section>
-				</Container >
-			</React.Fragment >
+				</Container>
+			</React.Fragment>
 		);
 	}
 }
