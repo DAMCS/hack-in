@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import './LevelThree.css';
-
 
 export default class DataFlow extends Component {
 
