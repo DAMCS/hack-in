@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import ReactGA from 'react-ga';
-import Door from './Door.png';
-import RoomOne from './levelone.jpg';
+import Door from 'assets/images/level1/Door.png';
+import RoomOne from 'assets/images/level1/levelone.jpg';
 import Numpad from './Numpad.js';
 import NumpadReveal from './NumpadReveal';
 
@@ -103,8 +103,7 @@ export default class LevelOne extends Component {
 	}
 
 	pushBack() {
-		console.log('call pushback')
-		this.props.history.push('/dashboard/');
+		this.props.history.push('/dashboard');
 	}
 
 	render() {

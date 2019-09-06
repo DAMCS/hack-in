@@ -5,7 +5,7 @@ import ReactTerminal from 'react-terminal-component';
 import { EmulatorState, FileSystem, OutputFactory, Outputs, History, defaultCommandMapping, CommandMapping } from 'javascript-terminal';
 import { Form, FormGroup, Input } from 'reactstrap';
 import ReactGA from 'react-ga';
-import RoomTwo from './leveltwo.jpg';
+import RoomTwo from 'assets/images/level2/leveltwo.jpg';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 

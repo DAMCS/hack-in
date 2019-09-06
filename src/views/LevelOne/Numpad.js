@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
-import NumpadLock from './numpad.png';
-import './LevelOne.css';
-import {toast} from 'react-toastify';
+import NumpadLock from 'assets/images/level1/numpad.png';
+import { toast } from 'react-toastify';
 import axios from 'axios'
 
-var imgstyle = {
-
-}
 var screenstyle = {
 	position: 'absolute',
 	width: '250px',
 	height: '90px',
-    background: 'transparent',
+	background: 'transparent',
 	border: '0px',
 	color: '#222',
 	padding: '10px',
@@ -56,10 +52,10 @@ export default class Numpad extends Component {
 						this.props.pushBack();
 					}
 				})
-				.catch(error => {
-					console.log(error);
-					toast.error('You entered the wrong code');
-				});
+					.catch(error => {
+						console.log(error);
+						toast.error('You entered the wrong code');
+					});
 				break;
 			}
 			case 'Clear': {
@@ -93,7 +89,7 @@ export default class Numpad extends Component {
 				<div className="screen-row">
 					<input type="text" style={screenstyle} value={this.state.keyinput} max="9999" readOnly />
 				</div>
-				<img src={NumpadLock} alt='Room One' style={imgstyle} useMap='#numpad-map' />
+				<img src={NumpadLock} alt='Room One' useMap='#numpad-map' />
 				<map name="numpad-map">
 					<area alt="0" title="0" coords="30,379,97,439" shape="rect" onClick={this.handleClick} />
 					<area alt="1" title="1" coords="30,300,96,357" shape="rect" onClick={this.handleClick} />
