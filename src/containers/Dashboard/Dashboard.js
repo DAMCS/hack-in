@@ -162,7 +162,7 @@ export default class Dashboard extends Component {
 							<Nav pills className="d-flex flex-column justify-content-start">
 								<NavItem>
 									<NavLink href="#" id="ann" onClick={this.toggle('Announcements')} className="d-flex justify-content-start align-items-center">
-										<FontAwesomeIcon icon={faSatelliteDish} size="2x" title="Announcements" />
+										<FontAwesomeIcon icon={faSatelliteDish} size="2x"/>
 										<Tooltip placement="right" isOpen={this.state.anntooltip} target="ann" toggle={this.toggleAnntooltip}>
           									Announcement
         								</Tooltip>
@@ -182,7 +182,7 @@ export default class Dashboard extends Component {
 								</NavItem>
 								<NavItem>
 									<NavLink href="#" id="leaderboard" onClick={this.toggle("LeaderBoard")} className="d-flex justify-content-start align-items-center">
-										<FontAwesomeIcon icon={faTable} size="2x" title="Leaderboard" />
+										<FontAwesomeIcon icon={faTable} size="2x"/>
 										<Tooltip placement="right" isOpen={this.state.leaderboardtooltip} target="leaderboard" toggle={this.togglelbtooltip}>
           									LeaderBoard
         								</Tooltip>
@@ -199,7 +199,7 @@ export default class Dashboard extends Component {
 								</NavItem>
 								<NavItem>
 									<NavLink href="#" id="storyline" onClick={this.toggle('StoryLine')} className="d-flex justify-content-start align-items-center">
-										<FontAwesomeIcon icon={faVideo} size="2x" title="StoryLine" />
+										<FontAwesomeIcon icon={faVideo} size="2x"/>
 										<Tooltip placement="right" isOpen={this.state.storylinetooltip} target="storyline" toggle={this.togglesltooltip}>
 											StoryLine
         								</Tooltip>
@@ -248,7 +248,7 @@ export default class Dashboard extends Component {
 								</NavItem>
 								<NavItem className="d-flex">
 									<NavLink id="contact" href="#" onClick={this.toggle('Contact')}>
-										<FontAwesomeIcon icon={faIdCard} size="2x" title="Contact" />
+										<FontAwesomeIcon icon={faIdCard} size="2x"/>
 										<Tooltip placement="right" isOpen={this.state.contacttooltip} target="contact" toggle={this.togglecontacttooltip}>
           									Contact
         								</Tooltip>
@@ -269,7 +269,7 @@ export default class Dashboard extends Component {
 								</NavItem>
 								<NavItem className="d-flex ">
 									<NavLink href="#" id="logout" onClick={this.handleLogout}>
-										<FontAwesomeIcon icon={faSignOutAlt} size="2x" title="Sign Out" />
+										<FontAwesomeIcon icon={faSignOutAlt} size="2x"/>
 										<Tooltip placement="right" isOpen={this.state.logouttooltip} target="logout" toggle={this.togglelogouttootltip}>
           									Logout
         								</Tooltip>
