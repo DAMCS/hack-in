@@ -6,7 +6,7 @@ import Typed from 'typed.js';
 import { toast } from 'react-toastify'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faServer, faDesktop } from '@fortawesome/free-solid-svg-icons'
-import RoomThree from './levelthree.jpg'
+import RoomThree from 'assets/images/level3/levelthree.jpg'
 
 import DataFlow from './DataFlow.js'
 import axios from 'axios';
@@ -47,33 +47,33 @@ class DataFlowModal extends React.Component {
 		this.state = {
 			modal: false,
 			code: `import pyshark
-				net_interface = 'wlan0'
-				capture_time = 20
-				capture = pyshark.LiveCapture(interface = net_interface)
-				capture.sniff(timeout = capture_time)
-				for i in range(len(capture)):
-				packet = capture[i]
-				try:
-					if packet.http.request_method == 'GET':
-							print("Captured packet number:"+str(i + 1))
-							print(packet.http.request_full_uri)
-					print(packet["urlencoded-form"])
-				except:
-					pass`,
+        net_interface = 'wlan0'
+        capture_time = 20
+        capture = pyshark.LiveCapture(interface = net_interface)
+        capture.sniff(timeout = capture_time)
+        for i in range(len(capture)):
+        packet = capture[i]
+        try:
+          if packet.http.request_method == 'GET':
+              print("Captured packet number:"+str(i + 1))
+              print(packet.http.request_full_uri)
+          print(packet["urlencoded-form"])
+        except:
+          pass`,
 			codeTrue: `import pyshark
-				net_interface = 'wlan0'
-				capture_time = 20
-				capture = pyshark.LiveCapture(interface = net_interface)
-				capture.sniff(timeout = capture_time)
-				for i in range(len(capture)):
-				packet = capture[i]
-				try:
-					if packet.http.request_method == 'POST':
-							print("Captured packet number:"+str(i + 1))
-							print(packet.http.request_full_uri)
-					print(packet["urlencoded-form"])
-				except:
-					pass`,
+        net_interface = 'wlan0'
+        capture_time = 20
+        capture = pyshark.LiveCapture(interface = net_interface)
+        capture.sniff(timeout = capture_time)
+        for i in range(len(capture)):
+        packet = capture[i]
+        try:
+          if packet.http.request_method == 'POST':
+              print("Captured packet number:"+str(i + 1))
+              print(packet.http.request_full_uri)
+          print(packet["urlencoded-form"])
+        except:
+          pass`,
 		};
 		this.toggle = this.toggle.bind(this);
 		this.handleChange = this.handleChange.bind(this);
@@ -143,7 +143,7 @@ class Transmission extends Component {
 			check: true
 		})
 	}
-	handleSubmit(event){
+	handleSubmit(event) {
 		axios({
 			method: "post",
 			url: "/api/level/completion",
@@ -160,10 +160,10 @@ class Transmission extends Component {
 				this.props.history.push('/dashboard/');
 			}
 		})
-		.catch(function (error) {
-			console.log(error);
-			toast.error(error.response.data.message);
-		});	
+			.catch(function (error) {
+				console.log(error);
+				toast.error(error.response.data.message);
+			});
 		event.preventDefault();
 	}
 	render() {
@@ -194,7 +194,7 @@ class Transmission extends Component {
 							</div>
 							<Form className="p-4 h-100 w-100" onSubmit={this.handleSubmit}>
 								<FormGroup className="w-100">
-									<Input className="w-100" value={this.state.pass} onChange={this.handleChange} type="password" name="pass" placeholder="passcode" />	<br />
+									<Input className="w-100" value={this.state.pass} onChange={this.handleChange} type="password" name="pass" placeholder="passcode" />  <br />
 								</FormGroup>
 								<Button color="success text-white">Submit</Button>
 							</Form>
@@ -215,7 +215,7 @@ export default class LevelThree extends Component {
 
 		this.toggle = this.toggle.bind(this);
 	}
-	componentDidMount() { 
+	componentDidMount() {
 		this.props.changeNavigation(3);
 	}
 
