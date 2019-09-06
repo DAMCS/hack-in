@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-	Col, Row, Nav, NavItem, NavLink, Modal, ModalHeader, ModalBody, ModalFooter, Button, Collapse, Badge
+	Col, Row, Nav, NavItem, NavLink, Modal, ModalHeader, ModalBody, ModalFooter, Button, Collapse, Badge, Tooltip
 } from 'reactstrap';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -58,12 +58,19 @@ export default class Dashboard extends Component {
 		this.toggleHint = this.toggleHint.bind(this);
 		this.updateHint = this.updateHint.bind(this);
 		this.changeNavigation = this.changeNavigation.bind(this);
+		this.toggleAnntooltip = this.toggleAnntooltip.bind(this);
+		this.togglelbtooltip = this.togglelbtooltip.bind(this);
+		this.togglesltooltip = this.togglesltooltip.bind(this);
+		this.togglehinttooltip = this.togglehinttooltip.bind(this);
+		this.togglemaptooltip = this.togglemaptooltip.bind(this);
+		this.togglecontacttooltip = this.togglecontacttooltip.bind(this);
+		this.togglelogouttootltip = this.togglelogouttootltip.bind(this);
 		this.state = {
 			isLoggedIn: true,
 			LeaderBoard: false,
 			Contact: false,
 			Announcements: false,
-			Inventory: false,
+			Inventory: true,
 			StoryLine: false,
 			announcement: [],
 			seen: 0,
@@ -71,7 +78,14 @@ export default class Dashboard extends Component {
 			Hint: false,
 			currentLevel: 0,
 			hints: [],
-			navigation: 0
+			navigation: 0,
+			anntooltip: false,
+			leaderboardtooltip: false,
+			storylinetooltip: false,
+			hinttoolip: false,
+			maptooltip: false,
+			contacttooltip: false,
+			logouttooltip: false,
 		}
 	}
 	changeNavigation(level) {
@@ -147,8 +161,11 @@ export default class Dashboard extends Component {
 						<Col xs="1" className="h-100 d-flex flex-column left-nav">
 							<Nav pills className="d-flex flex-column justify-content-start">
 								<NavItem>
-									<NavLink href="#" onClick={this.toggle('Announcements')} className="d-flex justify-content-start align-items-center">
-										<FontAwesomeIcon icon={faSatelliteDish} size="2x" title="Announcements" />
+									<NavLink href="#" id="ann" onClick={this.toggle('Announcements')} className="d-flex justify-content-start align-items-center">
+										<FontAwesomeIcon icon={faSatelliteDish} size="2x" />
+										<Tooltip placement="right" isOpen={this.state.anntooltip} target="ann" toggle={this.toggleAnntooltip}>
+											Announcement
+        								</Tooltip>
 										{this.state.announcement.length > this.state.seen ? (<React.Fragment>&nbsp;
 											<Badge color="primary">{this.state.announcement.length - this.state.seen}</Badge>
 										</React.Fragment>) : (<React.Fragment></React.Fragment>)}
@@ -164,8 +181,11 @@ export default class Dashboard extends Component {
 									</Modal>
 								</NavItem>
 								<NavItem>
-									<NavLink href="#" onClick={this.toggle("LeaderBoard")} className="d-flex justify-content-start align-items-center">
-										<FontAwesomeIcon icon={faTable} size="2x" title="Leaderboard" />
+									<NavLink href="#" id="leaderboard" onClick={this.toggle("LeaderBoard")} className="d-flex justify-content-start align-items-center">
+										<FontAwesomeIcon icon={faTable} size="2x" />
+										<Tooltip placement="right" isOpen={this.state.leaderboardtooltip} target="leaderboard" toggle={this.togglelbtooltip}>
+											LeaderBoard
+        								</Tooltip>
 										<Modal centered isOpen={this.state.LeaderBoard} toggle={this.toggle('LeaderBoard')} className="modal-lg">
 											<ModalHeader>LeaderBoard</ModalHeader>
 											<ModalBody className="container-fluid mw-100">
@@ -178,8 +198,11 @@ export default class Dashboard extends Component {
 									</NavLink>
 								</NavItem>
 								<NavItem>
-									<NavLink href="#" onClick={this.toggle('StoryLine')} className="d-flex justify-content-start align-items-center">
-										<FontAwesomeIcon icon={faVideo} size="2x" title="StoryLine" />
+									<NavLink href="#" id="storyline" onClick={this.toggle('StoryLine')} className="d-flex justify-content-start align-items-center">
+										<FontAwesomeIcon icon={faVideo} size="2x" />
+										<Tooltip placement="right" isOpen={this.state.storylinetooltip} target="storyline" toggle={this.togglesltooltip}>
+											StoryLine
+        								</Tooltip>
 										<Modal isOpen={this.state.StoryLine} toggle={this.toggle('StoryLine')} className="modal-lg">
 											<ModalHeader> <img alt="Story" width="100%" src={storyLineGIF} /></ModalHeader>
 											<ModalBody>
@@ -193,8 +216,11 @@ export default class Dashboard extends Component {
 								</NavItem>
 								<NavItem>{
 									this.state.navigation !== 0 ?
-										<NavLink href="#" onClick={this.toggleHint}>
+										<NavLink href="#" id="hint" onClick={this.toggleHint}>
 											<FontAwesomeIcon icon={faLightbulb} size="2x" />
+											<Tooltip placement="right" isOpen={this.state.hinttooltip} target="hint" toggle={this.togglehinttooltip}>
+												Ask Help!
+        									</Tooltip>
 											<Modal isOpen={this.state.Hint} toggle={this.toggle('Hint')} className="modal-lg">
 												<ModalHeader >Hint</ModalHeader>
 												<ModalBody>
@@ -213,13 +239,19 @@ export default class Dashboard extends Component {
 							</Nav>
 							<Nav pills className="d-flex flex-column justify-content-end mt-auto">
 								<NavItem className="d-flex">
-									<NavLink href="#" onClick={() => { this.props.history.push('/dashboard') }}>
-										<FontAwesomeIcon icon={faMap} size="2x" title="Lab Map" />
+									<NavLink href="#" id="labmap" onClick={() => { this.props.history.push('/dashboard') }}>
+										<FontAwesomeIcon icon={faMap} size="2x" />
+										<Tooltip placement="right" isOpen={this.state.maptooltip} target="labmap" toggle={this.togglemaptooltip}>
+											Lab Map
+        								</Tooltip>
 									</NavLink>
 								</NavItem>
 								<NavItem className="d-flex">
-									<NavLink href="#" onClick={this.toggle('Contact')}>
-										<FontAwesomeIcon icon={faIdCard} size="2x" title="Contact" />
+									<NavLink id="contact" href="#" onClick={this.toggle('Contact')}>
+										<FontAwesomeIcon icon={faIdCard} size="2x" />
+										<Tooltip placement="right" isOpen={this.state.contacttooltip} target="contact" toggle={this.togglecontacttooltip}>
+											Contact
+        								</Tooltip>
 										<Modal centered isOpen={this.state.Contact} toggle={this.toggle('Contact')} className="modal-lg">
 											<ModalHeader>Contact</ModalHeader>
 											<ModalBody>
@@ -236,8 +268,11 @@ export default class Dashboard extends Component {
 									</NavLink>
 								</NavItem>
 								<NavItem className="d-flex ">
-									<NavLink href="#" onClick={this.handleLogout}>
-										<FontAwesomeIcon icon={faSignOutAlt} size="2x" title="Sign Out" />
+									<NavLink href="#" id="logout" onClick={this.handleLogout}>
+										<FontAwesomeIcon icon={faSignOutAlt} size="2x" />
+										<Tooltip placement="right" isOpen={this.state.logouttooltip} target="logout" toggle={this.togglelogouttootltip}>
+											Logout
+        								</Tooltip>
 									</NavLink>
 								</NavItem>
 							</Nav>
@@ -246,13 +281,13 @@ export default class Dashboard extends Component {
 							{/* Routing dashboard containers! */}
 							<Switch>
 								{this.state.level.map((level, index) => {
-									if (level.levelId === 1) {
+									if (level.levelId === 1 && level.levelStatus === "open" && level.userLevelStatus === "not completed") {
 										return (<Route exact path={`${this.props.match.path}/levelone`} key="1" name="LevelOne" render={props => <LevelOne {...props} changeNavigation={this.changeNavigation} />} />)
 									}
-									else if (level.levelId === 2) {
+									else if (level.levelId === 2 && level.levelStatus === "open" && level.userLevelStatus === "not completed") {
 										return (<Route exact path={`${this.props.match.path}/leveltwo`} key="2" name="LevelTwo" render={props => <LevelTwo {...props} changeNavigation={this.changeNavigation} />} />)
 									}
-									else if (level.levelId === 3) {
+									else if (level.levelId === 3 && level.levelStatus === "open" && level.userLevelStatus === "not completed") {
 										return (<Route exact path={`${this.props.match.path}/levelthree`} key="3" name="LevelThree" render={props => <LevelThree {...props} changeNavigation={this.changeNavigation} />} />)
 									}
 									else {
@@ -301,6 +336,7 @@ export default class Dashboard extends Component {
 			console.log(error);
 		})
 	}
+
 	toggleHint() {
 		this.setState({
 			Hint: !this.state.Hint
@@ -360,5 +396,47 @@ export default class Dashboard extends Component {
 			time: new Date()
 		});
 		this.props.history.push('/')
+	}
+
+	toggleAnntooltip() {
+		this.setState({
+			anntooltip: !this.state.anntooltip
+		});
+	}
+
+	togglelbtooltip() {
+		this.setState({
+			leaderboardtooltip: !this.state.leaderboardtooltip
+		});
+	}
+
+	togglesltooltip() {
+		this.setState({
+			storylinetooltip: !this.state.storylinetooltip
+		});
+	}
+
+	togglehinttooltip() {
+		this.setState({
+			hinttooltip: !this.state.hinttooltip
+		});
+	}
+
+	togglemaptooltip() {
+		this.setState({
+			maptooltip: !this.state.maptooltip
+		});
+	}
+
+	togglecontacttooltip() {
+		this.setState({
+			contacttooltip: !this.state.contacttooltip
+		});
+	}
+
+	togglelogouttootltip() {
+		this.setState({
+			logouttooltip: !this.state.logouttooltip
+		});
 	}
 }

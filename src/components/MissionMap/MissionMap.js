@@ -43,9 +43,11 @@ class TooltipItem extends React.Component {
 		return (
 			<div class="h-100 w-100 d-flex justify-content-center align-items-center">
 				<NavLink href="#" id={'Level-' + this.props.id} className={"level" + (this.props.i + 1) + "-button"}
-					disabled={this.props.object.levelStatus === "open" ? false : true}
+					disabled={this.props.object.levelStatus === "closed" || this.props.object.userLevelStatus === "completed" ? true : false}
 					style={{ color: text_color }}
-					onClick={() => this.handleClick(this.props.i + 1)} >{this.props.i + 1}
+					onClick={() => {
+						this.handleClick(this.props.i + 1)
+					}}>{this.props.i + 1}
 				</NavLink>
 				<Tooltip placement="top" isOpen={this.state.tooltipOpen} target={'Level-' + this.props.id} toggle={this.toggle}>
 					Level {this.props.id + 1}

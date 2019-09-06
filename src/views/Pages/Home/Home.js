@@ -3,6 +3,7 @@ import { Redirect } from "react-router-dom";
 import { TabContent, TabPane, NavLink, Row, Col, Container } from 'reactstrap';
 import axios from "axios";
 import ReactGA from 'react-ga';
+
 const Header = React.lazy(() => import("./Header"));
 const Login = React.lazy(() => import("./SignIn"));
 const SignUp = React.lazy(() => import("./SignUp"));
@@ -12,6 +13,7 @@ function initializeReactGA() {
 	ReactGA.initialize('UA-104887157-5');
 	ReactGA.pageview('/homepage');
 }
+
 export default class Home extends Component {
 	constructor(props) {
 		super(props);

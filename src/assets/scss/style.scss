@@ -4,6 +4,7 @@
 
 @font-face {
   font-family: "PressStart2P";
+  font-display: swap;
   src: url("assets/fonts/PressStart2P.ttf") format("truetype");
 }
 
@@ -25,6 +26,7 @@ body,
   }
 }
 
+@import "_footer.scss";
 @import "_level_two.scss";
 @import "_level_one.scss";
 @import "mission_map.scss";
