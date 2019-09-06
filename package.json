@@ -23,6 +23,7 @@
 		"axios": "^0.19.0",
 		"bootstrap": "^4.3.1",
 		"classnames": "^2.2.6",
+		"dotenv": "^8.1.0",
 		"font-awesome": "^4.7.0",
 		"javascript-terminal": "^1.0.3",
 		"jquery": "^3.4.1",
@@ -47,9 +48,10 @@
 		"start": "react-scripts start",
 		"prebuild": "rm -rf ./build",
 		"build": "react-scripts build && javascript-obfuscator ./build --output . --config ./javascript-obfuscator.js",
-		"postbuild": "rm -rf build/**/**/*.map",
+		"postbuild": "rm -rf build/**/**/*.map && generate-robotstxt --config ./robots-txt.js build/robots.txt",
 		"test": "react-scripts test",
-		"eject": "react-scripts eject"
+		"eject": "react-scripts eject",
+		"clearbuild": "rm -rf build"
 	},
 	"eslintConfig": {
 		"extends": "react-app"
@@ -67,6 +69,7 @@
 		]
 	},
 	"devDependencies": {
+		"generate-robotstxt": "^7.1.0",
 		"javascript-obfuscator": "^0.18.1",
 		"npm-check": "^5.9.0",
 		"react-native-obfuscating-transformer": "^1.0.0"

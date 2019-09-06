@@ -23,7 +23,8 @@ const MissionMap = React.lazy(() => import('components/MissionMap'));
 const LevelThree = React.lazy(() => import('views/LevelThree'));
 const LevelOne = React.lazy(() => import('views/LevelOne'));
 const LevelTwo = React.lazy(() => import('views/LevelTwo'));
-const Page404 = React.lazy(() => import('views/Pages/Page404'))
+// const Page404 = React.lazy(() => import('views/Pages/Page404'))
+const Loading = React.lazy(() => import('components/Loading'));
 
 const storyLineGIF = require('assets/images/story_line/story.gif');
 
@@ -294,7 +295,7 @@ export default class Dashboard extends Component {
 										return <Route exact path={`${this.props.match.path}`} name="MissionMap" key="0" render={props => <MissionMap {...props} getLevel={this.getLevel} changeNavigation={this.changeNavigation} />} />
 									}
 								})}
-								<Route key="-1" component={Page404} />
+								<Route key="-1" component={Loading} />
 							</Switch>
 						</Col>
 						<Col xs="1" className="h-100 d-flex justify-content-center align-items-center right-nav">
