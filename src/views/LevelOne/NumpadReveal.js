@@ -52,7 +52,7 @@ export default class NumpadReveal extends Component {
 				})
 					.catch(function (error) {
 						console.log(error);
-						toast.error('You entered the wrong code');
+						toast.error(error.response.data.message);
 					});
 				break;
 			}

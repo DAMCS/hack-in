@@ -171,10 +171,10 @@ export default class Dashboard extends Component {
 											<Badge color="primary">{this.state.announcement.length - this.state.seen}</Badge>
 										</React.Fragment>) : (<React.Fragment></React.Fragment>)}
 									</NavLink>
-									<Modal centered isOpen={this.state.Announcements} toggle={this.toggle('Announcements')} className="modal-lg">
+									<Modal centered isOpen={this.state.Announcements} toggle={this.toggle('Announcements')} className="modal-lg" responsive>
 										<ModalHeader>Announcements</ModalHeader>
 										<ModalBody className="container-fluid mw-100">
-											<Announcement announcement={this.state.announcement} seen={this.state.seen} />
+											<Announcement announcement={this.state.announcement} seen={this.state.seen}/>
 										</ModalBody>
 										<ModalFooter>
 											<Button color="danger text-white" onClick={this.toggleAnnouncement}>Close</Button>
@@ -258,7 +258,7 @@ export default class Dashboard extends Component {
 											<ModalBody>
 												<div class="p-2 mx-auto">
 													Co-ordinator : Surya Prasath S<br />
-													Email : hackin2019@gmail.com<br />
+													Email : hackinpsg2019@gmail.com<br />
 													Phone : 9791745977<br />
 												</div>
 											</ModalBody>
@@ -326,7 +326,7 @@ export default class Dashboard extends Component {
 				Authorization: "Bearer " + token
 			},
 			data: {
-				levelId: this.state.currentLevel
+				levelId: this.state.navigation
 			}
 		}).then(response => {
 			console.log(response.data);
@@ -359,7 +359,7 @@ export default class Dashboard extends Component {
 				Authorization: "Bearer " + localStorage.getItem('token')
 			},
 			data: {
-				levelId: this.state.currentLevel,
+				levelId: this.state.navigation,
 				hintId: this.state.hints.length + 1
 			}
 		})
