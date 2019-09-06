@@ -57,7 +57,7 @@ export default class Dashboard extends Component {
 		this.hintBuy = this.hintBuy.bind(this);
 		this.toggleHint = this.toggleHint.bind(this);
 		this.updateHint = this.updateHint.bind(this);
-
+		this.changeNavigation = this.changeNavigation.bind(this);
 		this.state = {
 			isLoggedIn: true,
 			LeaderBoard: false,
@@ -70,8 +70,14 @@ export default class Dashboard extends Component {
 			level: [],
 			Hint: false,
 			currentLevel: 0,
-			hints: []
+			hints: [],
+			navigation: 0
 		}
+	}
+	changeNavigation(level) { 
+		this.setState({
+			navigation:level
+		})
 	}
 	componentDidMount() {
 		let token = localStorage.getItem("token");
@@ -130,7 +136,6 @@ export default class Dashboard extends Component {
 				console.log(error);
 			});
 	}
-
 	render() {
 		initializeReactGA();
 		if (this.state.isLoggedIn === false) {
@@ -186,23 +191,24 @@ export default class Dashboard extends Component {
 										</Modal>
 									</NavLink>
 								</NavItem>
-								<NavItem>
-									<NavLink href="#" onClick={this.toggleHint}>
-										<FontAwesomeIcon icon={faLightbulb} size="2x" />
-										<Modal isOpen={this.state.Hint} toggle={this.toggle('Hint')} className="modal-lg">
-											<ModalHeader >Hint</ModalHeader>
-											<ModalBody>
-												{this.state.hints.length !== 0 ? (<React.Fragment></React.Fragment>) : (<div>You haven't bought any hints!</div>)}
-												{this.state.hints.map((object, index) => {
-													return (<React.Fragment><div>{object.hintMsg}<br /></div></React.Fragment>)
-												})}
-											</ModalBody>
-											<ModalFooter>
-												<Button color="danger text-white" onClick={this.toggle('Hint')}>Close</Button>
-												<Button color="success text-white" onClick={this.hintBuy}>Buy</Button>
-											</ModalFooter>
-										</Modal>
-									</NavLink>
+								<NavItem>{
+										this.state.navigation !== 0 ?
+										<NavLink href="#" onClick={this.toggleHint}>
+											<FontAwesomeIcon icon={faLightbulb} size="2x" />
+											<Modal isOpen={this.state.Hint} toggle={this.toggle('Hint')} className="modal-lg">
+												<ModalHeader >Hint</ModalHeader>
+												<ModalBody>
+													{this.state.hints.length !== 0 ? (<React.Fragment></React.Fragment>) : (<div>You haven't bought any hints!</div>)}
+													{this.state.hints.map((object, index) => {
+														return (<React.Fragment><div>{object.hintMsg}<br /></div></React.Fragment>)
+													})}
+												</ModalBody>
+												<ModalFooter>
+													<Button color="danger text-white" onClick={this.toggle('Hint')}>Close</Button>
+													<Button color="success text-white" onClick={this.hintBuy}>Buy</Button>
+												</ModalFooter>
+											</Modal>
+										</NavLink> : <React.Fragment></React.Fragment>}
 								</NavItem>
 							</Nav>
 							<Nav pills className="d-flex flex-column justify-content-end mt-auto">
@@ -241,16 +247,16 @@ export default class Dashboard extends Component {
 							<Switch>
 								{this.state.level.map((level, index) => {
 									if (level.levelId === 1) {
-										return (<Route exact path={`${this.props.match.path}/levelone`} name="LevelOne" render={props => <LevelOne {...props} />} />)
+										return (<Route exact path={`${this.props.match.path}/levelone`} name="LevelOne" render={props => <LevelOne {...props} changeNavigation={this.changeNavigation}/>} />)
 									}
 									else if (level.levelId === 2) {
-										return (<Route exact path={`${this.props.match.path}/leveltwo`} name="LevelTwo" render={props => <LevelTwo {...props} />} />)
+										return (<Route exact path={`${this.props.match.path}/leveltwo`} name="LevelTwo" render={props => <LevelTwo {...props} changeNavigation={this.changeNavigation}/>} />)
 									}
 									else if (level.levelId === 3) {
-										return (<Route exact path={`${this.props.match.path}/levelthree`} name="LevelThree" render={props => <LevelThree {...props} />} />)
+										return (<Route exact path={`${this.props.match.path}/levelthree`} name="LevelThree" render={props => <LevelThree {...props} changeNavigation={this.changeNavigation}/>} />)
 									}
 								})}
-								<Route exact path={`${this.props.match.path}`} name="MissionMap" render={props => <MissionMap {...props} getLevel={this.getLevel} />} />
+								<Route exact path={`${this.props.match.path}`} name="MissionMap" render={props => <MissionMap {...props} getLevel={this.getLevel} changeNavigation={this.changeNavigation}/>} />
 								<Route component={Page404} />
 							</Switch>
 						</Col>
@@ -273,6 +279,7 @@ export default class Dashboard extends Component {
 	}
 
 	updateHint() {
+		// console.log(this.state.navigation);
 		let token = localStorage.getItem("token");
 		axios({
 			method: "post",
@@ -303,7 +310,6 @@ export default class Dashboard extends Component {
 		this.setState({
 			currentLevel: level
 		})
-		console.log(level);
 	}
 
 	hintBuy() {

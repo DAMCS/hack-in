@@ -6,6 +6,8 @@ import Typed from 'typed.js';
 import { toast } from 'react-toastify'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faServer, faDesktop } from '@fortawesome/free-solid-svg-icons'
+import RoomThree from './levelthree.jpg'
+
 import DataFlow from './DataFlow.js'
 import axios from 'axios';
 function initializeReactGA() {
@@ -45,33 +47,33 @@ class DataFlowModal extends React.Component {
 		this.state = {
 			modal: false,
 			code: `import pyshark
-net_interface = 'wlan0'
-capture_time = 20
-capture = pyshark.LiveCapture(interface = net_interface)
-capture.sniff(timeout = capture_time)
-for i in range(len(capture)):
-  packet = capture[i]
-  try:
-    if packet.http.request_method == 'GET':
-			print("Captured packet number:"+str(i + 1))
-			print(packet.http.request_full_uri)
-      print(packet["urlencoded-form"])
-  except:
-    pass`,
+				net_interface = 'wlan0'
+				capture_time = 20
+				capture = pyshark.LiveCapture(interface = net_interface)
+				capture.sniff(timeout = capture_time)
+				for i in range(len(capture)):
+				packet = capture[i]
+				try:
+					if packet.http.request_method == 'GET':
+							print("Captured packet number:"+str(i + 1))
+							print(packet.http.request_full_uri)
+					print(packet["urlencoded-form"])
+				except:
+					pass`,
 			codeTrue: `import pyshark
-net_interface = 'wlan0'
-capture_time = 20
-capture = pyshark.LiveCapture(interface = net_interface)
-capture.sniff(timeout = capture_time)
-for i in range(len(capture)):
-  packet = capture[i]
-  try:
-    if packet.http.request_method == 'POST':
-			print("Captured packet number:"+str(i + 1))
-			print(packet.http.request_full_uri)
-      print(packet["urlencoded-form"])
-  except:
-    pass`,
+				net_interface = 'wlan0'
+				capture_time = 20
+				capture = pyshark.LiveCapture(interface = net_interface)
+				capture.sniff(timeout = capture_time)
+				for i in range(len(capture)):
+				packet = capture[i]
+				try:
+					if packet.http.request_method == 'POST':
+							print("Captured packet number:"+str(i + 1))
+							print(packet.http.request_full_uri)
+					print(packet["urlencoded-form"])
+				except:
+					pass`,
 		};
 		this.toggle = this.toggle.bind(this);
 		this.handleChange = this.handleChange.bind(this);
@@ -120,7 +122,7 @@ for i in range(len(capture)):
 	}
 }
 
-export default class LevelThree extends Component {
+class Transmission extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -201,5 +203,44 @@ export default class LevelThree extends Component {
 				</div>
 			</React.Fragment>
 		)
+	}
+}
+
+export default class LevelThree extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			door: false
+		};
+
+		this.toggle = this.toggle.bind(this);
+	}
+	componentDidMount() { 
+		this.props.changeNavigation(3);
+	}
+
+	toggle() {
+		this.setState(prevState => ({
+			door: !prevState.door
+		}));
+	}
+
+	render() {
+		if (this.state.door === false) {
+			return (
+				<div className='levelOne'>
+					<img src={RoomThree} alt='Room Three' useMap='#image-door' />
+					<map name="image-door">
+						<area alt="router" title="router" coords="286,440,309,457" shape="rect" onClick={this.toggle} />
+					</map>
+				</div>
+			)
+		} else {
+			return (
+				<div className='levelOne'>
+					<Transmission onClick={this.toggle} />
+				</div>
+			)
+		}
 	}
 }
