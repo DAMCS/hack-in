@@ -2,7 +2,7 @@ import React from 'react';
 import { ListGroup, ListGroupItem } from 'reactstrap';
 
 const thermal = require('assets/images/inventory/thermal.png');
-const usb = require('assets/images/inventory/usb.ico');
+const usb = require('assets/images/inventory/usb.png');
 
 (function () {
 	if (!document.querySelectorAll || !('draggable' in document.createElement('span')) || window.opera
