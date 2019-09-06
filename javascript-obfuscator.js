@@ -3,7 +3,7 @@ module.exports = {
 	controlFlowFlattening: true,
 	controlFlowFlatteningThreshold: 0.75,
 	deadCodeInjection: false,
-	deadCodeInjectionThreshold: false,
+	deadCodeInjectionThreshold: 0,
 	debugProtection: false,
 	debugProtectionInterval: false,
 	disableConsoleOutput: true,
