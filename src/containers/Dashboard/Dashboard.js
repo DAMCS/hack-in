@@ -9,6 +9,7 @@ import { faSatelliteDish, faTable, faSignOutAlt, faAngleLeft, faIdCard, faVideo,
 import { Redirect, Route, Switch } from "react-router-dom";
 import ReactGA from 'react-ga';
 import { toast } from 'react-toastify';
+import Loading from 'components/Loading';
 
 function initializeReactGA() {
 	ReactGA.initialize(process.env.GA_ID);
@@ -23,9 +24,6 @@ const MissionMap = React.lazy(() => import('components/MissionMap'));
 const LevelThree = React.lazy(() => import('views/LevelThree'));
 const LevelOne = React.lazy(() => import('views/LevelOne'));
 const LevelTwo = React.lazy(() => import('views/LevelTwo'));
-// const Page404 = React.lazy(() => import('views/Pages/Page404'))
-const Loading = React.lazy(() => import('components/Loading'));
-
 const storyLineGIF = require('assets/images/story_line/story.gif');
 
 library.add(faSatelliteDish, faTable, faSignOutAlt, faAngleLeft, faIdCard, faVideo, faAngleRight, faLightbulb)
