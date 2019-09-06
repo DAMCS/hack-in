@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Row, Col } from 'reactstrap';
 import Typed from 'typed.js';
 import ReactTerminal from 'react-terminal-component';
-import { EmulatorState, FileSystem, OutputFactory, Outputs, History, defaultCommandMapping, CommandMapping,Modal,ModalBody,ModalFooter,ModalHeader,Button } from 'javascript-terminal';
+import { EmulatorState, FileSystem, OutputFactory, Outputs, History, defaultCommandMapping, CommandMapping, Modal, ModalBody, ModalFooter, ModalHeader, Button } from 'javascript-terminal';
 import { Form, FormGroup, Input } from 'reactstrap';
 import ReactGA from 'react-ga';
 import RoomTwo from './leveltwo.jpg';
@@ -23,7 +23,7 @@ class Terminal extends Component {
 		// }
 
 		// this.handleChange = this.handleChange.bind(this);
-		
+
 	}
 	// handleChange(event) {
 	// 	const target = event.target;
@@ -45,7 +45,7 @@ class Terminal extends Component {
 	componentWillUnmount() {
 		this.typed.destroy();
 	}
-	handleSubmit(){
+	handleSubmit() {
 		axios({
 			method: "post",
 			url: "/api/level/completion",
@@ -171,7 +171,7 @@ class Terminal extends Component {
 									<Input value={this.state.pass} onChange={this.handleChange} type="password" name="pass" placeholder="passcode" />
 								</FormGroup>
 							</Form>
-							{/* <Button color="success text-white">Submit</Button> */}
+							{/* <Button color="success text-white">Submit</Button> 
 						</Col>
 					</Row> */}
 				</div>
@@ -212,7 +212,7 @@ export default class LevelTwo extends Component {
 			}
 		}, false);
 	}
-	componentDidMount() { 
+	componentDidMount() {
 		this.props.changeNavigation(2)
 	}
 	toggle() {
@@ -225,12 +225,12 @@ export default class LevelTwo extends Component {
 			[event.target.name]: event.target.value
 		});
 	}
-	toggleModal() { 
+	toggleModal() {
 		this.setState({
-			modal:!this.state.modal
+			modal: !this.state.modal
 		})
 	}
-	handleSubmit(){
+	handleSubmit() {
 		axios({
 			method: "post",
 			url: "/api/level/completion",
@@ -260,7 +260,7 @@ export default class LevelTwo extends Component {
 					<map name="image-door">
 						{/* <area alt="door" title="door" coords="825,279,825,512,878,541,877,271" shape="poly" onClick={this.toggle} /> */}
 						<area alt="door2" title="door2" coords="373,309,494,520" shape="rect" />
-						<area id='terminal' alt="terminal" title="terminal" data-draggable="target" coords="593,414,646,448" shape="rect"/>
+						<area id='terminal' alt="terminal" title="terminal" data-draggable="target" coords="593,414,646,448" shape="rect" />
 						<area alt="door1" title="door1" coords="72,308,74,615,118,578,116,310" shape="poly" />
 					</map>
 
@@ -278,7 +278,7 @@ export default class LevelTwo extends Component {
 							<Button onClick={this.toggleModal} className="danger text-white">Close</Button>
 						</ModalFooter>
 					</Modal> */}
-					
+
 				</React.Fragment>
 			)
 		} else {
