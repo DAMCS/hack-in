@@ -7,7 +7,7 @@ import ReactGA from 'react-ga';
 import Loading from './components/Loading/Loading.js';
 
 function initializeReactGA() {
-	ReactGA.initialize('UA-104887157-5');
+	ReactGA.initialize(process.env.GA_ID);
 	ReactGA.pageview('/homepage');
 }
 

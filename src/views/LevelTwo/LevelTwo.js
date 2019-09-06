@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Modal, ModalBody, ModalHeader, Button ,NavLink} from 'reactstrap';
+import { Row, Col, Modal, ModalBody, ModalHeader, Button, NavLink } from 'reactstrap';
 import Typed from 'typed.js';
 import ReactTerminal from 'react-terminal-component';
 import { EmulatorState, FileSystem, OutputFactory, Outputs, History, defaultCommandMapping, CommandMapping } from 'javascript-terminal';
@@ -7,13 +7,13 @@ import { Form, FormGroup, Input } from 'reactstrap';
 import ReactGA from 'react-ga';
 import RoomTwo from 'assets/images/level2/leveltwo.jpg';
 import axios from 'axios';
-import { toast } from 'react-toastify'; 
+import { toast } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronCircleLeft } from '@fortawesome/free-solid-svg-icons'
 
 
 function initializeReactGA() {
-	ReactGA.initialize('UA-104887157-5');
+	ReactGA.initialize('process.env.GA_ID');
 	ReactGA.pageview('/leveltwo');
 }
 class Terminal extends Component {
@@ -178,7 +178,7 @@ export default class LevelTwo extends Component {
 			terminal: false,
 			pass: '',
 			modal: false,
-			window:false,
+			window: false,
 		};
 
 		this.toggle = this.toggle.bind(this);
@@ -223,9 +223,9 @@ export default class LevelTwo extends Component {
 			modal: !this.state.modal
 		})
 	}
-	toggleWindow(){
+	toggleWindow() {
 		this.setState({
-			window:!this.state.window
+			window: !this.state.window
 		})
 	}
 	handleSubmit(event) {
@@ -245,9 +245,9 @@ export default class LevelTwo extends Component {
 				this.props.history.push('/dashboard/');
 			}
 		})
-		.catch(function (error) {
-			toast.error(error.response.data.message);
-		});
+			.catch(function (error) {
+				toast.error(error.response.data.message);
+			});
 		event.preventDefault();
 	}
 	render() {
@@ -259,7 +259,7 @@ export default class LevelTwo extends Component {
 						<map name="image-door">
 							{/* <area alt="door" title="door" coords="825,279,825,512,878,541,877,271" shape="poly" onClick={this.toggle} /> */}
 							<area id="Entrance" alt="door2" title="Entrance" coords="373,309,494,520" shape="rect" onClick={this.toggleModal} />
-							<area id='terminal' alt="terminal" title="terminal" data-draggable="target" coords="593,414,646,448" shape="rect" onClick={this.toggleWindow}/>
+							<area id='terminal' alt="terminal" title="terminal" data-draggable="target" coords="593,414,646,448" shape="rect" onClick={this.toggleWindow} />
 							<area id="Exit" alt="door1" title="Exit" coords="72,308,74,615,118,578,116,310" shape="poly" />
 						</map>
 					</div>
@@ -277,7 +277,7 @@ export default class LevelTwo extends Component {
 					</Modal>
 					<Modal isOpen={this.state.window} toggle={this.toggleWindow} centered className="modal-lg">
 						<ModalBody>
-							<img src={require('../../assets/images/level2/windows.jpg')} alt="Windows" width="765px" height="400px"/>
+							<img src={require('../../assets/images/level2/windows.jpg')} alt="Windows" width="765px" height="400px" />
 						</ModalBody>
 					</Modal>
 				</React.Fragment>

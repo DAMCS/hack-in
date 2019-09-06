@@ -11,7 +11,7 @@ import ReactGA from 'react-ga';
 import { toast } from 'react-toastify';
 
 function initializeReactGA() {
-	ReactGA.initialize('UA-104887157-5');
+	ReactGA.initialize(process.env.GA_ID);
 	ReactGA.pageview('/dashboard');
 }
 
@@ -174,7 +174,7 @@ export default class Dashboard extends Component {
 									<Modal centered isOpen={this.state.Announcements} toggle={this.toggle('Announcements')} className="modal-lg" responsive>
 										<ModalHeader>Announcements</ModalHeader>
 										<ModalBody className="container-fluid mw-100">
-											<Announcement announcement={this.state.announcement} seen={this.state.seen}/>
+											<Announcement announcement={this.state.announcement} seen={this.state.seen} />
 										</ModalBody>
 										<ModalFooter>
 											<Button color="danger text-white" onClick={this.toggleAnnouncement}>Close</Button>

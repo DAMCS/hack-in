@@ -5,12 +5,12 @@ import Arrow from '@elsdoerfer/react-arrow';
 import Typed from 'typed.js';
 import { toast } from 'react-toastify'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faServer, faDesktop,faChevronCircleLeft } from '@fortawesome/free-solid-svg-icons'
+import { faServer, faDesktop, faChevronCircleLeft } from '@fortawesome/free-solid-svg-icons'
 import RoomThree from 'assets/images/level3/levelthree.jpg'
 import DataFlow from './DataFlow.js'
 import axios from 'axios';
 function initializeReactGA() {
-	ReactGA.initialize('UA-104887157-5');
+	ReactGA.initialize('process.env.GA_ID');
 	ReactGA.pageview('/levelthree');
 }
 
@@ -174,7 +174,7 @@ export default class LevelThree extends Component {
 		this.state = {
 			door: false,
 			modal: false,
-			pass:''
+			pass: ''
 		};
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.toggle = this.toggle.bind(this);
@@ -230,7 +230,7 @@ export default class LevelThree extends Component {
 					<img src={RoomThree} alt='Room Three' useMap='#image-door' />
 					<map name="image-door">
 						<area alt="router" title="router" coords="286,440,309,457" shape="rect" onClick={this.toggle} />
-						<area alt="door" title="door" coords="625,309,745,521" shape="rect" onClick={this.toggleModal}/>
+						<area alt="door" title="door" coords="625,309,745,521" shape="rect" onClick={this.toggleModal} />
 					</map>
 					<Modal isOpen={this.state.modal} toggle={this.toggleModal}>
 						<ModalHeader>Enter the Passcode</ModalHeader>

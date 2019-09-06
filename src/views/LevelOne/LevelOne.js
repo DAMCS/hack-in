@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Modal, ModalHeader, ModalBody,NavLink } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody, NavLink } from 'reactstrap';
 import ReactGA from 'react-ga';
 import Door from 'assets/images/level1/Door.png';
 import RoomOne from 'assets/images/level1/levelone.jpg';
@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronCircleLeft } from '@fortawesome/free-solid-svg-icons'
 
 function initializeReactGA() {
-	ReactGA.initialize('UA-104887157-5');
+	ReactGA.initialize('process.env.GA_ID');
 	ReactGA.pageview('/levelone');
 }
 
