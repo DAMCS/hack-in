@@ -65,6 +65,7 @@ export default class MissionMap extends React.Component {
 
 	}
 	componentDidMount() {
+		this.props.changeNavigation(0);
 		const token = localStorage.getItem('token');
 		axios({
 			method: 'get',

@@ -6,9 +6,10 @@ import Typed from 'typed.js';
 import { toast } from 'react-toastify'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faServer, faDesktop } from '@fortawesome/free-solid-svg-icons'
+import RoomThree from './levelthree.jpg'
 
 import DataFlow from './DataFlow.js'
-
+import axios from 'axios';
 function initializeReactGA() {
 	ReactGA.initialize('UA-104887157-5');
 	ReactGA.pageview('/levelthree');
@@ -46,33 +47,33 @@ class DataFlowModal extends React.Component {
 		this.state = {
 			modal: false,
 			code: `import pyshark
-net_interface = 'wlan0'
-capture_time = 20
-capture = pyshark.LiveCapture(interface = net_interface)
-capture.sniff(timeout = capture_time)
-for i in range(len(capture)):
-  packet = capture[i]
-  try:
-    if packet.http.request_method == 'GET':
-			print("Captured packet number:"+str(i + 1))
-			print(packet.http.request_full_uri)
-      print(packet["urlencoded-form"])
-  except:
-    pass`,
+				net_interface = 'wlan0'
+				capture_time = 20
+				capture = pyshark.LiveCapture(interface = net_interface)
+				capture.sniff(timeout = capture_time)
+				for i in range(len(capture)):
+				packet = capture[i]
+				try:
+					if packet.http.request_method == 'GET':
+							print("Captured packet number:"+str(i + 1))
+							print(packet.http.request_full_uri)
+					print(packet["urlencoded-form"])
+				except:
+					pass`,
 			codeTrue: `import pyshark
-net_interface = 'wlan0'
-capture_time = 20
-capture = pyshark.LiveCapture(interface = net_interface)
-capture.sniff(timeout = capture_time)
-for i in range(len(capture)):
-  packet = capture[i]
-  try:
-    if packet.http.request_method == 'POST':
-			print("Captured packet number:"+str(i + 1))
-			print(packet.http.request_full_uri)
-      print(packet["urlencoded-form"])
-  except:
-    pass`,
+				net_interface = 'wlan0'
+				capture_time = 20
+				capture = pyshark.LiveCapture(interface = net_interface)
+				capture.sniff(timeout = capture_time)
+				for i in range(len(capture)):
+				packet = capture[i]
+				try:
+					if packet.http.request_method == 'POST':
+							print("Captured packet number:"+str(i + 1))
+							print(packet.http.request_full_uri)
+					print(packet["urlencoded-form"])
+				except:
+					pass`,
 		};
 		this.toggle = this.toggle.bind(this);
 		this.handleChange = this.handleChange.bind(this);
@@ -121,7 +122,7 @@ for i in range(len(capture)):
 	}
 }
 
-export default class LevelThree extends Component {
+class Transmission extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -130,6 +131,7 @@ export default class LevelThree extends Component {
 		}
 		this.handleChange = this.handleChange.bind(this);
 		this.handleCheck = this.handleCheck.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 	handleChange(event) {
 		this.setState({
@@ -140,6 +142,29 @@ export default class LevelThree extends Component {
 		this.setState({
 			check: true
 		})
+	}
+	handleSubmit(event){
+		axios({
+			method: "post",
+			url: "/api/level/completion",
+			headers: {
+				Authorization: "Bearer " + localStorage.getItem('token')
+			},
+			data: {
+				levelId: 3,
+				password: this.state.pass
+			}
+		}).then(response => {
+			if (response.data.status === "Success") {
+				toast.success(response.data.message);
+				this.props.history.push('/dashboard/');
+			}
+		})
+		.catch(function (error) {
+			console.log(error);
+			toast.error(error.response.data.message);
+		});	
+		event.preventDefault();
 	}
 	render() {
 		initializeReactGA();
@@ -165,17 +190,57 @@ export default class LevelThree extends Component {
 							/>
 							<FontAwesomeIcon icon={faDesktop} size="5x" />
 							<div>
-								{this.state.check === true ? <TypedReact content='Your passcode is 01010010100' className="p-4 h-100 w-100" /> : ''}
+								{this.state.check === true ? <TypedReact content='Your passcode is 11110 00001 00011 00011 1 11000 00000 1' className="p-4 h-100 w-100" /> : ''}
 							</div>
-							<Form className="p-4 h-100 w-100">
+							<Form className="p-4 h-100 w-100" onSubmit={this.handleSubmit}>
 								<FormGroup className="w-100">
-									<Input className="w-100" value={this.state.pass} onChange={this.handleChange} type="password" name="pass" placeholder="passcode" />
+									<Input className="w-100" value={this.state.pass} onChange={this.handleChange} type="password" name="pass" placeholder="passcode" />	<br />
 								</FormGroup>
+								<Button color="success text-white">Submit</Button>
 							</Form>
 						</Col>
 					</Row>
 				</div>
 			</React.Fragment>
 		)
+	}
+}
+
+export default class LevelThree extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			door: false
+		};
+
+		this.toggle = this.toggle.bind(this);
+	}
+	componentDidMount() { 
+		this.props.changeNavigation(3);
+	}
+
+	toggle() {
+		this.setState(prevState => ({
+			door: !prevState.door
+		}));
+	}
+
+	render() {
+		if (this.state.door === false) {
+			return (
+				<div className='levelOne'>
+					<img src={RoomThree} alt='Room Three' useMap='#image-door' />
+					<map name="image-door">
+						<area alt="router" title="router" coords="286,440,309,457" shape="rect" onClick={this.toggle} />
+					</map>
+				</div>
+			)
+		} else {
+			return (
+				<div className='levelOne'>
+					<Transmission onClick={this.toggle} />
+				</div>
+			)
+		}
 	}
 }

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import NumpadLock from './numpad_reveal.png';
 import './LevelOne.css';
+import { toast } from 'react-toastify';
+import axios from 'axios'
 
 var imgstyle = {
 
@@ -9,7 +11,7 @@ var screenstyle = {
 	position: 'absolute',
 	width: '245px',
 	height: '90px',
-	background: '#ddd',
+	background: 'transparent',
 	border: '0px',
 	color: '#222',
 	padding: '10px',
@@ -35,8 +37,27 @@ export default class NumpadReveal extends Component {
 			case 'enter': {
 				if (this.state.keyinput !== '') {
 					this.setState({ keyinput: '' });
-					break;
 				}
+				axios({
+					method: "post",
+					url: "/api/level/completion",
+					headers: {
+						Authorization: "Bearer " + localStorage.getItem('token')
+					},
+					data: {
+						levelId: 1,
+						password: this.state.keyinput
+					}
+				}).then(response => {
+					if (response.data.status === "Success") {
+						toast.success(response.data.message);
+						this.props.pushBack();
+					}
+				})
+				.catch(function (error) {
+					console.log(error);
+					toast.error('You entered the wrong code');
+				});
 				break;
 			}
 			case 'Clear': {
