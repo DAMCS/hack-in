@@ -74,9 +74,9 @@ export default class Dashboard extends Component {
 			navigation: 0
 		}
 	}
-	changeNavigation(level) { 
+	changeNavigation(level) {
 		this.setState({
-			navigation:level
+			navigation: level
 		})
 	}
 	componentDidMount() {
@@ -153,7 +153,7 @@ export default class Dashboard extends Component {
 											<Badge color="primary">{this.state.announcement.length - this.state.seen}</Badge>
 										</React.Fragment>) : (<React.Fragment></React.Fragment>)}
 									</NavLink>
-									<Modal centered="true" isOpen={this.state.Announcements} toggle={this.toggle('Announcements')} className="modal-lg">
+									<Modal centered isOpen={this.state.Announcements} toggle={this.toggle('Announcements')} className="modal-lg">
 										<ModalHeader>Announcements</ModalHeader>
 										<ModalBody className="container-fluid mw-100">
 											<Announcement announcement={this.state.announcement} seen={this.state.seen} />
@@ -166,7 +166,7 @@ export default class Dashboard extends Component {
 								<NavItem>
 									<NavLink href="#" onClick={this.toggle("LeaderBoard")} className="d-flex justify-content-start align-items-center">
 										<FontAwesomeIcon icon={faTable} size="2x" title="Leaderboard" />
-										<Modal centered="true" isOpen={this.state.LeaderBoard} toggle={this.toggle('LeaderBoard')} className="modal-lg">
+										<Modal centered isOpen={this.state.LeaderBoard} toggle={this.toggle('LeaderBoard')} className="modal-lg">
 											<ModalHeader>LeaderBoard</ModalHeader>
 											<ModalBody className="container-fluid mw-100">
 												<LeaderBoard />
@@ -192,7 +192,7 @@ export default class Dashboard extends Component {
 									</NavLink>
 								</NavItem>
 								<NavItem>{
-										this.state.navigation !== 0 ?
+									this.state.navigation !== 0 ?
 										<NavLink href="#" onClick={this.toggleHint}>
 											<FontAwesomeIcon icon={faLightbulb} size="2x" />
 											<Modal isOpen={this.state.Hint} toggle={this.toggle('Hint')} className="modal-lg">
@@ -220,7 +220,7 @@ export default class Dashboard extends Component {
 								<NavItem className="d-flex">
 									<NavLink href="#" onClick={this.toggle('Contact')}>
 										<FontAwesomeIcon icon={faIdCard} size="2x" title="Contact" />
-										<Modal centered="true" isOpen={this.state.Contact} toggle={this.toggle('Contact')} className="modal-lg">
+										<Modal centered isOpen={this.state.Contact} toggle={this.toggle('Contact')} className="modal-lg">
 											<ModalHeader>Contact</ModalHeader>
 											<ModalBody>
 												<div class="p-2 mx-auto">
@@ -247,17 +247,17 @@ export default class Dashboard extends Component {
 							<Switch>
 								{this.state.level.map((level, index) => {
 									if (level.levelId === 1) {
-										return (<Route exact path={`${this.props.match.path}/levelone`} name="LevelOne" render={props => <LevelOne {...props} changeNavigation={this.changeNavigation}/>} />)
+										return (<Route exact path={`${this.props.match.path}/levelone`} key="1" name="LevelOne" render={props => <LevelOne {...props} changeNavigation={this.changeNavigation} />} />)
 									}
 									else if (level.levelId === 2) {
-										return (<Route exact path={`${this.props.match.path}/leveltwo`} name="LevelTwo" render={props => <LevelTwo {...props} changeNavigation={this.changeNavigation}/>} />)
+										return (<Route exact path={`${this.props.match.path}/leveltwo`} key="2" name="LevelTwo" render={props => <LevelTwo {...props} changeNavigation={this.changeNavigation} />} />)
 									}
 									else if (level.levelId === 3) {
-										return (<Route exact path={`${this.props.match.path}/levelthree`} name="LevelThree" render={props => <LevelThree {...props} changeNavigation={this.changeNavigation}/>} />)
+										return (<Route exact path={`${this.props.match.path}/levelthree`} key="3" name="LevelThree" render={props => <LevelThree {...props} changeNavigation={this.changeNavigation} />} />)
 									}
 								})}
-								<Route exact path={`${this.props.match.path}`} name="MissionMap" render={props => <MissionMap {...props} getLevel={this.getLevel} changeNavigation={this.changeNavigation}/>} />
-								<Route component={Page404} />
+								<Route exact path={`${this.props.match.path}`} name="MissionMap" key="0" render={props => <MissionMap {...props} getLevel={this.getLevel} changeNavigation={this.changeNavigation} />} />
+								<Route key="-1" component={Page404} />
 							</Switch>
 						</Col>
 						<Col xs="1" className="h-100 d-flex justify-content-center align-items-center right-nav">

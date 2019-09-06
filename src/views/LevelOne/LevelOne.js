@@ -39,7 +39,7 @@ class DoorRoom extends Component {
 				copy.toggleReveal();
 				e.preventDefault();
 			}
-		}, false); 
+		}, false);
 	}
 
 	closeModal() {
@@ -62,20 +62,20 @@ class DoorRoom extends Component {
 		initializeReactGA();
 		return (
 			<div class="h-100 w-100 ">
-				<img src={Door} alt='Room One' useMap='#image-map' />
+				<img src={Door} alt='Room One' useMap='#image-map' class="h-100 w-100" />
 				<map name="image-map">
 					<area alt="numpad" id="numpad" data-draggable="target" title="numpad" coords="608,424,640,476" shape="rect" onClick={this.toggleNumpad} />
 				</map>
 				<Modal isOpen={this.state.modal === 1} toggle={this.closeModal} className={this.props.className}>
 					<ModalHeader toggle={this.closeModal}>Enter the Passcode</ModalHeader>
 					<ModalBody>
-						<Numpad pushBack={this.props.pushBack}/>
+						<Numpad pushBack={this.props.pushBack} />
 					</ModalBody>
 				</Modal>
 				<Modal isOpen={this.state.modal === 2} toggle={this.closeModal} className={this.props.className}>
 					<ModalHeader toggle={this.closeModal}>Enter the Passcode</ModalHeader>
 					<ModalBody>
-						<NumpadReveal pushBack={this.props.pushBack}/>
+						<NumpadReveal pushBack={this.props.pushBack} />
 					</ModalBody>
 				</Modal>
 			</div>
@@ -93,7 +93,7 @@ export default class LevelOne extends Component {
 		this.toggle = this.toggle.bind(this);
 		this.pushBack = this.toggle.bind(this);
 	}
-	componentDidMount() { 
+	componentDidMount() {
 		this.props.changeNavigation(1);
 	}
 	toggle() {
@@ -102,7 +102,7 @@ export default class LevelOne extends Component {
 		}));
 	}
 
-	pushBack(){
+	pushBack() {
 		console.log('call pushback')
 		this.props.history.push('/dashboard/');
 	}
@@ -120,7 +120,7 @@ export default class LevelOne extends Component {
 		} else {
 			return (
 				<div className='levelOne'>
-					<DoorRoom onClick={this.toggle} pushBack={this.pushBack}/>
+					<DoorRoom onClick={this.toggle} pushBack={this.pushBack} />
 				</div>
 			)
 		}

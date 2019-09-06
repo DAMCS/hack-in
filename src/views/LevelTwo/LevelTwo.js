@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
-import { Row, Col } from 'reactstrap';
+import { Row, Col, Modal, ModalBody, ModalFooter, ModalHeader, Button } from 'reactstrap';
 import Typed from 'typed.js';
 import ReactTerminal from 'react-terminal-component';
-import { EmulatorState, FileSystem, OutputFactory, Outputs, History, defaultCommandMapping, CommandMapping, Modal, ModalBody, ModalFooter, ModalHeader, Button } from 'javascript-terminal';
+import { EmulatorState, FileSystem, OutputFactory, Outputs, History, defaultCommandMapping, CommandMapping } from 'javascript-terminal';
 import { Form, FormGroup, Input } from 'reactstrap';
 import ReactGA from 'react-ga';
 import RoomTwo from './leveltwo.jpg';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { isTSEnumMember } from '@babel/types';
-const LevelOne = React.lazy(() => import('views/LevelOne'));
 
 function initializeReactGA() {
 	ReactGA.initialize('UA-104887157-5');
@@ -18,22 +16,22 @@ function initializeReactGA() {
 class Terminal extends Component {
 	constructor(props) {
 		super(props);
-		// this.state = {
-		// 	pass: "",
-		// }
+		this.state = {
+			pass: "",
+		}
 
-		// this.handleChange = this.handleChange.bind(this);
+		this.handleChange = this.handleChange.bind(this);
 
 	}
-	// handleChange(event) {
-	// 	const target = event.target;
-	// 	const value = target.value;
-	// 	const name = target.name;
+	handleChange(event) {
+		const target = event.target;
+		const value = target.value;
+		const name = target.name;
 
-	// 	this.setState({
-	// 		[name]: value
-	// 	});
-	// }
+		this.setState({
+			[name]: value
+		});
+	}
 	componentDidMount() {
 		const strings = ["Look here...we got a terminal!!!"]
 		const options = {
@@ -164,16 +162,6 @@ class Terminal extends Component {
 							} promptSymbol='guest@Hackin>' emulatorState={customState} clickToFocus autoFocus={false} />
 						</Col>
 					</Row>
-					{/* <Row className="p-4">
-						<Col>
-							<Form>
-								<FormGroup>
-									<Input value={this.state.pass} onChange={this.handleChange} type="password" name="pass" placeholder="passcode" />
-								</FormGroup>
-							</Form>
-							{/* <Button color="success text-white">Submit</Button> 
-						</Col>
-					</Row> */}
 				</div>
 			</React.Fragment>
 		);
@@ -248,7 +236,6 @@ export default class LevelTwo extends Component {
 			}
 		})
 			.catch(function (error) {
-				console.log(error);
 				toast.error(error.response.data.message);
 			});
 	}
@@ -256,15 +243,17 @@ export default class LevelTwo extends Component {
 		if (this.state.terminal === false) {
 			return (
 				<React.Fragment>
-					<img src={RoomTwo} alt='Room One' useMap='#image-door' />
-					<map name="image-door">
-						{/* <area alt="door" title="door" coords="825,279,825,512,878,541,877,271" shape="poly" onClick={this.toggle} /> */}
-						<area alt="door2" title="door2" coords="373,309,494,520" shape="rect" />
-						<area id='terminal' alt="terminal" title="terminal" data-draggable="target" coords="593,414,646,448" shape="rect" />
-						<area alt="door1" title="door1" coords="72,308,74,615,118,578,116,310" shape="poly" />
-					</map>
-
-					{/* <Modal isOpen={this.state.modal} toggle={this.toggleModal} className={this.props.className}>
+					<div class="d-flex justify-content-center align-items-center">
+						<img src={RoomTwo} alt='Room One' useMap='#image-door' class="d-flex justify-content-center" />
+						<map name="image-door">
+							{/* <area alt="door" title="door" coords="825,279,825,512,878,541,877,271" shape="poly" onClick={this.toggle} /> */}
+							<area id="Entrance" alt="door2" title="Entrance" coords="373,309,494,520" shape="rect" onClick={this.toggleModal} />
+							<area id='terminal' alt="terminal" title="terminal" data-draggable="target" coords="593,414,646,448" shape="rect" />
+							<area id='terminal' alt="terminal" title="terminal" data-draggable="target" coords="593,414,646,448" shape="rect" />
+							<area id="Exit" alt="door1" title="Exit" coords="72,308,74,615,118,578,116,310" shape="poly" />
+						</map>
+					</div>
+					<Modal isOpen={this.state.modal} toggle={this.toggleModal}>
 						<ModalHeader>Enter the Passcode</ModalHeader>
 						<ModalBody>
 							<Form onSubmit={this.handleSubmit}>
@@ -274,11 +263,10 @@ export default class LevelTwo extends Component {
 							</Form>
 						</ModalBody>
 						<ModalFooter>
-							<Button className="success text-white">Submit</Button>
-							<Button onClick={this.toggleModal} className="danger text-white">Close</Button>
+							<Button color="success" className="success text-white">Submit</Button>
+							<Button color="danger" onClick={this.toggleModal} className="danger text-white">Close</Button>
 						</ModalFooter>
-					</Modal> */}
-
+					</Modal>
 				</React.Fragment>
 			)
 		} else {

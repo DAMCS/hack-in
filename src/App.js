@@ -4,18 +4,15 @@ import { createBrowserHistory } from "history";
 import { ToastContainer } from 'react-toastify'
 import './App.scss';
 import ReactGA from 'react-ga';
+import Loading from './components/Loading/Loading.js';
 
 function initializeReactGA() {
 	ReactGA.initialize('UA-104887157-5');
 	ReactGA.pageview('/homepage');
 }
-function Loading() {
-	return (
-		<div class="h-100 w-100 d-flex justify-content-center align-items-center">
-			Loading...
-		</div>
-	);
-}
+
+
+
 const Page404 = React.lazy(() => import('./views/Pages/Page404'))
 const Page500 = React.lazy(() => import('./views/Pages/Page500'))
 const Home = React.lazy(() => import('./views/Pages/Home'))
