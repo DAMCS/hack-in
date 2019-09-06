@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-	Col, Row, Nav, NavItem, NavLink, Modal, ModalHeader, ModalBody, ModalFooter, Button, Collapse, Badge,Tooltip
+	Col, Row, Nav, NavItem, NavLink, Modal, ModalHeader, ModalBody, ModalFooter, Button, Collapse, Badge, Tooltip
 } from 'reactstrap';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -70,7 +70,7 @@ export default class Dashboard extends Component {
 			LeaderBoard: false,
 			Contact: false,
 			Announcements: false,
-			Inventory: false,
+			Inventory: true,
 			StoryLine: false,
 			announcement: [],
 			seen: 0,
@@ -162,9 +162,9 @@ export default class Dashboard extends Component {
 							<Nav pills className="d-flex flex-column justify-content-start">
 								<NavItem>
 									<NavLink href="#" id="ann" onClick={this.toggle('Announcements')} className="d-flex justify-content-start align-items-center">
-										<FontAwesomeIcon icon={faSatelliteDish} size="2x"/>
+										<FontAwesomeIcon icon={faSatelliteDish} size="2x" />
 										<Tooltip placement="right" isOpen={this.state.anntooltip} target="ann" toggle={this.toggleAnntooltip}>
-          									Announcement
+											Announcement
         								</Tooltip>
 										{this.state.announcement.length > this.state.seen ? (<React.Fragment>&nbsp;
 											<Badge color="primary">{this.state.announcement.length - this.state.seen}</Badge>
@@ -182,9 +182,9 @@ export default class Dashboard extends Component {
 								</NavItem>
 								<NavItem>
 									<NavLink href="#" id="leaderboard" onClick={this.toggle("LeaderBoard")} className="d-flex justify-content-start align-items-center">
-										<FontAwesomeIcon icon={faTable} size="2x"/>
+										<FontAwesomeIcon icon={faTable} size="2x" />
 										<Tooltip placement="right" isOpen={this.state.leaderboardtooltip} target="leaderboard" toggle={this.togglelbtooltip}>
-          									LeaderBoard
+											LeaderBoard
         								</Tooltip>
 										<Modal centered isOpen={this.state.LeaderBoard} toggle={this.toggle('LeaderBoard')} className="modal-lg">
 											<ModalHeader>LeaderBoard</ModalHeader>
@@ -199,7 +199,7 @@ export default class Dashboard extends Component {
 								</NavItem>
 								<NavItem>
 									<NavLink href="#" id="storyline" onClick={this.toggle('StoryLine')} className="d-flex justify-content-start align-items-center">
-										<FontAwesomeIcon icon={faVideo} size="2x"/>
+										<FontAwesomeIcon icon={faVideo} size="2x" />
 										<Tooltip placement="right" isOpen={this.state.storylinetooltip} target="storyline" toggle={this.togglesltooltip}>
 											StoryLine
         								</Tooltip>
@@ -242,15 +242,15 @@ export default class Dashboard extends Component {
 									<NavLink href="#" id="labmap" onClick={() => { this.props.history.push('/dashboard') }}>
 										<FontAwesomeIcon icon={faMap} size="2x" />
 										<Tooltip placement="right" isOpen={this.state.maptooltip} target="labmap" toggle={this.togglemaptooltip}>
-												Lab Map
+											Lab Map
         								</Tooltip>
 									</NavLink>
 								</NavItem>
 								<NavItem className="d-flex">
 									<NavLink id="contact" href="#" onClick={this.toggle('Contact')}>
-										<FontAwesomeIcon icon={faIdCard} size="2x"/>
+										<FontAwesomeIcon icon={faIdCard} size="2x" />
 										<Tooltip placement="right" isOpen={this.state.contacttooltip} target="contact" toggle={this.togglecontacttooltip}>
-          									Contact
+											Contact
         								</Tooltip>
 										<Modal centered isOpen={this.state.Contact} toggle={this.toggle('Contact')} className="modal-lg">
 											<ModalHeader>Contact</ModalHeader>
@@ -269,9 +269,9 @@ export default class Dashboard extends Component {
 								</NavItem>
 								<NavItem className="d-flex ">
 									<NavLink href="#" id="logout" onClick={this.handleLogout}>
-										<FontAwesomeIcon icon={faSignOutAlt} size="2x"/>
+										<FontAwesomeIcon icon={faSignOutAlt} size="2x" />
 										<Tooltip placement="right" isOpen={this.state.logouttooltip} target="logout" toggle={this.togglelogouttootltip}>
-          									Logout
+											Logout
         								</Tooltip>
 									</NavLink>
 								</NavItem>
@@ -400,43 +400,43 @@ export default class Dashboard extends Component {
 
 	toggleAnntooltip() {
 		this.setState({
-		  anntooltip : !this.state.anntooltip
+			anntooltip: !this.state.anntooltip
 		});
 	}
-	
+
 	togglelbtooltip() {
 		this.setState({
-			leaderboardtooltip : !this.state.leaderboardtooltip
+			leaderboardtooltip: !this.state.leaderboardtooltip
 		});
 	}
 
 	togglesltooltip() {
 		this.setState({
-		  storylinetooltip : !this.state.storylinetooltip
+			storylinetooltip: !this.state.storylinetooltip
 		});
 	}
 
 	togglehinttooltip() {
 		this.setState({
-		  hinttooltip : !this.state.hinttooltip
+			hinttooltip: !this.state.hinttooltip
 		});
 	}
 
 	togglemaptooltip() {
 		this.setState({
-		  maptooltip : !this.state.maptooltip
+			maptooltip: !this.state.maptooltip
 		});
 	}
 
 	togglecontacttooltip() {
 		this.setState({
-		  contacttooltip : !this.state.contacttooltip
+			contacttooltip: !this.state.contacttooltip
 		});
 	}
 
 	togglelogouttootltip() {
 		this.setState({
-		  logouttooltip : !this.state.logouttooltip
+			logouttooltip: !this.state.logouttooltip
 		});
 	}
 }
