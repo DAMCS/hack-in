@@ -14,7 +14,7 @@ module.exports = {
 	selfDefending: true,
 	stringArray: true,
 	stringArrayEncoding: 'base64',
-	stringArrayThreshold: 0.75,
+	stringArrayThreshold: 0.25,
 	unicodeEscapeSequence: false
 };
 
