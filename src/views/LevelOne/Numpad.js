@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import NumpadLock from 'assets/images/level1/numpad.png';
 import { toast } from 'react-toastify';
-import axios from 'axios'
+import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
 var screenstyle = {
 	position: 'absolute',
@@ -22,7 +23,8 @@ export default class Numpad extends Component {
 		super(props);
 
 		this.state = {
-			keyinput: ''
+			keyinput: '',
+			lvlCleared: false
 		}
 		this.handleClick = this.handleClick.bind(this);
 	}
@@ -49,7 +51,9 @@ export default class Numpad extends Component {
 				}).then(response => {
 					if (response.data.status === "Success") {
 						toast.success(response.data.message);
-						this.props.pushBack();
+						this.setState({
+							lvlCleared: true
+						})
 					}
 				})
 					.catch(error => {
@@ -84,6 +88,9 @@ export default class Numpad extends Component {
 	}
 
 	render() {
+		if (this.state.lvlCleared) {
+			return <Redirect to = {{ pathname: "/dashboard" }} />;
+		}
 		return (
 			<div className='levelOne'>
 				<div className="screen-row">

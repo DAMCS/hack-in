@@ -38,11 +38,14 @@ export default class TypedReactDemo extends React.Component {
 			'As delegating this big responsibility <br>to the most trusted agent, your mission <br>will not be easy.<br>Our Intelligence has prepared a briefing <br>on the opposition you will face.<br>',
 			'Due to the sensitive nature of the assignment,<br>certain rules of engagement must be obeyed.<br>To destroy his work, you have to crack all the <br>security locks enabled in his laboratory.<br>',
 			'You can unlock the rooms one by one only.<br>You will be facing various challenges in <br>cracking codes but I will keep you updated with <br>all the necessary details.<br>',
+			'The tools at the right corner of your <br>screen will come in handy at certain situations.<br>',
+			'You can use them by dragging and dropping <br>them into specific objects.<br>',
 			'So, can your hacking skills help <br>unlock his technical territory ?'
 		];
 		const options = {
 			strings: strings,
-			typeSpeed: 30,
+			typeSpeed: 20,
+			backDelay: 2500
 		};
 		this.typed = new Typed(this.el, options);
 		this.setState({

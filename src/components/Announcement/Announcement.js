@@ -29,8 +29,7 @@ class Announcement extends Component {
 					this.props.announcement.map((object, i) => {
 						return (
 							<div>
-								{i+1}
-								<font color={this.props.seen < object.annoId ? "red" : ""}>{'.'+object.annoMsg}</font> <br />
+								<font color={this.props.seen < object.annoId ? "red" : ""}>{(i + 1)+'.'+object.annoMsg}</font> <br />
 							</div>)
 					})}
 			</div>

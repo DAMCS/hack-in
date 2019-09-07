@@ -5,12 +5,12 @@ import Arrow from '@elsdoerfer/react-arrow';
 import Typed from 'typed.js';
 import { toast } from 'react-toastify'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faServer, faDesktop, faChevronCircleLeft } from '@fortawesome/free-solid-svg-icons'
+import { faServer, faDesktop, faChevronCircleLeft, faLaptop } from '@fortawesome/free-solid-svg-icons'
 import RoomThree from 'assets/images/level3/levelthree.jpg'
 import DataFlow from './DataFlow.js'
 import axios from 'axios';
 function initializeReactGA() {
-	ReactGA.initialize('process.env.GA_ID');
+	ReactGA.initialize(process.env.GA_ID);
 	ReactGA.pageview('/levelthree');
 }
 
@@ -46,33 +46,29 @@ class DataFlowModal extends React.Component {
 		this.state = {
 			modal: false,
 			code: `import pyshark
-        net_interface = 'wlan0'
-        capture_time = 20
-        capture = pyshark.LiveCapture(interface = net_interface)
-        capture.sniff(timeout = capture_time)
-        for i in range(len(capture)):
-        packet = capture[i]
-        try:
-          if packet.http.request_method == 'GET':
-              print("Captured packet number:"+str(i + 1))
-              print(packet.http.request_full_uri)
-          print(packet["urlencoded-form"])
-        except:
-          pass`,
+net_interface = 'wlan0'
+capture_time = 20
+capture = pyshark.LiveCapture(interface = net_interface)
+capture.sniff(timeout = capture_time)
+for i in range(len(capture)):
+  packet = capture[i]
+  try:
+    if packet.http.request_method == 'GET':
+      print(packet["urlencoded-form"])
+  except:
+    pass`,
 			codeTrue: `import pyshark
-        net_interface = 'wlan0'
-        capture_time = 20
-        capture = pyshark.LiveCapture(interface = net_interface)
-        capture.sniff(timeout = capture_time)
-        for i in range(len(capture)):
-        packet = capture[i]
-        try:
-          if packet.http.request_method == 'POST':
-              print("Captured packet number:"+str(i + 1))
-              print(packet.http.request_full_uri)
-          print(packet["urlencoded-form"])
-        except:
-          pass`,
+net_interface = 'wlan0'
+capture_time = 20
+capture = pyshark.LiveCapture(interface = net_interface)
+capture.sniff(timeout = capture_time)
+for i in range(len(capture)):
+  packet = capture[i]
+  try:
+    if packet.http.request_method == 'POST':
+      print(packet["urlencoded-form"])
+  except:
+    pass`,
 		};
 		this.toggle = this.toggle.bind(this);
 		this.handleChange = this.handleChange.bind(this);
@@ -125,25 +121,40 @@ class Transmission extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			check: false
+			check: false,
+			window: false,
 		}
 		this.handleCheck = this.handleCheck.bind(this);
+		this.toggleWindow = this.toggleWindow.bind(this);
 	}
 	handleCheck() {
 		this.setState({
 			check: true
 		})
 	}
+
+	toggleWindow() {
+		this.setState({
+			window: !this.state.window
+		})
+	}
+
 	render() {
 		initializeReactGA();
 		return (
 			<React.Fragment>
-				<div class="h-100 w-100 d-flex flex-column justify-content-center align-items-center">
+				<TypedReact content="Initializing Wireshark..." />
+				<div class="h-10 w-100 d-flex flex-column justify-content-center align-items-center">
 					<Row class="h-25 w-100 d-flex justify-content-center">
-						<div class="d-flex justify-content-center align-items-center"><FontAwesomeIcon icon={faDesktop} size="5x" /></div>
+						<div class="d-flex justify-content-center align-items-center"><FontAwesomeIcon icon={faDesktop} onClick={this.toggleWindow} size="5x" /></div>
 						<div class="d-flex justify-content-center align-items-center"><DataFlowModal handleCheck={this.handleCheck} /></div>
 						<div class="d-flex justify-content-center align-items-center"><FontAwesomeIcon icon={faServer} size="5x" /></div>
 					</Row>
+					<Modal isOpen={this.state.window} toggle={this.toggleWindow} centered className="modal-lg">
+						<ModalBody>
+							<img src={require('../../assets/images/level3/network.png')} alt="Windows" width="765px" height="400px" />
+						</ModalBody>
+					</Modal>
 					<Row class="h-100 w-100 d-flex">
 						<Col className="h-100 w-100 d-flex flex-column justify-content-center align-items-center">
 							<Arrow
@@ -156,9 +167,9 @@ class Transmission extends Component {
 								color='#00de4a'
 								lineDashed="0.9"
 							/>
-							<FontAwesomeIcon icon={faDesktop} size="5x" />
+							<FontAwesomeIcon icon={faLaptop} color='red' size="5x" />
 							<div className="p-2">
-								{this.state.check === true ? <TypedReact content='Your passcode is 11110 00001 00011 00011 1 11000 00000 1' className="p-4 h-100 w-100" /> : ''}
+								{this.state.check === true ? <TypedReact content='11110 00001 00011 00011 1 11000 00000 1' className="p-4 h-100 w-100" /> : ''}
 							</div>
 						</Col>
 					</Row>

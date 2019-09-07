@@ -85,6 +85,7 @@ export default class Dashboard extends Component {
 			maptooltip: false,
 			contacttooltip: false,
 			logouttooltip: false,
+			currentUserLevel: 1
 		}
 	}
 	changeNavigation(level) {
@@ -103,8 +104,8 @@ export default class Dashboard extends Component {
 				}
 			}).then(response => {
 				if (response.data.status === "Success") {
-					console.log(response.data);
-					this.setState({ isLoggedIn: true })
+					//console.log(response.data);
+					this.setState({ isLoggedIn: true , currentUserLevel: response.data.currentLevel})
 				}
 				if (response.data.storySeen === false) {
 					this.setState({
@@ -203,7 +204,7 @@ export default class Dashboard extends Component {
 											StoryLine
         								</Tooltip>
 										<Modal isOpen={this.state.StoryLine} toggle={this.toggle('StoryLine')} className="modal-lg">
-											<ModalHeader> <img alt="Story" width="100%" src={storyLineGIF} /></ModalHeader>
+											<ModalHeader> <img alt="Story" width="765px" style={{justifyContent: 'center',alignItems: 'center'}} src={storyLineGIF} /></ModalHeader>
 											<ModalBody>
 												<StoryLine />
 											</ModalBody>
@@ -280,13 +281,13 @@ export default class Dashboard extends Component {
 							{/* Routing dashboard containers! */}
 							<Switch>
 								{this.state.level.map((level, index) => {
-									if (level.levelId === 1 && level.levelStatus === "open" && level.userLevelStatus === "not completed") {
+									if (level.levelId === 1 && level.levelStatus === "open" && level.userLevelStatus === "not completed" && this.state.currentUserLevel === 1) {
 										return (<Route exact path={`${this.props.match.path}/levelone`} key="1" name="LevelOne" render={props => <LevelOne {...props} changeNavigation={this.changeNavigation} />} />)
 									}
-									else if (level.levelId === 2 && level.levelStatus === "open" && level.userLevelStatus === "not completed") {
+									else if (level.levelId === 2 && level.levelStatus === "open" && level.userLevelStatus === "not completed" && this.state.currentUserLevel === 2) {
 										return (<Route exact path={`${this.props.match.path}/leveltwo`} key="2" name="LevelTwo" render={props => <LevelTwo {...props} changeNavigation={this.changeNavigation} />} />)
 									}
-									else if (level.levelId === 3 && level.levelStatus === "open" && level.userLevelStatus === "not completed") {
+									else if (level.levelId === 3 && level.levelStatus === "open" && level.userLevelStatus === "not completed" && this.state.currentUserLevel === 3) {
 										return (<Route exact path={`${this.props.match.path}/levelthree`} key="3" name="LevelThree" render={props => <LevelThree {...props} changeNavigation={this.changeNavigation} />} />)
 									}
 									else {
