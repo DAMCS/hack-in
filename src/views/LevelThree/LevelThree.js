@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Input, NavLink } from 'reactstrap';
+import { Row, Col, Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Input, NavLink, Spinner } from 'reactstrap';
 import ReactGA from 'react-ga';
 import Arrow from '@elsdoerfer/react-arrow';
 import Typed from 'typed.js';
