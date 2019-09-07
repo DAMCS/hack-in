@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-const Page404 = React.lazy(() => import('views/Pages/Page404'));
+import Page404 from 'views/Pages/Page404';
 
 export default class Loading extends Component {
 	constructor(props) {

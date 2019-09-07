@@ -1,8 +1,9 @@
 import React from 'react';
-import { ListGroup, ListGroupItem } from 'reactstrap';
+import { ListGroup, ListGroupItem, Tooltip } from 'reactstrap';
 
 const thermal = require('assets/images/inventory/thermal.png');
 const usb = require('assets/images/inventory/usb.png');
+const torch = require('assets/images/inventory/torch.png');
 
 (function () {
 	if (!document.querySelectorAll || !('draggable' in document.createElement('span')) || window.opera
@@ -34,18 +35,59 @@ const usb = require('assets/images/inventory/usb.png');
 })();
 
 export default class Inventory extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			tooltipOpenThermal: false,
+			tooltipOpenUSB: false,
+			tooltipOpenTorch: false
+		}
+
+		this.toggleThermal = this.toggleThermal.bind(this);
+		this.toggleUSB = this.toggleUSB.bind(this);
+		this.toggleTorch = this.toggleTorch.bind(this);
+	}
+
+
+	toggleThermal() {
+		this.setState({
+			tooltipOpenThermal: !this.state.tooltipOpenThermal
+		});
+	}
+
+	toggleUSB() {
+		this.setState({
+			tooltipOpenUSB: !this.state.tooltipOpenUSB
+		});
+	}
+
+	toggleTorch() {
+		this.setState({
+			tooltipOpenTorch: !this.state.tooltipOpenTorch
+		});
+	}
+
 	render() {
 		return (
 			<React.Fragment>
 				<ListGroup data-draggable="target" className="p-2">
 					<ListGroupItem data-draggable="target" className="p-2 inventory">
-						<img width="50px" alt="" id="numpad" height="50px" src={thermal} />
+						<img width="50px" alt="" id="thermal" height="50px" src={thermal} />
+						<Tooltip placement="left" isOpen={this.state.tooltipOpenThermal} target={'thermal'} toggle={this.toggleThermal}>
+							Thermal Imaging Camera
+						</Tooltip>
 					</ListGroupItem>
 					<ListGroupItem data-draggable="target" className="p-2 inventory">
-						<img width="50px" alt="" id="terminal" height="50px" src={usb} />
+						<img width="50px" alt="" id="usb" height="50px" src={usb} />
+						<Tooltip placement="left" isOpen={this.state.tooltipOpenUSB} target={'usb'} toggle={this.toggleUSB}>
+							Linux Live USB
+						</Tooltip>
 					</ListGroupItem>
 					<ListGroupItem data-draggable="target" className="p-2 inventory">
-						<img width="50px" alt="" height="50px" src={thermal} />
+						<img width="50px" alt="" id="torch" height="50px" src={torch} />
+						<Tooltip placement="left" isOpen={this.state.tooltipOpenTorch} target={'torch'} toggle={this.toggleTorch}>
+							Torch
+						</Tooltip>
 					</ListGroupItem>
 				</ListGroup>
 			</React.Fragment>

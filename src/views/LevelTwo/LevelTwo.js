@@ -13,7 +13,7 @@ import { faChevronCircleLeft } from '@fortawesome/free-solid-svg-icons'
 
 
 function initializeReactGA() {
-	ReactGA.initialize('process.env.GA_ID');
+	ReactGA.initialize(process.env.GA_ID);
 	ReactGA.pageview('/leveltwo');
 }
 class Terminal extends Component {
@@ -36,7 +36,7 @@ class Terminal extends Component {
 		});
 	}
 	componentDidMount() {
-		const strings = ["Look here...we got a terminal!!!"]
+		const strings = ["Booting into Linux live mode..."]
 		const options = {
 			strings: strings,
 			typeSpeed: 30
@@ -82,8 +82,15 @@ class Terminal extends Component {
 				'/OS/boot': { content: 'Contains boot information' },
 				'/home/README': { content: 'This is a text file' },
 				'/home/users/hacker': {},
-				'/home/user/hacker/passwd': { content: 'You fool!!!' },
-				'/etc/passwd': { content: "Does'nt work like unix :) =>" }
+				'/home/user/hacker/passwd': { content: 'Executable file' },
+				'/etc/passwd': { content: "Not Authorized" },
+				'/dev': {},
+				'/dev/hda1': {},
+				'/dev/hda1/WINDOWS': {},
+				'/dev/hda1/WINDOWS/Users': {},
+				'/dev/hda1/WINDOWS/Users/Desktop': {},
+				'/dev/hda1/WINDOWS/Users/Desktop/DoorKey.txt': {content: "qazwsx007"},
+
 			}),
 			'commandMapping': CommandMapping.create({
 				...defaultCommandMapping,
@@ -105,31 +112,13 @@ class Terminal extends Component {
 					},
 					'optDef': {}
 				},
-				'run': {
-					'function': (state, opts) => {
-						const input = opts.join(' ');
-						let code = ''
-						if (input === "passwd") {
-							code = 'A*&^vdcvW$'
-						} else if (input === '') {
-							code = 'Please give a filename'
-						}
-						else {
-							code = 'Wrong file'
-						}
-						return {
-							output: OutputFactory.makeTextOutput(code)
-						};
-					},
-					'optDef': {}
-				}
 			})
 		});
 		const defaultOutputs = customState.getOutputs();
 
 		const newOutputs = Outputs.addRecord(
 			defaultOutputs, OutputFactory.makeTextOutput(
-				`Welcome Hacker to TERMINAL`
+				`Welcome to Linux Terminal`
 			)
 		);
 		customState = customState.setOutputs(newOutputs);
@@ -198,8 +187,7 @@ export default class LevelTwo extends Component {
 
 		document.addEventListener('drop', function (e) {
 
-			if (e.target.getAttribute('data-draggable') === 'target' && e.target.id === item.id) {
-				console.log("test passed!!");
+			if (e.target.getAttribute('data-draggable') === 'target' && e.target.id === "terminal" && item.id === "usb") {
 				copy.toggle();
 				e.preventDefault();
 			}
@@ -242,7 +230,7 @@ export default class LevelTwo extends Component {
 		}).then(response => {
 			if (response.data.status === "Success") {
 				toast.success(response.data.message);
-				this.props.history.push('/dashboard/');
+				this.props.history.push('/dashboard');
 			}
 		})
 			.catch(function (error) {

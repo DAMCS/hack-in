@@ -40,10 +40,11 @@ class TooltipItem extends React.Component {
 	render() {
 		let text_color = '';
 		this.props.object.userLevelStatus === "completed" ? text_color = "green" : text_color = "red";
+		console.log(this.props.currentlevel, (this.props.i + 1));
 		return (
 			<div class="h-100 w-100 d-flex justify-content-center align-items-center">
 				<NavLink href="#" id={'Level-' + this.props.id} className={"level" + (this.props.i + 1) + "-button"}
-					disabled={this.props.object.levelStatus === "closed" || this.props.object.userLevelStatus === "completed" ? true : false}
+					disabled={this.props.object.levelStatus === "closed" || this.props.object.userLevelStatus === "completed" || this.props.currentlevel != (this.props.i + 1)? true : false}
 					style={{ color: text_color }}
 					onClick={() => {
 						this.handleClick(this.props.i + 1)
@@ -62,9 +63,8 @@ export default class MissionMap extends React.Component {
 		super(props);
 		this.state = {
 			level: [],
+			currentlevel: ""
 		};
-
-
 	}
 	componentDidMount() {
 		this.props.changeNavigation(0);
@@ -79,7 +79,8 @@ export default class MissionMap extends React.Component {
 			.then(response => {
 				console.log(response.data)
 				this.setState({
-					level: response.data.data
+					level: response.data.data,
+					currentlevel: response.data.currentLevel
 				})
 			})
 			.catch(function (error) {
@@ -97,7 +98,7 @@ export default class MissionMap extends React.Component {
 					<img src={MapImage} alt='Map' className="img h-100 w-100" />
 					<div class="fill">
 						{this.state.level.map((object, i) => {
-							return <TooltipItem key={i} id={i} object={object} i={i} {...this.props} />;
+							return <TooltipItem key={i} id={i} object={object} currentlevel={this.state.currentlevel} i={i} {...this.props} />;
 						})}
 					</div>
 				</div>

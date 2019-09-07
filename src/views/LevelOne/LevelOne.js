@@ -7,9 +7,10 @@ import Numpad from './Numpad.js';
 import NumpadReveal from './NumpadReveal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronCircleLeft } from '@fortawesome/free-solid-svg-icons'
+import {withRouter} from 'react-router-dom'
 
 function initializeReactGA() {
-	ReactGA.initialize('process.env.GA_ID');
+	ReactGA.initialize(process.env.GA_ID);
 	ReactGA.pageview('/levelone');
 }
 
@@ -36,8 +37,7 @@ class DoorRoom extends Component {
 
 		document.addEventListener('drop', function (e) {
 
-			if (e.target.getAttribute('data-draggable') === 'target' && e.target.id === item.id) {
-				console.log("test passed!!");
+			if (e.target.getAttribute('data-draggable') === 'target' && e.target.id === "numpad" && item.id === "thermal") {
 				copy.toggleReveal();
 				e.preventDefault();
 			}
@@ -85,7 +85,7 @@ class DoorRoom extends Component {
 	}
 }
 
-export default class LevelOne extends Component {
+class LevelOne extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -105,7 +105,8 @@ export default class LevelOne extends Component {
 	}
 
 	pushBack() {
-		this.props.history.push('/dashboard');
+		console.log('Push back called');
+		this.props.history.push('/dashboard/leveltwo');
 	}
 
 	render() {
@@ -132,3 +133,5 @@ export default class LevelOne extends Component {
 		}
 	}
 }
+
+export default withRouter(LevelOne);
