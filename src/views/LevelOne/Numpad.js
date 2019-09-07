@@ -35,6 +35,7 @@ export default class Numpad extends Component {
 
 		switch (value) {
 			case 'enter': {
+				let check_password = this.state.keyinput;
 				if (this.state.keyinput !== '') {
 					this.setState({ keyinput: '' });
 				}
@@ -46,7 +47,7 @@ export default class Numpad extends Component {
 					},
 					data: {
 						levelId: 1,
-						password: this.state.keyinput
+						password: check_password
 					}
 				}).then(response => {
 					if (response.data.status === "Success") {

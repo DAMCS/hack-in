@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import MapImage from 'assets/images/mission_map/map.jpg';
 import { NavLink, Tooltip } from 'reactstrap';
+import {Redirect} from 'react-router-dom';
 
 class TooltipItem extends React.Component {
 	constructor(props) {
@@ -9,7 +10,8 @@ class TooltipItem extends React.Component {
 		this.handleClick = this.handleClick.bind(this);
 		this.toggle = this.toggle.bind(this);
 		this.state = {
-			tooltipOpen: false
+			tooltipOpen: false,
+			level: 0
 		};
 	}
 
@@ -23,37 +25,44 @@ class TooltipItem extends React.Component {
 		this.props.getLevel(eventNumber);
 		switch (eventNumber) {
 			case 1:
-				this.props.history.push('/dashboard/levelone');
+				this.setState({level: 1});
 				break;
 			case 2:
-				this.props.history.push('/dashboard/leveltwo');
+				this.setState({level: 2});
 				break;
 			case 3:
-				this.props.history.push('/dashboard/levelthree');
+				this.setState({level: 3});
 				break;
 			default:
-				this.props.history.push('/dashboard/');
 				break;
 		}
 	}
 
 	render() {
-		let text_color = '';
-		this.props.object.userLevelStatus === "completed" ? text_color = "green" : text_color = "red";
-		return (
-			<div class="h-100 w-100 d-flex justify-content-center align-items-center">
-				<NavLink href="#" id={'Level-' + this.props.id} className={"level" + (this.props.i + 1) + "-button"}
-					disabled={this.props.object.levelStatus === "closed" || this.props.object.userLevelStatus === "completed" || this.props.currentlevel !== (this.props.i + 1)? true : false}
-					style={{ color: text_color }}
-					onClick={() => {
-						this.handleClick(this.props.i + 1)
-					}}>{this.props.i + 1}
-				</NavLink>
-				<Tooltip placement="top" isOpen={this.state.tooltipOpen} target={'Level-' + this.props.id} toggle={this.toggle}>
-					Level {this.props.id + 1}
-				</Tooltip>
-			</div>
-		);
+		if (this.state.level === 1) {
+			return <Redirect to = {{ pathname: "/dashboard/levelone" }} />;
+		} else if (this.state.level === 2) {
+			return <Redirect to = {{ pathname: "/dashboard/leveltwo" }} />;
+		} else if (this.state.level === 3) {
+			return <Redirect to = {{ pathname: "/dashboard/levelthree" }} />;
+		} else {
+			let text_color = '';
+			this.props.object.userLevelStatus === "completed" ? text_color = "green" : text_color = "red";
+			return (
+				<div class="h-100 w-100 d-flex justify-content-center align-items-center">
+					<NavLink href="#" id={'Level-' + this.props.id} className={"level" + (this.props.i + 1) + "-button"}
+						disabled={this.props.object.levelStatus === "closed" || this.props.object.userLevelStatus === "completed" || this.props.currentlevel !== (this.props.i + 1)? true : false}
+						style={{ color: text_color }}
+						onClick={() => {
+							this.handleClick(this.props.i + 1)
+						}}>{this.props.i + 1}
+					</NavLink>
+					<Tooltip placement="top" isOpen={this.state.tooltipOpen} target={'Level-' + this.props.id} toggle={this.toggle}>
+						Level {this.props.id + 1}
+					</Tooltip>
+				</div>
+			);
+		}
 	}
 }
 

@@ -12,7 +12,7 @@ export default class Loading extends Component {
 	componentDidMount() {
 		setTimeout(function () { //Start the timer
 			this.setState({ render: true }) //After 1 second, set render to true
-		}.bind(this), 1000)
+		}.bind(this), 3500)
 	}
 
 	render() {

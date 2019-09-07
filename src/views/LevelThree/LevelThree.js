@@ -185,7 +185,8 @@ export default class LevelThree extends Component {
 		this.state = {
 			door: false,
 			modal: false,
-			pass: ''
+			pass: '',
+			loading: false
 		};
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.toggle = this.toggle.bind(this);
@@ -207,6 +208,7 @@ export default class LevelThree extends Component {
 		})
 	}
 	handleSubmit(event) {
+		this.setState({loading: true});
 		axios({
 			method: "post",
 			url: "/api/level/completion",
@@ -218,13 +220,15 @@ export default class LevelThree extends Component {
 				password: this.state.pass
 			}
 		}).then(response => {
+			this.setState({loading:false});
 			if (response.data.status === "Success") {
 				toast.success(response.data.message);
-				this.props.history.push('/dashboard/');
+				this.props.history.push('/dashboard');
 			}
 		})
 			.catch(function (error) {
 				console.log(error);
+				this.setState({loading:false});
 				toast.error(error.response.data.message);
 			});
 		event.preventDefault();
@@ -250,7 +254,7 @@ export default class LevelThree extends Component {
 								<FormGroup>
 									<Input value={this.state.pass} onChange={this.handleChange} type="password" name="pass" placeholder="passcode" />
 								</FormGroup>
-								<Button color="success" type="submit" className="success text-white">Submit</Button>&nbsp;
+								<Button color="success" disabled={this.state.loading} type="submit" className="success text-white">{this.state.loading?<Spinner /> :""} Submit</Button>&nbsp;
 								<Button color="danger" onClick={this.toggleModal} className="danger text-white">Close</Button>
 							</Form>
 						</ModalBody>

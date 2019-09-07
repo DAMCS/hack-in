@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Modal, ModalBody, ModalHeader, Button, NavLink } from 'reactstrap';
+import { Row, Col, Modal, ModalBody, ModalHeader, Button, NavLink, Spinner } from 'reactstrap';
 import Typed from 'typed.js';
 import ReactTerminal from 'react-terminal-component';
 import { EmulatorState, FileSystem, OutputFactory, Outputs, History, defaultCommandMapping, CommandMapping } from 'javascript-terminal';
@@ -168,6 +168,7 @@ export default class LevelTwo extends Component {
 			pass: '',
 			modal: false,
 			window: false,
+			loading: false
 		};
 
 		this.toggle = this.toggle.bind(this);
@@ -217,6 +218,7 @@ export default class LevelTwo extends Component {
 		})
 	}
 	handleSubmit(event) {
+		this.setState({loading:true});
 		axios({
 			method: "post",
 			url: "/api/level/completion",
@@ -228,12 +230,14 @@ export default class LevelTwo extends Component {
 				password: this.state.pass
 			}
 		}).then(response => {
+			this.setState({loading:false});
 			if (response.data.status === "Success") {
 				toast.success(response.data.message);
 				this.props.history.push('/dashboard');
 			}
 		})
-			.catch(function (error) {
+			.catch(error => {
+				this.setState({loading:false});
 				toast.error(error.response.data.message);
 			});
 		event.preventDefault();
@@ -258,7 +262,7 @@ export default class LevelTwo extends Component {
 								<FormGroup>
 									<Input value={this.state.pass} onChange={this.handleChange} type="password" name="pass" placeholder="passcode" />
 								</FormGroup>
-								<Button color="success" type="submit" className="success text-white">Submit</Button>&nbsp;
+								<Button color="success" disabled={this.state.loading} type="submit" className="success text-white">{this.state.loading?<Spinner /> :""} Submit</Button>&nbsp;
 								<Button color="danger" onClick={this.toggleModal} className="danger text-white">Close</Button>
 							</Form>
 						</ModalBody>
