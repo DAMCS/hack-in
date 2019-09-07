@@ -13,7 +13,7 @@ import { faChevronCircleLeft } from '@fortawesome/free-solid-svg-icons'
 
 
 function initializeReactGA() {
-	ReactGA.initialize(process.env.GA_ID);
+	ReactGA.initialize(process.env.REACT_APP_GA_ID);
 	ReactGA.pageview('/leveltwo');
 }
 class Terminal extends Component {

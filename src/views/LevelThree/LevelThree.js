@@ -10,7 +10,7 @@ import RoomThree from 'assets/images/level3/levelthree.jpg'
 import DataFlow from './DataFlow.js'
 import axios from 'axios';
 function initializeReactGA() {
-	ReactGA.initialize(process.env.GA_ID);
+	ReactGA.initialize(process.env.REACT_APP_GA_ID);
 	ReactGA.pageview('/levelthree');
 }
 

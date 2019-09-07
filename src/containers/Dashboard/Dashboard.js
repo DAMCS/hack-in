@@ -12,7 +12,7 @@ import { toast } from 'react-toastify';
 import Loading from 'components/Loading';
 
 function initializeReactGA() {
-	ReactGA.initialize(process.env.GA_ID);
+	ReactGA.initialize(process.env.REACT_APP_GA_ID);
 	ReactGA.pageview('/dashboard');
 }
 
@@ -141,7 +141,6 @@ export default class Dashboard extends Component {
 			}
 		})
 			.then(response => {
-				console.log(response.data);
 				this.setState({
 					level: response.data.data
 				})
@@ -316,7 +315,6 @@ export default class Dashboard extends Component {
 	}
 
 	updateHint() {
-		// console.log(this.state.navigation);
 		let token = localStorage.getItem("token");
 		axios({
 			method: "post",
@@ -328,7 +326,6 @@ export default class Dashboard extends Component {
 				levelId: this.state.navigation
 			}
 		}).then(response => {
-			console.log(response.data);
 			this.setState({
 				hints: response.data.data,
 			})

@@ -40,11 +40,10 @@ class TooltipItem extends React.Component {
 	render() {
 		let text_color = '';
 		this.props.object.userLevelStatus === "completed" ? text_color = "green" : text_color = "red";
-		console.log(this.props.currentlevel, (this.props.i + 1));
 		return (
 			<div class="h-100 w-100 d-flex justify-content-center align-items-center">
 				<NavLink href="#" id={'Level-' + this.props.id} className={"level" + (this.props.i + 1) + "-button"}
-					disabled={this.props.object.levelStatus === "closed" || this.props.object.userLevelStatus === "completed" || this.props.currentlevel != (this.props.i + 1)? true : false}
+					disabled={this.props.object.levelStatus === "closed" || this.props.object.userLevelStatus === "completed" || this.props.currentlevel !== (this.props.i + 1)? true : false}
 					style={{ color: text_color }}
 					onClick={() => {
 						this.handleClick(this.props.i + 1)
@@ -77,7 +76,6 @@ export default class MissionMap extends React.Component {
 			}
 		})
 			.then(response => {
-				console.log(response.data)
 				this.setState({
 					level: response.data.data,
 					currentlevel: response.data.currentLevel

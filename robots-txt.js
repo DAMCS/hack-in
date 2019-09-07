@@ -13,5 +13,5 @@ module.exports = {
 			crawlDelay: 10,
 		}
 	],
-	host: process.env.ROBOTS_HOST
+	host: process.env.REACT_APP_ROBOTS_HOST
 };

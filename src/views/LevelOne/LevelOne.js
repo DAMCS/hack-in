@@ -10,7 +10,7 @@ import { faChevronCircleLeft } from '@fortawesome/free-solid-svg-icons'
 import {withRouter} from 'react-router-dom'
 
 function initializeReactGA() {
-	ReactGA.initialize(process.env.GA_ID);
+	ReactGA.initialize(process.env.REACT_APP_GA_ID);
 	ReactGA.pageview('/levelone');
 }
 
@@ -29,7 +29,6 @@ class DoorRoom extends Component {
 
 		var item = null;
 		document.addEventListener('dragstart', function (e) {
-			console.log(e.target.id);
 			item = e.target;
 			e.dataTransfer.setData('text', '');
 
@@ -105,7 +104,6 @@ class LevelOne extends Component {
 	}
 
 	pushBack() {
-		console.log('Push back called');
 		this.props.history.push('/dashboard/leveltwo');
 	}
 

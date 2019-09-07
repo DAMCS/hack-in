@@ -10,7 +10,7 @@ const SignUp = React.lazy(() => import("./SignUp"));
 const Footer = React.lazy(() => import("./Footer"));
 
 function initializeReactGA() {
-	ReactGA.initialize(process.env.GA_ID);
+	ReactGA.initialize(process.env.REACT_APP_GA_ID);
 	ReactGA.pageview('/homepage');
 }
 
@@ -48,7 +48,6 @@ export default class Home extends Component {
 				}
 			}).then(response => {
 				if (response.data.status === "Success") {
-					console.log(response.data);
 					this.setState({ isLoggedIn: true });
 				}
 			});

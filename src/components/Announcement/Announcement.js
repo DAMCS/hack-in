@@ -15,7 +15,7 @@ class Announcement extends Component {
 			}
 			})
 			.then((res) => {
-				console.log(res.data)
+				//console.log(res.data)
 			})
 			.catch(function (error) {
 				console.log(error);

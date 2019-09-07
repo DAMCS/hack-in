@@ -16,7 +16,6 @@ export default class LeaderBoard extends Component {
 				}
 			}
 		).then(response => {
-			console.log(response.data);
 				this.setState({
 					display_name : response.data.name,
 					display_value : response.data.count,
