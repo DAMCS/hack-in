@@ -47,7 +47,7 @@
 	"scripts": {
 		"start": "react-scripts start",
 		"prebuild": "rm -rf ./build",
-		"build": "react-scripts build",
+		"build": "react-scripts build && javascript-obfuscator ./build --output . --config ./javascript-obfuscator.js",
 		"postbuild": "rm -rf build/**/**/*.map && generate-robotstxt --config ./robots-txt.js build/robots.txt",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject",
