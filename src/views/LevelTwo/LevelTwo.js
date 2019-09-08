@@ -60,7 +60,7 @@ class Terminal extends Component {
 		}).then(response => {
 			if (response.data.status === "Success") {
 				toast.success(response.data.message);
-				this.props.history.push('/dashboard/');
+				this.props.history.push('/');
 			}
 		})
 			.catch(function (error) {
@@ -233,7 +233,7 @@ export default class LevelTwo extends Component {
 			this.setState({loading:false});
 			if (response.data.status === "Success") {
 				toast.success(response.data.message);
-				this.props.history.push('/dashboard');
+				this.props.history.push('/');
 			}
 		})
 			.catch(error => {

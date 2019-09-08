@@ -86,7 +86,7 @@ export default class NumpadReveal extends Component {
 
 	render() {
 		if (this.state.lvlCleared) {
-			return <Redirect to = {{ pathname: "/dashboard" }} />;
+			return <Redirect to = {{ pathname: "/" }} />;
 		}
 		return (
 			<div className='levelOne'>

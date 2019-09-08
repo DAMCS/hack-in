@@ -40,10 +40,13 @@ class TooltipItem extends React.Component {
 
 	render() {
 		if (this.state.level === 1) {
+			console.log('test 1');
 			return <Redirect to = {{ pathname: "/dashboard/levelone" }} />;
 		} else if (this.state.level === 2) {
+			console.log('test 2');
 			return <Redirect to = {{ pathname: "/dashboard/leveltwo" }} />;
 		} else if (this.state.level === 3) {
+			console.log('test 3');
 			return <Redirect to = {{ pathname: "/dashboard/levelthree" }} />;
 		} else {
 			let text_color = '';

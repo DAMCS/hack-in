@@ -51,6 +51,7 @@ export default class Dashboard extends Component {
 		this.handleLogout = this.handleLogout.bind(this);
 		this.toggle = this.toggle.bind(this);
 		this.toggleAnnouncement = this.toggleAnnouncement.bind(this);
+		this.updateUserCompletion = this.updateUserCompletion.bind(this);
 
 		this.getLevel = this.getLevel.bind(this);
 		this.hintBuy = this.hintBuy.bind(this);
@@ -93,7 +94,8 @@ export default class Dashboard extends Component {
 			navigation: level
 		})
 	}
-	componentDidMount() {
+
+	updateUserCompletion() {
 		let token = localStorage.getItem("token");
 		if (token) {
 			axios({
@@ -148,6 +150,9 @@ export default class Dashboard extends Component {
 			.catch(function (error) {
 				console.log(error);
 			});
+	}
+	componentDidMount() {
+		this.updateUserCompletion();
 	}
 	render() {
 		initializeReactGA();
@@ -281,18 +286,24 @@ export default class Dashboard extends Component {
 							<Switch>
 								{this.state.level.map((level, index) => {
 									if (level.levelId === 1 && level.levelStatus === "open" && level.userLevelStatus === "not completed" && this.state.currentUserLevel === 1) {
+										console.log('working 1');
 										return (<Route exact path={`${this.props.match.path}/levelone`} key="1" name="LevelOne" render={props => <LevelOne {...props} changeNavigation={this.changeNavigation} />} />)
 									}
 									else if (level.levelId === 2 && level.levelStatus === "open" && level.userLevelStatus === "not completed" && this.state.currentUserLevel === 2) {
+										console.log('working 2');
 										return (<Route exact path={`${this.props.match.path}/leveltwo`} key="2" name="LevelTwo" render={props => <LevelTwo {...props} changeNavigation={this.changeNavigation} />} />)
 									}
 									else if (level.levelId === 3 && level.levelStatus === "open" && level.userLevelStatus === "not completed" && this.state.currentUserLevel === 3) {
+										console.log('working 3');
 										return (<Route exact path={`${this.props.match.path}/levelthree`} key="3" name="LevelThree" render={props => <LevelThree {...props} changeNavigation={this.changeNavigation} />} />)
 									}
 									else {
+										console.log('working 0');
 										return <Route exact path={`${this.props.match.path}`} name="MissionMap" key="0" render={props => <MissionMap {...props} getLevel={this.getLevel} changeNavigation={this.changeNavigation} />} />
+
 									}
 								})}
+								{console.log('working -1')}
 								<Route key="-1" component={Loading} />
 							</Switch>
 						</Col>

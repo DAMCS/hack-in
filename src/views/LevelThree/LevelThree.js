@@ -223,10 +223,10 @@ export default class LevelThree extends Component {
 			this.setState({loading:false});
 			if (response.data.status === "Success") {
 				toast.success(response.data.message);
-				this.props.history.push('/dashboard');
+				this.props.history.push('/');
 			}
 		})
-			.catch(function (error) {
+			.catch(error => {
 				console.log(error);
 				this.setState({loading:false});
 				toast.error(error.response.data.message);

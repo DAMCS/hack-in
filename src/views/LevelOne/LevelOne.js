@@ -104,7 +104,7 @@ class LevelOne extends Component {
 	}
 
 	pushBack() {
-		this.props.history.push('/dashboard/leveltwo');
+		this.props.history.push('/dashboard');
 	}
 
 	render() {
