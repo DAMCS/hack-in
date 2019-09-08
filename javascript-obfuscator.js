@@ -1,7 +1,6 @@
 module.exports = {
 	compact: true,
-	controlFlowFlattening: true,
-	controlFlowFlatteningThreshold: 0.25,
+	controlFlowFlattening: false,
 	deadCodeInjection: false,
 	deadCodeInjectionThreshold: 0,
 	debugProtection: false,
@@ -14,7 +13,7 @@ module.exports = {
 	selfDefending: true,
 	stringArray: true,
 	stringArrayEncoding: 'base64',
-	stringArrayThreshold: 0.25,
+	stringArrayThreshold: 0.15,
 	unicodeEscapeSequence: false
 };
 
