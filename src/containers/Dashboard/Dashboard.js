@@ -107,7 +107,7 @@ export default class Dashboard extends Component {
 			}).then(response => {
 				if (response.data.status === "Success") {
 					//console.log(response.data);
-					this.setState({ isLoggedIn: true , currentUserLevel: response.data.currentLevel})
+					this.setState({ isLoggedIn: true, currentUserLevel: response.data.currentLevel })
 				}
 				if (response.data.storySeen === false) {
 					this.setState({
@@ -208,7 +208,7 @@ export default class Dashboard extends Component {
 											StoryLine
         								</Tooltip>
 										<Modal isOpen={this.state.StoryLine} toggle={this.toggle('StoryLine')} className="modal-lg">
-											<ModalHeader> <img alt="Story" width="765px" style={{justifyContent: 'center',alignItems: 'center'}} src={storyLineGIF} /></ModalHeader>
+											<ModalHeader> <img alt="Story" width="765px" style={{ justifyContent: 'center', alignItems: 'center' }} src={storyLineGIF} /></ModalHeader>
 											<ModalBody>
 												<StoryLine />
 											</ModalBody>
@@ -228,7 +228,7 @@ export default class Dashboard extends Component {
 											<Modal isOpen={this.state.Hint} toggle={this.toggle('Hint')} className="modal-lg">
 												<ModalHeader >Hint</ModalHeader>
 												<ModalBody>
-													{this.state.hints.length !== 0 ? (<React.Fragment></React.Fragment>) : (<div>You haven't bought any hints!</div>)}
+													{this.state.hints.length !== 0 ? (<React.Fragment></React.Fragment>) : (<div>You haven't bought any hints! If you do, then you will lose credits.</div>)}
 													{this.state.hints.map((object, index) => {
 														return (<React.Fragment><div>{object.hintMsg}<br /></div></React.Fragment>)
 													})}
