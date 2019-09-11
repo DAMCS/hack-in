@@ -66,7 +66,7 @@ class Login extends Component {
 								onChange={this.handleInput}
 								value={this.state.email}
 								type="email"
-								placeholder="email"
+								placeholder="Enter email"
 								required
 							/>
 						</FormGroup>

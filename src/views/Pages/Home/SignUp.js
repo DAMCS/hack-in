@@ -15,7 +15,7 @@ class SignUp extends Component {
 			phone: "",
 			loginCode: "",
 			signupType: true,
-			name: "",
+			uname: "",
 			roll_no: "",
 			alumni_code: "",
 		};
@@ -95,9 +95,9 @@ class SignUp extends Component {
 								<FormGroup controlId="formName">
 									<Input
 										className="form-control"
-										name="name"
+										name="uname"
 										onChange={this.handleInput}
-										value={this.state.name}
+										value={this.state.uname}
 										type="text"
 										placeholder="name"
 										required
@@ -108,7 +108,7 @@ class SignUp extends Component {
 										className="form-control"
 										name="roll_no"
 										onChange={this.handleInput}
-										value={this.state.name}
+										value={this.state.roll_no}
 										type="text"
 										placeholder="roll number"
 										required
@@ -159,7 +159,7 @@ class SignUp extends Component {
 									<Input
 										name="alumni_code"
 										onChange={this.handleInput}
-										value={this.state.loginCode}
+										value={this.state.alumni_code}
 										type="text"
 										placeholder="alumni code"
 										required
@@ -175,14 +175,24 @@ class SignUp extends Component {
 	}
 
 	handleSignupType(event) {
+		this.setState({
+			email: "",
+			password: "",
+			confirmPassword: "",
+			phone: "",
+			loginCode: "",
+			uname: "",
+			roll_no: "",
+			alumni_code: "",
+		})
 		if (event.target.name === "alumni") {
 			this.setState({
-				signupType: false
+				signupType: false,
 			})
 		}
 		else {
 			this.setState({
-				signupType: true
+				signupType: true,
 			})
 		}
 
@@ -199,6 +209,7 @@ class SignUp extends Component {
 	}
 	handleSubmit(event) {
 		let passCheck = /^[A-Za-z0-9]\w{7,30}$/;
+		console.log(event.target.name);
 		if (event.target.name === "student") {
 
 			if (!this.state.password.match(passCheck)) {
@@ -235,8 +246,8 @@ class SignUp extends Component {
 						}
 					})
 					.catch((err) => {
-						if (err.data.status === "Error")
-							toast.error("Sign up failed! Please contact hack[in] coordinator!");
+						 if(err.response.data.status === "Error")
+							toast.error(err.response.data.message);
 					});
 			}
 		}
@@ -254,7 +265,7 @@ class SignUp extends Component {
 					method: "post",
 					url: "/api/user/signup/alum",
 					data: {
-						name: this.state.name,
+						name: this.state.uname,
 						rollno: this.state.roll_no,
 						email: this.state.email,
 						password: this.state.password,
@@ -277,8 +288,8 @@ class SignUp extends Component {
 						}
 					})
 					.catch((err) => {
-						if (err.data.status === "Error")
-							toast.error("Sign up failed! Please contact hack[in] coordinator!");
+						if (err.response.data.status === "Error")
+							toast.error(err.response.data.message);
 					});
 			}
 		}
