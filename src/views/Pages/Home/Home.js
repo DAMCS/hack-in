@@ -63,8 +63,8 @@ export default class Home extends Component {
 			return (
 				<React.Fragment>
 					<Container fluid className="h-100 w-100 d-flex flex-column justify-content-center">
-						<Row className="h-100 d-flex justify-content-center align-items-center">
-							<Col xs="12 d-flex flex-column align-items-center mx-0 m">
+						<Row className="h-100 d-flex justify-content-end align-items-end mt-auto">
+							<Col xs="12 d-flex flex-column align-items-center">
 								<Header />
 							</Col>
 						</Row>
