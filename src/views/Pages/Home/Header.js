@@ -5,7 +5,7 @@ export default class Header extends Component {
 	render() {
 		return (
 			<React.Fragment>
-				<Container fluid className="d-flex justify-content-center mb-4">
+				<Container fluid className="h-100 d-flex justify-content-center my-auto">
 					<h1>
 						<NavLink href="/">
 							HACK[IN]

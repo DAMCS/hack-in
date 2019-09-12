@@ -26,9 +26,10 @@ body,
   }
 }
 
-@import "_footer.scss";
-@import "_level_two.scss";
-@import "_level_one.scss";
+@import "home.scss";
+@import "footer.scss";
+@import "level_two.scss";
+@import "level_one.scss";
 @import "mission_map.scss";
 @import "story_line.scss";
 @import "inventory.scss";

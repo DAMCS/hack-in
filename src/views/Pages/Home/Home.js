@@ -63,12 +63,12 @@ export default class Home extends Component {
 			return (
 				<React.Fragment>
 					<Container fluid className="h-100 w-100 d-flex flex-column justify-content-center">
-						<Row>
-							<Col xs="12">
+						<Row className="h-100 d-flex justify-content-center align-items-center">
+							<Col xs="12 d-flex flex-column align-items-center mx-0 m">
 								<Header />
 							</Col>
 						</Row>
-						<Row className="">
+						<Row className="h-100 d-flex justify-content-center">
 							<Col xs="12" className="d-flex flex-column justify-content-center align-items-center align-middle w-50">
 								<TabContent activeTab={this.state.activeTab} className="p-2">
 									<TabPane tabId="SignIn">
@@ -83,8 +83,8 @@ export default class Home extends Component {
 								</NavLink>
 							</Col>
 						</Row>
-						<Row>
-							<Col xs="12">
+						<Row className="h-100 w-100 d-flex justify-content-center">
+							<Col xs="12" className="w-100 d-flex justify-content-end">
 								<Footer />
 							</Col>
 						</Row>

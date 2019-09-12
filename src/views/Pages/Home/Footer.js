@@ -48,13 +48,12 @@ export default class Footer extends Component {
 	render() {
 		return (
 			<React.Fragment>
-				<Container fluid className="fixed-bottom">
-					<section id="lab_social_icon_footer">
-						<Container>
-							<div style={{ float: "left" }}>
-								Login 2k19, PSG College of Technology.
+				<Container fluid className="h-100 w-100 d-flex justify-content-center align-items-end">
+					<div id="lab_social_icon_footer h-100 w-100 d-flex justify-content-between">
+						<div style={{ float: "left" }} className="d-flex justify-content-start align-items-center">
+								Login 2k19,<br /> PSG College of Technology.
 									</div>
-							<div style={{ float: "right" }} class="d-flex justfy-content-end">
+							<div style={{ float: "right" }} class="d-flex justfy-content-end align-items-center">
 								<div style={{ float: "left" }}>
 									<Contact />
 								</div>
@@ -77,8 +76,7 @@ export default class Footer extends Component {
 									/>
 								</NavLink>
 							</div>
-						</Container>
-					</section>
+					</div>
 				</Container>
 			</React.Fragment>
 		);
