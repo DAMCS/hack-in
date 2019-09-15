@@ -21,9 +21,12 @@ const Inventory = React.lazy(() => import('components/Inventory/Inventory'));
 const LeaderBoard = React.lazy(() => import('components/LeaderBoard'));
 const StoryLine = React.lazy(() => import('components/StoryLine'));
 const MissionMap = React.lazy(() => import('components/MissionMap'));
-const LevelThree = React.lazy(() => import('views/LevelThree'));
 const LevelOne = React.lazy(() => import('views/LevelOne'));
 const LevelTwo = React.lazy(() => import('views/LevelTwo'));
+const LevelThree = React.lazy(() => import('views/LevelThree'));
+const LevelFour = React.lazy(() => import('views/LevelFour'));
+const LevelFive = React.lazy(() => import('views/LevelFive'));
+const LevelSix = React.lazy(() => import('views/LevelSix'));
 const storyLineGIF = require('assets/images/story_line/story.gif');
 
 library.add(faSatelliteDish, faTable, faSignOutAlt, faAngleLeft, faIdCard, faVideo, faAngleRight, faLightbulb)
@@ -297,10 +300,16 @@ export default class Dashboard extends Component {
 										console.log('working 3');
 										return (<Route exact path={`${this.props.match.path}/levelthree`} key="3" name="LevelThree" render={props => <LevelThree {...props} changeNavigation={this.changeNavigation} />} />)
 									}
+									else if (level.levelId === 4 &&  level.levelStatus === "open" && level.userLevelStatus === "not completed" && this.state.currentUserLevel === 4) {
+										return (<Route exact path={`${this.props.match.path}/levelfour`} key="4" name="LevelFour" render={props => <LevelFour {...props} changeNavigation={this.changeNavigation} />} />)
+									} else if (level.levelId === 5 &&  level.levelStatus === "open" && level.userLevelStatus === "not completed" && this.state.currentUserLevel === 5 ) {
+										return (<Route exact path={`${this.props.match.path}/levelfive`} key="5" name="LevelFive" render={props => <LevelFive {...props} changeNavigation={this.changeNavigation} />} />)
+									} else if (level.levelId === 6 &&  level.levelStatus === "open" && level.userLevelStatus === "not completed" && this.state.currentUserLevel === 6 ) {
+										return (<Route exact path={`${this.props.match.path}/levelsix`} key="6" name="LevelSix" render={props => <LevelSix {...props} changeNavigation={this.changeNavigation} />} />)
+									}
 									else {
 										console.log('working 0');
 										return <Route exact path={`${this.props.match.path}`} name="MissionMap" key="0" render={props => <MissionMap {...props} getLevel={this.getLevel} changeNavigation={this.changeNavigation} />} />
-
 									}
 								})}
 								{console.log('working -1')}

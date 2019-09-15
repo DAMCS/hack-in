@@ -5,7 +5,7 @@ import ReactTerminal from 'react-terminal-component';
 import { EmulatorState, FileSystem, OutputFactory, Outputs, History, defaultCommandMapping, CommandMapping } from 'javascript-terminal';
 import { Form, FormGroup, Input } from 'reactstrap';
 import ReactGA from 'react-ga';
-import RoomTwo from 'assets/images/level2/leveltwo.jpg';
+import RoomFour from 'assets/images/level5/levelfive.jpg'
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -14,8 +14,9 @@ import { faChevronCircleLeft } from '@fortawesome/free-solid-svg-icons'
 
 function initializeReactGA() {
 	ReactGA.initialize(process.env.REACT_APP_GA_ID);
-	ReactGA.pageview('/leveltwo');
+	ReactGA.pageview('/levelfive');
 }
+
 class Terminal extends Component {
 	constructor(props) {
 		super(props);
@@ -36,7 +37,7 @@ class Terminal extends Component {
 		});
 	}
 	componentDidMount() {
-		const strings = ["Booting into Linux live mode..."]
+		const strings = ["Booting into Linux..."]
 		const options = {
 			strings: strings,
 			typeSpeed: 30
@@ -46,50 +47,36 @@ class Terminal extends Component {
 	componentWillUnmount() {
 		this.typed.destroy();
 	}
-	handleSubmit() {
-		axios({
-			method: "post",
-			url: "/api/level/completion",
-			headers: {
-				Authorization: "Bearer " + localStorage.getItem('token')
-			},
-			data: {
-				levelId: 2,
-				password: this.state.pass
-			}
-		}).then(response => {
-			if (response.data.status === "Success") {
-				toast.success(response.data.message);
-				this.props.history.push('/');
-			}
-		})
-			.catch(function (error) {
-				console.log(error);
-				toast.error('You entered the wrong code');
-			});
-	}
+	
 	render() {
+		initializeReactGA();
 		let customState = EmulatorState.create({
 			'fs': FileSystem.create({
 				'/home': {},
 				'/bin': {},
 				'/bin/passwd': { content: 'You are not allowed to access this file' },
+				'/bin/clone': { content: 'Clones file to local storage.' },
 				'/etc': {},
 				'/Network': {},
 				'/Network/netstat': { content: 'You are not allowed to access this file' },
 				'/OS': {},
 				'/OS/boot': { content: 'Contains boot information' },
-				'/home/README': { content: 'This is a text file' },
+				'/home/README': { content: 'This is not just a text file' },
+				'/home/program.java': {content: 'Cannot display. Not in this Project directory.'},
 				'/home/users/hacker': {},
 				'/home/user/hacker/passwd': { content: 'Executable file' },
+				'/home/user/hacker/door_logic': { content: 'Copyable file' },
 				'/etc/passwd': { content: "Not Authorized" },
 				'/dev': {},
 				'/dev/hda1': {},
-				'/dev/hda1/WINDOWS': {},
-				'/dev/hda1/WINDOWS/Users': {},
-				'/dev/hda1/WINDOWS/Users/Desktop': {},
-				'/dev/hda1/WINDOWS/Users/Desktop/DoorKey.txt': {content: "qazwsx007"},
-
+				'/dev/hda1/script.py': {content: 'Permission restricted.'},
+				'/var': {},
+				'/var/www': {},
+				'/var/www/html': {},
+				'/var/www/html/index.html': {content: '<html><head><title>Door key display page</title></head><body id="showkey"></body></html>'},
+				'/var/www/html/index.js': {content: 'console.log("You came very close");'},
+				'/var/www/html/App.js': {content: 'Permission restricted.'},
+				'/var/www/html/README': {content: 'Installation : git clone <repo name>.'},
 			}),
 			'commandMapping': CommandMapping.create({
 				...defaultCommandMapping,
@@ -111,13 +98,31 @@ class Terminal extends Component {
 					},
 					'optDef': {}
 				},
+				'clone': {
+					'function': (state, opts) => {
+						if (opts.length !== 0) {
+							if (opts[0] === 'door_logic') {
+								return window.open("/door_key");
+							} else {
+								return {
+									output: OutputFactory.makeTextOutput("File can't be cloned.")
+								};
+							}
+						} else {
+							return {
+								output: OutputFactory.makeTextOutput("Enter file to clone...")
+							};
+						}
+					},
+					'optDef': {}
+				},
 			})
 		});
 		const defaultOutputs = customState.getOutputs();
 
 		const newOutputs = Outputs.addRecord(
 			defaultOutputs, OutputFactory.makeTextOutput(
-				`Welcome to Linux Terminal`
+				`Welcome to secured shell!`
 			)
 		);
 		customState = customState.setOutputs(newOutputs);
@@ -150,7 +155,7 @@ class Terminal extends Component {
 									width: '100%',
 									height: '100%'
 								}
-							} promptSymbol='guest@Hackin>' emulatorState={customState} clickToFocus autoFocus={false} />
+							} promptSymbol='Schwarz@Hackin>' emulatorState={customState} clickToFocus autoFocus={false} />
 						</Col>
 					</Row>
 				</div>
@@ -159,7 +164,7 @@ class Terminal extends Component {
 	}
 }
 
-export default class LevelTwo extends Component {
+export default class LevelFive extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -175,26 +180,16 @@ export default class LevelTwo extends Component {
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.toggleModal = this.toggleModal.bind(this);
 		this.toggleWindow = this.toggleWindow.bind(this);
-		let copy = this;
-
 		var item = null;
 		document.addEventListener('dragstart', function (e) {
 			item = e.target;
-
+			console.log(item.id);
 			e.dataTransfer.setData('text', '');
 
 		}, false);
-
-		document.addEventListener('drop', function (e) {
-
-			if (e.target.getAttribute('data-draggable') === 'target' && e.target.id === "terminal" && item.id === "usb") {
-				copy.toggle();
-				e.preventDefault();
-			}
-		}, false);
 	}
 	componentDidMount() {
-		this.props.changeNavigation(2)
+		this.props.changeNavigation(5)
 	}
 	toggle() {
 		this.setState(prevState => ({
@@ -225,7 +220,7 @@ export default class LevelTwo extends Component {
 				Authorization: "Bearer " + localStorage.getItem('token')
 			},
 			data: {
-				levelId: 2,
+				levelId: 5,
 				password: this.state.pass
 			}
 		}).then(response => {
@@ -242,16 +237,15 @@ export default class LevelTwo extends Component {
 		event.preventDefault();
 	}
 	render() {
-		initializeReactGA();
 		if (this.state.terminal === false) {
 			return (
 				<React.Fragment>
 					<div class="d-flex justify-content-center align-items-center">
-						<img src={RoomTwo} alt='Room One' useMap='#image-door' class="d-flex justify-content-center" />
+						<img src={RoomFour} alt='Room Four' useMap='#image-door' />
 						<map name="image-door">
 							{/* <area alt="door" title="door" coords="825,279,825,512,878,541,877,271" shape="poly" onClick={this.toggle} /> */}
-							<area id="Entrance" alt="door2" title="Entrance" coords="373,309,494,520" shape="rect" onClick={this.toggleModal} />
-							<area id='terminal' alt="terminal" title="terminal" data-draggable="target" coords="593,414,646,448" shape="rect" onClick={this.toggleWindow} />
+							<area id="Entrance" alt="door2" title="Entrance" coords="189,312,311,524" shape="rect" onClick={this.toggleModal} />
+							<area id='terminal' alt="terminal" title="terminal" coords="637,373,717,428" shape="rect" onClick={this.toggle}/>
 							<area id="Exit" alt="door1" title="Exit" coords="72,308,74,615,118,578,116,310" shape="poly" />
 						</map>
 					</div>
@@ -267,11 +261,12 @@ export default class LevelTwo extends Component {
 							</Form>
 						</ModalBody>
 					</Modal>
-					<Modal isOpen={this.state.window} toggle={this.toggleWindow} centered className="modal-lg">
+					{/* <Modal isOpen={this.state.window} toggle={this.toggleWindow} centered className="modal-lg">
 						<ModalBody>
-							<img src={require('../../assets/images/level2/windows.jpg')} alt="Windows" width="765px" height="400px" />
+							<img src={require('../../assets/images/level4/monali_saw.jpg')} alt="stylesuxx" style={{"display":"none"}} />
+							<img src={require('../../assets/images/level4/mona.png')} alt="Monalisa" width="765px" height="400px" />
 						</ModalBody>
-					</Modal>
+					</Modal> */}
 				</React.Fragment>
 			)
 		} else {

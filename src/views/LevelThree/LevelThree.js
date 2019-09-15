@@ -97,6 +97,7 @@ for i in range(len(capture)):
 		this.toggle();
 	}
 	render() {
+		initializeReactGA();
 		return (
 			<div class="h-100 w-100">
 				<NavLink className="h-100 w-100" style={{ cursor: "pointer" }} onClick={this.toggle}><DataFlow /></NavLink>
@@ -140,7 +141,6 @@ class Transmission extends Component {
 	}
 
 	render() {
-		initializeReactGA();
 		return (
 			<React.Fragment>
 				<TypedReact content="Initializing Wireshark..." />

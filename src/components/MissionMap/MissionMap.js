@@ -33,6 +33,15 @@ class TooltipItem extends React.Component {
 			case 3:
 				this.setState({level: 3});
 				break;
+			case 4:
+				this.setState({level: 4});
+				break;
+			case 5:
+				this.setState({level: 5});
+				break;
+			case 6:
+				this.setState({level: 6});
+				break;
 			default:
 				break;
 		}
@@ -48,6 +57,15 @@ class TooltipItem extends React.Component {
 		} else if (this.state.level === 3) {
 			console.log('test 3');
 			return <Redirect to = {{ pathname: "/dashboard/levelthree" }} />;
+		} else if (this.state.level === 4) {
+			console.log('test 4');
+			return <Redirect to = {{ pathname: "/dashboard/levelfour" }} />;
+		} else if (this.state.level === 5) {
+			console.log('test 5');
+			return <Redirect to = {{ pathname: "/dashboard/levelfive" }} />;
+		} else if (this.state.level === 6) {
+			console.log('test 6');
+			return <Redirect to = {{ pathname: "/dashboard/levelsix" }} />;
 		} else {
 			let text_color = '';
 			this.props.object.userLevelStatus === "completed" ? text_color = "green" : text_color = "red";
