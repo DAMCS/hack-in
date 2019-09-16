@@ -245,7 +245,7 @@ export default class LevelFour extends Component {
 					</Modal>
 					<Modal isOpen={this.state.window} toggle={this.toggleWindow} centered className="modal-lg">
 						<ModalBody>
-							<img src={require('../../assets/images/level4/monali_saw.jpg')} alt="stylesuxx" style={{"display":"none"}} />
+							<img src={require('../../assets/images/level4/monali_saw.jpg')} alt="stylesuxx"  width="765px" height="400px"  style={{"display":"none"}} />
 							<img src={require('../../assets/images/level4/mona.png')} alt="Monalisa" width="765px" height="400px" />
 						</ModalBody>
 					</Modal>

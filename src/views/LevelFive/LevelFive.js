@@ -56,6 +56,7 @@ class Terminal extends Component {
 				'/bin': {},
 				'/bin/passwd': { content: 'You are not allowed to access this file' },
 				'/bin/clone': { content: 'Clones file to local storage.' },
+				'/bin/uname': { content: 'Prints system architecture.' },
 				'/etc': {},
 				'/Network': {},
 				'/Network/netstat': { content: 'You are not allowed to access this file' },
@@ -113,6 +114,15 @@ class Terminal extends Component {
 								output: OutputFactory.makeTextOutput("Enter file to clone...")
 							};
 						}
+					},
+					'optDef': {}
+				},
+				'uname': {
+					'function': (state, opts) => {
+						let code = "Linux server 4.4.0-148-generic #174-Ubuntu SMP x86_64 x86_64 x86_64 GNU/Linux"
+						return {
+							output: OutputFactory.makeTextOutput(code)
+						};
 					},
 					'optDef': {}
 				},
