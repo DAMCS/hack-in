@@ -399,7 +399,7 @@ export default class Dashboard extends Component {
 			})
 			.catch((err) => {
 				toast.error("Internal Error");
-				if (error.response.data.message === "Auth failed. Please Login.") {
+				if (err.response.data.message === "Auth failed. Please Login.") {
 					this.props.history.push("/dashboard");
 				}
 			})

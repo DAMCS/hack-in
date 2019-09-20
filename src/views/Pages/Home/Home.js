@@ -49,9 +49,6 @@ export default class Home extends Component {
 			}).then(response => {
 				if (response.data.status === "Success") {
 					this.setState({ isLoggedIn: true });
-					if (error.response.data.message === "Auth failed. Please Login.") {
-						this.props.history.push("/dashboard");
-					}
 				}
 			});
 		}
