@@ -19,6 +19,9 @@ class Announcement extends Component {
 			})
 			.catch(function (error) {
 				console.log(error);
+				if (error.response.data.message === "Auth failed. Please Login.") {
+					this.props.history.push("/dashboard");
+				}
 			})
 	}
 

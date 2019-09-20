@@ -60,6 +60,9 @@ export default class Numpad extends Component {
 					.catch(error => {
 						console.log(error);
 						toast.error(error.response.data.message);
+						if (error.response.data.message === "Auth failed. Please Login.") {
+							this.props.history.push("/dashboard");
+						}
 					});
 				break;
 			}

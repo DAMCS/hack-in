@@ -153,6 +153,9 @@ export default class Dashboard extends Component {
 			})
 			.catch(function (error) {
 				console.log(error);
+				if (error.response.data.message === "Auth failed. Please Login.") {
+					this.props.history.push("/dashboard");
+				}
 			});
 	}
 	componentDidMount() {
@@ -354,6 +357,9 @@ export default class Dashboard extends Component {
 			})
 		}).catch(error => {
 			console.log(error);
+			if (error.response.data.message === "Auth failed. Please Login.") {
+				this.props.history.push("/dashboard");
+			}
 		})
 	}
 
@@ -393,6 +399,9 @@ export default class Dashboard extends Component {
 			})
 			.catch((err) => {
 				toast.error("Internal Error");
+				if (error.response.data.message === "Auth failed. Please Login.") {
+					this.props.history.push("/dashboard");
+				}
 			})
 	}
 

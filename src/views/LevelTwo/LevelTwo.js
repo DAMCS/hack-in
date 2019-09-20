@@ -66,6 +66,9 @@ class Terminal extends Component {
 			.catch(function (error) {
 				console.log(error);
 				toast.error('You entered the wrong code');
+				if (error.response.data.message === "Auth failed. Please Login.") {
+					this.props.history.push("/dashboard");
+				}
 			});
 	}
 	render() {
@@ -238,6 +241,9 @@ export default class LevelTwo extends Component {
 			.catch(error => {
 				this.setState({loading:false});
 				toast.error(error.response.data.message);
+				if (error.response.data.message === "Auth failed. Please Login.") {
+					this.props.history.push("/dashboard");
+				}
 			});
 		event.preventDefault();
 	}
