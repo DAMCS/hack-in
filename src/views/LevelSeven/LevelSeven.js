@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
-import { Form, Modal, ModalBody, ModalHeader, Button, Spinner } from 'reactstrap';
+import { Row, Col, Input, Form, FormGroup, NavLink, Modal, ModalBody, ModalHeader, Button, Spinner } from 'reactstrap';
 import ReactGA from 'react-ga';
 import RoomFour from 'assets/images/level6/levelsix.jpg'
+import PhpLogo from 'assets/images/level7/download.jpg'
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronCircleLeft } from '@fortawesome/free-solid-svg-icons'
 
 
 function initializeReactGA() {
@@ -11,11 +14,68 @@ function initializeReactGA() {
 	ReactGA.pageview('/levelseven');
 }
 
+class PhpMyAdmin extends Component{
+
+	constructor(props) {
+		super(props);
+		this.state = {
+			username: "",
+			password: "",
+			isLoggedIn: false,
+			msg: "",
+			visible: true
+		};
+		this.handleInput = this.handleInput.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
+	}
+	handleInput(event) {
+		const target = event.target;
+		const value = target.value;
+		const name = target.name;
+
+		this.setState({
+			[name]: value
+		});
+	}
+	handleSubmit(event) {
+		event.preventDefault();
+	}
+
+	render(){
+		return(
+			<Form onSubmit={this.handleSubmit} className="d-flex flex-column align-items-center">
+						<FormGroup>
+							<Input
+								className="form-control"
+								name="username"
+								onChange={this.handleInput}
+								value={this.state.username}
+								type="username"
+								placeholder="username"
+								required
+							/>
+						</FormGroup>
+						<FormGroup controlId="formBasicPassword">
+							<Input
+								name="password"
+								onChange={this.handleInput}
+								value={this.state.password}
+								type="password"
+								placeholder="password"
+								required
+							/>
+						</FormGroup>
+						<Button type="submit">Go</Button>
+					</Form>
+		)
+	}
+}
+
 export default class LevelSeven extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			terminal: false,
+			phpmyadmin: false,
 			pass: '',
 			modal: false,
 			window: false,
@@ -40,7 +100,7 @@ export default class LevelSeven extends Component {
 	}
 	toggle() {
 		this.setState(prevState => ({
-			terminal: !prevState.terminal
+			phpmyadmin: !prevState.phpmyadmin
 		}));
 	}
 	handleChange(event) {
@@ -88,14 +148,14 @@ export default class LevelSeven extends Component {
 	}
 	render() {
 		initializeReactGA();
-		if (this.state.terminal === false) {
+		if (this.state.phpmyadmin === false) {
 			return (
 				<React.Fragment>
 					<div class="d-flex justify-content-center align-items-center">
 						<img src={RoomFour} alt='Room Four' useMap='#image-door' />
 						<map name="image-door">
 							{/* <area alt="door" title="door" coords="825,279,825,512,878,541,877,271" shape="poly" onClick={this.toggle} /> */}
-							<area id="Switch" alt="switch" title="Switch" coords="624,410,24" shape="circle" onClick={this.toggleModal} />
+							<area id="Switch" alt="switch" title="Switch" coords="624,410,24" shape="circle" onClick={this.toggle} />
 						</map>
 					</div>
 					<Modal isOpen={this.state.modal} centered toggle={this.toggleModal}>
@@ -108,6 +168,25 @@ export default class LevelSeven extends Component {
 						</ModalBody>
 					</Modal>
 				</React.Fragment>
+			)
+		}
+		else{
+			return(
+				<div class="h-100 w-100 p-4 d-flex flex-column justify-content-center">
+					<Row className="p-6 h-100 w-100 d-flex justify-content-center align-self-center">
+						<Col className="h-100 w-100 d-flex justify-content-center align-items-center">
+							<img src={PhpLogo} alt='' useMap='#image-door' />
+						</Col>
+					</Row>
+					<Row className="h-100 w-100  d-flex align-items-center" >
+						<Col className="h-100 w-100">
+							<PhpMyAdmin />
+							<NavLink className="back-button" onClick={() => { this.setState({ phpmyadmin: false }) }}>
+								<FontAwesomeIcon icon={faChevronCircleLeft} size="1x" title="Back"></FontAwesomeIcon>
+							</NavLink>
+						</Col>
+					</Row>
+				</div>
 			)
 		}
 	}
