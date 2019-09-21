@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Input, Form, FormGroup, NavLink, Modal, ModalBody, ModalHeader, Button, Spinner } from 'reactstrap';
+import { Row, Col, Input, Form, FormGroup, NavLink, Modal, ModalBody, ModalHeader, Button, Spinner,Label } from 'reactstrap';
 import ReactGA from 'react-ga';
 import RoomFour from 'assets/images/level6/levelsix.jpg'
 import PhpLogo from 'assets/images/level7/download.jpg'
@@ -43,29 +43,36 @@ class PhpMyAdmin extends Component{
 
 	render(){
 		return(
-			<Form onSubmit={this.handleSubmit} className="d-flex flex-column align-items-center">
+			<Form onSubmit={this.handleSubmit} className="d-flex flex-column align-items-center" style={{ color: "black"}}>
 						<FormGroup>
+							<Label>
+								Username:
+							</Label>
 							<Input
 								className="form-control"
 								name="username"
 								onChange={this.handleInput}
 								value={this.state.username}
 								type="username"
-								placeholder="username"
 								required
+								style={{ background:"white", borderColor: "black"}}
+								// onFocus={()=>{this.style.borderColor="black"}}
 							/>
 						</FormGroup>
 						<FormGroup controlId="formBasicPassword">
+							<Label>
+								Password:
+							</Label>
 							<Input
 								name="password"
 								onChange={this.handleInput}
 								value={this.state.password}
 								type="password"
-								placeholder="password"
 								required
+								style={{ background: "white", borderColor: "black" }}
 							/>
 						</FormGroup>
-						<Button type="submit">Go</Button>
+						<Button style={{ background: "grey", borderColor: "black",color:"black" }} type="submit">Go</Button>
 					</Form>
 		)
 	}
@@ -79,7 +86,9 @@ export default class LevelSeven extends Component {
 			pass: '',
 			modal: false,
 			window: false,
-			loading: false
+			loading: false,
+			posX:0,
+			posy:0,
 		};
 
 		this.toggle = this.toggle.bind(this);
@@ -87,12 +96,27 @@ export default class LevelSeven extends Component {
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.toggleModal = this.toggleModal.bind(this);
 		this.toggleWindow = this.toggleWindow.bind(this);
-		var item = null;
+		let item = null;
+		let check = false;
 		document.addEventListener('dragstart', function (e) {
 			item = e.target;
-			console.log(item.id);
 			e.dataTransfer.setData('text', '');
+			if(item.id === "torch"){
+				check = true;
+			}
+		}, false);
 
+		document.addEventListener('mousemove', function (e) {
+			if (e.target.getAttribute('data-draggable') === 'target'  && check) {
+				console.log(e.ClientX,e.clientY);
+				e.preventDefault();
+			}
+		}, false);
+
+		document.addEventListener('drop', function (e) {
+			if (e.target.getAttribute('data-draggable') === 'target' && item.id === "torch") {
+				check = false;
+			}
 		}, false);
 	}
 	componentDidMount() {
@@ -152,7 +176,7 @@ export default class LevelSeven extends Component {
 			return (
 				<React.Fragment>
 					<div class="d-flex justify-content-center align-items-center">
-						<img src={RoomFour} alt='Room Four' useMap='#image-door' />
+						<img data-draggable="target" src={RoomFour} alt='Room Four' useMap='#image-door' />
 						<map name="image-door">
 							{/* <area alt="door" title="door" coords="825,279,825,512,878,541,877,271" shape="poly" onClick={this.toggle} /> */}
 							<area id="Switch" alt="switch" title="Switch" coords="624,410,24" shape="circle" onClick={this.toggle} />
@@ -172,7 +196,7 @@ export default class LevelSeven extends Component {
 		}
 		else{
 			return(
-				<div class="h-100 w-100 p-4 d-flex flex-column justify-content-center">
+				<div class="h-100 w-100 p-4 d-flex flex-column justify-content-center" style={{background:"white"}}>
 					<Row className="p-6 h-100 w-100 d-flex justify-content-center align-self-center">
 						<Col className="h-100 w-100 d-flex justify-content-center align-items-center">
 							<img src={PhpLogo} alt='' useMap='#image-door' />
@@ -182,7 +206,7 @@ export default class LevelSeven extends Component {
 						<Col className="h-100 w-100">
 							<PhpMyAdmin />
 							<NavLink className="back-button" onClick={() => { this.setState({ phpmyadmin: false }) }}>
-								<FontAwesomeIcon icon={faChevronCircleLeft} size="1x" title="Back"></FontAwesomeIcon>
+								<FontAwesomeIcon icon={faChevronCircleLeft} size="1x" title="Back" style={{color:"black"}}></FontAwesomeIcon>
 							</NavLink>
 						</Col>
 					</Row>
