@@ -244,7 +244,7 @@ export default class LevelFive extends Component {
 				this.setState({loading:false});
 				toast.error(error.response.data.message);
 				if (error.response.data.message === "Auth failed. Please Login.") {
-					this.props.history.push("/dashboard");
+					this.props.history.push("/");
 				}
 			});
 		event.preventDefault();

@@ -63,11 +63,11 @@ class Terminal extends Component {
 				this.props.history.push('/');
 			}
 		})
-			.catch(function (error) {
+			.catch(error => {
 				console.log(error);
 				toast.error('You entered the wrong code');
 				if (error.response.data.message === "Auth failed. Please Login.") {
-					this.props.history.push("/dashboard");
+					this.props.history.push("/");
 				}
 			});
 	}
@@ -242,7 +242,7 @@ export default class LevelTwo extends Component {
 				this.setState({loading:false});
 				toast.error(error.response.data.message);
 				if (error.response.data.message === "Auth failed. Please Login.") {
-					this.props.history.push("/dashboard");
+					this.props.history.push("/");
 				}
 			});
 		event.preventDefault();

@@ -17,10 +17,10 @@ class Announcement extends Component {
 			.then((res) => {
 				//console.log(res.data)
 			})
-			.catch(function (error) {
+			.catch(error => {
 				console.log(error);
 				if (error.response.data.message === "Auth failed. Please Login.") {
-					this.props.history.push("/dashboard");
+					this.props.history.push("/");
 				}
 			})
 	}

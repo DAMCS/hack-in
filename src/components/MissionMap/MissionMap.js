@@ -117,10 +117,10 @@ export default class MissionMap extends React.Component {
 					currentlevel: response.data.currentLevel
 				})
 			})
-			.catch(function (error) {
+			.catch(error => {
 				console.log(error);
 				if (error.response.data.message === "Auth failed. Please Login.") {
-					this.props.history.push("/dashboard");
+					this.props.history.push("/");
 				}
 			});
 	}

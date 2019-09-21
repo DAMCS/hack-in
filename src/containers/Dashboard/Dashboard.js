@@ -151,10 +151,10 @@ export default class Dashboard extends Component {
 					level: response.data.data
 				})
 			})
-			.catch(function (error) {
+			.catch(error => {
 				console.log(error);
 				if (error.response.data.message === "Auth failed. Please Login.") {
-					this.props.history.push("/dashboard");
+					this.props.history.push("/");
 				}
 			});
 	}
@@ -358,7 +358,7 @@ export default class Dashboard extends Component {
 		}).catch(error => {
 			console.log(error);
 			if (error.response.data.message === "Auth failed. Please Login.") {
-				this.props.history.push("/dashboard");
+				this.props.history.push("/");
 			}
 		})
 	}
@@ -397,7 +397,7 @@ export default class Dashboard extends Component {
 					toast.error("You cannot buy anymore hints!");
 				}
 			})
-			.catch((err) => {
+			.catch(err => {
 				toast.error("Internal Error");
 				if (err.response.data.message === "Auth failed. Please Login.") {
 					this.props.history.push("/dashboard");

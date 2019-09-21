@@ -106,9 +106,9 @@ export default class LevelSeven extends Component {
 			}
 		}, false);
 
-		document.addEventListener('mousemove', function (e) {
+		document.addEventListener('dragover', function (e) {
 			if (e.target.getAttribute('data-draggable') === 'target'  && check) {
-				console.log(e.ClientX,e.clientY);
+				console.log(e.clientX,e.clientY);
 				e.preventDefault();
 			}
 		}, false);
@@ -165,7 +165,7 @@ export default class LevelSeven extends Component {
 				this.setState({loading:false});
 				toast.error(error.response.data.message);
 				if (error.response.data.message === "Auth failed. Please Login.") {
-					this.props.history.push("/dashboard");
+					this.props.history.push("/");
 				}
 			});
 		event.preventDefault();
