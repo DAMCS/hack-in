@@ -311,10 +311,10 @@ export default class Dashboard extends Component {
 										return (<Route exact path={`${this.props.match.path}/levelfive`} key="5" name="LevelFive" render={props => <LevelFive {...props} changeNavigation={this.changeNavigation} />} />)
 									} else if (level.levelId === 6 &&  level.levelStatus === "open" && level.userLevelStatus === "not completed" && this.state.currentUserLevel === 6 ) {
 										return (<Route exact path={`${this.props.match.path}/levelsix`} key="6" name="LevelSix" render={props => <LevelSix {...props} changeNavigation={this.changeNavigation} />} />)
-									} else if (level.levelId === 7 &&  /* level.levelStatus === "open"  && */ level.userLevelStatus === "not completed" /* && this.state.currentUserLevel === 7 */ ) {
+									} else if (level.levelId === 7 &&  level.levelStatus === "open"  &&  level.userLevelStatus === "not completed" && this.state.currentUserLevel === 7  ) {
 										return (<Route exact path={`${this.props.match.path}/levelseven`} key="7" name="LevelSeven" render={props => <LevelSeven {...props} changeNavigation={this.changeNavigation} />} />)
-									} else if (level.levelId === 8 &&  /* level.levelStatus === "open"  && */ level.userLevelStatus === "not completed" /* && this.state.currentUserLevel === 8 */) {
-										return (<Route exact path={`${this.props.match.path}/leveleight`} key="7" name="LevelSeven" render={props => <LevelEight {...props} changeNavigation={this.changeNavigation} />} />)
+									} else if (level.levelId === 8 &&  level.levelStatus === "open"  &&  level.userLevelStatus === "not completed" && this.state.currentUserLevel === 8 ) {
+										return (<Route exact path={`${this.props.match.path}/leveleight`} key="8" name="LevelEight" render={props => <LevelEight {...props} changeNavigation={this.changeNavigation} />} />)
 									}
 									else {
 										console.log('working 0');
