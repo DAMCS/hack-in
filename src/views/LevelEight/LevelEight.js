@@ -62,7 +62,7 @@ with open("password.txt") as pass_file:
         this.setState({ loading: true });
         axios({
             method: "post",
-            url: "http://13.232.92.177:3000/api/compile/code",
+            url: "http://13.232.92.177:3000/apis/compile/code",
             headers: {
                 Authorization: "Bearer " + localStorage.getItem('token'),
                 'Access-Control-Allow-Origin' : '*',
