@@ -14,8 +14,6 @@ function initializeReactGA() {
 	ReactGA.pageview('/levelseven');
 }
 
-
-
 class PhpMyAdmin extends Component{
 
 	constructor(props) {
@@ -25,7 +23,8 @@ class PhpMyAdmin extends Component{
 			password: "",
 			isLoggedIn: false,
 			msg: "",
-			visible: true
+			visible: true,
+			loading: false
 		};
 		this.handleInput = this.handleInput.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -40,9 +39,13 @@ class PhpMyAdmin extends Component{
 		});
 	}
 	handleSubmit(event) {
+		this.setState({loading: true});
 		axios({
 			method: "post",
 			url: "/api/level/checkuser",
+			headers: {
+				Authorization: "Bearer " + localStorage.getItem('token')
+			},
 			data: {
 				uname: this.state.username,
 				password: this.state.password
@@ -52,9 +55,11 @@ class PhpMyAdmin extends Component{
 				if (response.data.status === "Success") {
 					this.setState({isLoggedIn:true})
 				}
+				this.setState({loading: false});
 			})
 			.catch(error => {
 				toast.error("Try different authentication!");
+				this.setState({loading: false});
 			});
 		// this.setState({isLoggedIn:true});
 		event.preventDefault();
@@ -93,7 +98,7 @@ class PhpMyAdmin extends Component{
 								/>
 							</FormGroup>
 							<Label>Can't Escape? We also did't!</Label>
-							<Button style={{ background: "grey", borderColor: "black",color:"black" }} type="submit">Go</Button>
+							<Button disabled={this.state.loading} style={{ background: "grey", borderColor: "black",color:"black" }} type="submit">{this.state.loading?<Spinner /> :""} Go</Button>
 						</Form>
 			)
 		} else {
@@ -129,7 +134,6 @@ var topOffset;
 var leftOffset;
 var aPanelHeight = oPanelHeight;
 var aPanelWidth = oPanelWidth;
-var answer='';
 function PositionPushCanvas(){
 	//Now get the screen size
 	var can = document.getElementById("myCanvas");
@@ -188,6 +192,7 @@ export default class LevelSeven extends Component {
 			e.dataTransfer.setData('text', '');
 			if(item.id === "torch"){
 				check = true;
+				console.log(check);
 			}
 		}, false);
 
@@ -283,7 +288,7 @@ export default class LevelSeven extends Component {
 			},
 			data: {
 				levelId: 7,
-				password: "closed"
+				password: this.state.pass
 			}
 		}).then(response => {
 			this.setState({loading:false});

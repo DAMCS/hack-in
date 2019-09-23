@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Row,Col,Modal, ModalBody, ModalHeader, Button, NavLink, Spinner } from 'reactstrap';
 import { Form, FormGroup, Input,Label } from 'reactstrap';
 import ReactGA from 'react-ga';
-import RoomFour from 'assets/images/level5/levelfive.jpg'
+import RoomEight from 'assets/images/level8/leveleight.jpg'
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -38,7 +38,7 @@ with open("password.txt") as pass_file:
     door_key = pass_file.readline().strip()
     try:
         if(user_password == int(door_key)):
-            print "Door can be opened with this password !"
+            print "Door can be opened!"
     except:
         failed()
 `
@@ -185,12 +185,12 @@ export default class LevelEight extends Component {
             return (
                 <React.Fragment>
                     <div class="d-flex justify-content-center align-items-center">
-                        <img src={RoomFour} alt='Room Four' useMap='#image-door' />
+                        <img src={RoomEight} alt='Room Eight' useMap='#image-door' />
                         <map name="image-door">
                             {/* <area alt="door" title="door" coords="825,279,825,512,878,541,877,271" shape="poly" onClick={this.toggle} /> */}
-                            <area id="Entrance" alt="door2" title="Entrance" coords="189,312,311,524" shape="rect" onClick={this.toggleModal} />
-                            <area id='terminal' alt="terminal" title="terminal" coords="637,373,717,428" shape="rect" onClick={this.toggle} />
-                            <area id="Exit" alt="door1" title="Exit" coords="72,308,74,615,118,578,116,310" shape="poly" />
+                            <area id="Entrance" alt="door2" title="Entrance" coords="351,307,477,516" shape="rect" onClick={this.toggleModal} />
+                            <area id='terminal' alt="terminal" title="terminal" coords="229,380,304,422" shape="rect" onClick={this.toggle} />
+                    
                         </map>
                     </div>
                     <Modal isOpen={this.state.modal} toggle={this.toggleModal}>
