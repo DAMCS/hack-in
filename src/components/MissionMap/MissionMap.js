@@ -45,6 +45,9 @@ class TooltipItem extends React.Component {
 			case 7:
 				this.setState({level: 7});
 				break;
+			case 8:
+				this.setState({ level: 8 });
+				break;
 			default:
 				break;
 		}
