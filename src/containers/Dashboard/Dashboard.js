@@ -29,6 +29,7 @@ const LevelFive = React.lazy(() => import('views/LevelFive'));
 const LevelSix = React.lazy(() => import('views/LevelSix'));
 const LevelSeven = React.lazy(() => import('views/LevelSeven'));
 const LevelEight = React.lazy(() => import('views/LevelEight'));
+const LevelNine = React.lazy(() => import('views/LevelNine'));
 const storyLineGIF = require('assets/images/story_line/story.gif');
 
 library.add(faSatelliteDish, faTable, faSignOutAlt, faAngleLeft, faIdCard, faVideo, faAngleRight, faLightbulb)
@@ -315,6 +316,8 @@ export default class Dashboard extends Component {
 										return (<Route exact path={`${this.props.match.path}/levelseven`} key="7" name="LevelSeven" render={props => <LevelSeven {...props} changeNavigation={this.changeNavigation} />} />)
 									} else if (level.levelId === 8 &&  level.levelStatus === "open"  &&  level.userLevelStatus === "not completed" && this.state.currentUserLevel === 8 ) {
 										return (<Route exact path={`${this.props.match.path}/leveleight`} key="8" name="LevelEight" render={props => <LevelEight {...props} changeNavigation={this.changeNavigation} />} />)
+									} else if (level.levelId === 9/* &&  level.levelStatus === "open"  &&  level.userLevelStatus === "not completed" && this.state.currentUserLevel === 9 */) {
+										return (<Route exact path={`${this.props.match.path}/levelnine`} key="9" name="LevelNine" render={props => <LevelNine {...props} changeNavigation={this.changeNavigation} />} />)
 									}
 									else {
 										console.log('working 0');
