@@ -71,7 +71,7 @@ export default class LevelNine extends Component {
                 </Row>
                 <Row className="p-4 h-10 w-50 d-flex justify-content-center align-self-center">
                     <Col className="h-100 w-100 d-flex justify-content-center align-items-center">
-                        <Button color="success" className="success text-white" /*onClick={this.handleUpload}*/> Sample</Button> &nbsp;
+                        <Button color="success" className="success text-white" onClick={}> Sample</Button> &nbsp;
                         <Button color="success" className="success text-white" onClick={this.handleDownload}>Output</Button>
                     </Col>
                 </Row>
