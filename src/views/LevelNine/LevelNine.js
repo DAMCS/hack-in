@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Button, Modal, ModalBody, ModalHeader, Spinner ,Input, Form,FormGroup,NavLink } from 'reactstrap';
+import { Row, Col, Button, Input ,NavLink } from 'reactstrap';
 import ReactGA from 'react-ga';
 import RoomNine from 'assets/images/level9/levelnine.jpg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -104,13 +104,13 @@ export default class LevelNine extends Component {
                     </Row>
                     <Row className="p-1 h-10 w-100 d-flex justify-content-center align-self-center">
                         <Col className="h-100 w-100 d-flex justify-content-center align-items-center">
-                            <Button color="success" className="success text-white" onClick={() => { return window.open('/sample.html') }}> Download C++</Button>
+                            <Button color="success" className="success text-white" onClick={() => { return window.open("/cpp.zip") }}> Download C++</Button>
                         </Col>
                         <Col className="h-100 w-100 d-flex justify-content-center align-items-center">
-                            <Button color="success" className="success text-white" onClick={() => { return window.open('/sample.html') }}>Download Java</Button>
+                            <Button color="success" className="success text-white" onClick={() => { return window.open('/user_defined_bot.java') }}>Download Java</Button>
                         </Col>
                         <Col className="h-100 w-100 d-flex justify-content-center align-items-center">
-                            <Button color="success" className="success text-white" onClick={() => { return window.open('/sample.html') }}> Download python</Button>
+                            <Button color="success" className="success text-white" onClick={() => { return window.open('/player2.py') }}> Download python</Button>
                         </Col>
                     </Row>
                     <Row className="p-4 h-10 w-50 d-flex justify-content-center align-self-center">
@@ -120,8 +120,9 @@ export default class LevelNine extends Component {
                                 <option>Java</option>
                                 <option>Python</option>
                             </Input>&nbsp;
-                            
-                            <Input type="file" style={{ opacity: "0", position: 'absolute', cursor: 'pointer' }} id="upload" name="file-upload" onChange={this.handleUpload} />
+                        </Col>
+                        <Col className="h-100 w-100 d-flex justify-content-center align-items-center" >
+                            <Input type="file" style={{ opacity: "0", position: 'absolute' }} id="upload" name="file-upload" onChange={this.handleUpload} />
                             <p style={{ marginLeft: '10px', marginTop: '15px' }}>
                                 Upload
                             </p>
@@ -140,6 +141,7 @@ export default class LevelNine extends Component {
                             </NavLink>
                         </Col>
                     </Row>
+                    
                 </div>);
             }
     }

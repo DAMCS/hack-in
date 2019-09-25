@@ -197,7 +197,7 @@ export default class LevelSeven extends Component {
 		}, false);
 
 		document.addEventListener('dragover', e => {
-			if (e.target.getAttribute('data-draggable') === 'target'  && this.state.canvas) {
+			if (e.target.getAttribute('data-draggable') === 'target'  && this.state.canvas && check) {
 				// console.log(e.clientX,e.clientY);
 				var can = document.getElementById("myCanvas");
 				var mouse = getMousePos(can, e)
@@ -216,6 +216,7 @@ export default class LevelSeven extends Component {
 				console.log(topOffset, aPanelHeight, leftOffset, aPanelWidth, y, x);
 				if ((y >= topOffset && y < topOffset + aPanelHeight)&& (x>=leftOffset && x < leftOffset+aPanelWidth) ) {
 					console.log('yesss');
+					check = false;
 					this.setState({canvas:false})
 				}
 			
@@ -239,9 +240,9 @@ export default class LevelSeven extends Component {
 		// base_image.src = RoomFour;
 		can.style.width ='100%';
 		can.style.height='100%';
-		var ctx = can.getContext("2d");
 		base_image.src = RoomSeven;
-		ctx.drawImage(base_image, 0, 0,base_image.width,base_image.height,0,0,can.width,can.height);
+		//ctx.drawImage(base_image, 0, 0,base_image.width,base_image.height,0,0,can.width,can.height);
+		this.setState({canvas: true})
 	}
 
 	redraw(mouse) {
