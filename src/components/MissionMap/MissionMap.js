@@ -48,6 +48,9 @@ class TooltipItem extends React.Component {
 			case 8:
 				this.setState({ level: 8 });
 				break;
+			case 9:
+				this.setState({ level: 9 });
+				break;
 			default:
 				break;
 		}
@@ -78,6 +81,9 @@ class TooltipItem extends React.Component {
 		} else if (this.state.level === 8) {
 			console.log('test 8');
 			return <Redirect to = {{ pathname: "/dashboard/leveleight" }} />;
+		} else if (this.state.level === 9) {
+			console.log('test 9');
+			return <Redirect to = {{ pathname: "/dashboard/levelnine" }} />;
 		} else {
 			let text_color = '';
 			this.props.object.userLevelStatus === "completed" ? text_color = "green" : text_color = "red";

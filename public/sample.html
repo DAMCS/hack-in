@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <link rel="stylesheet" href="css/hex.css" type="text/css" />
+    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css" />
+    <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/jquery-landpiece.js"></script>
+    <script type="text/javascript" src="js/hex1.js"></script>
+</head>
+
+<body>
+    <div id="botwar">
+        <div id="gameBoard"></div>
+
+        <div style="clear: both;"></div>
+        <div id="red-stats">
+            <span id="text-red-soldiers" class="text-red">Number of <br>secured systems:<br></span> <span id="red-soldiers" class="text-bold">0</span>
+            <br />
+
+        </div>
+
+        <div class="container-red-dice-roll">
+            <div class="hex-row">
+                <div class="hex red" id="redDiceRoll"></div>
+            </div>
+        </div>
+
+        <div class="container-red-dice-roll">
+            <div class="hex-row">
+                <div class="hex blue" id="blueDiceRoll"></div>
+            </div>
+        </div>
+
+        <div id="blue-stats">
+            <span id="text-blue-soldiers" class="text-blue">No of <br>spammed systems:<br></span> <span id="blue-soldiers" class="text-bold">0</span>
+            <br />
+
+        </div>
+        <br><br><br><br>
+        <h3>Reload to start the simulation again</h3>
+
+        <div class="no-display">
+
+            <div id="dialog-game-config" title="Game Setup">
+                <h3>Players</h3>
+                <h3>On Takeover</h3>
+                <div><span>Neighboring Territories</span> <span class="config-options" config="neighborTerritories">strengthen</span></div>
+                <div><span>Enemy Territories</span> <span class="config-options" config="enemyTerritories">no change</span></div>
+                <h3>Victory Condition</h3>
+                <div><span>Win due to:</span> <span class="config-options" config="victoryCondition">most soldiers</span></div>
+                <h3>Gameboard</h3>
+                <div><span>Landmass:</span> <span class="config-options" config="landMass">all</span></div>
+            </div>
+
+            <div id="dialog-game-end" title="Game Over!">
+                <h2>Winner:</h2>
+                <span id="game-winner"></span>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>
