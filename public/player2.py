@@ -20,7 +20,7 @@ import random
 
                                         None    if the tile is empty.
 
-                        get_neighbours() -> return vector<point<int>>, the point represents the index in the board
+                        get_neighbours() -> return [(x, y), ...], the point represents the index in the board
 
 
 
