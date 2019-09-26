@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
         Methods:
 
-            getValue() -> returns the value of the honeypot.
+            getValue() -> returns the value of the antivirus.
 
             getColour() -> returns the color 'r' or 'b'
 
@@ -42,7 +42,7 @@ import java.util.ArrayList;
 
 
 
-    value - the value of the honeypot.
+    value - the value of the antivirus.
 
 
 

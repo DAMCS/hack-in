@@ -14,7 +14,7 @@
 
         Methods:
 
-            getValue() -> returns the value of the honeypot.
+            getValue() -> returns the value of the antivirus.
 
             getColor() -> returns the color of the type 
 
@@ -32,7 +32,7 @@
 
 
 
-    value - the value of the honeypot.
+    value - the value of the antivirus.
 
 
 

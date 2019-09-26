@@ -10,7 +10,7 @@ import random
 
         Methods:
 
-                        get_value() -> returns the value of the honeypot.
+                        get_value() -> returns the value of the antivirus.
 
                         get_colour() -> returns the color 'r' or 'b'.
 
@@ -32,7 +32,7 @@ import random
 
 
 
-        value - the value of the honeypot.
+        value - the value of the antivirus.
 
 
 
