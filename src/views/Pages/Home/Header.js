@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Container, NavLink } from 'reactstrap';
+import payoda from "./payoda.png"
 
 export default class Header extends Component {
 	render() {
@@ -11,6 +12,13 @@ export default class Header extends Component {
 							HACK[IN]
 						</NavLink>
 					</h1>
+					<div className="" style={{
+						position: "fixed",
+						top: 0,
+						right: 0,
+					}} >
+						<img height="85px" width="260px" style={{cursor: "pointer"}} src={payoda} onClick={() => {window.open("https://www.payoda.com/")}}/>
+					</div>
 				</Container>
 			</React.Fragment>
 		)
