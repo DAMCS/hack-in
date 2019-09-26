@@ -28,7 +28,7 @@ import random
 
 
 
-        free_space - a list consists of co-ordinates which are left to be filled.
+        free_space - a set consists of co-ordinates which are left to be filled.
 
 
 
