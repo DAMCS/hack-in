@@ -12,7 +12,7 @@
 		"url": "https://gitlab.com:aakashhemadri/hack-in/issues"
 	},
 	"homepage": "https://hackinpsg.ml",
-	"proxy": "https://hackin.psglogin.in",
+	"proxy": "https://hackinpsg.ml",
 	"dependencies": {
 		"@elsdoerfer/react-arrow": "^1.0.3",
 		"@fortawesome/fontawesome-svg-core": "^1.2.22",

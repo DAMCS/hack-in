@@ -9,15 +9,26 @@
     <script type="text/javascript" src="js/jquery-ui.min.js"></script>
     <script type="text/javascript" src="js/jquery-landpiece.js"></script>
     <script type="text/javascript" src="js/hex1.js"></script>
+    <style>
+        .center-content {
+            position: static;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: absolute;
+            left: 27%;
+            top: 12%;
+        }
+    </style>
 </head>
 
 <body>
-    <div id="botwar">
+    <div id="botwar" class="center-content">
         <div id="gameBoard"></div>
 
         <div style="clear: both;"></div>
         <div id="red-stats">
-            <span id="text-red-soldiers" class="text-red">Number of <br>secured systems:<br></span> <span id="red-soldiers" class="text-bold">0</span>
+            <span id="text-red-soldiers" class="text-red">Number of <br>AI systems:<br></span> <span id="red-soldiers" class="text-bold">0</span>
             <br />
 
         </div>
@@ -35,7 +46,7 @@
         </div>
 
         <div id="blue-stats">
-            <span id="text-blue-soldiers" class="text-blue">No of <br>spammed systems:<br></span> <span id="blue-soldiers" class="text-bold">0</span>
+            <span id="text-blue-soldiers" class="text-blue">No of <br>Infected systems:<br></span> <span id="blue-soldiers" class="text-bold">0</span>
             <br />
 
         </div>

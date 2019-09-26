@@ -325,7 +325,7 @@ export default class LevelSeven extends Component {
 							</map>
 						</div>
 						<Modal isOpen={this.state.modal} centered toggle={this.toggleModal}>
-							<ModalHeader className="d-flex justify-content-center align-items-center">Door key pressed</ModalHeader>
+							<ModalHeader className="d-flex justify-content-center align-items-center">Enter Passcode</ModalHeader>
 							<ModalBody className="d-flex justify-content-center align-items-center">
 								<Form onSubmit={this.handleSubmit}>
 									<FormGroup>

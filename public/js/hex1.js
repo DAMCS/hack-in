@@ -266,9 +266,9 @@ function displayOutput(input) {
                     }
                 } else {
                     if (redCount.soldiers > blueCount.soldiers) {
-                        winner = 'Honeypot server';
+                        winner = 'AI';
                     } else if (blueCount.soldiers > redCount.soldiers) {
-                        winner = 'Spam mailer';
+                        winner = 'You';
                     } else {
                         winner = 'No one. Tie.';
                     }
