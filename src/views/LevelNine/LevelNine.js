@@ -290,7 +290,7 @@ var interval = null;
 function displayOutput(input) {
     axios({
         method: "post",
-        url: "http://localhost:5000/api/level/final",
+        url: "/api/level/final",
         headers: {
             Authorization: "Bearer " + localStorage.getItem('token')
         },
