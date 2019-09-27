@@ -15,6 +15,7 @@ const Page404 = React.lazy(() => import('./views/Pages/Page404'))
 const Page500 = React.lazy(() => import('./views/Pages/Page500'))
 const Home = React.lazy(() => import('./views/Pages/Home'))
 const Dashboard = React.lazy(() => import('./containers/Dashboard'))
+const EndingPage = React.lazy(() => import('./views/Pages/BubyePage'))
 
 export default class App extends Component {
 	render() {
@@ -23,6 +24,7 @@ export default class App extends Component {
 			<BrowserRouter history={createBrowserHistory()} >
 				<React.Suspense fallback={<Loading />}>
 					<Switch>
+						<Route exact path="/endingpage" name="Ending Page" render={props => <EndingPage {...props} />} />
 						<Route exact path="/404" name="Page 404" render={props => <Page404 {...props} />} />
 						<Route exact path="/500" name="Page 500" render={props => <Page500 {...props} />} />
 						<Route exact path="/" name="Home" render={props => <Home {...props} />} />
