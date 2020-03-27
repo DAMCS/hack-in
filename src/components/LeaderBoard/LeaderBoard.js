@@ -1,106 +1,61 @@
 import React, { Component } from 'react';
-import TableRow from './TableRow';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Table } from 'reactstrap';
+import { Container, Table } from 'reactstrap';
+import axios from 'axios';
 
-class LeaderBoard extends Component {
+export default class LeaderBoard extends Component {
 
 	constructor(props) {
 		super(props);
-		this.state = { display_name: "", display_value: "", data: [] };
+		this.state = {display_name: "", display_value: "", data: [] };
 	}
 	componentDidMount() {
-
-		let dummy_data = {
-			display_name: "Name/Level Progressed",
-			display_value: "Points/Completed count",
-			data: [
-				{
-					"leader_id": 1,
-					"leader_name": "Surya",
-					"leader_pts": 1000
-				},
-				{
-					"leader_id": 2,
-					"leader_name": "Prasath",
-					"leader_pts": 800
-				}, {
-					"leader_id": 3,
-					"leader_name": "Tester",
-					"leader_pts": 700
+		axios.get('/api/leaderboard',
+			{
+				headers: {
+					"Authorization": "Bearer " + localStorage.getItem('token')
 				}
-			]
-		}
-
-		this.setState(dummy_data);
-
-		// axios.get('/api/leaderboard',
-		// {headers: {
-		// 	"Authorization" : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QxMjNAZ21haWwuY29tIiwidXNlcm5hbWUiOiJ0ZXN0MTIzQGdtYWlsLmNvbSIsInVzZXJJZCI6IjVkNWU5NjM2Njg4ZjZmMDZiMzUyOGQ5ZCIsImlhdCI6MTU2NjQ4MDAwOCwiZXhwIjoxNTY2NDgzNjA4fQ.U6TkCk3AvvVaX8RnhsBzrmZwucoMzR-WBLuMi9RtSJ4",
-		//   }
-		// }
-		// ).then(response => {
-		// 	this.setState({ leader_val: response.data });
-		// })
-		// .catch(function (error) {
-		// 	console.log(error);
-		// })
+			}
+		).then(response => {
+				this.setState({
+					display_name : response.data.name,
+					display_value : response.data.count,
+					data : response.data.data,
+				})	
+			})
+			.catch(function (error) {
+				console.log(error);
+			})
 	}
 	tabRow() {
 		return this.state.data.map(function (object, i) {
-			return <TableRow obj={object} key={i} />;
+			return (
+				<tr>
+				<td>
+					{object.name_id}
+				</td>
+				<td>
+					{object.level_pts}
+				</td>
+			</tr>
+			);
 		});
 	}
 
 	render() {
 		return (
-			<Table striped bordered hover>
-				<thead>
-					<tr className="active">
-						<th>ID</th>
-						<th>{this.state.display_name}</th>
-						<th>{this.state.display_value}</th>
-					</tr>
-				</thead>
-				<tbody>
-					{this.tabRow()}
-				</tbody>
-			</Table>
-
-		);
-	}
-}
-
-export default class LeaderBoardModal extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			modal: false
-		};
-
-		this.toggle = this.toggle.bind(this);
-	}
-
-	toggle() {
-		this.setState(prevState => ({
-			modal: !prevState.modal
-		}));
-	}
-
-	render() {
-		return (
-			<div>
-				<Button color="primary" onClick={this.toggle}><img style={{ marginLeft: "5px" }} width="30px" alt="" height="30px" src={require("../../components/Inventory/hacker2.png")} />
-				</Button>
-				<Modal centered="true" isOpen={this.state.modal} toggle={this.toggle}>
-					<ModalHeader>LeaderBoard</ModalHeader>
-					<ModalBody>
-						<LeaderBoard />
-					</ModalBody>
-					<ModalFooter>
-						<Button color="danger" onClick={this.toggle}>Cancel</Button>
-					</ModalFooter>
-				</Modal>
-			</div>
+			<Container fluid >
+				<Table striped bordered hover responsive>
+					<thead>
+						<tr className="active">
+							<th>{this.state.display_name}</th>
+							<th>{this.state.display_value}</th>
+						</tr>
+					</thead>
+					<tbody>
+						{this.tabRow()}
+					</tbody>
+				</Table>
+			</Container>
 		);
 	}
 }

@@ -1,14 +1,9 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import { Button, Form, FormGroup, Input } from "reactstrap";
 import axios from "axios";
-
-import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
-
-import "../../../assets/css/dark.scss";
-
-const MySwal = withReactContent(Swal);
+import { Button, Form, FormGroup, Input } from "reactstrap";
+import { toast } from 'react-toastify'
+import ReactGA from 'react-ga';
 
 class Login extends Component {
 	constructor(props) {
@@ -43,26 +38,19 @@ class Login extends Component {
 		})
 			.then(response => {
 				if (response.data.status === "Success") {
-
-					MySwal.fire({
-						type: 'success',
-						title: 'Signed in successfully',
-						toast: true,
-						position: 'top-end',
-						showConfirmButton: false,
-						timer: 1000
-					})
+					toast.success("Signed in successfully");
 					localStorage.setItem("token", response.data.token);
+					ReactGA.event({
+						category: 'User',
+						action: 'User Logged In',
+						time: new Date()
+					});
+					ReactGA.set({ userId: this.state.email });
 					this.props.history.push('/dashboard');
 				}
 			})
 			.catch(error => {
-				MySwal.fire({
-					type: 'error',
-					title: 'Oops...',
-					text: error.response.data.message,
-					toast: false,
-				})
+				toast.error("Failed to sign in!");
 			});
 		event.preventDefault();
 	}
@@ -79,6 +67,7 @@ class Login extends Component {
 								value={this.state.email}
 								type="email"
 								placeholder="Enter email"
+								required
 							/>
 						</FormGroup>
 						<FormGroup controlId="formBasicPassword">
@@ -87,7 +76,8 @@ class Login extends Component {
 								onChange={this.handleInput}
 								value={this.state.password}
 								type="password"
-								placeholder="Password"
+								placeholder="password"
+								required
 							/>
 						</FormGroup>
 						<Button type="submit">Sign In</Button>

@@ -1,10 +1,71 @@
 @import "../darkdarktheme/scss/darkdarktheme.scss";
 
-@import "../css/dark.scss";
+@import "../react-toastify/scss/main.scss";
+
+@font-face {
+  font-family: "PressStart2P";
+  font-display: swap;
+  src: url("assets/fonts/PressStart2P.ttf") format("truetype");
+}
 
 html,
 body,
-#root,
-#root > div {
+#root {
   height: 100%;
+  width: 100%;
+  overflow: hidden;
+  font-family: "PressStart2P";
+  font-size: 16px;
+}
+
+// ie11 floating footer temp fix, react only
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  #root {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@import "home.scss";
+@import "footer.scss";
+@import "level_two.scss";
+@import "level_one.scss";
+@import "level_nine.scss";
+@import "mission_map.scss";
+@import "story_line.scss";
+@import "inventory.scss";
+
+.popover {
+  max-width: 400px;
+}
+
+.modal-lg {
+  min-width: 400px !important;
+  line-height: 25pt;
+}
+
+.navbar-collapse {
+  position: relative;
+  width: 100px;
+}
+
+// Scrollbar fix for chrome.
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: $primary;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: $secondary;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

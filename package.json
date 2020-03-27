@@ -9,39 +9,49 @@
 		"url": "git@gitlab.com:aakashhemadri/hack-in.git"
 	},
 	"bugs": {
-		"url": "https://gitlab.com:aakashhemadri/hack-in/jissues"
+		"url": "https://gitlab.com:aakashhemadri/hack-in/issues"
 	},
-	"proxy": "http://13.235.77.118:3000",
+	"homepage": "https://hackinpsg.ml",
+	"proxy": "https://hackinpsg.ml",
 	"dependencies": {
+		"@elsdoerfer/react-arrow": "^1.0.3",
+		"@fortawesome/fontawesome-svg-core": "^1.2.22",
+		"@fortawesome/free-brands-svg-icons": "^5.10.2",
+		"@fortawesome/free-regular-svg-icons": "^5.10.2",
 		"@fortawesome/free-solid-svg-icons": "^5.10.2",
 		"@fortawesome/react-fontawesome": "^0.1.4",
-		"@sweetalert2/theme-dark": "^2.1.0",
 		"axios": "^0.19.0",
 		"bootstrap": "^4.3.1",
 		"classnames": "^2.2.6",
-		"flag-icon-css": "^3.3.0",
+		"dotenv": "^8.1.0",
 		"font-awesome": "^4.7.0",
+		"javascript-terminal": "^1.0.3",
 		"jquery": "^3.4.1",
 		"node-sass": "^4.12.0",
 		"npm": "^6.10.3",
 		"prop-types": "^15.7.2",
 		"react": "^16.8.6",
+		"react-bash": "^1.6.0",
 		"react-dom": "^16.8.6",
+		"react-ga": "^2.6.0",
 		"react-router-dom": "^5.0.1",
 		"react-scripts": "3.0.1",
+		"react-terminal-component": "^1.4.1",
+		"react-toastify": "^5.3.2",
 		"reactstrap": "^8.0.1",
 		"simple-line-icons": "^2.4.1",
 		"styled-components": "^4.3.2",
-		"sweetalert2": "^8.16.3",
-		"sweetalert2-react": "^0.8.3",
-		"sweetalert2-react-content": "^1.1.0",
+		"typed.js": "^2.0.10",
 		"typescript": "^3.5.3"
 	},
 	"scripts": {
 		"start": "react-scripts start",
-		"build": "react-scripts build",
+		"prebuild": "rm -rf ./build",
+		"build": "react-scripts build && javascript-obfuscator ./build --output . --config ./javascript-obfuscator.js",
+		"postbuild": "rm -rf build/**/**/*.map && generate-robotstxt --config ./robots-txt.js build/robots.txt",
 		"test": "react-scripts test",
-		"eject": "react-scripts eject"
+		"eject": "react-scripts eject",
+		"clearbuild": "rm -rf build"
 	},
 	"eslintConfig": {
 		"extends": "react-app"
@@ -59,6 +69,9 @@
 		]
 	},
 	"devDependencies": {
-		"npm-check": "^5.9.0"
+		"generate-robotstxt": "^7.1.0",
+		"javascript-obfuscator": "^0.18.1",
+		"npm-check": "^5.9.0",
+		"react-native-obfuscating-transformer": "^1.0.0"
 	}
 }
